@@ -14,6 +14,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
 DisplayLight_t _displayLight;
+
 static TIM_HandleTypeDef *_htim;
 /* Private function prototypes -----------------------------------------------*/
 /* Private user code ---------------------------------------------------------*/

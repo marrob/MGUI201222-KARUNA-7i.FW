@@ -38,6 +38,7 @@ extern "C" {
 #include "PowerLed.h"
 #include "GuiItf.h"
 #include "Peri.h"
+#include "eeprom.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
