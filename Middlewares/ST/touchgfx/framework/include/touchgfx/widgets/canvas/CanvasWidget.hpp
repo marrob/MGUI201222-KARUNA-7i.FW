@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -147,10 +147,12 @@ public:
      */
     virtual bool drawCanvasWidget(const Rect& invalidatedArea) const = 0;
 
+protected:
+    uint8_t alpha; ///< The Alpha for this CanvasWidget.
+
 private:
     AbstractPainter* canvasPainter;
     mutable int16_t maxRenderLines;
-    uint8_t alpha;
 };
 
 } // namespace touchgfx

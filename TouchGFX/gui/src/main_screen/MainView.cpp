@@ -3,6 +3,21 @@
 #include <touchgfx/containers/buttons/ImageButtonStyle.hpp>
 #include "BitmapDatabase.hpp" 
 
+
+// Initialize static member of class Box
+
+static bool  mAlreadyStarted;
+static bool  mIsHdmiON;
+static bool  mIsRcaON;
+static bool  mIsXlrON;
+static bool  mIsBncON;
+
+//CLOCKS
+static bool mIs24Locked;
+static bool mIs245Locked;
+static bool mIs22Locked;
+static bool mIsIntExt;
+
 //Default colors
 colortype GRAYCOLOR;
 colortype MIDGRAYCOLOR;
@@ -12,18 +27,7 @@ colortype DARKGRAYCOLOR;
 colortype REDCOLOR;
 
 //Buttons
-uint8_t mKarunaControl;
-
-bool mIsHdmiON;
-bool mIsRcaON;
-bool mIsXlrON;
-bool mIsBncON;
-
-//CLOCKS
-bool mIs24Locked;
-bool mIs245Locked;
-bool mIs22Locked;
-bool mIsIntExt;
+uint8_t mKarunaControl; 
 
 //Temperature
 int mTemp;
@@ -75,20 +79,34 @@ MainView::MainView()
 	DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
 	MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
 	REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
+	 
+	//Init outputs
+	if (!mAlreadyStarted)
+	{
+		//OUTPUTS 
+		mIsBncON = true;
+		mIsHdmiON = true;
+		mIsRcaON = true;
+		mIsXlrON = true;
 
-	// Simulate CLOCK lock
-	mIs24Locked = true;
-	mIs245Locked = true;
-	mIs22Locked = true;
-	mIsIntExt = false;
+		// Simulate CLOCK lock
+		mIs24Locked = true;
+		mIs245Locked = true;
+		mIs22Locked = true;
+		mIsIntExt = false;
+
+		mAlreadyStarted = true;
+	} 
+	
+	RefreshHDMIOutput();
+	RefreshRCAOutput();
+	RefreshBNCOutput();
+	RefreshXLROutput();
 
 	Refresh24Thermal();
 	Refresh245Thermal();
 	Refresh22Thermal();
 	RefreshIntExt();
-
-	//OUTPUTS 
-	SetOnAllOutput();
 
 	//Audio and Clocks temperature
 	RefreshAudioAndClockInfo();
@@ -109,6 +127,7 @@ void MainView::SetOnAllOutput()
 
 void MainView::setupScreen()
 {
+
 }
 
 

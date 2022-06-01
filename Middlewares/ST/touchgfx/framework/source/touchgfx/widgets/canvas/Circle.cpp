@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -10,10 +10,7 @@
 *
 *******************************************************************************/
 
-#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Drawable.hpp>
-#include <touchgfx/widgets/canvas/CWRUtil.hpp>
-#include <touchgfx/widgets/canvas/CanvasWidget.hpp>
 #include <touchgfx/widgets/canvas/Circle.hpp>
 
 namespace touchgfx
@@ -86,29 +83,42 @@ bool Circle::drawCanvasWidget(const Rect& invalidatedArea) const
         arcEnd = _360;
     }
 
+    const int16_t circleCenterX16 = circleCenterX.to<int16_t>();
+    const int16_t circleCenterY16 = circleCenterY.to<int16_t>();
+    int32_t routside = 0;
     if (circleLineWidth != 0)
     {
         // Check if invalidated area is completely inside the circle
-        int32_t x1 = int(CWRUtil::toQ5(invalidatedArea.x)); // Take the corners of the invalidated area
-        int32_t x2 = int(CWRUtil::toQ5(invalidatedArea.right()));
-        int32_t y1 = int(CWRUtil::toQ5(invalidatedArea.y));
-        int32_t y2 = int(CWRUtil::toQ5(invalidatedArea.bottom()));
-        int32_t dx1 = abs(int(circleCenterX) - x1); // Find distances between each corner and circle center
-        int32_t dx2 = abs(int(circleCenterX) - x2);
-        int32_t dy1 = abs(int(circleCenterY) - y1);
-        int32_t dy2 = abs(int(circleCenterY) - y2);
-        int32_t dx = CWRUtil::Q5(MAX(dx1, dx2)).to<int>() + 1; // Largest hor/vert distance (round up)
-        int32_t dy = CWRUtil::Q5(MAX(dy1, dy2)).to<int>() + 1;
-        int32_t dsqr = (dx * dx) + (dy * dy); // Pythagoras
-
+        const int32_t dx1 = abs(int(circleCenterX16) - invalidatedArea.x); // Find distances between each corner and circle center
+        const int32_t dx2 = abs(int(circleCenterX16) - invalidatedArea.right());
+        const int32_t dy1 = abs(int(circleCenterY16) - invalidatedArea.y);
+        const int32_t dy2 = abs(int(circleCenterY16) - invalidatedArea.bottom());
+        const int32_t dx = MAX(dx1, dx2) + 1; // Largest horz/vert distance (round up)
+        const int32_t dy = MAX(dy1, dy2) + 1;
         // From https://www.mathopenref.com/polygonincircle.html
-        int32_t rmin = ((circleRadius - (circleLineWidth / 2)) * CWRUtil::cosine((circleArcIncrement + 1) / 2)).to<int>();
-
+        const int32_t rmin = ((circleRadius - (circleLineWidth / 2)) * CWRUtil::cosine((circleArcIncrement + 1) / 2)).to<int>();
         // Check if invalidatedArea is completely inside circle
-        if (dsqr < rmin * rmin)
+        if ((dx * dx) + (dy * dy) < rmin * rmin)
         {
             return true;
         }
+        routside = (circleRadius + (circleLineWidth / 2)).to<int>() + 1;
+    }
+    else
+    {
+        routside = circleRadius.to<int>() + 1;
+    }
+    // From https://yal.cc/rectangle-circle-intersection-test/
+    const int32_t invalidatedRight = invalidatedArea.right();
+    const int32_t minimumX = MIN(circleCenterX16, invalidatedRight);
+    const int32_t nearestX = circleCenterX16 - MAX(invalidatedArea.x, minimumX);
+    const int32_t invalidatedBottom = invalidatedArea.bottom();
+    const int32_t minimumY = MIN(circleCenterY16, invalidatedBottom);
+    const int32_t nearestY = circleCenterY16 - MAX(invalidatedArea.y, minimumY);
+    // Check if invalidatedArea is completely outside circle
+    if ((nearestX * nearestX) + (nearestY * nearestY) > routside * routside)
+    {
+        return true;
     }
 
     Canvas canvas(this, invalidatedArea);
@@ -185,7 +195,7 @@ bool Circle::drawCanvasWidget(const Rect& invalidatedArea) const
             // Draw the circle cap
             CWRUtil::Q5 capX = circleCenterX + (radius * CWRUtil::sine(arcStart));
             CWRUtil::Q5 capY = circleCenterY - (radius * CWRUtil::cosine(arcStart));
-            for (CWRUtil::Q5 capAngle = arcStart - _180 + circleCapArcIncrementQ5; capAngle < arcStart; capAngle = capAngle + circleCapArcIncrementQ5)
+            for (CWRUtil::Q5 capAngle = (arcStart - _180) + circleCapArcIncrementQ5; capAngle < arcStart; capAngle = capAngle + circleCapArcIncrementQ5)
             {
                 lineToXYAR2(canvas, capX, capY, capAngle, lineWidth);
             }
@@ -213,7 +223,7 @@ Rect Circle::getMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd) const
     CWRUtil::Q5 yMax = CWRUtil::toQ5<int>(0);
     calculateMinimalRect(arcStart, arcEnd, xMin, xMax, yMin, yMax);
     return Rect(xMin.to<int>() - 1, yMin.to<int>() - 1,
-                xMax.to<int>() - xMin.to<int>() + 2, yMax.to<int>() - yMin.to<int>() + 2);
+                (xMax.to<int>() - xMin.to<int>()) + 2, (yMax.to<int>() - yMin.to<int>()) + 2);
 }
 
 void Circle::updateArc(CWRUtil::Q5 setStartAngleQ5, CWRUtil::Q5 setEndAngleQ5)

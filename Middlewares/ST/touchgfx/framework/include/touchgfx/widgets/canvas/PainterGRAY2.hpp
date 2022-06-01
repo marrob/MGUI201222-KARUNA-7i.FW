@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -18,9 +18,9 @@
 #ifndef TOUCHGFX_PAINTERGRAY2_HPP
 #define TOUCHGFX_PAINTERGRAY2_HPP
 
+#include <platform/driver/lcd/LCD2bpp.hpp>
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/widgets/canvas/AbstractPainterGRAY2.hpp>
-#include <platform/driver/lcd/LCD2bpp.hpp>
 
 namespace touchgfx
 {

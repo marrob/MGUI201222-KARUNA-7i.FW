@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -385,19 +385,22 @@ public:
     virtual Rect getMinimalRect() const;
 
     /**
-     * Update the end point for this Line given the new length and angle. The rectangle that
-     * surrounds the line before and after will be invalidated. The starting coordinates
-     * will be fixed but the ending point will be updated. This is simply a different way to
-     * update the ending point.
+     * Update the end point for this Line given the new length and angle in degrees. The rectangle
+     * that surrounds the line before and after will be invalidated. The starting coordinates will
+     * be fixed but the ending point will be updated. This is simply a different way to update the
+     * ending point.
      *
-     * @param  length The new length of the line in Q5 format.
-     * @param  angle  The new angle of the line in Q5 format.
+     * @param   length  The new length of the line in Q5 format.
+     * @param   angle   The new angle of the line in Q5 format.
      *
      * @see updateEnd
      *
-     * @note The area containing the Line is invalidated before and after the change.
+     * @note    The area containing the Line is invalidated before and after the change.
+     * @note    Angles are given in degrees, so a full circle is 360.
      */
     void updateLengthAndAngle(CWRUtil::Q5 length, CWRUtil::Q5 angle);
+
+    virtual void invalidateContent() const;
 
 private:
     CWRUtil::Q5 startX;
@@ -412,6 +415,8 @@ private:
     int lineCapArcIncrement;
 
     void updateCachedShape();
+
+    Rect rectContainingPoints(const Rect& fullRect, CWRUtil::Q5 x0, CWRUtil::Q5 y0, CWRUtil::Q5 x1, CWRUtil::Q5 y1, CWRUtil::Q5 x2, CWRUtil::Q5 y2) const;
 };
 
 } // namespace touchgfx

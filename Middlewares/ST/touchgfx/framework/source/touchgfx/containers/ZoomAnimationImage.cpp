@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -10,12 +10,8 @@
 *
 *******************************************************************************/
 
-#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Application.hpp>
-#include <touchgfx/EasingEquations.hpp>
-#include <touchgfx/containers/Container.hpp>
 #include <touchgfx/containers/ZoomAnimationImage.hpp>
-#include <touchgfx/widgets/ScalableImage.hpp>
 
 namespace touchgfx
 {
@@ -190,28 +186,23 @@ void ZoomAnimationImage::updateRenderingMethod()
 {
     if ((smallBmp.getWidth() == getWidth()) && (smallBmp.getHeight() == getHeight()))
     {
+        image.setBitmap(smallBmp); // Updates width and height
         image.setVisible(true);
         scalableImage.setVisible(false);
-        image.setBitmap(smallBmp);
-        image.invalidate();
-        scalableImage.invalidate();
     }
     else if ((largeBmp.getWidth() == getWidth()) && (largeBmp.getHeight() == getHeight()))
     {
+        image.setBitmap(largeBmp); // Updates width and height
         image.setVisible(true);
         scalableImage.setVisible(false);
-        image.setBitmap(largeBmp);
-        image.invalidate();
-        scalableImage.invalidate();
     }
     else
     {
         image.setVisible(false);
-        image.invalidate();
         scalableImage.setVisible(true);
         scalableImage.setWidthHeight(*this);
-        scalableImage.invalidate();
     }
+    Container::invalidate();
 }
 
 void ZoomAnimationImage::setCurrentState(States state)

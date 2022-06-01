@@ -1,7 +1,7 @@
-# Copyright (c) 2018(-2021) STMicroelectronics.
+# Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.18.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -47,6 +47,10 @@ class TextEntries
     else
       @entries.first.languages
     end
+  end
+
+  def languages_with_specific_settings
+    @entries.collect { |entry| entry.typographies.keys + entry.alignments.keys + entry.directions.keys }.flatten.uniq
   end
 
   def remove_language(language)

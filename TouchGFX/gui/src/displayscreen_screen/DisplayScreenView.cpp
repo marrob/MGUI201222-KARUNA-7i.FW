@@ -1,16 +1,44 @@
 #include <gui/displayscreen_screen/DisplayScreenView.hpp>
 
-DisplayScreenView::DisplayScreenView()
+
+#ifdef SIMULATOR
+uint8_t DisplayScreenView::DisplayLightSet(uint8_t percent)
+{ 
+	return percent;
+}
+#else
+extern "C"
+{
+	uint8_t DisplayLightSet(uint8_t percent);
+}
+#endif
+
+
+DisplayScreenView::DisplayScreenView() :
+	sliderValueChangedCallback(this, &DisplayScreenView::sliderValueChangedCallbackHandler)
 {
 
 }
 
 void DisplayScreenView::setupScreen()
 {
-    DisplayScreenViewBase::setupScreen();
+	DisplayScreenViewBase::setupScreen();
+	sldrBrightnes.setNewValueCallback(sliderValueChangedCallback);
+}
+
+void DisplayScreenView::sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value)
+{
+	if (&src == &sldrBrightnes)
+	{
+		//execute code whenever the value of the slider changes. 
+
+		Unicode::snprintf(lblBrightnessBuffer, 8, "%d", value);
+		lblBrightness.invalidate();
+		DisplayLightSet((uint8_t)value);
+	}
 }
 
 void DisplayScreenView::tearDownScreen()
 {
-    DisplayScreenViewBase::tearDownScreen();
+	DisplayScreenViewBase::tearDownScreen();
 }
