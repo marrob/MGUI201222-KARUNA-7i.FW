@@ -13,6 +13,11 @@ public:
     virtual void tearDownScreen();
     virtual void btnScreenOnClick();
 
+#ifdef SIMULATOR
+    void DisplayEnable();
+    void DisplayDisable();
+#endif
+
 protected:
 };
 

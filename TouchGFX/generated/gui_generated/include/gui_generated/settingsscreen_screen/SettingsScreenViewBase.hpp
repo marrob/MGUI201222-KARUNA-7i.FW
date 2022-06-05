@@ -35,7 +35,7 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::Box box1;
-    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > > btnDisplay;
+    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnDisplay;
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::RadioButton rdbtnEnableAll;
     touchgfx::TextArea textArea1;

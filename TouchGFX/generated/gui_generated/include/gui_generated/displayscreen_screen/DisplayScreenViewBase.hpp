@@ -16,6 +16,7 @@
 #include <touchgfx/widgets/RadioButton.hpp>
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class DisplayScreenViewBase : public touchgfx::View<DisplayScreenPresenter>
@@ -24,6 +25,14 @@ public:
     DisplayScreenViewBase();
     virtual ~DisplayScreenViewBase() {}
     virtual void setupScreen();
+
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void sldrBrightnesChanged(int value)
+    {
+        // Override and implement this function in DisplayScreen
+    }
 
 protected:
     FrontendApplication& application() {
@@ -36,10 +45,10 @@ protected:
     touchgfx::Box __background;
     touchgfx::Box box1;
     touchgfx::BoxWithBorder boxWithBorder1;
-    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > > btnBack;
+    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnBack;
     touchgfx::TextArea textArea1;
     touchgfx::Slider sldrBrightnes;
-    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger > > > btnDisplayOff;
+    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnDisplayOff;
     touchgfx::TextArea textArea2_1;
     touchgfx::Container container1;
     touchgfx::RadioButton rdbtnSet0;
@@ -58,7 +67,15 @@ protected:
     touchgfx::TextArea textArea2_3_4;
     touchgfx::Line line1;
     touchgfx::PainterRGB565 line1Painter;
+    touchgfx::TextAreaWithOneWildcard lblBrightness;
+    touchgfx::TextArea textArea2_1_1_1;
     touchgfx::RadioButtonGroup<7> radioButtonGroup1;
+
+    /*
+     * Wildcard Buffers
+     */
+    static const uint16_t LBLBRIGHTNESS_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar lblBrightnessBuffer[LBLBRIGHTNESS_SIZE];
 
 private:
 
@@ -66,11 +83,13 @@ private:
      * Callback Declarations
      */
     touchgfx::Callback<DisplayScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+    touchgfx::Callback<DisplayScreenViewBase, const touchgfx::Slider&, int> sliderValueChangedCallback;
 
     /*
      * Callback Handler Declarations
      */
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
+    void sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value);
 
     /*
      * Canvas Buffer Size

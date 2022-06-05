@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -19,12 +19,12 @@
 #define TOUCHGFX_HALSDL2_HPP
 
 #include <stdio.h>
-#include <touchgfx/hal/Types.hpp>
+#include <platform/driver/touch/TouchController.hpp>
 #include <touchgfx/hal/HAL.hpp>
+#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/lcd/LCD.hpp>
 #include <SDL2/SDL_render.h>
 #include <SDL2/SDL_video.h>
-#include <platform/driver/touch/TouchController.hpp>
 
 namespace touchgfx
 {
@@ -138,6 +138,8 @@ public:
      */
     bool doSampleTouch(int32_t& x, int32_t& y) const;
 
+    virtual void setFrameBufferSize(uint16_t width, uint16_t height);
+
     /**
      * Initializes SDL.
      *
@@ -210,6 +212,14 @@ public:
 
     /** Copies the screenshot to clipboard. */
     virtual void copyScreenshotToClipboard();
+
+    /**
+     * Flash invalidated areas on/off. The area that needs to be redrawn is flashed in grey to help
+     * identify performance bottle necks.
+     *
+     * @param   flash   (Optional) True to flash the screen when updating.
+     */
+    virtual void setFlashInvalidatedAreas(bool flash = true);
 
     /**
      * Single stepping enable/disable. When single stepping is enabled, F10 will execute one
@@ -425,7 +435,7 @@ private:
     void recreateWindow(bool updateContent = true);
     void pushTouch(bool down) const;
     bool popTouch() const;
-    static void updateTitle(int32_t x, int32_t y);
+    static void updateTitle();
     void alphaChannelCheck(SDL_Surface* surface, bool& isOpaque, bool& hasSemiTransparency);
     void updateCurrentSkin();
     int getCurrentSkinX() const;

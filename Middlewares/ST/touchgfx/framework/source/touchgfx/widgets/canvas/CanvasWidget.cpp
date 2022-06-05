@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -10,21 +10,18 @@
 *
 *******************************************************************************/
 
-#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Utils.hpp>
 #include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 #include <touchgfx/hal/HAL.hpp>
-#include <touchgfx/widgets/Widget.hpp>
-#include <touchgfx/widgets/canvas/AbstractPainter.hpp>
 #include <touchgfx/widgets/canvas/CanvasWidget.hpp>
 
 namespace touchgfx
 {
 CanvasWidget::CanvasWidget()
     : Widget(),
+      alpha(255),
       canvasPainter(0),
-      maxRenderLines(0x7FFF),
-      alpha(255)
+      maxRenderLines(0x7FFF)
 {
 }
 
@@ -37,7 +34,7 @@ AbstractPainter& CanvasWidget::getPainter() const
 {
     assert(canvasPainter != 0 && "No painter set");
     return *canvasPainter;
-}
+} //lint !e1763
 
 void CanvasWidget::draw(const Rect& invalidatedArea) const
 {
@@ -108,13 +105,10 @@ void CanvasWidget::draw(const Rect& invalidatedArea) const
             // rest of the CanvasWidget.
             wantedRenderLines = 1;
         }
-        else
+        else if (failedAtLeastOnce && maxRenderLines == 0x7FFF)
         {
-            if (failedAtLeastOnce && maxRenderLines == 0x7FFF)
-            {
-                // Only adjust maxRenderLines if it is the first draw for the CanvasWidget
-                maxRenderLines = wantedRenderLines;
-            }
+            // Only adjust maxRenderLines if it is the first draw for the CanvasWidget
+            maxRenderLines = wantedRenderLines;
         }
         *offset += wantedRenderLines;
         *lines -= wantedRenderLines;
@@ -139,7 +133,7 @@ Rect CanvasWidget::getMinimalRect() const
 
 Rect CanvasWidget::getSolidRect() const
 {
-    return Rect(0, 0, 0, 0);
+    return Rect();
 }
 
 void CanvasWidget::resetMaxRenderLines()

@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -18,9 +18,9 @@
 #ifndef TOUCHGFX_CWRUTIL_HPP
 #define TOUCHGFX_CWRUTIL_HPP
 
-#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Utils.hpp>
 #include <touchgfx/canvas_widget_renderer/Rasterizer.hpp>
+#include <touchgfx/hal/Types.hpp>
 
 namespace touchgfx
 {
@@ -157,7 +157,7 @@ struct CWRUtil
         Q5 operator*(const Q15& q15) const
         {
             int32_t remainder;
-            return Q5(muldiv(v, int(q15), Rasterizer::POLY_BASE_SIZE* Rasterizer::POLY_BASE_SIZE* Rasterizer::POLY_BASE_SIZE, remainder));
+            return Q5(muldiv(v, int(q15), Rasterizer::POLY_BASE_SIZE * Rasterizer::POLY_BASE_SIZE * Rasterizer::POLY_BASE_SIZE, remainder));
         }
 
         /**
@@ -216,10 +216,25 @@ struct CWRUtil
         }
 
         /**
-         * Convert the Q5 value to an integer by removing the 5 bits used for the fraction. The
-         * number is rounded up to the nearest integer.
+         * Convert the Q5 value to an integer by removing the 5 bits used for the fraction. The number
+         * is rounded down to the nearest integer.
          *
-         * @return The first integer value higher than (or equal to) the Q5 value.
+         * @return  The first integer value higher than (or equal to) the Q5 value.
+         *
+         * @see ceil
+         */
+        int floor() const
+        {
+            return to<int>();
+        }
+
+        /**
+         * Convert the Q5 value to an integer by removing the 5 bits used for the fraction. The number
+         * is rounded up to the nearest integer.
+         *
+         * @return  The first integer value higher than (or equal to) the Q5 value.
+         *
+         * @see floor
          */
         int ceil() const
         {

@@ -1,7 +1,7 @@
-# Copyright (c) 2018(-2021) STMicroelectronics.
+# Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.18.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -13,10 +13,11 @@ class FontsCpp
     @@font_convert = font_convert
   end
 
-  def initialize(text_entries, typographies, output_directory, font_asset_path, data_format, generate_binary_fonts, generate_font_format)
+  def initialize(text_entries, typographies, output_directory, font_asset_path, autohint_setting, data_format, generate_binary_fonts, generate_font_format)
     @typographies = typographies
     @output_directory = output_directory
     @font_asset_path = font_asset_path
+    @autohint_setting = autohint_setting
     @data_format = data_format
     @generate_binary_fonts = generate_binary_fonts
     @generate_font_format = generate_font_format
@@ -70,6 +71,7 @@ class FontsCpp
       fallback_char ||= 0
       ellipsis_char = typography[:ellipsis_character]
       ellipsis_char ||= 0
+      autohint = @autohint_setting == "no" ? "-nah" : @autohint_setting == "force" ? "-fah" : ""
       byte_align = @data_format.match("A#{typography.bpp}") ? "-ba" : ""
       #generate contextual forms table for font if not already done
       generate_contextual_table = context_tables_is_generated[typography.cpp_name] ? "no" : "yes"
@@ -88,6 +90,7 @@ class FontsCpp
 -ct #{generate_contextual_table} \
 -bf #{@generate_binary_fonts} \
 -ff #{@generate_font_format} \
+#{autohint} \
 #{byte_align}"
       #puts "Command: #{cmd}"
       output = `#{cmd}`.force_encoding('iso-8859-1')

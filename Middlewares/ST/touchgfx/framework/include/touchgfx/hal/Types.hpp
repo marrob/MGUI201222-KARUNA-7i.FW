@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -203,7 +203,7 @@ public:
      */
     bool includes(const Rect& other) const
     {
-        return other.x >= x && other.y >= y && other.right() <= right() && other.bottom() <= bottom();
+        return other.isEmpty() || (other.x >= x && other.y >= y && other.right() <= right() && other.bottom() <= bottom());
     }
 
     /**
@@ -212,7 +212,7 @@ public:
      *
      * @param  other The other rectangle.
      *
-     * @return Intersecting rectangle or Rect(0, 0, 0, 0) in case of no intersection.
+     * @return Intersecting rectangle or empty Rect in case of no intersection.
      */
     Rect operator&(const Rect& other) const
     {
@@ -223,7 +223,7 @@ public:
 
     /**
      * Assigns this Rect to the intersection of the current Rect and the assigned Rect. The
-     * assignment will result in a Rect(0, 0, 0, 0) if they do not intersect.
+     * assignment will result in a empty Rect if they do not intersect.
      *
      * @param  other The rect to intersect with.
      */
@@ -282,6 +282,39 @@ public:
     }
 
     /**
+     * Restrict the area to not exceed the given max width and max height. As a result, width or
+     * height can be negative if the rect is completely outside Rect(0, 0, max_width, max_height),
+     * but this is nicely handled by the isEmpty() function.
+     *
+     * @param   max_width   The maximum width.
+     * @param   max_height  The maximum height.
+     *
+     * @see intersect, isEmpty
+     */
+    void restrictTo(int16_t max_width, int16_t max_height)
+    {
+        // Limit area to the screen (0,0,HAL::WIDTH,HAL::HEIGT)
+        if (x < 0)
+        {
+            width += x;
+            x = 0; // Negative width is ok (isEmpty => true)
+        }
+        if (width > max_width - x) // right() > max_width
+        {
+            width = max_width - x;
+        }
+        if (y < 0)
+        {
+            height += y;
+            y = 0; // Negative height is ok (isEmpty => true)
+        }
+        if (height > max_height - y) // bottom() > max_height
+        {
+            height = max_height - y;
+        }
+    }
+
+    /**
      * Compares equality of two Rect by the dimensions and position of these.
      *
      * @param  other The Rect to compare with.
@@ -322,7 +355,7 @@ public:
      */
     uint32_t area() const
     {
-        return width * height;
+        return isEmpty() ? 0 : width * height;
     }
 
 private:

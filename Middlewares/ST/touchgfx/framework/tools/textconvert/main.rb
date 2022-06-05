@@ -1,24 +1,15 @@
-#!env ruby
-# Copyright (c) 2018(-2021) STMicroelectronics.
+# Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.18.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
 # If no LICENSE file comes with this software, it is provided AS-IS.
 #
 ###############################################################################/
-
 $:.unshift File.dirname(__FILE__)
 
-require 'fileutils'
-require 'json'
-require 'rubygems'
-require 'lib/converter'
-require 'lib/emitters/fonts_cpp'
-require 'lib/file_io'
-require 'lib/generator'
 require 'lib/version'
 
 WINDOWS_LINE_ENDINGS = "\r\n"
@@ -29,10 +20,6 @@ LINE_ENDINGS = RUBY_PLATFORM.match(/linux/) ? WINDOWS_LINE_ENDINGS : UNIX_LINE_E
 def root_dir
   # Get the dirname of this (main.rb) file:
   @root_dir ||= File.dirname(__FILE__)
-end
-
-def convert_to_xml(xlsx_file_name, xml_file_name, xml_file_version, framebuffer_bpp)
-  Converter.new.run(xlsx_file_name, xml_file_name, xml_file_version, framebuffer_bpp)
 end
 
 class Main
@@ -48,11 +35,7 @@ Where 'remap'/'yes' will map identical texts to the same memory area to save spa
       'binary_translations' will generate binary translations instead of cpp files
       'binary_fonts' will generate binary font files instead of cpp files
       last argument is the framebuffer format (used to limit the bit depth of the generated fonts)
-      Configuration specified in the application.config file take precedence over the commandline arguments
-
-Note: old .xlsx files are automatically converted to .xml format
-
-Also note: If the only argument passed is an .xlsx file, it will be converted to .xml
+      Configuration specified in the application.config file take precedence over the command line arguments
 BANNER
   end
 
@@ -73,37 +56,11 @@ UPGRADE
            !File.exists?("#{@localization_output_path}/include/texts/TextKeysAndLanguages.hpp")
   end
 
-  if Integer(RUBY_VERSION.match(/\d+/)[0]) < 3
+  if Integer(RUBY_VERSION.match(/\d+/)[0]) < 3 && !RUBY_PLATFORM.match(/linux/)
     puts self.upgrade
   end
 
   if __FILE__ == $0
-
-    if ARGV.count==0 && false
-      Dir["**/assets/texts/texts.xlsx"].each do |file_name|
-        xml_file_name = file_name.gsub(/\.xlsx$/, '.xml')
-        if File.exists?(xml_file_name)
-          puts "WARNING: Removing existing \"#{xml_file_name}\""
-          File.delete(xml_file_name)
-        end
-        puts "Converting \"#{file_name}\" to \"#{xml_file_name}\""
-        convert_to_xml(file_name, xml_file_name, TOUCHGFX_VERSION, '8')
-      end
-      exit
-    end
-
-    if ARGV.count==1 && ARGV[0].match(/\.xlsx$/)
-      # Only one argument, and it is an Excel sheet
-      file_name = ARGV.shift
-      xml_file_name = file_name.gsub(/\.xlsx$/, '.xml')
-      if File.exists?(xml_file_name)
-        puts "WARNING: File \"#{xml_file_name}\" already exists, please remove first"
-      else
-        puts "Converting \"#{file_name}\" to \"#{xml_file_name}\""
-        convert_to_xml(file_name, xml_file_name, TOUCHGFX_VERSION, '8')
-      end
-      exit
-    end
 
     if ARGV.count < 6
       abort self.banner
@@ -118,6 +75,7 @@ UPGRADE
 
     #optional arguments
     remap_identical_texts = ARGV.include?("yes") || ARGV.include?("remap") ? "yes" : "no"
+    autohint_setting = "default"
 
     data_format_a1 = ARGV.include?("A1") ? "A1" : ""
     data_format_a2 = ARGV.include?("A2") ? "A2" : ""
@@ -136,6 +94,8 @@ UPGRADE
 
     generate_font_format = "0" # 0 = normal font format, 1 = unmapped_flash_font_format
 
+    require 'json'
+
     application_config = File.join($calling_path, "application.config")
     if File.file?(application_config)
       text_conf = JSON.parse(File.read(application_config))["text_configuration"] || {}
@@ -143,6 +103,11 @@ UPGRADE
       remap = text_conf["remap"]
       if !remap.nil?
         remap_identical_texts = remap == "yes" ? "yes" : "no"
+      end
+
+      autohint = text_conf["autohint"]
+      if !autohint.nil?
+        autohint_setting = (autohint == "no" || autohint == "force") ? autohint : "default"
       end
 
       a1 = text_conf["a1"]
@@ -195,13 +160,15 @@ UPGRADE
     end
 
     begin
-      # 0. possibly convert .xlsx to .xml
+      # 0. check text database file extension. Allow texts.xlsx as parameter, but require a texts.xml to be present
       # 1. if text_converter is newer than compile_time.cache, remove all files under generated/texts and generated/fonts
       # 1b if generated/fonts/include/fonts/ApplicationFontProvider.hpp is missing, force generation of TextKeysAndLanguages.hpp
       # 1c if generated/texts/cache/options.cache contents differ from supplies arguments, force run
       # 2. if generated/texts/cache/compile_time.cache is newer than xml file and fonts/ApplicationFontProvider.hpp exists then stop now
       # 3. remove UnicodeList*.txt and CharSizes*.csv
       # 4. create #{@localization_output_path}/include/texts/ and #{@fonts_output_path}/include/fonts/
+
+      require 'fileutils'
 
       # 0:
       if file_name.match(/\.xlsx$/)
@@ -211,22 +178,9 @@ UPGRADE
             puts "WARNING: Using \"#{xml_file_name}\" instead of \"#{file_name}\""
           end
         else
-          if File.exists?(file_name)
-            puts "WARNING: Excel file not supported. Converting \"#{file_name}\" to \"#{xml_file_name}\""
-            convert_to_xml(file_name, xml_file_name, TOUCHGFX_VERSION, framebuffer_bpp)
-          else
-            fail "ERROR: #{file_name} not found"
-          end
+          fail "ERROR: #{xml_file_name} not found"
         end
         file_name = xml_file_name
-      elsif file_name.match(/\.xml$/) && !File.exists?(file_name)
-        xlsx_file_name = file_name.gsub(/\.xml$/, '.xlsx')
-        if File.exists?(xlsx_file_name)
-          puts "WARNING: XML file not found. Converting \"#{xlsx_file_name}\" to \"#{file_name}\""
-          convert_to_xml(xlsx_file_name, file_name, TOUCHGFX_VERSION, framebuffer_bpp)
-        else
-          fail "ERROR: #{file_name} not found"
-        end
       end
 
       # 1:
@@ -254,6 +208,7 @@ UPGRADE
       options = File.exists?(options_file) && File.read(options_file)
 
       new_options = { :remap => remap_identical_texts,
+                      :autohint => autohint_setting,
                       :data_format => data_format,
                       :binary_translations => generate_binary_translations,
                       :binary_fonts => generate_binary_fonts,
@@ -262,6 +217,7 @@ UPGRADE
 
       if (options != new_options)
         force_run = true
+        require 'lib/file_io'
         FileIO.write_file_silent(options_file, new_options)
       end
 
@@ -285,8 +241,10 @@ UPGRADE
       FileUtils.mkdir_p("#{@localization_output_path}/include/texts/")
       FileUtils.mkdir_p("#{@fonts_output_path}/include/fonts")
 
+      require 'lib/emitters/fonts_cpp'
+      require 'lib/generator'
       FontsCpp.font_convert = font_convert_path
-      Generator.new.run(file_name, @fonts_output_path, @localization_output_path, font_asset_path, data_format, remap_identical_texts, generate_binary_translations, generate_binary_fonts, framebuffer_bpp, generate_font_format)
+      Generator.new.run(file_name, @fonts_output_path, @localization_output_path, font_asset_path, data_format, remap_identical_texts, autohint_setting, generate_binary_translations, generate_binary_fonts, framebuffer_bpp, generate_font_format)
       #touch the cache compile time that we rely on in the makefile
       FileUtils.touch "#{@localization_output_path}/cache/compile_time.cache"
 

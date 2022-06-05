@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -18,17 +18,17 @@
 #ifndef TOUCHGFX_HAL_HPP
 #define TOUCHGFX_HAL_HPP
 
-#include <touchgfx/hal/Types.hpp>
+#include <platform/core/MCUInstrumentation.hpp>
+#include <platform/driver/button/ButtonController.hpp>
+#include <platform/driver/touch/TouchController.hpp>
 #include <touchgfx/Bitmap.hpp>
 #include <touchgfx/Drawable.hpp>
 #include <touchgfx/hal/BlitOp.hpp>
 #include <touchgfx/hal/DMA.hpp>
 #include <touchgfx/hal/FrameBufferAllocator.hpp>
 #include <touchgfx/hal/Gestures.hpp>
+#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/lcd/LCD.hpp>
-#include <platform/core/MCUInstrumentation.hpp>
-#include <platform/driver/button/ButtonController.hpp>
-#include <platform/driver/touch/TouchController.hpp>
 
 namespace touchgfx
 {
@@ -488,6 +488,19 @@ public:
     virtual void blitFill(colortype color, uint16_t x, uint16_t y, uint16_t width, uint16_t height, uint8_t alpha, uint16_t dstWidth, Bitmap::BitmapFormat dstFormat, bool replaceBgAlpha);
 
     /**
+     * Copies a region of the currently displayed framebuffer to memory. Used for e.g.
+     * BlockTransition and for displaying pre-rendered drawables
+     * e.g. in animations where redrawing the drawable is not necessary.
+     *
+     * @param  region               The displayed framebuffer region to copy.
+     *
+     * @return A pointer to the memory address containing the copy of the framebuffer.
+     *
+     * @note Requires double framebuffer to be enabled.
+     */
+    virtual uint16_t* copyFromTFTToClientBuffer(Rect region);
+
+    /**
      * Blits a color value to the framebuffer performing alpha-blending as specified.
      *
      * @param  color                The desired fill-color.
@@ -678,14 +691,29 @@ public:
      *                              buffering is disabled.
      * @param [in] animationStorage If non-null, the animation storage. If null animation storage
      *                              is disabled.
+     *
+     * @see setAnimationStorage
      */
     virtual void setFrameBufferStartAddresses(void* frameBuffer, void* doubleBuffer, void* animationStorage)
     {
         assert(frameBuffer != 0 && "A framebuffer address must be set");
         frameBuffer0 = reinterpret_cast<uint16_t*>(frameBuffer);
         frameBuffer1 = reinterpret_cast<uint16_t*>(doubleBuffer);
-        frameBuffer2 = reinterpret_cast<uint16_t*>(animationStorage);
         USE_DOUBLE_BUFFERING = doubleBuffer != 0;
+        setAnimationStorage(animationStorage);
+    }
+
+    /**
+     * Sets animation storage address.
+     *
+     * @param [in] animationStorage If non-null, the animation storage. If null animation storage
+     *                              is disabled.
+     *
+     * @see setFrameBufferStartAddresses
+     */
+    virtual void setAnimationStorage(void* animationStorage)
+    {
+        frameBuffer2 = reinterpret_cast<uint16_t*>(animationStorage);
         USE_ANIMATION_STORAGE = animationStorage != 0;
     }
 

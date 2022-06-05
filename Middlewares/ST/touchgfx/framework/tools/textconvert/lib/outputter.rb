@@ -1,7 +1,7 @@
-# Copyright (c) 2018(-2021) STMicroelectronics.
+# Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.18.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -30,7 +30,7 @@ require 'lib/emitters/typed_text_database_hpp'
 require 'lib/emitters/typed_text_database_cpp'
 
 class Outputter
-  def initialize(string_indices, characters, text_entries, typographies, localization_output_directory, fonts_output_directory, font_asset_path, data_format, remap_identical_texts, generate_binary_translations, generate_binary_fonts, generate_font_format)
+  def initialize(string_indices, characters, text_entries, typographies, localization_output_directory, fonts_output_directory, font_asset_path, data_format, remap_identical_texts, autohint_setting, generate_binary_translations, generate_binary_fonts, generate_font_format)
     @string_indices = string_indices #dictionary of all string indices into the characters array
     @characters = characters         #one array of the needed strings in optimal order
     @text_entries = text_entries
@@ -40,6 +40,7 @@ class Outputter
     @font_asset_path = font_asset_path
     @data_format = data_format
     @remap_identical_texts = remap_identical_texts
+    @autohint_setting = autohint_setting
     @generate_binary_translations = generate_binary_translations
     @generate_binary_fonts = generate_binary_fonts
     @generate_font_format = generate_font_format
@@ -69,7 +70,7 @@ class Outputter
 
     LanguagesCpp.new(@string_indices, @text_entries, @localization_output_directory, @remap_identical_texts, @generate_binary_translations).run
 
-    FontsCpp.new(@text_entries, @typographies, @fonts_output_directory, @font_asset_path, @data_format, @generate_binary_fonts, @generate_font_format).run
+    FontsCpp.new(@text_entries, @typographies, @fonts_output_directory, @font_asset_path, @autohint_setting, @data_format, @generate_binary_fonts, @generate_font_format).run
 
     if @generate_binary_translations.downcase == 'yes'
       [ LanguagesBin ].each { |template| template.new(@text_entries, @typographies, @localization_output_directory).run }

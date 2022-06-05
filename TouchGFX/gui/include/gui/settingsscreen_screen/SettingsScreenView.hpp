@@ -13,9 +13,9 @@ public:
     virtual void tearDownScreen();
 
     virtual void handleTickEvent();
- 
+     
 #ifdef SIMULATOR
-    uint8_t GuiItfGetKarunaUptimeCnt();
+    uint8_t GuiItfGetKarunaUptimeCnt(); 
 #endif
 
 protected:

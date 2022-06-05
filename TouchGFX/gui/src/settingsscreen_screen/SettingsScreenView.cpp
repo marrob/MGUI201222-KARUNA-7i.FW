@@ -23,7 +23,7 @@ SettingsScreenView::SettingsScreenView()
 
 void SettingsScreenView::setupScreen()
 {
-    SettingsScreenViewBase::setupScreen();
+    SettingsScreenViewBase::setupScreen(); 
 }
 
 void SettingsScreenView::tearDownScreen()

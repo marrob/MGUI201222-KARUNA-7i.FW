@@ -9,7 +9,8 @@
 
 
 DisplayScreenViewBase::DisplayScreenViewBase() :
-    flexButtonCallback(this, &DisplayScreenViewBase::flexButtonCallbackHandler)
+    flexButtonCallback(this, &DisplayScreenViewBase::flexButtonCallbackHandler),
+    sliderValueChangedCallback(this, &DisplayScreenViewBase::sliderValueChangedCallbackHandler)
 {
 
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
@@ -45,7 +46,8 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     sldrBrightnes.setBitmaps(touchgfx::Bitmap(BITMAP_SLIDER_930_ID), touchgfx::Bitmap(BITMAP_SLIDER_930_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID));
     sldrBrightnes.setupHorizontalSlider(20, 16, 0, 0, 930);
     sldrBrightnes.setValueRange(0, 100);
-    sldrBrightnes.setValue(0);
+    sldrBrightnes.setValue(100);
+    sldrBrightnes.setNewValueCallback(sliderValueChangedCallback);
 
     btnDisplayOff.setBoxWithBorderPosition(0, 0, 500, 90);
     btnDisplayOff.setBorderSize(1);
@@ -157,6 +159,18 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     line1.setLineWidth(2);
     line1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
+    lblBrightness.setPosition(896, 361, 77, 44);
+    lblBrightness.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblBrightness.setLinespacing(0);
+    Unicode::snprintf(lblBrightnessBuffer, LBLBRIGHTNESS_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_8FBD).getText());
+    lblBrightness.setWildcard(lblBrightnessBuffer);
+    lblBrightness.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ONW5));
+
+    textArea2_1_1_1.setPosition(759, 361, 144, 44);
+    textArea2_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    textArea2_1_1_1.setLinespacing(0);
+    textArea2_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FF38));
+
     add(__background);
     add(box1);
     add(boxWithBorder1);
@@ -167,6 +181,8 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     add(textArea2_1);
     add(container1);
     add(line1);
+    add(lblBrightness);
+    add(textArea2_1_1_1);
     radioButtonGroup1.add(rdbtnSet0);
     radioButtonGroup1.add(rdbtnSet1);
     radioButtonGroup1.add(rdbtnSet5);
@@ -187,8 +203,8 @@ void DisplayScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
     {
         //ShowMain
         //When btnBack clicked change screen to Main
-        //Go to Main with no screen transition
-        application().gotoMainScreenNoTransition();
+        //Go to Main with screen transition towards West
+        application().gotoMainScreenSlideTransitionWest();
     }
     else if (&src == &btnDisplayOff)
     {
@@ -196,5 +212,16 @@ void DisplayScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
         //When btnDisplayOff clicked change screen to OffScreen
         //Go to OffScreen with screen transition towards West
         application().gotoOffScreenScreenSlideTransitionWest();
+    }
+}
+
+void DisplayScreenViewBase::sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value)
+{
+    if (&src == &sldrBrightnes)
+    {
+        //sldrBrightnesChanged
+        //When sldrBrightnes value changed call virtual function
+        //Call sldrBrightnesChanged
+        sldrBrightnesChanged(value);
     }
 }

@@ -1,8 +1,8 @@
 /******************************************************************************
-* Copyright (c) 2018(-2021) STMicroelectronics.
+* Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.18.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -18,11 +18,11 @@
 #ifndef TOUCHGFX_DRAWABLE_HPP
 #define TOUCHGFX_DRAWABLE_HPP
 
-#include <touchgfx/hal/Types.hpp>
 #include <touchgfx/Bitmap.hpp>
 #include <touchgfx/events/ClickEvent.hpp>
 #include <touchgfx/events/DragEvent.hpp>
 #include <touchgfx/events/GestureEvent.hpp>
+#include <touchgfx/hal/Types.hpp>
 
 namespace touchgfx
 {
@@ -84,16 +84,16 @@ public:
      * @note The rectangle returned must be relative to upper left corner of the Drawable, meaning
      *       that a completely solid widget should return the full size Rect(0, 0,
      *       getWidth(), getHeight()). If no area can be guaranteed to be solid, an empty
-     *       Rect(0, 0, 0, 0) must be returned. Failing to return the correct rectangle
+     *       Rect must be returned. Failing to return the correct rectangle
      *       may result in errors on the display.
      */
     virtual Rect getSolidRect() const = 0;
 
     /**
-     * Request that a region of this drawable is redrawn. Will recursively traverse the tree
-     * towards the root, and once reached, issue a draw operation. When this function
-     * returns, the specified invalidated area has been redrawn for all appropriate
-     * Drawables covering the region.
+     * Request that a region of this drawable is redrawn. All invalidated regions are collected
+     * and possibly merged with other regions that have been invalidated. Before the next tick,
+     * these regions will then be redrawn by the drawables, widgets and containers, covering the
+     * regions.
      *
      * To invalidate the entire Drawable, use invalidate()
      *
@@ -106,11 +106,26 @@ public:
 
     /**
      * Tell the framework that this entire Drawable needs to be redrawn. It is the same as
-     * calling invalidateRect() with Rect(0, 0, getWidth(), getHeight()).
+     * calling invalidateRect() with Rect(0, 0, getWidth(), getHeight()) as argument.
      *
      * @see invalidateRect
      */
     virtual void invalidate() const;
+
+    /**
+     * Tell the framework that the contents of the Drawable needs to be redrawn. If the Drawable is
+     * invisible, nothing happens. Subclasses of Drawable are encouraged to implement this function
+     * and invalidate as little as possible, i.e. the smallest rectangle covering the visual element(s)
+     * drawn by the widget.
+     */
+    virtual void invalidateContent() const
+    {
+        // Consider checking if *this is in the draw chain
+        if (visible)
+        {
+            invalidate();
+        }
+    }
 
     /**
      * Gets the next sibling node. This will be the next Drawable that has been added to the
@@ -212,6 +227,8 @@ public:
      * @param  height The height of this Drawable.
      *
      * @note For most Drawable widgets, changing this does normally not automatically yield a redraw.
+     *
+     * @see setXY,setWidthHeight,setPosition(const Drawable&)
      */
     void setPosition(int16_t x, int16_t y, int16_t width, int16_t height)
     {
@@ -401,7 +418,7 @@ public:
      * Sets the position of the Drawable to the same as the given Drawable. This will copy
      * the x, y, width and height.
      *
-     * @param  drawable The drawable.
+     * @param  drawable The Drawable.
      *
      * @see setPosition(int16_t,int16_t,int16_t,int16_t)
      */
