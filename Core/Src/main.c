@@ -34,7 +34,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define UART_BUFFER_SIZE    40
+#define RS485_BUFFER_SIZE    40
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -144,8 +144,8 @@ const osMessageQueueAttr_t USBUartRxQueue_attributes = {
 Device_t Device;
 __IO unsigned long RTOSRunTimeStatTick;
 
-static char USB_UART_RxBuffer[UART_BUFFER_SIZE] __attribute__ ((aligned (32)));
-static char RS485_UART_RxBuffer[UART_BUFFER_SIZE] __attribute__ ((aligned (32)));
+static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
+static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
 
 /* USER CODE END PV */
 
@@ -811,7 +811,7 @@ static void MX_UART7_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN UART7_Init 2 */
-  HAL_UART_Receive_DMA (&huart7, (uint8_t*)RS485_UART_RxBuffer, UART_BUFFER_SIZE);
+  HAL_UART_Receive_DMA (&huart7, (uint8_t*)RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
   /* USER CODE END UART7_Init 2 */
 
 }
@@ -846,7 +846,7 @@ static void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-  HAL_UART_Receive_DMA (&huart1, (uint8_t*)USB_UART_RxBuffer, UART_BUFFER_SIZE);
+  HAL_UART_Receive_DMA (&huart1, (uint8_t*)USB_UART_RxBuffer, RS485_BUFFER_SIZE);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -1203,7 +1203,7 @@ void UsbUartTx(char *str)
 
 void UsbParser(char *request)
 {
-  char response[UART_BUFFER_SIZE];
+  char response[RS485_BUFFER_SIZE];
   char cmd[20];
   char arg1[10];
   char arg2[10];
@@ -1360,6 +1360,7 @@ void RS485Parser(char *response)
 #define RS485_ARG1_SIZE 10
 #define RS485_ARG2_SIZE 10
 
+  uint8_t addr = 0;
   char cmd[20];
   char arg1[10];
   char arg2[10];
@@ -1372,52 +1373,90 @@ void RS485Parser(char *response)
   if(strlen(response) !=0)
   {
     Device.Diag.RS485ResponseCnt++;
-    params = sscanf(response, "%s %s %s", cmd, arg1, arg2);
-    if(params == 1)
+    params = sscanf(response, "#%hhx %s %s %s", &addr, cmd, arg1, arg2);
+
+    if(addr == KRN_ADDR )
     {
-      if(!strcmp(cmd, "RDY"))
+      if(params == 2)
       {
-        Device.Diag.RS485RdyCnt++;
+        if(!strcmp(cmd, "OK"))
+        {
+          Device.Karuna.OkCnt++;
+        }
+        else
+        {
+          Device.Karuna.UnknownCnt++;
+        }
       }
-      else
+
+      if(params == 3)
       {
-        Device.Diag.RS485UnknownCnt++;
+        if(!strcmp(cmd, "*VER"))
+        {
+
+        }
+        else if(!strcmp(cmd, "*UID"))
+        {
+
+        }
+        else if(!strcmp(cmd,"UPTIME"))
+        {
+           Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
+        }
+        else if(!strcmp(cmd, "DI"))
+        {
+          Device.Karuna.DI = strtol(arg1, NULL, 16);
+        }
+        else if(!strcmp(cmd, "DO"))
+        {
+          Device.Karuna.DO = strtol(arg1, NULL, 16);
+        }
+        else
+        {
+          Device.Karuna.UnknownCnt++;
+        }
       }
     }
 
-    if(params == 2)
+    if(addr == DAS_ADDR)
     {
-      if(!strcmp(cmd, "*OPC"))
+      if(params == 2)
       {
+        if(!strcmp(cmd, "OK"))
+        {
+          Device.Karuna.OkCnt++;
+        }
+        else
+        {
+          Device.DasClock.UnknownCnt++;
+        }
+      }
+      if(params == 3)
+      {
+        if(!strcmp(cmd, "*VER"))
+        {
 
-      }
-      else if(!strcmp(cmd, "*WHOIS"))
-      {
+        }
+        else if(!strcmp(cmd, "*UID"))
+        {
 
-      }
-      else if(!strcmp(cmd, "*VER"))
-      {
-
-      }
-      else if(!strcmp(cmd, "*UID"))
-      {
-
-      }
-      else if(!strcmp(cmd,"UPTIME"))
-      {
-         Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
-      }
-      else if(!strcmp(cmd, "STATUS"))
-      {
-        Device.Karuna.Status = strtol(arg1, NULL, 16);
-      }
-      else if(!strcmp(cmd, "OUTS"))
-      {
-        Device.Karuna.Outputs = strtol(arg1, NULL, 16);
-      }
-      else
-      {
-        Device.Diag.RS485UnknownCnt++;
+        }
+        else if(!strcmp(cmd,"UPTIME"))
+        {
+           Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
+        }
+        else if(!strcmp(cmd, "DI"))
+        {
+          Device.DasClock.DI = strtol(arg1, NULL, 16);
+        }
+        else if(!strcmp(cmd, "DO"))
+        {
+          Device.DasClock.DO = strtol(arg1, NULL, 16);
+        }
+        else
+        {
+          Device.Karuna.UnknownCnt++;
+        }
       }
     }
   }
@@ -1469,7 +1508,7 @@ void UsbRxTask(void *argument)
         timestamp = HAL_GetTick();
         startFlag = 1;
       }
-      for(uint8_t i=0; i < UART_BUFFER_SIZE; i++)
+      for(uint8_t i=0; i < RS485_BUFFER_SIZE; i++)
       {
         if(USB_UART_RxBuffer[i]=='\n')
         {
@@ -1477,8 +1516,8 @@ void UsbRxTask(void *argument)
           startFlag = 0;
           HAL_UART_DMAStop(&huart1);
           UsbParser(USB_UART_RxBuffer);
-          memset(USB_UART_RxBuffer, 0x00, UART_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, UART_BUFFER_SIZE);
+          memset(USB_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, RS485_BUFFER_SIZE);
           Device.Diag.UsbUartRxCommandsCounter ++;
         }
       }
@@ -1503,8 +1542,8 @@ void UsbRxTask(void *argument)
           }
           startFlag = 0;
           HAL_UART_DMAStop(&huart1);
-          memset(USB_UART_RxBuffer, 0x00, UART_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, UART_BUFFER_SIZE);
+          memset(USB_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, RS485_BUFFER_SIZE);
           Device.Diag.UsbUartTimeoutCounter ++;
         }
       }
@@ -1576,7 +1615,7 @@ void RS485RxTask(void *argument)
         timestamp = HAL_GetTick();
         startFlag = 1;
       }
-      for(uint8_t i=0; i < UART_BUFFER_SIZE; i++)
+      for(uint8_t i=0; i < RS485_BUFFER_SIZE; i++)
       {
         if(RS485_UART_RxBuffer[i]=='\n')
         {
@@ -1584,8 +1623,8 @@ void RS485RxTask(void *argument)
           startFlag = 0;
           HAL_UART_DMAStop(&huart7);
           RS485Parser(RS485_UART_RxBuffer);
-          memset(RS485_UART_RxBuffer, 0x00, UART_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, UART_BUFFER_SIZE);
+          memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
           Device.Diag.BusUartRxCommandsCounter ++;
         }
       }
@@ -1610,8 +1649,8 @@ void RS485RxTask(void *argument)
           }
           startFlag = 0;
           HAL_UART_DMAStop(&huart7);
-          memset(RS485_UART_RxBuffer, 0x00, UART_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, UART_BUFFER_SIZE);
+          memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
           Device.Diag.BusUartTimeoutCounter ++;
         }
       }
@@ -1633,20 +1672,22 @@ void RS485TxTask(void *argument)
   /* USER CODE BEGIN RS485TxTask */
   /* Infinite loop */
   uint8_t cmdId = 0;
-  RS485UartTx("OUTS?");
-  char temp[20];
+  char buffer[RS485_BUFFER_SIZE];
+  memset(buffer, 0xCC, RS485_BUFFER_SIZE);
+
   for(;;)
   {
     switch (cmdId)
     {
-      case 0: RS485UartTx("UPTIME?");break;
-      case 1: RS485UartTx("STATUS?");break;
-      case 3:{
-        sprintf(temp,"OUTS %02X", Device.Karuna.Outputs);
-        RS485UartTx(temp);
-        break;
-      };
+      case 0:sprintf(buffer, "#%02X UPTIME?", KRN_ADDR);break;
+      case 1:sprintf(buffer, "#%02X DI?", KRN_ADDR);
+      case 2:sprintf(buffer, "#%02X DO %02X", KRN_ADDR, Device.Karuna.DO);break;
+      case 3:sprintf(buffer, "#%02X UPTIME?", DAS_ADDR);break;
+      case 4:sprintf(buffer, "#%02X DI?", DAS_ADDR);
+      case 5:sprintf(buffer, "#%02X DO %02X", DAS_ADDR, Device.DasClock.DO);break;
     }
+
+    RS485UartTx(buffer);
 
     if(cmdId == 3)
     {
