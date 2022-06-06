@@ -1356,14 +1356,14 @@ void RS485UartTx(char *str)
 
 void RS485Parser(char *response)
 {
-#define RS485_CMD_SIZE  20
-#define RS485_ARG1_SIZE 10
-#define RS485_ARG2_SIZE 10
+#define RS485_CMD_SIZE  40
+#define RS485_ARG1_SIZE 20
+#define RS485_ARG2_SIZE 20
 
-  uint8_t addr = 0;
-  char cmd[20];
-  char arg1[10];
-  char arg2[10];
+  unsigned int addr = 0;
+  char cmd[RS485_CMD_SIZE];
+  char arg1[RS485_ARG1_SIZE];
+  char arg2[RS485_ARG2_SIZE];
   uint8_t params = 0;
 
   memset(cmd,0xCC, RS485_CMD_SIZE);
@@ -1373,8 +1373,8 @@ void RS485Parser(char *response)
   if(strlen(response) !=0)
   {
     Device.Diag.RS485ResponseCnt++;
-    params = sscanf(response, "#%hhx %s %s %s", &addr, cmd, arg1, arg2);
-
+    params = sscanf(response, "#%x %s %s %s", &addr, cmd, arg1, arg2);
+/*
     if(addr == KRN_ADDR )
     {
       if(params == 2)
@@ -1401,7 +1401,7 @@ void RS485Parser(char *response)
         }
         else if(!strcmp(cmd,"UPTIME"))
         {
-           Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
+          // Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
         }
         else if(!strcmp(cmd, "DI"))
         {
@@ -1443,7 +1443,7 @@ void RS485Parser(char *response)
         }
         else if(!strcmp(cmd,"UPTIME"))
         {
-           Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
+          // Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
         }
         else if(!strcmp(cmd, "DI"))
         {
@@ -1458,7 +1458,7 @@ void RS485Parser(char *response)
           Device.Karuna.UnknownCnt++;
         }
       }
-    }
+    }*/
   }
 }
 /* USER CODE END 4 */
@@ -1672,7 +1672,7 @@ void RS485TxTask(void *argument)
   /* USER CODE BEGIN RS485TxTask */
   /* Infinite loop */
   uint8_t cmdId = 0;
-  char buffer[RS485_BUFFER_SIZE];
+  static char buffer[RS485_BUFFER_SIZE];
   memset(buffer, 0xCC, RS485_BUFFER_SIZE);
 
   for(;;)
