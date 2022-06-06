@@ -12,20 +12,20 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-typedef struct _DisplayLight
+typedef struct _Backlight
 {
   uint8_t LightPercent;
-} DisplayLight_t;
+} Backlight_t;
 
 /* Exported macro ------------------------------------------------------------*/
 #define DISPLAY_LIGHT_OK  0
 /* Exported functions ------------------------------------------------------- */
 
-void DisplayLightInit(TIM_HandleTypeDef *htim);
-uint8_t DisplayLightSet(uint8_t percent);
-uint8_t DisplayLightGet(void);
-void DisplayEnable(void);
-void DisplayDisable(void);
+void BacklightInit(TIM_HandleTypeDef *htim);
+uint8_t BacklightSet(uint8_t percent);
+uint8_t BacklightGet(void);
+void BacklightEnable(void);
+void BacklightDisable(void);
 
 
 #endif /* APPLICATION_USER_CORE_INC_DISPLAYLIGHT_H_ */

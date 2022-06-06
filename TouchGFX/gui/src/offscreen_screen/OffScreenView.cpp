@@ -1,17 +1,17 @@
 #include <gui/offscreen_screen/OffScreenView.hpp>
 
 #ifdef SIMULATOR
-void OffScreenView::DisplayEnable()
+void OffScreenView::BacklightEnable()
 {
 }
-void OffScreenView::DisplayDisable()
+void OffScreenView::BacklightDisable()
 {
 }
 #else
 extern "C"
 {
-    void DisplayEnable();
-    void DisplayDisable();
+    void BacklightEnable();
+    void BacklightDisable();
 }
 #endif
 
@@ -23,7 +23,7 @@ OffScreenView::OffScreenView()
 void OffScreenView::setupScreen()
 {
     OffScreenViewBase::setupScreen();    
-    DisplayDisable();
+    BacklightDisable();
 }
 
 void OffScreenView::tearDownScreen()
@@ -33,5 +33,5 @@ void OffScreenView::tearDownScreen()
 
 void OffScreenView::btnScreenOnClick() 
 {
-    DisplayEnable();
+  BacklightEnable();
 }

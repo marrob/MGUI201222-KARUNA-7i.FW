@@ -9,6 +9,10 @@
 #define _GUIITF_H_
 
 
+#define GUIITF_OK             0x00
+#define GUIITF_FAIL           0x01
+#define GUIITF_OUT_OF_RANGE   0x02
+
 /*** KARUNA ***/
 #define KRN_STAT_A0             (uint8_t)1<<0
 #define KRN_STAT_A1             (uint8_t)1<<1
@@ -25,9 +29,19 @@
 
 
 /* Exported functions prototypes ---------------------------------------------*/
+uint8_t GuiItfLoad(void);
+uint8_t GuiItfSetDefault(void);
+
+/* Karuna --------------------------------------------------------------------*/
 uint8_t GuiItfGetKarunaStatus(void);
-void GuiItfKarunaControl(uint8_t p_Output);
+uint8_t GuiItfKarunaControl(uint8_t p_Output);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
+
+/* Backlight -----------------------------------------------------------------*/
+uint8_t GuiItfSetBacklight(uint8_t percent);
+uint8_t GuiItfGetBacklight(void);
+
+
 
 
 

@@ -13,7 +13,7 @@ public:
     virtual void tearDownScreen();
 
 #ifdef SIMULATOR
-    uint8_t DisplayLightSet(uint8_t percent);
+    uint8_t BacklightSet(uint8_t percent);
 #endif
 
 protected:

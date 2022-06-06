@@ -29,6 +29,7 @@
 #include <stdio.h>
 #include <queue.h>
 #include <stdlib.h>
+#include "GuiItf.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -250,7 +251,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /*** Display ***/
-  DisplayDisable();
+  BacklightDisable();
 
   /*** Flash ***/
   MX25_Init(&hqspi);
@@ -258,8 +259,8 @@ int main(void)
   HAL_NVIC_DisableIRQ(QUADSPI_IRQn);
 
   /*** Leds ***/
-  DisplayLightInit(&htim1);
-  DisplayLightSet(100);
+  BacklightInit(&htim1);
+  BacklightSet(100);
 
   PowerLedInit(&htim1);
   PowerSetLedLight(10);
@@ -1238,7 +1239,7 @@ void UsbParser(char *request)
       }
       else if(!strcmp(cmd, "DIS:LIG?"))
       {
-        sprintf(response, "%d", DisplayLightGet());
+        sprintf(response, "%d", BacklightGet());
       }
 //        else if(!strcmp(cmd, "LED:LIG?"))
 //        {
@@ -1298,7 +1299,7 @@ void UsbParser(char *request)
     {/*** commands with parameters ***/
       if(!strcmp(cmd, "DIS:LIG"))
       {
-        DisplayLightSet(strtol(arg1, NULL, 0));
+        BacklightSet(strtol(arg1, NULL, 0));
         strcpy(response, "RDY");
       }
 //        else if(!strcmp(cmd, "LED:LIG"))
@@ -1433,6 +1434,9 @@ void RS485Parser(char *response)
 void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
+
+  GuiItfLoad();
+
   MX_TouchGFX_Process();
   /* Infinite loop */
   for(;;)
@@ -1542,7 +1546,7 @@ void LiveLedTask(void *argument)
     }
 
     if(Device.Diag.UpTimeSec > 1)
-      DisplayEnable();
+      BacklightEnable();
 
     osDelay(10);
   }

@@ -74,7 +74,7 @@ typedef struct _DiagTypeDef
   uint32_t PowerLedTaskCounter;
   uint64_t UpTimeSec;
 
-
+  uint32_t BootUpCnt;
 }Diag_t;
 
 

@@ -2,14 +2,14 @@
 
 
 #ifdef SIMULATOR
-uint8_t DisplayScreenView::DisplayLightSet(uint8_t percent)
+uint8_t DisplayScreenView::BacklightSet(uint8_t percent)
 { 
 	return percent;
 }
 #else
 extern "C"
 {
-	uint8_t DisplayLightSet(uint8_t percent);
+	uint8_t BacklightSet(uint8_t percent);
 }
 #endif
 
@@ -34,7 +34,7 @@ void DisplayScreenView::sliderValueChangedCallbackHandler(const touchgfx::Slider
 
 		Unicode::snprintf(lblBrightnessBuffer, 8, "%d", value);
 		lblBrightness.invalidate();
-		DisplayLightSet((uint8_t)value);
+		BacklightSet((uint8_t)value);
 	}
 }
 

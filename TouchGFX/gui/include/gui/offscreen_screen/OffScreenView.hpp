@@ -14,8 +14,8 @@ public:
     virtual void btnScreenOnClick();
 
 #ifdef SIMULATOR
-    void DisplayEnable();
-    void DisplayDisable();
+    void BacklightEnable();
+    void BacklightDisable();
 #endif
 
 protected:

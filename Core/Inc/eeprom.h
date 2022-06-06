@@ -12,11 +12,8 @@
 #include "stm32f7xx_hal.h"
 
 /* Exported constants --------------------------------------------------------*/
-
-#define EEP_FIRST_CONTENT         "I'M ALIVE"
-#define EEP_TEST_CONTENT          "This is a Test"
-#define EEP_DEV_ADDRESS           0x50
-#define EEP_DEV_PAGE_SIZE         64
+#define EEP_DEV_ADDRESS           0xA0
+#define EEP_DEV_PAGE_SIZE         4
 #define EEP_DEV_TIMEOUT_MS        100
 
 /* Exported macro ------------------------------------------------------------*/
@@ -25,8 +22,8 @@
 
 /* Exported functions ------------------------------------------------------- */
 void EepromInit(I2C_HandleTypeDef *hi2c);
-HAL_StatusTypeDef EepromWrite(uint16_t address, void *data, size_t size);
-HAL_StatusTypeDef EepromRead(uint16_t memAddr, void *pData, size_t size);
+HAL_StatusTypeDef EepromU32Read(uint16_t address, uint32_t *data);
+HAL_StatusTypeDef EepromU32Write(uint8_t address, uint32_t data);
 
 #endif /* INC_EEPROM_H_ */
 
