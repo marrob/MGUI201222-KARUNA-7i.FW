@@ -116,7 +116,7 @@ const osThreadAttr_t LiveLed_Task_attributes = {
 osThreadId_t RS485Rx_TaskHandle;
 const osThreadAttr_t RS485Rx_Task_attributes = {
   .name = "RS485Rx_Task",
-  .stack_size = 128 * 4,
+  .stack_size = 8192 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for RS485Tx_Task */
@@ -361,7 +361,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
   RCC_OscInitStruct.PLL.PLLM = 8;
-  RCC_OscInitStruct.PLL.PLLN = 400;
+  RCC_OscInitStruct.PLL.PLLN = 432;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV2;
   RCC_OscInitStruct.PLL.PLLQ = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -385,7 +385,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV4;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV2;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_6) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_7) != HAL_OK)
   {
     Error_Handler();
   }
@@ -475,7 +475,7 @@ static void MX_I2C1_Init(void)
 
   /* USER CODE END I2C1_Init 1 */
   hi2c1.Instance = I2C1;
-  hi2c1.Init.Timing = 0x00C0EAFF;
+  hi2c1.Init.Timing = 0x20404768;
   hi2c1.Init.OwnAddress1 = 0;
   hi2c1.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c1.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -523,7 +523,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x00C0EAFF;
+  hi2c2.Init.Timing = 0x20404768;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
@@ -634,7 +634,7 @@ static void MX_QUADSPI_Init(void)
   /* USER CODE END QUADSPI_Init 1 */
   /* QUADSPI parameter configuration*/
   hqspi.Instance = QUADSPI;
-  hqspi.Init.ClockPrescaler = 100;
+  hqspi.Init.ClockPrescaler = 5;
   hqspi.Init.FifoThreshold = 4;
   hqspi.Init.SampleShifting = QSPI_SAMPLE_SHIFTING_NONE;
   hqspi.Init.FlashSize = 25;
@@ -1374,7 +1374,7 @@ void RS485Parser(char *response)
   {
     Device.Diag.RS485ResponseCnt++;
     params = sscanf(response, "#%x %s %s %s", &addr, cmd, arg1, arg2);
-/*
+
     if(addr == KRN_ADDR )
     {
       if(params == 2)
@@ -1401,7 +1401,7 @@ void RS485Parser(char *response)
         }
         else if(!strcmp(cmd,"UPTIME"))
         {
-          // Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
+           Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
         }
         else if(!strcmp(cmd, "DI"))
         {
@@ -1443,7 +1443,7 @@ void RS485Parser(char *response)
         }
         else if(!strcmp(cmd,"UPTIME"))
         {
-          // Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
+           Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
         }
         else if(!strcmp(cmd, "DI"))
         {
@@ -1458,7 +1458,7 @@ void RS485Parser(char *response)
           Device.Karuna.UnknownCnt++;
         }
       }
-    }*/
+    }
   }
 }
 /* USER CODE END 4 */
@@ -1475,6 +1475,8 @@ void StartDefaultTask(void *argument)
   /* USER CODE BEGIN 5 */
 
   GuiItfLoad();
+
+  BacklightEnable();
 
   MX_TouchGFX_Process();
   /* Infinite loop */

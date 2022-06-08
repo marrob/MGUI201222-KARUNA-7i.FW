@@ -14,17 +14,7 @@
       <ProjectName>MGUI201222-KARUNA-7i.FW</ProjectName>
       <ProjectNature>Cpp</ProjectNature>
       <Secure/>
-      <filestoremove>
-        <file>
-          <name>Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rtc.c</name>
-        </file>
-        <file>
-          <name>..\Src\stm32f746i.c</name>
-        </file>
-        <file>
-          <name>Drivers\STM32F7xx_HAL_Driver\Src\stm32f7xx_hal_rtc_ex.c</name>
-        </file>
-      </filestoremove>
+      <filestoremove/>
       <configs>
         <config>
           <name>MGUI201222-KARUNA-7i.FW</name>
