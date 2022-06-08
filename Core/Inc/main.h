@@ -83,7 +83,7 @@ typedef struct _AppTypeDef
 {
   Diag_t Diag;
 
-  struct _Karuna_t
+  struct _Karuna
   {
     uint32_t OkCnt;
     uint32_t UnknownCnt;
@@ -92,7 +92,7 @@ typedef struct _AppTypeDef
     uint32_t UpTimeSec;
   }Karuna;
 
-  struct _DAS_t
+  struct _DasClock
   {
     uint32_t OkCnt;
     uint32_t UnknownCnt;
