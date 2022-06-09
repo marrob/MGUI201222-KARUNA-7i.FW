@@ -40,8 +40,6 @@ uint8_t GuiItfLoad(void)
     Device.Diag.BootUpCnt++;
     EepromU32Write(EPP_BOOTUP_CNT_ADDR, Device.Diag.BootUpCnt);
 
-    DelayMs(10);
-
     /*** Backlight ***/
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
     BacklightSet(value);
