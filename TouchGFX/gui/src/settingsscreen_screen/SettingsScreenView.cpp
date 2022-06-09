@@ -1,18 +1,27 @@
 #include <gui/settingsscreen_screen/SettingsScreenView.hpp>
 
-uint8_t mUptimeCounter;
+uint32_t mUptimeCounter;
 int mTickGUICount;
 
 #ifdef SIMULATOR
-uint8_t SettingsScreenView::GuiItfGetKarunaUptimeCnt()
+
+uint32_t SettingsScreenView::GuiItfGetKarunaUptimeCnt()
 {
   mUptimeCounter++;
   return mUptimeCounter;
 }
+
+uint32_t SettingsScreenView::GuiItfGetDASCLOCKUptimeCnt()
+{
+	mUptimeCounter++;
+	return mUptimeCounter;
+}
+
 #else
 extern "C"
 { 
-  uint8_t GuiItfGetKarunaUptimeCnt();
+	uint32_t GuiItfGetKarunaUptimeCnt();
+	uint32_t GuiItfGetDASCLOCKUptimeCnt();
 }
 #endif
 
@@ -37,9 +46,13 @@ void SettingsScreenView::handleTickEvent()
 	//Wait for 0.5sec
 	if (mTickGUICount % 30 == 0)
 	{
-		uint8_t uptime = GuiItfGetKarunaUptimeCnt();
+		uint32_t uptime = GuiItfGetKarunaUptimeCnt();
+		Unicode::snprintf(lblKarunaUptimeBuffer , 11, "%d", uptime);
 
-		Unicode::snprintf(lblKarunaUptimeBuffer , 8, "%d", uptime);
+		uint32_t uptimeClock = GuiItfGetDASCLOCKUptimeCnt();
+		Unicode::snprintf(lblClockUptimeBuffer, 11, "%d", uptimeClock);
+
 		lblKarunaUptime.invalidate();
+		lblClockUptime.invalidate();
 	}
 }
