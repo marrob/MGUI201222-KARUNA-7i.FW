@@ -98,6 +98,7 @@ typedef struct _AppTypeDef
     uint32_t UnknownCnt;
     uint8_t DO;
     uint8_t DI;
+    double AI[DAS_AI_CHANNELS];
     uint32_t UpTimeSec;
   }DasClock;
 

@@ -35,6 +35,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 #define RS485_BUFFER_SIZE    40
+#define RS485_TX_HOLD_MS     1
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -1345,10 +1346,9 @@ void RS485DirRx(void)
 
 void RS485UartTx(char *str)
 {
-  static char temp[80];
-
+  static char temp[RS485_BUFFER_SIZE];
   RS485DirTx();
-  DelayMs(1);
+  DelayMs(RS485_TX_HOLD_MS);
   sprintf(temp, "%s\n",str);
   HAL_UART_Transmit(&huart7, (uint8_t*)temp, strlen(temp), 100);
   RS485DirRx();
@@ -1375,7 +1375,7 @@ void RS485Parser(char *response)
     Device.Diag.RS485ResponseCnt++;
     params = sscanf(response, "#%x %s %s %s", &addr, cmd, arg1, arg2);
 
-    if(addr == KRN_ADDR )
+    if(addr == KRN_HOST_RX_ADDR )
     {
       if(params == 2)
       {
@@ -1418,20 +1418,20 @@ void RS485Parser(char *response)
       }
     }
 
-    if(addr == DAS_ADDR)
+    if(addr == DAS_HOST_RX_ADDR)
     {
       if(params == 2)
       {
         if(!strcmp(cmd, "OK"))
         {
-          Device.Karuna.OkCnt++;
+          Device.DasClock.OkCnt++;
         }
         else
         {
           Device.DasClock.UnknownCnt++;
         }
       }
-      if(params == 3)
+      else if(params == 3)
       {
         if(!strcmp(cmd, "*VER"))
         {
@@ -1455,8 +1455,30 @@ void RS485Parser(char *response)
         }
         else
         {
-          Device.Karuna.UnknownCnt++;
+          Device.DasClock.UnknownCnt++;
         }
+      }
+      else if(params == 4)
+      {
+        /*
+         * #02 AI? 0
+         * #20 AI 0 151.062
+         */
+        if(!strcmp(cmd, "AI"))
+        {
+           uint8_t ch = strtol(arg1, NULL, 10);
+           double value = atof(arg2);
+           if(ch <= DAS_AI_CHANNELS)
+             Device.DasClock.AI[ch] = value;
+        }
+        else
+        {
+          Device.DasClock.UnknownCnt++;
+        }
+      }
+      else
+      {
+        Device.DasClock.UnknownCnt++;
       }
     }
   }
@@ -1669,6 +1691,8 @@ void RS485RxTask(void *argument)
 * @retval None
 */
 /* USER CODE END Header_RS485TxTask */
+
+
 void RS485TxTask(void *argument)
 {
   /* USER CODE BEGIN RS485TxTask */
@@ -1681,17 +1705,25 @@ void RS485TxTask(void *argument)
   {
     switch (cmdId)
     {
-      case 0:sprintf(buffer, "#%02X UPTIME?", KRN_ADDR);break;
-      case 1:sprintf(buffer, "#%02X DI?", KRN_ADDR);
-      case 2:sprintf(buffer, "#%02X DO %02X", KRN_ADDR, Device.Karuna.DO);break;
-      case 3:sprintf(buffer, "#%02X UPTIME?", DAS_ADDR);break;
-      case 4:sprintf(buffer, "#%02X DI?", DAS_ADDR);
-      case 5:sprintf(buffer, "#%02X DO %02X", DAS_ADDR, Device.DasClock.DO);break;
+      case 0:sprintf(buffer, "#%02X UPTIME?", KRN_HOST_TX_ADDR);break;
+      case 1:sprintf(buffer, "#%02X DI?", KRN_HOST_TX_ADDR);
+      case 2:sprintf(buffer, "#%02X DO %02X", KRN_HOST_TX_ADDR, Device.Karuna.DO);break;
+      case 3:sprintf(buffer, "#%02X UPTIME?", DAS_HOST_TX_ADDR);break;
+      case 4:sprintf(buffer, "#%02X DI?", DAS_HOST_TX_ADDR);
+      case 5:sprintf(buffer, "#%02X DO %02X", DAS_HOST_TX_ADDR, Device.DasClock.DO);break;
+      case 6:sprintf(buffer, "#%02X AI? 0", DAS_HOST_TX_ADDR);break;
+      case 7:sprintf(buffer, "#%02X AI? 1", DAS_HOST_TX_ADDR);break;
+      case 8:sprintf(buffer, "#%02X AI? 2", DAS_HOST_TX_ADDR);break;
+      case 9:sprintf(buffer, "#%02X AI? 3", DAS_HOST_TX_ADDR);break;
+      case 10:sprintf(buffer, "#%02X AI? 4", DAS_HOST_TX_ADDR);break;
+      case 11:sprintf(buffer, "#%02X AI? 5", DAS_HOST_TX_ADDR);break;
+      case 12:sprintf(buffer, "#%02X AI? 6", DAS_HOST_TX_ADDR);break;
+      case 13:sprintf(buffer, "#%02X AI? 7", DAS_HOST_TX_ADDR);break;
     }
 
     RS485UartTx(buffer);
 
-    if(cmdId == 3)
+    if(cmdId == 13)
     {
       cmdId = 0;
     }
@@ -1700,7 +1732,7 @@ void RS485TxTask(void *argument)
       cmdId++;
     }
     Device.Diag.RS485RequestCnt++;
-    osDelay(100);
+    osDelay(5);
   }
   /* USER CODE END RS485TxTask */
 }

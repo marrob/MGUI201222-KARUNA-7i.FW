@@ -1,4 +1,4 @@
-/*
+/*//
  * GuiItf.h
  *
  *  Created on: 2022. máj. 14.
@@ -14,7 +14,9 @@
 #define GUIITF_OUT_OF_RANGE   0x02
 
 /*** KARUNA ***/
-#define KRN_ADDR                0x01
+//Host:0, Device:1
+#define KRN_HOST_TX_ADDR        0x01  // Host->Device 0->1
+#define KRN_HOST_RX_ADDR        0x10
 #define KRN_STAT_A0             (uint8_t)1<<0
 #define KRN_STAT_A1             (uint8_t)1<<1
 #define KRN_STAT_A2             (uint8_t)1<<2
@@ -29,8 +31,11 @@
 #define KRN_CTRL_I2S            (uint8_t)1<<3
 
 /*** DAS Clock ***/
-#define DAS_ADDR                0x02
+//Host:0, Device:2
+#define DAS_HOST_TX_ADDR        0x02
+#define DAS_HOST_RX_ADDR        0x20
 
+#define DAS_AI_CHANNELS         7
 
 /* Exported functions prototypes ---------------------------------------------*/
 uint8_t GuiItfLoad(void);
