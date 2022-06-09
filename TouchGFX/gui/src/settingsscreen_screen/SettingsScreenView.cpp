@@ -11,7 +11,7 @@ uint32_t SettingsScreenView::GuiItfGetKarunaUptimeCnt()
   return mUptimeCounter;
 }
 
-uint32_t SettingsScreenView::GuiItfGetDASCLOCKUptimeCnt()
+uint32_t SettingsScreenView::GuiItfGetDasClockUptimeCnt()
 {
 	mUptimeCounter++;
 	return mUptimeCounter;
@@ -21,7 +21,7 @@ uint32_t SettingsScreenView::GuiItfGetDASCLOCKUptimeCnt()
 extern "C"
 { 
 	uint32_t GuiItfGetKarunaUptimeCnt();
-	uint32_t GuiItfGetDASCLOCKUptimeCnt();
+	uint32_t GuiItfGetDasClockUptimeCnt();
 }
 #endif
 
@@ -49,7 +49,7 @@ void SettingsScreenView::handleTickEvent()
 		uint32_t uptime = GuiItfGetKarunaUptimeCnt();
 		Unicode::snprintf(lblKarunaUptimeBuffer , 11, "%d", uptime);
 
-		uint32_t uptimeClock = GuiItfGetDASCLOCKUptimeCnt();
+		uint32_t uptimeClock = GuiItfGetDasClockUptimeCnt();
 		Unicode::snprintf(lblClockUptimeBuffer, 11, "%d", uptimeClock);
 
 		lblKarunaUptime.invalidate();

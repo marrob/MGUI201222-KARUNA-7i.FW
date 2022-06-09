@@ -16,11 +16,11 @@ public:
      
 #ifdef SIMULATOR
     uint32_t GuiItfGetKarunaUptimeCnt();
-    uint32_t  GuiItfGetDASCLOCKUptimeCnt();
+    uint32_t GuiItfGetDasClockUptimeCnt();
 #endif
 
 protected:
 
 };
 
-#endif  SETTINGSSCREENVIEW_HPP
+#endif  //SETTINGSSCREENVIEW_HPP
