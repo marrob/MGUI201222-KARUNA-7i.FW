@@ -34,11 +34,19 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-#define RS485_BUFFER_SIZE    40
-#define RS485_TX_HOLD_MS     1
+
+
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
+#define RS485_BUFFER_SIZE    40
+#define RS485_TX_HOLD_MS     1
+#define RS485_CMD_LENGTH    10
+#define RS485_ARG1_LENGTH   10
+#define RS485_ARG2_LENGTH   10
+
+
 /* USER CODE BEGIN PD */
 
 /*** SDRAM ***/
@@ -179,8 +187,6 @@ void LiveLedOff(void);
 void LiveLedOn(void);
 
 /*** LCD ***/
-
-
 void ConsoleWrite(char *str);
 void UsbParser(char *request);
 void UsbUartTx(char *str);
@@ -1356,19 +1362,15 @@ void RS485UartTx(char *str)
 
 void RS485Parser(char *response)
 {
-#define RS485_CMD_SIZE  40
-#define RS485_ARG1_SIZE 20
-#define RS485_ARG2_SIZE 20
-
   unsigned int addr = 0;
-  char cmd[RS485_CMD_SIZE];
-  char arg1[RS485_ARG1_SIZE];
-  char arg2[RS485_ARG2_SIZE];
+  char cmd[RS485_CMD_LENGTH];
+  char arg1[RS485_ARG1_LENGTH];
+  char arg2[RS485_ARG2_LENGTH];
   uint8_t params = 0;
 
-  memset(cmd,0xCC, RS485_CMD_SIZE);
-  memset(arg1,0xCC, RS485_ARG1_SIZE);
-  memset(arg2,0xCC, RS485_ARG2_SIZE);
+  memset(cmd,0x00, RS485_CMD_LENGTH);
+  memset(arg1,0x00, RS485_ARG1_LENGTH);
+  memset(arg2,0x00, RS485_ARG2_LENGTH);
 
   if(strlen(response) !=0)
   {
@@ -1460,15 +1462,13 @@ void RS485Parser(char *response)
       }
       else if(params == 4)
       {
-        /*
-         * #02 AI? 0
-         * #20 AI 0 151.062
-         */
+        // #02 AI? 0
+        // #20 AI 0 151.062
         if(!strcmp(cmd, "AI"))
         {
            uint8_t ch = strtol(arg1, NULL, 10);
            double value = atof(arg2);
-           if(ch <= DAS_AI_CHANNELS)
+           if(ch < DAS_AI_CHANNELS)
              Device.DasClock.AI[ch] = value;
         }
         else
