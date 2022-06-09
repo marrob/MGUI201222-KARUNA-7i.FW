@@ -15,10 +15,12 @@ public:
     virtual void handleTickEvent();
      
 #ifdef SIMULATOR
-    uint8_t GuiItfGetKarunaUptimeCnt(); 
+    uint32_t GuiItfGetKarunaUptimeCnt();
+    uint32_t  GuiItfGetDASCLOCKUptimeCnt();
 #endif
 
 protected:
+
 };
 
-#endif // SETTINGSSCREENVIEW_HPP
+#endif  SETTINGSSCREENVIEW_HPP

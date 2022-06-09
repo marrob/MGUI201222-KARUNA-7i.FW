@@ -98,6 +98,18 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     lblKarunaUptime.setWildcard(lblKarunaUptimeBuffer);
     lblKarunaUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_542M));
 
+    textArea2_1_1_1_1.setPosition(40, 425, 326, 44);
+    textArea2_1_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    textArea2_1_1_1_1.setLinespacing(0);
+    textArea2_1_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XUER));
+
+    lblClockUptime.setPosition(379, 425, 137, 44);
+    lblClockUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblClockUptime.setLinespacing(0);
+    Unicode::snprintf(lblClockUptimeBuffer, LBLCLOCKUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_WF3B).getText());
+    lblClockUptime.setWildcard(lblClockUptimeBuffer);
+    lblClockUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_URPR));
+
     add(__background);
     add(box1);
     add(btnDisplay);
@@ -113,6 +125,8 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     add(line1_1);
     add(textArea2_1_1_1);
     add(lblKarunaUptime);
+    add(textArea2_1_1_1_1);
+    add(lblClockUptime);
     radioButtonGroup1.add(rdbtnEnableAll);
     radioButtonGroup1.add(rdbtnEnableSelected);
 }

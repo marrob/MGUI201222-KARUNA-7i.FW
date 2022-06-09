@@ -50,13 +50,17 @@ protected:
     touchgfx::PainterRGB565 line1_1Painter;
     touchgfx::TextArea textArea2_1_1_1;
     touchgfx::TextAreaWithOneWildcard lblKarunaUptime;
+    touchgfx::TextArea textArea2_1_1_1_1;
+    touchgfx::TextAreaWithOneWildcard lblClockUptime;
     touchgfx::RadioButtonGroup<2> radioButtonGroup1;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t LBLKARUNAUPTIME_SIZE = 10;
+    static const uint16_t LBLKARUNAUPTIME_SIZE = 12;
     touchgfx::Unicode::UnicodeChar lblKarunaUptimeBuffer[LBLKARUNAUPTIME_SIZE];
+    static const uint16_t LBLCLOCKUPTIME_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblClockUptimeBuffer[LBLCLOCKUPTIME_SIZE];
 
 private:
 
