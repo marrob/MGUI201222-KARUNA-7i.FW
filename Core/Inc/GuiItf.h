@@ -61,8 +61,8 @@ uint8_t GuiItfKarunaControl(uint8_t p_Output);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
 
 /* DasClock-------------------------------------------------------------------*/
-uint32_t GuiItfGetDasUptimeCnt(void);
-uint8_t GuiItfGetDasVersion(char *ver, char *uid);
+uint32_t GuiItfGetDasClockUptimeCnt(void);
+uint8_t GuiItfGetDasClockVersion(char *ver, char *uid);
 
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent);

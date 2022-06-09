@@ -105,17 +105,7 @@ uint8_t GuiItfKarunaControl(uint8_t output)
 
 
 
-/* DAS -----------------------------------------------------------------------*/
-uint32_t GuiItfGetDasUptimeCnt(void)
-{
-  return Device.DasClock.UpTimeSec;
-}
 
-uint8_t GuiItfGetDasVersion(char *ver, char *uid)
-{
-
-  return GUIITF_OK;
-}
 
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent)
@@ -131,3 +121,18 @@ uint8_t GuiItfGetBacklight(void)
 {
     return BacklightGet();
 }
+
+/* DasClock -----------------------------------------------------------------*/
+uint32_t GuiItfGetDasClockUptimeCnt(void)
+{
+
+  return Device.DasClock.UpTimeSec;
+}
+
+
+uint8_t GuiItfGetDasClockVersion(char *ver, char *uid)
+{
+
+  return GUIITF_OK;
+}
+
