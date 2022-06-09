@@ -83,12 +83,24 @@ typedef struct _AppTypeDef
 {
   Diag_t Diag;
 
-  struct
+  struct _Karuna
   {
-    uint8_t Status;
-    uint8_t Outputs;
+    uint32_t OkCnt;
+    uint32_t UnknownCnt;
+    uint8_t DI;
+    uint8_t DO;
     uint32_t UpTimeSec;
   }Karuna;
+
+  struct _DasClock
+  {
+    uint32_t OkCnt;
+    uint32_t UnknownCnt;
+    uint8_t DO;
+    uint8_t DI;
+    double AI[DAS_AI_CHANNELS];
+    uint32_t UpTimeSec;
+  }DasClock;
 
   struct
   {

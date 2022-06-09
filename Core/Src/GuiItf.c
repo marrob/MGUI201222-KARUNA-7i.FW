@@ -40,15 +40,13 @@ uint8_t GuiItfLoad(void)
     Device.Diag.BootUpCnt++;
     EepromU32Write(EPP_BOOTUP_CNT_ADDR, Device.Diag.BootUpCnt);
 
-    DelayMs(10);
-
     /*** Backlight ***/
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
     BacklightSet(value);
 
     /*** KARUNA CTRL ***/
     EepromU32Read(EEP_KARUNA_CTRL_ADDR, &value);
-    Device.Karuna.Outputs = value;
+    Device.Karuna.DO = value;
   }
 
   return GUIITF_OK;
@@ -72,7 +70,7 @@ uint8_t GuiItfSetDefault(void)
   /*** KARUNA CTRL ***/
   value = (KRN_CTRL_RCA) | (KRN_CTRL_BNC) | (KRN_CTRL_XLR) | (KRN_CTRL_I2S);
   EepromU32Write(EEP_KARUNA_CTRL_ADDR, value);
-  Device.Karuna.Outputs = value;
+  Device.Karuna.DO = value;
 
   /*** Magic Word ***/
   value = MAGIC_WORD;
@@ -81,21 +79,42 @@ uint8_t GuiItfSetDefault(void)
 }
 
 /* Karuna --------------------------------------------------------------------*/
+uint32_t GuiItfGetKarunaUptimeCnt(void)
+{
+  return Device.Karuna.UpTimeSec;
+}
+
 uint8_t GuiItfGetKarunaStatus(void)
 {
-  return Device.Karuna.Status;
+  return Device.Karuna.DI;
+}
+
+uint8_t GuiItfGetKarunaVersion(char *ver, char *uid)
+{
+
+  return GUIITF_OK;
 }
 
 uint8_t GuiItfKarunaControl(uint8_t output)
 {
-  Device.Karuna.Outputs = output;
+  Device.Karuna.DO = output;
   EepromU32Write(EEP_KARUNA_CTRL_ADDR, output);
   return GUIITF_OK;
 }
 
-uint32_t GuiItfGetKarunaUptimeCnt(void)
+
+
+
+/* DAS -----------------------------------------------------------------------*/
+uint32_t GuiItfGetDasUptimeCnt(void)
 {
-  return Device.Karuna.UpTimeSec;
+  return Device.DasClock.UpTimeSec;
+}
+
+uint8_t GuiItfGetDasVersion(char *ver, char *uid)
+{
+
+  return GUIITF_OK;
 }
 
 /* Backlight -----------------------------------------------------------------*/

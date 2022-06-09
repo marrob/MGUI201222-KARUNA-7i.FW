@@ -4,12 +4,12 @@
 #ifdef SIMULATOR
 uint8_t DisplayScreenView::GuiItfSetBacklight(uint8_t percent)
 { 
-	return percent;
+  return percent;
 }
 
-uint8_t DisplayScreenView::GuiItfGetBacklight(void) 
+uint8_t DisplayScreenView::GuiItfGetBacklight(void)
 {
-	return 101;
+  return 50;
 }
 
 #else
