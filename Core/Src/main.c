@@ -1710,20 +1710,18 @@ void RS485TxTask(void *argument)
       case 2:sprintf(buffer, "#%02X DO %02X", KRN_HOST_TX_ADDR, Device.Karuna.DO);break;
       case 3:sprintf(buffer, "#%02X UPTIME?", DAS_HOST_TX_ADDR);break;
       case 4:sprintf(buffer, "#%02X DI?", DAS_HOST_TX_ADDR);
-      case 5:sprintf(buffer, "#%02X DO %02X", DAS_HOST_TX_ADDR, Device.DasClock.DO);break;
-      case 6:sprintf(buffer, "#%02X AI? 0", DAS_HOST_TX_ADDR);break;
-      case 7:sprintf(buffer, "#%02X AI? 1", DAS_HOST_TX_ADDR);break;
-      case 8:sprintf(buffer, "#%02X AI? 2", DAS_HOST_TX_ADDR);break;
-      case 9:sprintf(buffer, "#%02X AI? 3", DAS_HOST_TX_ADDR);break;
-      case 10:sprintf(buffer, "#%02X AI? 4", DAS_HOST_TX_ADDR);break;
-      case 11:sprintf(buffer, "#%02X AI? 5", DAS_HOST_TX_ADDR);break;
-      case 12:sprintf(buffer, "#%02X AI? 6", DAS_HOST_TX_ADDR);break;
-      case 13:sprintf(buffer, "#%02X AI? 7", DAS_HOST_TX_ADDR);break;
+      case 5:sprintf(buffer, "#%02X AI? 0", DAS_HOST_TX_ADDR);break;
+      case 6:sprintf(buffer, "#%02X AI? 1", DAS_HOST_TX_ADDR);break;
+      case 7:sprintf(buffer, "#%02X AI? 2", DAS_HOST_TX_ADDR);break;
+      case 8:sprintf(buffer, "#%02X AI? 3", DAS_HOST_TX_ADDR);break;
+      case 9:sprintf(buffer, "#%02X AI? 4", DAS_HOST_TX_ADDR);break;
+      case 10:sprintf(buffer, "#%02X AI? 5", DAS_HOST_TX_ADDR);break;
+      case 11:sprintf(buffer, "#%02X AI? 6", DAS_HOST_TX_ADDR);break;
     }
 
     RS485UartTx(buffer);
 
-    if(cmdId == 13)
+    if(cmdId == 11)
     {
       cmdId = 0;
     }

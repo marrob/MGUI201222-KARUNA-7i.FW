@@ -34,13 +34,16 @@
 //Host:0, Device:2
 #define DAS_HOST_TX_ADDR        0x02
 #define DAS_HOST_RX_ADDR        0x20
-#define DAS_DI_LOCK1      (uint8_t) 1<<0
-#define DAS_DI_LOCK2      (uint8_t) 1<<1
-#define DAS_DI_MV1        (uint8_t) 1<<2
-#define DAS_DI_MV2        (uint8_t) 1<<3
-#define DAS_DO_MV1_EN     (uint8_t) 1<<0
-#define DAS_DO_MV2_EN     (uint8_t) 1<<1
-#define DAS_AI_CHANNELS       7
+
+#define DAS_DI_LOCK1        (uint8_t) 1<<0
+#define DAS_DI_LOCK2        (uint8_t) 1<<1
+#define DAS_DI_EXT_EN       (uint8_t) 1<<2
+#define DAS_DI_MV1_EN       (uint8_t) 1<<3
+#define DAS_DI_MV2_EN       (uint8_t) 1<<4
+
+#define DAS_DO_MV1_EN       (uint8_t) 1<<0
+#define DAS_DO_MV2_EN       (uint8_t) 1<<1
+
 #define DAS_AI_MV341_I_MA     0
 #define DAS_AI_MV205_1_I_MA   1
 #define DAS_AI_MV205_2_I_MA   2
