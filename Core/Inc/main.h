@@ -43,6 +43,43 @@ extern "C" {
 
 /* Exported types ------------------------------------------------------------*/
 /* USER CODE BEGIN ET */
+
+/* USER CODE END ET */
+
+/* Exported constants --------------------------------------------------------*/
+/* USER CODE BEGIN EC */
+
+
+/* USER CODE END EC */
+
+/* Exported macro ------------------------------------------------------------*/
+/* USER CODE BEGIN EM */
+
+/*** DEVICE ***/
+#define DEVICE_OK             0
+#define DEVICE_FAIL           1
+
+#define DEVICE_NAME           "MGUI201222-KARUNA-7i"
+#define DEVICE_FW             "220610_1604"
+#define DEVICE_PCB            "VA01"
+#define DEVICE_MNF            "KONVOLUCIO"
+#define DEVICE_MNF_SIZE       sizeof(DEVICE_MNF)
+
+#define DEVICE_NAME_SIZE      25
+#define DEVICE_FW_SIZE        25
+#define DEVICE_UID_SIZE       25
+#define DEVICE_PCB_SIZE       5
+
+/*** RS485 ***/
+#define RS485_BUFFER_SIZE     40
+#define RS485_TX_HOLD_MS      1
+#define RS485_CMD_LENGTH      35
+#define RS485_ARG1_LENGTH     35
+#define RS485_ARG2_LENGTH     35
+
+/*** YYMMDD-HHmmss ***/
+#define DEVICE_TIMESTAMP_SIZE 14
+
 typedef struct _DiagTypeDef
 {
   uint32_t BusUartRxCommandsCounter;
@@ -70,30 +107,31 @@ typedef struct _DiagTypeDef
   uint32_t RS485ResponseCnt;
   uint32_t RS485RdyCnt;
 
-
   uint32_t PowerLedTaskCounter;
   uint64_t UpTimeSec;
 
   uint32_t BootUpCnt;
 }Diag_t;
 
-
-
 typedef struct _AppTypeDef
 {
   Diag_t Diag;
-
   struct _Karuna
   {
+    char FW[DEVICE_FW_SIZE];
+    char UID[DEVICE_UID_SIZE];
+    char PCB[DEVICE_PCB_SIZE];
     uint32_t OkCnt;
     uint32_t UnknownCnt;
     uint8_t DI;
     uint8_t DO;
     uint32_t UpTimeSec;
   }Karuna;
-
   struct _DasClock
   {
+    char FW[DEVICE_FW_SIZE];
+    char UID[DEVICE_UID_SIZE];
+    char PCB[DEVICE_PCB_SIZE];
     uint32_t OkCnt;
     uint32_t UnknownCnt;
     uint8_t DO;
@@ -101,7 +139,6 @@ typedef struct _AppTypeDef
     double AI[DAS_AI_CHANNELS];
     uint32_t UpTimeSec;
   }DasClock;
-
   struct
   {
     double AnalogInputs[4];
@@ -109,33 +146,10 @@ typedef struct _AppTypeDef
     uint8_t Outputs;
     uint16_t Inputs;
   }Peri;
-
+  char Now[DEVICE_TIMESTAMP_SIZE];
 }Device_t;
 
 extern Device_t Device;
-/* USER CODE END ET */
-
-/* Exported constants --------------------------------------------------------*/
-/* USER CODE BEGIN EC */
-
-
-/* USER CODE END EC */
-
-/* Exported macro ------------------------------------------------------------*/
-/* USER CODE BEGIN EM */
-
-#define DEVICE_NAME             "MGUI201222VA1-KARUNA"
-#define DEVICE_NAME_SIZE        sizeof(DEVICE_NAME)
-#define DEVICE_FW               "1.0.0.1"
-#define DEVICE_FW_SIZE          sizeof(DEVICE_FW)
-#define DEVICE_PCB              "00"
-#define DEVICE_PCB_SIZE         sizeof(DEVICE_PCB)
-#define DEVICE_MNF              "KONVOLUCIO"
-#define DEVICE_MNF_SIZE         sizeof(DEVICE_MNF)
-
-
-
-
 /* USER CODE END EM */
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
@@ -145,7 +159,10 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 
-extern void init_app_cpp_domain(void);
+/*** RTC ***/
+uint8_t RtcSet(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min, uint8_t sec);
+uint8_t RtcGet(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
+uint8_t RtcGetNowToString(char *timestamp_string);
 
 /* USER CODE END EFP */
 

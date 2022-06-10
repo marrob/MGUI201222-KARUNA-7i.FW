@@ -54,17 +54,19 @@
 #define DAS_AI_MV205_2_TEMP   6
 
 /* Exported functions prototypes ---------------------------------------------*/
+/* GUI -----------------------------------------------------------------------*/
 uint8_t GuiItfLoad(void);
 uint8_t GuiItfSetDefault(void);
+uint8_t GuiItfGetVersion(char *fw, char *uid, char *pcb);
 
 /* Karuna --------------------------------------------------------------------*/
-uint8_t GuiItfGetKarunaVersion(char *ver, char *uid);
+uint8_t GuiItfGetKarunaVersion(char *fw, char *uid, char *pcb);
 uint8_t GuiItfKarunaControl(uint8_t p_Output);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
 
 /* DasClock-------------------------------------------------------------------*/
+uint8_t GuiItfGetDasClockVersion(char *fw, char *uid, char *pcb);
 uint32_t GuiItfGetDasClockUptimeCnt(void);
-uint8_t GuiItfGetDasClockVersion(char *ver, char *uid);
 double GuiItfGetDasClockMV341Temp(void);
 uint8_t GuiItfGetDasClockStatusLock1(void);
 uint8_t GuiItfGetDasClockStatusLock2(void);
@@ -76,8 +78,8 @@ uint8_t GuiItfGetBacklight(void);
 void GuiItfBacklightEnable(void);
 void GuiItfBacklightDisable(void);
 
-
-
-
+/* RTC -----------------------------------------------------------------------*/
+uint8_t GuiItfSetRtc(uint8_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t mins, uint8_t secs);
+uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
 
 #endif /* _GUIITF_H_ */
