@@ -33,14 +33,11 @@ uint8_t GuiItfLoad(void)
   }
   else
   {
-
     /*** Boot Up counter ***/
     EepromU32Read(EPP_BOOTUP_CNT_ADDR, &value);
     Device.Diag.BootUpCnt = value;
     Device.Diag.BootUpCnt++;
     EepromU32Write(EPP_BOOTUP_CNT_ADDR, Device.Diag.BootUpCnt);
-
-    DelayMs(10);
 
     /*** Backlight ***/
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
@@ -48,9 +45,8 @@ uint8_t GuiItfLoad(void)
 
     /*** KARUNA CTRL ***/
     EepromU32Read(EEP_KARUNA_CTRL_ADDR, &value);
-    Device.Karuna.Outputs = value;
+    Device.Karuna.DO = value;
   }
-
   return GUIITF_OK;
 }
 
@@ -72,7 +68,7 @@ uint8_t GuiItfSetDefault(void)
   /*** KARUNA CTRL ***/
   value = (KRN_CTRL_RCA) | (KRN_CTRL_BNC) | (KRN_CTRL_XLR) | (KRN_CTRL_I2S);
   EepromU32Write(EEP_KARUNA_CTRL_ADDR, value);
-  Device.Karuna.Outputs = value;
+  Device.Karuna.DO = value;
 
   /*** Magic Word ***/
   value = MAGIC_WORD;
@@ -81,21 +77,26 @@ uint8_t GuiItfSetDefault(void)
 }
 
 /* Karuna --------------------------------------------------------------------*/
+uint32_t GuiItfGetKarunaUptimeCnt(void)
+{
+  return Device.Karuna.UpTimeSec;
+}
+
 uint8_t GuiItfGetKarunaStatus(void)
 {
-  return Device.Karuna.Status;
+  return Device.Karuna.DI;
+}
+
+uint8_t GuiItfGetKarunaVersion(char *ver, char *uid)
+{
+  return GUIITF_OK; //TODO: ....
 }
 
 uint8_t GuiItfKarunaControl(uint8_t output)
 {
-  Device.Karuna.Outputs = output;
+  Device.Karuna.DO = output;
   EepromU32Write(EEP_KARUNA_CTRL_ADDR, output);
   return GUIITF_OK;
-}
-
-uint32_t GuiItfGetKarunaUptimeCnt(void)
-{
-  return Device.Karuna.UpTimeSec;
 }
 
 /* Backlight -----------------------------------------------------------------*/
@@ -110,5 +111,47 @@ uint8_t GuiItfSetBacklight(uint8_t percent)
 
 uint8_t GuiItfGetBacklight(void)
 {
-    return BacklightGet();
+  return BacklightGet();
 }
+
+void GuiItfBacklightEnable(void)
+{
+  BacklightEnable();
+}
+
+void GuiItfBacklightDisable(void)
+{
+  BacklightDisable();
+}
+
+
+/* DasClock -----------------------------------------------------------------*/
+uint32_t GuiItfGetDasClockUptimeCnt(void)
+{
+  return Device.DasClock.UpTimeSec;
+}
+
+uint8_t GuiItfGetDasClockVersion(char *ver, char *uid)
+{
+  return GUIITF_OK;
+}
+
+double GuiItfGetDasClockMV341Temp(void)
+{
+  return Device.DasClock.AI[DAS_AI_MV341_TEMP];
+}
+
+uint8_t GuiItfGetDasClockStatusLock1(void)
+{
+  return Device.DasClock.DI & DAS_DI_LOCK1;
+}
+
+uint8_t GuiItfGetDasClockStatusLock2(void)
+{
+  return Device.DasClock.DI & DAS_DI_LOCK2;
+}
+uint8_t GuiItfGetDasClockIsExt(void)
+{
+  return Device.DasClock.DI & DAS_DI_EXT_IS_EN;
+}
+

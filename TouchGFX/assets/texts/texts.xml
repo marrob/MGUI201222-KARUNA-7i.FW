@@ -120,6 +120,17 @@
         <Translation Language="GB">Brightness : </Translation>
       </Text>
     </TextGroup>
+    <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_WF3B" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_URPR" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_XUER" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock uptime counter : </Translation>
+      </Text>
+    </TextGroup>
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />

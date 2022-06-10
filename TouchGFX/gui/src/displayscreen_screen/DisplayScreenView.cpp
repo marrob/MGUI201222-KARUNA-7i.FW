@@ -4,8 +4,14 @@
 #ifdef SIMULATOR
 uint8_t DisplayScreenView::GuiItfSetBacklight(uint8_t percent)
 { 
-	return percent;
+  return percent;
 }
+
+uint8_t DisplayScreenView::GuiItfGetBacklight(void)
+{
+  return 42; //Ez egy sokkal szebb szám 
+}
+
 #else
 extern "C"
 {

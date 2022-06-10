@@ -44,16 +44,38 @@ uint8_t MainView::GuiItfGetKarunaStatus()
 {
   return 0b00000001;
 }
-
 void MainView::GuiItfKarunaControl(uint8_t p_Output)
 {
+}
+double MainView::GuiItfGetDasClockMV341Temp()
+{
+	return 60;
+}
+bool MainView::GuiItfGetDasClockStatusLock1()
+{
+	return true;
+}
+bool MainView::GuiItfGetDasClockStatusLock2()
+{
+	return true;
+}
+bool MainView::GuiItfGetDasClockIsExt()
+{
+	return false;
 }
 
 #else
 extern "C"
 {
+  //Karuna
   uint8_t GuiItfGetKarunaStatus();
   void GuiItfKarunaControl(uint8_t p_Output);
+
+  //DasClock
+  double GuiItfGetDasClockMV341Temp();
+  uint8_t GuiItfGetDasClockStatusLock1();
+  uint8_t GuiItfGetDasClockStatusLock2();
+  uint8_t GuiItfGetDasClockIsExt();
 }
 #endif
 
@@ -102,14 +124,9 @@ MainView::MainView()
 	RefreshRCAOutput();
 	RefreshBNCOutput();
 	RefreshXLROutput();
-
-	Refresh24Thermal();
-	Refresh245Thermal();
-	Refresh22Thermal();
-	RefreshIntExt();
-
+	 
 	//Audio and Clocks temperature
-	RefreshAudioAndClockInfo();
+	RefreshKarunaAndClockInfo();
 }
 
 void MainView::SetOnAllOutput()
@@ -205,27 +222,27 @@ void MainView::RefreshXLROutput()
 
 // CLOCK PROPS
 
-void MainView::Refresh24Thermal()
+void MainView::Refresh24Lock()
 {
-	box24.setColor(GetThermalColor(mIs24Locked));
+	box24.setColor(GetLockColor(mIs24Locked));
 	box24.invalidate();
 }
 
-void MainView::Refresh245Thermal()
+void MainView::Refresh245Lock()
 {
-	box245.setColor(GetThermalColor(mIs245Locked));
+	box245.setColor(GetLockColor(mIs245Locked));
 	box245.invalidate();
 }
 
-void MainView::Refresh22Thermal()
+void MainView::Refresh22Lock()
 {
-	box22.setColor(GetThermalColor(mIs22Locked));
+	box22.setColor(GetLockColor(mIs22Locked));
 	box22.invalidate();
 }
 
 void MainView::RefreshIntExt()
 {
-	boxIntExt.setColor(GetThermalColor(mIsIntExt));
+	boxIntExt.setColor(GetLockColor(mIsIntExt));
 	if (mIsIntExt)
 	{
 		imgIntExt.setBitmap(Bitmap(BITMAP_CLOCKEXT_80X80_I_ID));
@@ -528,7 +545,7 @@ colortype MainView::GetOutputColor(bool p_State)
 	}
 }
 
-colortype MainView::GetThermalColor(bool p_State)
+colortype MainView::GetLockColor(bool p_State)
 {
 	if (!p_State)
 	{
@@ -575,19 +592,7 @@ void MainView::SetBit(uint8_t* input, bool bit ,int SetTo)
 		*input = (~(1 << SetTo)) & *input;
 	}
 }
-
-
-//SCREEN
-
-void  MainView::OpenScreenoff()
-{
-
-}
-
-void  MainView::ShowDipslay()
-{
-
-}
+ 
 
 // Tick event
 
@@ -597,11 +602,11 @@ void MainView::handleTickEvent()
 	//Wait for 0.5sec
 	if (mTickCount % 30 == 0)
 	{
-		RefreshAudioAndClockInfo();
+		RefreshKarunaAndClockInfo();
 	}
 }
 
-void MainView::RefreshAudioAndClockInfo()
+void MainView::RefreshKarunaAndClockInfo()
 {
 	//Read audio format
 	uint8_t  KRN_STAT = GuiItfGetKarunaStatus();
@@ -609,11 +614,18 @@ void MainView::RefreshAudioAndClockInfo()
 	SetDSDPCM(KRN_STAT);
 	SetBitDepth(KRN_STAT);
 	SetFreq(KRN_STAT);
+	 
+ 
+	double temp = GuiItfGetDasClockMV341Temp();
+	SetTemp((int)temp);
 
-	//Simulation
-	int temp = 60; // ReadAnalogOutput_1();
-	SetTemp(temp);
+	mIs22Locked = GuiItfGetDasClockStatusLock1();
+	mIs245Locked = GuiItfGetDasClockStatusLock2();
+	mIs24Locked = mIs245Locked && mIs22Locked;
+	mIsIntExt = GuiItfGetDasClockIsExt();
 
-	//Debug - CheckTick time
-	//lblValueFormat.setVisible(!lblValueFormat.isVisible());
+	Refresh24Lock();
+	Refresh245Lock();
+	Refresh22Lock();
+	RefreshIntExt(); 
 }

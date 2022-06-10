@@ -1070,7 +1070,42 @@
             "Wildcard1": {
               "TextId": "__SingleUse_P0TG",
               "UseBuffer": true,
-              "BufferSize": 10
+              "BufferSize": 12
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "textArea2_1_1_1_1",
+            "X": 40,
+            "Y": 425,
+            "Width": 326,
+            "Height": 44,
+            "TextId": "__SingleUse_XUER",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblClockUptime",
+            "X": 379,
+            "Y": 425,
+            "Width": 137,
+            "Height": 44,
+            "TextId": "__SingleUse_URPR",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_WF3B",
+              "UseBuffer": true,
+              "BufferSize": 12
             }
           }
         ],
