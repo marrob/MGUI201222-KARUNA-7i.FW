@@ -47,19 +47,19 @@ uint8_t MainView::GuiItfGetKarunaStatus()
 void MainView::GuiItfKarunaControl(uint8_t p_Output)
 {
 }
-double MainView::GuiItfGetDasMV341Temp()
+double MainView::GuiItfGetDasClockMV341Temp()
 {
 	return 60;
 }
-bool MainView::GuiItfGetDasStatusLock1()
+bool MainView::GuiItfGetDasClockStatusLock1()
 {
 	return true;
 }
-bool MainView::GuiItfGetDasStatusLock2()
+bool MainView::GuiItfGetDasClockStatusLock2()
 {
 	return true;
 }
-bool MainView::GuiItfGetDasIntExt()
+bool MainView::GuiItfGetDasClockIsExt()
 {
 	return false;
 }
@@ -71,11 +71,11 @@ extern "C"
   uint8_t GuiItfGetKarunaStatus();
   void GuiItfKarunaControl(uint8_t p_Output);
 
-  //DAS
-  double GuiItfGetDasMV341Temp();
-  bool GuiItfGetDasStatusLock1();
-  bool GuiItfGetDasStatusLock2();
-  bool GuiItfGetDasIntExt();
+  //DasClock
+  double GuiItfGetDasClockMV341Temp();
+  uint8_t GuiItfGetDasClockStatusLock1();
+  uint8_t GuiItfGetDasClockStatusLock2();
+  uint8_t GuiItfGetDasClockIsExt();
 }
 #endif
 
@@ -616,13 +616,13 @@ void MainView::RefreshKarunaAndClockInfo()
 	SetFreq(KRN_STAT);
 	 
  
-	double temp = GuiItfGetDasMV341Temp();
+	double temp = GuiItfGetDasClockMV341Temp();
 	SetTemp((int)temp);
 
-	mIs22Locked = GuiItfGetDasStatusLock1();
-	mIs245Locked = GuiItfGetDasStatusLock2();
-	mIs24Locked = mIs24Locked && mIs22Locked;
-	mIsIntExt = GuiItfGetDasIntExt();  
+	mIs22Locked = GuiItfGetDasClockStatusLock1();
+	mIs245Locked = GuiItfGetDasClockStatusLock2();
+	mIs24Locked = mIs245Locked && mIs22Locked;
+	mIsIntExt = GuiItfGetDasClockIsExt();
 
 	Refresh24Lock();
 	Refresh245Lock();

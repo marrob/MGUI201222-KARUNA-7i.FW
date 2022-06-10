@@ -35,7 +35,21 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+typedef enum RS485ItemType
+{
+  TX_ITEM_NO_ARG,
+  TX_ITEM_INT_ARG
+}RS485ItemType_t;
 
+typedef struct _RS485TxItem
+{
+  char Command[20];
+  uint8_t HostAddr;
+  RS485ItemType_t Type;
+  void (*Arg1);
+  uint8_t PeriodTime;
+  int32_t LastTimesamp;
+}RS485TxItem_t;
 
 /* USER CODE END PTD */
 
@@ -149,12 +163,30 @@ const osMessageQueueAttr_t USBUartRxQueue_attributes = {
 };
 /* USER CODE BEGIN PV */
 
-
 Device_t Device;
 __IO unsigned long RTOSRunTimeStatTick;
 
 static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
 static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
+
+RS485TxItem_t RS485TxCollection[] =
+{
+    /*** Karuna ***/
+    {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 20,},
+    {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 20 },
+    {"#%02X DO %02X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 20 },
+
+    /*** DasClock ***/
+    {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 20,},
+    {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 20 },
+    {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+    {"#%02X AI? 1",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+    {"#%02X AI? 2",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+    {"#%02X AI? 3",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+    {"#%02X AI? 4",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+    {"#%02X AI? 5",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+    {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,20 },
+};
 
 /* USER CODE END PV */
 
@@ -1590,6 +1622,9 @@ void LiveLedTask(void *argument)
   /* Infinite loop */
   uint32_t timestamp = 0;
   uint8_t flag = 0;
+
+  osDelay(1000);
+  BacklightEnable();
   for(;;)
   {
     if(HAL_GetTick() - timestamp > 500)
@@ -1607,10 +1642,6 @@ void LiveLedTask(void *argument)
         Device.Diag.UpTimeSec++;
       }
     }
-
-    if(Device.Diag.UpTimeSec > 1)
-      BacklightEnable();
-
     osDelay(10);
   }
   /* USER CODE END LiveLedTask */
@@ -1692,45 +1723,35 @@ void RS485RxTask(void *argument)
 */
 /* USER CODE END Header_RS485TxTask */
 
-
 void RS485TxTask(void *argument)
 {
   /* USER CODE BEGIN RS485TxTask */
   /* Infinite loop */
-  uint8_t cmdId = 0;
   static char buffer[RS485_BUFFER_SIZE];
   memset(buffer, 0xCC, RS485_BUFFER_SIZE);
 
   for(;;)
   {
-    switch (cmdId)
+    for(uint8_t i=0; i< sizeof(RS485TxCollection)/sizeof(RS485TxItem_t); i++)
     {
-      case 0:sprintf(buffer, "#%02X UPTIME?", KRN_HOST_TX_ADDR);break;
-      case 1:sprintf(buffer, "#%02X DI?", KRN_HOST_TX_ADDR);
-      case 2:sprintf(buffer, "#%02X DO %02X", KRN_HOST_TX_ADDR, Device.Karuna.DO);break;
-      case 3:sprintf(buffer, "#%02X UPTIME?", DAS_HOST_TX_ADDR);break;
-      case 4:sprintf(buffer, "#%02X DI?", DAS_HOST_TX_ADDR);
-      case 5:sprintf(buffer, "#%02X AI? 0", DAS_HOST_TX_ADDR);break;
-      case 6:sprintf(buffer, "#%02X AI? 1", DAS_HOST_TX_ADDR);break;
-      case 7:sprintf(buffer, "#%02X AI? 2", DAS_HOST_TX_ADDR);break;
-      case 8:sprintf(buffer, "#%02X AI? 3", DAS_HOST_TX_ADDR);break;
-      case 9:sprintf(buffer, "#%02X AI? 4", DAS_HOST_TX_ADDR);break;
-      case 10:sprintf(buffer, "#%02X AI? 5", DAS_HOST_TX_ADDR);break;
-      case 11:sprintf(buffer, "#%02X AI? 6", DAS_HOST_TX_ADDR);break;
-    }
+      switch(RS485TxCollection[i].Type)
+      {
+        case TX_ITEM_NO_ARG:
+        {
+          sprintf(buffer, RS485TxCollection[i].Command, RS485TxCollection[i].HostAddr);
+          break;
+        }
+        case TX_ITEM_INT_ARG:
+        {
+          sprintf(buffer, RS485TxCollection[i].Command, RS485TxCollection[i].HostAddr, *((uint32_t*)RS485TxCollection[i].Arg1));
+          break;
+        }
+      }
 
-    RS485UartTx(buffer);
-
-    if(cmdId == 11)
-    {
-      cmdId = 0;
+      RS485UartTx(buffer);
+      Device.Diag.RS485RequestCnt++;
+      osDelay(5);
     }
-    else
-    {
-      cmdId++;
-    }
-    Device.Diag.RS485RequestCnt++;
-    osDelay(5);
   }
   /* USER CODE END RS485TxTask */
 }
