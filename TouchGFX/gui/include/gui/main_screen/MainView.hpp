@@ -5,7 +5,7 @@
 #include <gui/main_screen/MainPresenter.hpp>
 
 class MainView : public MainViewBase
-{ 
+{
 public:
 	MainView();
 	void SetOnAllOutput();
@@ -18,16 +18,16 @@ public:
 
 	virtual void handleTickEvent();
 
-	void RefreshAudioAndClockInfo();
+	void RefreshKarunaAndClockInfo();
 
 	void RefreshBNCOutput();
 	void RefreshRCAOutput();
 	void RefreshHDMIOutput();
 	void RefreshXLROutput();
 
-	void Refresh24Thermal();
-	void Refresh245Thermal();
-	void Refresh22Thermal();
+	void Refresh24Lock();
+	void Refresh245Lock();
+	void Refresh22Lock();
 	void RefreshIntExt();
 
 	void SetDSDPCM(int p_AudiFormat);
@@ -38,23 +38,29 @@ public:
 	void PaintDot(colortype p_Dot1, colortype p_Dot2, colortype p_Dot3);
 
 	colortype GetOutputColor(bool p_State);
-	colortype GetThermalColor(bool p_State);
+	colortype GetLockColor(bool p_State);
 	bool ToBinary(int number, int p_Position);
 	void CopyBit(int input, int* output, int CopyFrom, int CopyTo);
 	void SetBit(uint8_t* input, bool bit, int SetTo);
 
-	virtual void OpenScreenoff();
-	virtual void ShowDipslay();
 
-	
+
 
 #ifdef SIMULATOR
+
+	//Karuna
 	uint8_t GuiItfGetKarunaStatus();
 	void GuiItfKarunaControl(uint8_t p_Output);
+
+	//DAS Clock
+	double GuiItfGetDasMV341Temp();
+	bool GuiItfGetDasStatusLock1();
+	bool GuiItfGetDasStatusLock2();
+	bool GuiItfGetDasIntExt();
 #endif
 
 
-protected: 
+protected:
 
 private:
 	uint8_t count;

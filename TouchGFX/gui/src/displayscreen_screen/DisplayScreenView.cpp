@@ -9,7 +9,7 @@ uint8_t DisplayScreenView::GuiItfSetBacklight(uint8_t percent)
 
 uint8_t DisplayScreenView::GuiItfGetBacklight(void)
 {
-  return 50;
+  return 42; //Ez egy sokkal szebb szám 
 }
 
 #else
