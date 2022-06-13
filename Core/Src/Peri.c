@@ -19,6 +19,12 @@
 #define MCP320X_CH3          3
 #define MCP320X_CON_SINGLE_END  (1<<3)
 
+
+/*** Log Flash ***/
+#define LOG_FLASH_PAGE_SIZE     256
+#define LOG_FLASH_PP_CMD_SZIE   5
+
+static uint8_t LogFlashPageWrite(uint32_t addr, uint8_t *data, uint32_t size);
 static void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length);
 static void Spi2Transmitt(uint8_t *data, uint32_t size);
 static void Spi2Receive(uint8_t *data, uint32_t size);
@@ -210,12 +216,16 @@ void LogFlashReadId (void)
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
 }
 
-static void LogFlashPageWrite(uint32_t page_addr, uint8_t *data, uint32_t size);
 
-static void LogFlashPageWrite(uint32_t page_addr, uint8_t *data, uint32_t size)
+
+static uint8_t LogFlashPageWrite(uint32_t addr, uint8_t *data, uint32_t size)
 {
-  #define LOG_FLASH_PAGE_SIZE     256
-  #define LOG_FLASH_PP_CMD_SZIE   5
+
+  if((addr % LOG_FLASH_PAGE_SIZE) !=0 )
+    return PERIPH_ARG_ERROR;
+
+  if(addr > 0xFFFFFF)
+    return PERIPH_OUT_OF_RNG;
 
   /*** WREN - Write Enable***/
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
@@ -230,10 +240,10 @@ static void LogFlashPageWrite(uint32_t page_addr, uint8_t *data, uint32_t size)
   /*** PP - Page Program***/
   uint8_t cmd[LOG_FLASH_PP_CMD_SZIE];
   cmd[0] = 0x06;
-  cmd[1] = page_addr;
-  cmd[2] = page_addr >> 8;
-  cmd[3] = page_addr >> 16;
-  cmd[4] = page_addr >> 24;
+  cmd[1] = addr;
+  cmd[2] = addr >> 8;
+  cmd[3] = addr >> 16;
+  cmd[4] = addr >> 24;
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
   Spi2Transmitt(cmd, LOG_FLASH_PP_CMD_SZIE);
   Spi2Transmitt(data, size);
@@ -244,21 +254,46 @@ static void LogFlashPageWrite(uint32_t page_addr, uint8_t *data, uint32_t size)
   Spi2Transmitt((uint8_t[]){0x04}, 1);
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
 
+  return PERIPH_OK;
 }
 
 uint8_t LogFlashWriteLine(char *str)
 {
-  uint32_t pageAddre = Device.LogLastPageAddress * 256;
+  uint32_t page_addr = Device.LogLastPageAddress * 256;
   if (str == NULL)
     return PERIPH_ARG_ERROR;
-
   uint32_t size = strlen(str);
   if (size > 256 || size == 0)
     return PERIPH_ARG_ERROR;
-
-  LogFlashPageWrite(pageAddre, (uint8_t*)str, size );
-
+  LogFlashPageWrite(page_addr, (uint8_t*)str, size );
   GuiItfLogIncPageAddr();
+  return PERIPH_OK;
+}
 
+static char str[LOG_FLASH_PAGE_SIZE];
+
+uint8_t LogFlashReadLine(uint32_t addr, char *data)
+{
+  uint32_t page_addr = Device.LogLastPageAddress * 256;
+
+  if((page_addr % LOG_FLASH_PAGE_SIZE) !=0 )
+    return PERIPH_ARG_ERROR;
+
+  if(addr > 0xFFFFFF)
+    return PERIPH_OUT_OF_RNG;
+
+  /*** EN4B - Enter 4 Byte mode***/
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  Spi2Transmitt((uint8_t[]){0xB7}, 1);
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
+
+  /*** READ4B - Read Data Byte by 4 byte address ***/
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  Spi2Transmitt((uint8_t[]){0x13}, 1);
+  Spi2Receive((char*)str,LOG_FLASH_PAGE_SIZE);
+  //uint32_t size = strlen(str);
+  strcpy(data, str);
+
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
   return PERIPH_OK;
 }

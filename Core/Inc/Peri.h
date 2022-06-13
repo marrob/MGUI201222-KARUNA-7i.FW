@@ -25,6 +25,7 @@
 #define PERIPH_OK           0
 #define PERIPH_FAIL         1
 #define PERIPH_ARG_ERROR    2
+#define PERIPH_OUT_OF_RNG   3
 
 
 /* Exported functions prototypes ---------------------------------------------*/
