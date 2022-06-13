@@ -30,6 +30,7 @@
 #include <queue.h>
 #include <stdlib.h>
 #include "GuiItf.h"
+#include "LiveLed.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,6 +76,9 @@ typedef struct _RS485TxItem
 #define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
 #define SDRAM_BUFFER_SIZE                        ((uint32_t)0x1000)
+
+
+#define WITHOUT_RTOS
 
 /* USER CODE END PD */
 
@@ -190,6 +194,8 @@ RS485TxItem_t RS485TxCollection[] =
     {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
 };
 
+LiveLED_HnadleTypeDef hLiveLed;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -211,7 +217,7 @@ static void MX_I2C1_Init(void);
 static void MX_RTC_Init(void);
 void StartDefaultTask(void *argument);
 void UsbRxTask(void *argument);
-void LiveLedTask(void *argument);
+void LiveLedOsTask(void *argument);
 void RS485RxTask(void *argument);
 void RS485TxTask(void *argument);
 void PeriTask(void *argument);
@@ -290,7 +296,7 @@ int main(void)
   MX_TIM2_Init();
   MX_I2C1_Init();
   MX_RTC_Init();
-  MX_TouchGFX_Init();
+//  MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
 
   /*** Display ***/
@@ -312,11 +318,16 @@ int main(void)
   /*** EEPROM ***/
   EepromInit(&hi2c1);
 
+  /*** LiveLed ***/
+  hLiveLed.LedOffFnPtr = &LiveLedOff;
+  hLiveLed.LedOnFnPtr = &LiveLedOn;
+  hLiveLed.HalfPeriodTimeMs = 500;
+  LiveLedInit(&hLiveLed);
 
   /* USER CODE END 2 */
 
   /* Init scheduler */
-  osKernelInitialize();
+  //osKernelInitialize();
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -332,7 +343,7 @@ int main(void)
 
   /* Create the queue(s) */
   /* creation of USBUartRxQueue */
-  USBUartRxQueueHandle = osMessageQueueNew (16, 80, &USBUartRxQueue_attributes);
+ // USBUartRxQueueHandle = osMessageQueueNew (16, 80, &USBUartRxQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -340,22 +351,22 @@ int main(void)
 
   /* Create the thread(s) */
   /* creation of defaultTask */
-  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+//  defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* creation of UsbRx_Task */
-  UsbRx_TaskHandle = osThreadNew(UsbRxTask, NULL, &UsbRx_Task_attributes);
+ // UsbRx_TaskHandle = osThreadNew(UsbRxTask, NULL, &UsbRx_Task_attributes);
 
   /* creation of LiveLed_Task */
-  LiveLed_TaskHandle = osThreadNew(LiveLedTask, NULL, &LiveLed_Task_attributes);
+ // LiveLed_TaskHandle = osThreadNew(LiveLedOsTask, NULL, &LiveLed_Task_attributes);
 
   /* creation of RS485Rx_Task */
-  RS485Rx_TaskHandle = osThreadNew(RS485RxTask, NULL, &RS485Rx_Task_attributes);
+ // RS485Rx_TaskHandle = osThreadNew(RS485RxTask, NULL, &RS485Rx_Task_attributes);
 
   /* creation of RS485Tx_Task */
-  RS485Tx_TaskHandle = osThreadNew(RS485TxTask, NULL, &RS485Tx_Task_attributes);
+ // RS485Tx_TaskHandle = osThreadNew(RS485TxTask, NULL, &RS485Tx_Task_attributes);
 
   /* creation of Peri_Task */
-  Peri_TaskHandle = osThreadNew(PeriTask, NULL, &Peri_Task_attributes);
+  //Peri_TaskHandle = osThreadNew(PeriTask, NULL, &Peri_Task_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -367,13 +378,14 @@ int main(void)
   /* USER CODE END RTOS_EVENTS */
 
   /* Start scheduler */
-  osKernelStart();
+  //osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    LiveLedTask(&hLiveLed);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -1702,43 +1714,46 @@ void UsbRxTask(void *argument)
   /* USER CODE END UsbRxTask */
 }
 
-/* USER CODE BEGIN Header_LiveLedTask */
+/* USER CODE BEGIN Header_LiveLedOsTask */
 /**
 * @brief Function implementing the LiveLed_Task thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_LiveLedTask */
-void LiveLedTask(void *argument)
+/* USER CODE END Header_LiveLedOsTask */
+void LiveLedOsTask(void *argument)
 {
-  /* USER CODE BEGIN LiveLedTask */
+  /* USER CODE BEGIN LiveLedOsTask */
   /* Infinite loop */
-  uint32_t timestamp = 0;
-  uint8_t flag = 0;
-
-  osDelay(1000);
-  BacklightEnable();
   for(;;)
   {
-    if(HAL_GetTick() - timestamp > 500)
+    uint32_t timestamp = 0;
+    uint8_t flag = 0;
+
+    osDelay(1000);
+    BacklightEnable();
+    for(;;)
     {
-      timestamp = HAL_GetTick();
-      if(flag)
+      if(HAL_GetTick() - timestamp > 500)
       {
-        flag = 0;
-        LiveLedOn();
-        RtcGetNowToString(Device.Now);
+        timestamp = HAL_GetTick();
+        if(flag)
+        {
+          flag = 0;
+          LiveLedOn();
+          RtcGetNowToString(Device.Now);
+        }
+        else
+        {
+          flag = 1;
+          LiveLedOff();
+          Device.Diag.UpTimeSec++;
+        }
       }
-      else
-      {
-        flag = 1;
-        LiveLedOff();
-        Device.Diag.UpTimeSec++;
-      }
+      osDelay(10);
     }
-    osDelay(10);
   }
-  /* USER CODE END LiveLedTask */
+  /* USER CODE END LiveLedOsTask */
 }
 
 /* USER CODE BEGIN Header_RS485RxTask */
