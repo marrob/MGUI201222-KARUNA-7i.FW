@@ -1,8 +1,7 @@
 #include <gui/main_screen/MainView.hpp>
 #include <touchgfx/Color.hpp>
 #include <touchgfx/containers/buttons/ImageButtonStyle.hpp>
-#include "BitmapDatabase.hpp" 
-
+#include "BitmapDatabase.hpp"  
 
 // Initialize static member of class Box
 
@@ -17,7 +16,7 @@ static bool mIs24Locked;
 static bool mIs245Locked;
 static bool mIs22Locked;
 static bool mIsIntExt;
-
+ 
 //Default colors
 colortype GRAYCOLOR;
 colortype MIDGRAYCOLOR;
@@ -37,48 +36,6 @@ int mAudioFormat;
 
 //Gui Refresh
 int mTickCount;
-
-#ifdef SIMULATOR
-
-uint8_t MainView::GuiItfGetKarunaStatus()
-{
-  return 0b00000001;
-}
-void MainView::GuiItfKarunaControl(uint8_t p_Output)
-{
-}
-double MainView::GuiItfGetDasClockMV341Temp()
-{
-	return 60;
-}
-bool MainView::GuiItfGetDasClockStatusLock1()
-{
-	return true;
-}
-bool MainView::GuiItfGetDasClockStatusLock2()
-{
-	return true;
-}
-bool MainView::GuiItfGetDasClockIsExt()
-{
-	return false;
-}
-
-#else
-extern "C"
-{
-  //Karuna
-  uint8_t GuiItfGetKarunaStatus();
-  void GuiItfKarunaControl(uint8_t p_Output);
-
-  //DasClock
-  double GuiItfGetDasClockMV341Temp();
-  uint8_t GuiItfGetDasClockStatusLock1();
-  uint8_t GuiItfGetDasClockStatusLock2();
-  uint8_t GuiItfGetDasClockIsExt();
-}
-#endif
-
 
 
 
@@ -153,7 +110,7 @@ void MainView::setupScreen()
 void MainView::RefreshHDMIOutput()
 { 
 	SetBit(&mKarunaControl, mIsHdmiON, 3); 
-	GuiItfKarunaControl(mKarunaControl);
+	mCommunicator.GuiItfKarunaControl(mKarunaControl);
 
 	btnHDMI.setBoxWithBorderColors(GetOutputColor(mIsHdmiON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsHdmiON)
@@ -172,7 +129,7 @@ void MainView::RefreshHDMIOutput()
 void MainView::RefreshRCAOutput()
 { 
 	SetBit(&mKarunaControl, mIsRcaON, 0);
-	GuiItfKarunaControl(mKarunaControl);
+	mCommunicator.GuiItfKarunaControl(mKarunaControl);
 
 	btnRCA.setBoxWithBorderColors(GetOutputColor(mIsRcaON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsRcaON)
@@ -189,7 +146,7 @@ void MainView::RefreshRCAOutput()
 void MainView::RefreshBNCOutput()
 { 
 	SetBit(&mKarunaControl, mIsBncON, 1);
-	GuiItfKarunaControl(mKarunaControl);
+	mCommunicator.GuiItfKarunaControl(mKarunaControl);
 
 	btnBNC.setBoxWithBorderColors(GetOutputColor(mIsBncON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsBncON)
@@ -206,7 +163,7 @@ void MainView::RefreshBNCOutput()
 void MainView::RefreshXLROutput()
 { 
 	SetBit(&mKarunaControl, mIsXlrON, 2);
-	GuiItfKarunaControl(mKarunaControl);
+	mCommunicator.GuiItfKarunaControl(mKarunaControl);
 
 	btnXLR.setBoxWithBorderColors(GetOutputColor(mIsXlrON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsXlrON)
@@ -609,20 +566,19 @@ void MainView::handleTickEvent()
 void MainView::RefreshKarunaAndClockInfo()
 {
 	//Read audio format
-	uint8_t  KRN_STAT = GuiItfGetKarunaStatus();
+	uint8_t  KRN_STAT = mCommunicator.GuiItfGetKarunaStatus();
 	 
 	SetDSDPCM(KRN_STAT);
 	SetBitDepth(KRN_STAT);
-	SetFreq(KRN_STAT);
-	 
+	SetFreq(KRN_STAT);  
  
-	double temp = GuiItfGetDasClockMV341Temp();
+	double temp = mCommunicator.GuiItfGetDasClockMV341Temp();
 	SetTemp((int)temp);
 
-	mIs22Locked = GuiItfGetDasClockStatusLock1();
-	mIs245Locked = GuiItfGetDasClockStatusLock2();
+	mIs22Locked = mCommunicator.GuiItfGetDasClockStatusLock1();
+	mIs245Locked = mCommunicator.GuiItfGetDasClockStatusLock2();
 	mIs24Locked = mIs245Locked && mIs22Locked;
-	mIsIntExt = GuiItfGetDasClockIsExt();
+	mIsIntExt = mCommunicator.GuiItfGetDasClockIsExt();
 
 	Refresh24Lock();
 	Refresh245Lock();

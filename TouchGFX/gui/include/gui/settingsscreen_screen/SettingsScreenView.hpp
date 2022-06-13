@@ -3,23 +3,19 @@
 
 #include <gui_generated/settingsscreen_screen/SettingsScreenViewBase.hpp>
 #include <gui/settingsscreen_screen/SettingsScreenPresenter.hpp>
+#include <gui/common/BackendCommunicator.hpp>
 
 class SettingsScreenView : public SettingsScreenViewBase
 {
-public:
+public: 
+
     SettingsScreenView();
     virtual ~SettingsScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-
-    virtual void handleTickEvent();
-     
-#ifdef SIMULATOR
-    uint32_t GuiItfGetKarunaUptimeCnt();
-    uint32_t GuiItfGetDasClockUptimeCnt();
-#endif
-
+         
 protected:
+    BackendCommunicator mCommunicator;
 
 };
 

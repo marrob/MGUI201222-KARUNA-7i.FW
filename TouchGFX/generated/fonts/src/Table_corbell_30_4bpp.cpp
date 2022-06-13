@@ -70,7 +70,8 @@ KEEP extern const touchgfx::GlyphNode glyphs_corbell_30_4bpp[] FONT_TABLE_LOCATI
     {  7588, 0x0077,  19,  14,  14,   1,  20, 184,   7, 0x00 },
     {  7728, 0x0078,  12,  14,  14,   0,  12, 191,   2, 0x00 },
     {  7812, 0x0079,  13,  21,  14,   0,  13, 193,   7, 0x00 },
-    {  7959, 0x007A,  11,  14,  14,   1,  13, 200,   2, 0x00 }
+    {  7959, 0x007A,  11,  14,  14,   1,  13, 200,   2, 0x00 },
+    {  8043, 0x00B0,  10,  10,  20,   1,  12,   0,   0, 0x00 }
 };
 
 // corbell_30_4bpp
@@ -154,6 +155,6 @@ touchgfx::GeneratedFont& getFont_corbell_30_4bpp();
 
 touchgfx::GeneratedFont& getFont_corbell_30_4bpp()
 {
-    static touchgfx::GeneratedFont corbell_30_4bpp(glyphs_corbell_30_4bpp, 67, 30, 7, 4, 1, 2, 1, unicodes_corbell_30_4bpp, kerning_corbell_30_4bpp, 63, 0, 0, &corbell_contextualFormsTable);
+    static touchgfx::GeneratedFont corbell_30_4bpp(glyphs_corbell_30_4bpp, 68, 30, 7, 4, 1, 2, 1, unicodes_corbell_30_4bpp, kerning_corbell_30_4bpp, 63, 0, 0, &corbell_contextualFormsTable);
     return corbell_30_4bpp;
 }

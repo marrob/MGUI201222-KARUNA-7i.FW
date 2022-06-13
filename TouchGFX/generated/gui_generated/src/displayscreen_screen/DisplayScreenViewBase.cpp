@@ -151,6 +151,20 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     textArea2_3_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AQQB));
     container1.add(textArea2_3_4);
 
+    lblBrightness.setPosition(871, 215, 77, 44);
+    lblBrightness.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblBrightness.setLinespacing(0);
+    Unicode::snprintf(lblBrightnessBuffer, LBLBRIGHTNESS_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_8FBD).getText());
+    lblBrightness.setWildcard(lblBrightnessBuffer);
+    lblBrightness.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ONW5));
+    container1.add(lblBrightness);
+
+    textArea2_1_1_1.setPosition(734, 215, 144, 44);
+    textArea2_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    textArea2_1_1_1.setLinespacing(0);
+    textArea2_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FF38));
+    container1.add(textArea2_1_1_1);
+
     line1.setPosition(60, 409, 920, 15);
     line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1.setPainter(line1Painter);
@@ -158,18 +172,6 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     line1.setEnd(920, 1);
     line1.setLineWidth(2);
     line1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-
-    lblBrightness.setPosition(896, 361, 77, 44);
-    lblBrightness.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblBrightness.setLinespacing(0);
-    Unicode::snprintf(lblBrightnessBuffer, LBLBRIGHTNESS_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_8FBD).getText());
-    lblBrightness.setWildcard(lblBrightnessBuffer);
-    lblBrightness.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ONW5));
-
-    textArea2_1_1_1.setPosition(759, 361, 144, 44);
-    textArea2_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea2_1_1_1.setLinespacing(0);
-    textArea2_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FF38));
 
     add(__background);
     add(box1);
@@ -181,8 +183,6 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     add(textArea2_1);
     add(container1);
     add(line1);
-    add(lblBrightness);
-    add(textArea2_1_1_1);
     radioButtonGroup1.add(rdbtnSet0);
     radioButtonGroup1.add(rdbtnSet1);
     radioButtonGroup1.add(rdbtnSet5);
