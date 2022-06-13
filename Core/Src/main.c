@@ -372,7 +372,7 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  ConsoleWrite("FreeRTOS osKernelStart()");
+  printf("FreeRTOS osKernelStart()");
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -925,7 +925,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 460800;
+  huart1.Init.BaudRate = 115200;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -1213,17 +1213,17 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 /* printf -------------------------------------------------------------------*/
-/*
+
 int _write(int file, char *ptr, int len)
 {
   HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 100);
   return len;
 }
-*/
+
 
 void ConsoleWrite(char *str)
 {
-  HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), 100);
+  //HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), 100);
 }
 
 /* LEDs ---------------------------------------------------------------------*/
