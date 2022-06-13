@@ -8,6 +8,9 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "Peri.h"
+#include "stdio.h"
+#include <string.h>
+#include "GuiItf.h"
 
 /*** MCP3208 ***/
 #define MCP320X_CH0          0
@@ -185,18 +188,77 @@ void PeriSetOutputs(uint8_t data)
 
 
 /* LogFlash ------------------------------------------------------------------*/
-void PeriphLogFlashReadId (void)
+/*
+ * A flash 256Mbit-es, ez 32MByte (32000000Byte)
+ * Egy page mérete 256Byte, ez igy 32000000/256 = 125000 ez "125 000 Line"
+ * 0x00 00 00 00 -> Page 0 (Line) Start
+ * 0x00 00 00 FF -> Page 1 (Line) End
+ *
+ * 0x00 00 01 00 -> Page 2 Start
+ * 0x00 00 01 FF -> Page 2 End
+ * ha leveszem a page-en belül címeket, akkor:
+ * 0x00 00 00 .. FF FF FF ez 0-tól 16777215-ig terjedo cimtartomány (ehhez kell a 4 bájtos címzés)
+ */
+void LogFlashReadId (void)
 {
-  uint8_t cmd[] = {0x9F /*, 0x00, 0x00*/};
   uint8_t id[] = {0x00, 0x00};
 
+  /*** RDID - read identification***/
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
-  Spi2Transmitt(cmd, sizeof(cmd));
+  Spi2Transmitt((uint8_t[]){0x9F}, 1);
   Spi2Receive(id,sizeof(id));
-  //Spi2TransmittReceive(cmd,resp, 3 );
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
+}
+
+static void LogFlashPageWrite(uint32_t page_addr, uint8_t *data, uint32_t size);
+
+static void LogFlashPageWrite(uint32_t page_addr, uint8_t *data, uint32_t size)
+{
+  #define LOG_FLASH_PAGE_SIZE     256
+  #define LOG_FLASH_PP_CMD_SZIE   5
+
+  /*** WREN - Write Enable***/
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  //Spi2Transmitt((uint8_t){0x06}, 1);
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
+
+  /*** EN4B - Enter 4 Byte mode***/
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  Spi2Transmitt((uint8_t[]){0xB7}, 1);
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
+
+  /*** PP - Page Program***/
+  uint8_t cmd[LOG_FLASH_PP_CMD_SZIE];
+  cmd[0] = 0x06;
+  cmd[1] = page_addr;
+  cmd[2] = page_addr >> 8;
+  cmd[3] = page_addr >> 16;
+  cmd[4] = page_addr >> 24;
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  Spi2Transmitt(cmd, LOG_FLASH_PP_CMD_SZIE);
+  Spi2Transmitt(data, size);
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
+
+  /*** WRDI - Write Disable ***/
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  Spi2Transmitt((uint8_t[]){0x04}, 1);
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
 
 }
 
+uint8_t LogFlashWriteLine(char *str)
+{
+  uint32_t pageAddre = Device.LogLastPageAddress * 256;
+  if (str == NULL)
+    return PERIPH_ARG_ERROR;
 
+  uint32_t size = strlen(str);
+  if (size > 256 || size == 0)
+    return PERIPH_ARG_ERROR;
 
+  LogFlashPageWrite(pageAddre, (uint8_t*)str, size );
+
+  GuiItfLogIncPageAddr();
+
+  return PERIPH_OK;
+}

@@ -147,6 +147,7 @@ typedef struct _AppTypeDef
     uint16_t Inputs;
   }Peri;
   char Now[DEVICE_TIMESTAMP_SIZE];
+  uint32_t LogLastPageAddress;
 }Device_t;
 
 extern Device_t Device;

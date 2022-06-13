@@ -324,7 +324,12 @@ int main(void)
   hLiveLed.HalfPeriodTimeMs = 500;
   LiveLedInit(&hLiveLed);
 
-  PeriphLogFlashReadId();
+//  while(1)
+  //  LogFlashReadId();
+
+  LogFlashWriteLine("Hello World");
+
+  LogFlashWriteLine("It is a Test");
 
   /* USER CODE END 2 */
 
@@ -1127,7 +1132,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(RS_485_DIR_GPIO_Port, RS_485_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(AIN_CS_GPIO_Port, AIN_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(AIN_CS_GPIO_Port, AIN_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, LIVE_LED_Pin|DIO_LD_Pin|DISP_EN_Pin, GPIO_PIN_RESET);
@@ -1139,10 +1144,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOB, DIO_WR_Pin|SPI2_CLK_Pin|SPI2_MOSI_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(DIO_CS_GPIO_Port, DIO_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, FLS_CS_Pin|DIO_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : DO_EN_Pin */
   GPIO_InitStruct.Pin = DO_EN_Pin;
@@ -1161,7 +1163,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pin : AIN_CS_Pin */
   GPIO_InitStruct.Pin = AIN_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(AIN_CS_GPIO_Port, &GPIO_InitStruct);
 
@@ -1198,19 +1200,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(SPI2_MISO_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : FLS_CS_Pin */
-  GPIO_InitStruct.Pin = FLS_CS_Pin;
+  /*Configure GPIO pins : FLS_CS_Pin DIO_CS_Pin */
+  GPIO_InitStruct.Pin = FLS_CS_Pin|DIO_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(FLS_CS_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : DIO_CS_Pin */
-  GPIO_InitStruct.Pin = DIO_CS_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(DIO_CS_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
   /*Configure GPIO pin : DISP_EN_Pin */
   GPIO_InitStruct.Pin = DISP_EN_Pin;

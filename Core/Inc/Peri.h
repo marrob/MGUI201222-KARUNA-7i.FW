@@ -22,10 +22,20 @@
 #define MCP320X_CON_SINGLE_END  (1<<3)
 
 
+#define PERIPH_OK           0
+#define PERIPH_FAIL         1
+#define PERIPH_ARG_ERROR    2
+
+
 /* Exported functions prototypes ---------------------------------------------*/
 void PeriInit(void);
 double PeriGetTemperature(uint8_t channel);
 uint16_t PeriGetInputs(void);
 void PeriSetOutputs(uint8_t data);
+
+/* LogFlash ------------------------------------------------------------------*/
+void LogFlashReadId (void);
+uint8_t LogFlashWriteLine(char *str);
+
 
 #endif /* _ANALOG_INPUTS_H_ */

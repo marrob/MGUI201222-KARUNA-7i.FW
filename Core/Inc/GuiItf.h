@@ -82,4 +82,8 @@ void GuiItfBacklightDisable(void);
 uint8_t GuiItfSetRtc(uint8_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t mins, uint8_t secs);
 uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
 
+/* Log -----------------------------------------------------------------------*/
+uint32_t GuiItfLogGetLasPageAddr(void);
+void GuiItfLogIncPageAddr(void);
+
 #endif /* _GUIITF_H_ */

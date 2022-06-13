@@ -16,6 +16,7 @@
 #define EEP_BACKLIGHT_ADDR       0x0008
 #define EEP_KARUNA_CTRL_ADDR     0x000C
 #define EEP_RTC_IS_SET_ADDR      0x0010
+#define EEP_LOG_LAST_PAGE_ADDR   0x0014
 
 #define MAGIC_WORD               0x55AA55AA
 
@@ -49,6 +50,10 @@ uint8_t GuiItfLoad(void)
     /*** KARUNA CTRL ***/
     EepromU32Read(EEP_KARUNA_CTRL_ADDR, &value);
     Device.Karuna.DO = value;
+
+    /*** Log ***/
+    EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
+    Device.LogLastPageAddress = value;
   }
   return GUIITF_OK;
 }
@@ -77,6 +82,11 @@ uint8_t GuiItfSetDefault(void)
   value = 0x01;
   EepromU32Write(EEP_RTC_IS_SET_ADDR, value);
   RtcSet(22, 6, 10, 13, 45, 30);
+
+  /*** Log ***/
+  value = 0;
+  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, value);
+  Device.LogLastPageAddress = value;
 
   /*** Magic Word ***/
   value = MAGIC_WORD;
@@ -219,3 +229,17 @@ uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *days, uint8_t *hour
 {
   return  RtcGet(year, month, days, hours, mins, secs);
 }
+
+/* Log -----------------------------------------------------------------------*/
+
+uint32_t GuiItfLogGetLasPageAddr(void)
+{
+  return Device.LogLastPageAddress;
+}
+
+void GuiItfLogIncPageAddr(void)
+{
+  Device.LogLastPageAddress++;
+  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.LogLastPageAddress);
+}
+
