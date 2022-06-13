@@ -17,14 +17,16 @@
 #define MCP320X_CON_SINGLE_END  (1<<3)
 
 static void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length);
+static void Spi2Transmitt(uint8_t *data, uint32_t size);
+static void Spi2Receive(uint8_t *data, uint32_t size);
 static void Clock(void);
 
 /* Private user code ---------------------------------------------------------*/
 
 /* Commmon--------------------------------------------------------------------*/
-void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length)
+void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t size)
 {
-  for(uint32_t j=0; j < length; j++)
+  for(uint32_t j=0; j < size; j++)
   {
     uint8_t rx_mask = 0x80;
     uint8_t tx_mask = 0x80;
@@ -36,14 +38,60 @@ void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length)
       else
         HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_RESET);
       tx_mask>>=1;
+      DelayUs(1);
       if(HAL_GPIO_ReadPin(SPI2_MISO_GPIO_Port, SPI2_MISO_Pin) == GPIO_PIN_SET)
         rx[j] |= rx_mask;
       else
         rx[j] &= ~rx_mask;
       rx_mask>>=1;
       HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_SET);
+      DelayUs(1);
     }
     HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_RESET);
+  }
+}
+
+static void Spi2Transmitt(uint8_t *data, uint32_t size)
+{
+  for(uint32_t j=0; j < size; j++)
+  {
+    uint8_t mask = 0x80;
+    for(uint8_t i=0; i<8; i++)
+    {
+      if(data[j] & mask)
+        HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_SET);
+      else
+        HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_RESET);
+      mask>>=1;
+
+      HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_SET);
+      DelayUs(1);
+      HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_RESET);
+      DelayUs(1);
+    }
+  }
+
+}
+
+void Spi2Receive(uint8_t *data, uint32_t size)
+{
+  for(uint32_t j=0; j < size; j++)
+  {
+    uint16_t mask = 0x80;
+    for(uint8_t i = 0; i < 8; i++)
+    {
+      HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_SET);
+      DelayUs(1);
+
+      if(HAL_GPIO_ReadPin(SPI2_MISO_GPIO_Port, SPI2_MISO_Pin) == GPIO_PIN_SET)
+        data[j]|= mask;
+      else
+        data[j]&=~mask;
+      mask >>=1;
+
+      HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_RESET);
+      DelayUs(1);
+    }
   }
 }
 
@@ -139,9 +187,16 @@ void PeriSetOutputs(uint8_t data)
 /* LogFlash ------------------------------------------------------------------*/
 void PeriphLogFlashReadId (void)
 {
-  uint8_t cmd[] = {0x9F};
+  uint8_t cmd[] = {0x9F /*, 0x00, 0x00*/};
+  uint8_t id[] = {0x00, 0x00};
 
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
+  Spi2Transmitt(cmd, sizeof(cmd));
+  Spi2Receive(id,sizeof(id));
+  //Spi2TransmittReceive(cmd,resp, 3 );
+  HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
 
-  //  Spi2TransmittReceive()
 }
+
+
 
