@@ -16,41 +16,49 @@
 #define MCP320X_CH3          3
 #define MCP320X_CON_SINGLE_END  (1<<3)
 
-
-
-static void SwSpiTransmittReceive(uint8_t *tx, uint8_t *rx, int length);
+static void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length);
 static void Clock(void);
 
 /* Private user code ---------------------------------------------------------*/
 
-/* Temperature  --------------------------------------------------------------*/
-void SwSpiTransmittReceive(uint8_t *tx, uint8_t *rx, int length)
+/* Commmon--------------------------------------------------------------------*/
+void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length)
 {
-  for(uint8_t j=0; j < length; j++)
+  for(uint32_t j=0; j < length; j++)
   {
     uint8_t rx_mask = 0x80;
     uint8_t tx_mask = 0x80;
     for(uint8_t i = 0; i<8;i++)
     {
-      HAL_GPIO_WritePin(SPI_CLK_GPIO_Port, SPI_CLK_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_RESET);
       if(tx[j] & tx_mask)
-        HAL_GPIO_WritePin(AI_MOSI_GPIO_Port, AI_MOSI_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_SET);
       else
-        HAL_GPIO_WritePin(AI_MOSI_GPIO_Port, AI_MOSI_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_RESET);
       tx_mask>>=1;
-      if(HAL_GPIO_ReadPin(AI_MISO_GPIO_Port, AI_MISO_Pin) == GPIO_PIN_SET)
+      if(HAL_GPIO_ReadPin(SPI2_MISO_GPIO_Port, SPI2_MISO_Pin) == GPIO_PIN_SET)
         rx[j] |= rx_mask;
       else
         rx[j] &= ~rx_mask;
       rx_mask>>=1;
-      HAL_GPIO_WritePin(SPI_CLK_GPIO_Port, SPI_CLK_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_SET);
     }
-    HAL_GPIO_WritePin(SPI_CLK_GPIO_Port, SPI_CLK_Pin, GPIO_PIN_RESET);
+    HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_RESET);
   }
 }
-  #define MACP320X_ARRAY_SIZE 3
-  uint8_t result[MACP320X_ARRAY_SIZE];
-  uint8_t param[MACP320X_ARRAY_SIZE];
+
+static void Clock(void)
+{
+  HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_SET);
+  DelayUs(5);
+  HAL_GPIO_WritePin(SPI2_CLK_GPIO_Port, SPI2_CLK_Pin, GPIO_PIN_RESET);
+  DelayUs(5);
+}
+
+/* Temperature  --------------------------------------------------------------*/
+#define MACP320X_ARRAY_SIZE 3
+uint8_t result[MACP320X_ARRAY_SIZE];
+uint8_t param[MACP320X_ARRAY_SIZE];
 /*
  *
  *config:
@@ -64,9 +72,9 @@ uint16_t Mcp320xGetValue(uint8_t config)
   param[0] = 0x01;
   param[1] = config << 0x04;
   param[2] = 0;
-  HAL_GPIO_WritePin(AI_CS_GPIO_Port, AI_CS_Pin, GPIO_PIN_RESET);
-  SwSpiTransmittReceive(param, result, MACP320X_ARRAY_SIZE);
-  HAL_GPIO_WritePin(AI_CS_GPIO_Port, AI_CS_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(AIN_CS_GPIO_Port, AIN_CS_Pin, GPIO_PIN_RESET);
+  Spi2TransmittReceive(param, result, MACP320X_ARRAY_SIZE);
+  HAL_GPIO_WritePin(AIN_CS_GPIO_Port, AIN_CS_Pin, GPIO_PIN_SET);
   value = (result[1]&0x03)<<8;
   value |= result[2];
   return value;
@@ -80,42 +88,31 @@ double PeriGetTemperature(uint8_t channel)
   return temp;
 }
 
-
-static void Clock(void)
-{
-  HAL_GPIO_WritePin(SPI_CLK_GPIO_Port, SPI_CLK_Pin, GPIO_PIN_SET);
-  DelayUs(5);
-  HAL_GPIO_WritePin(SPI_CLK_GPIO_Port, SPI_CLK_Pin, GPIO_PIN_RESET);
-  DelayUs(5);
-}
-
-
+/* DIO -----------------------------------------------------------------------*/
 uint16_t PeriGetInputs(void)
 {
   uint16_t retval = 0;
   uint16_t mask = 0x8000;
 
   /*** Chip Select ***/
-  HAL_GPIO_WritePin(DIO_CS_GPIO_Port, PER_LD_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(DIO_CS_GPIO_Port, DIO_CS_Pin, GPIO_PIN_RESET);
 
   /*** Load ***/
-  HAL_GPIO_WritePin(PER_LD_GPIO_Port, PER_LD_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(DIO_LD_GPIO_Port, DIO_LD_Pin, GPIO_PIN_RESET);
   Clock();
-  HAL_GPIO_WritePin(PER_LD_GPIO_Port, PER_LD_Pin, GPIO_PIN_SET);
+  HAL_GPIO_WritePin(DIO_LD_GPIO_Port, DIO_LD_Pin, GPIO_PIN_SET);
 
   for(uint8_t j = 0; j < 16; j++)
   {
-    if(HAL_GPIO_ReadPin(PER_MISO_GPIO_Port, PER_MISO_Pin) == GPIO_PIN_SET)
+    if(HAL_GPIO_ReadPin(SPI2_MISO_GPIO_Port, SPI2_MISO_Pin) == GPIO_PIN_SET)
       retval|= mask;
     else
       retval&=~mask;
     mask >>=1;
     Clock();
   }
-
   /*** Chip Select ***/
-  HAL_GPIO_WritePin(DIO_CS_GPIO_Port, PER_LD_Pin, GPIO_PIN_SET);
-
+  HAL_GPIO_WritePin(DIO_CS_GPIO_Port, DIO_CS_Pin, GPIO_PIN_SET);
   return retval;
 }
 
@@ -126,16 +123,25 @@ void PeriSetOutputs(uint8_t data)
   for(uint8_t i=0; i<8; i++)
   {
     if(data & mask)
-      HAL_GPIO_WritePin(PER_MOSI_GPIO_Port, PER_MOSI_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_SET);
     else
-      HAL_GPIO_WritePin(PER_MOSI_GPIO_Port, PER_MOSI_Pin, GPIO_PIN_RESET);
-
+      HAL_GPIO_WritePin(SPI2_MOSI_GPIO_Port, SPI2_MOSI_Pin, GPIO_PIN_RESET);
     mask>>=1;
     Clock();
   }
-
   /*** Update ***/
   HAL_GPIO_WritePin(DIO_WR_GPIO_Port, DIO_WR_Pin, GPIO_PIN_SET);
   DelayUs(1);
   HAL_GPIO_WritePin(DIO_WR_GPIO_Port, DIO_WR_Pin, GPIO_PIN_RESET);
 }
+
+
+/* LogFlash ------------------------------------------------------------------*/
+void PeriphLogFlashReadId (void)
+{
+  uint8_t cmd[] = {0x9F};
+
+
+  //  Spi2TransmittReceive()
+}
+

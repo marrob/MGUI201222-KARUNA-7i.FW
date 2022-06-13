@@ -324,6 +324,8 @@ int main(void)
   hLiveLed.HalfPeriodTimeMs = 500;
   LiveLedInit(&hLiveLed);
 
+  PeriphLogFlashReadId();
+
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -1125,19 +1127,19 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(RS_485_DIR_GPIO_Port, RS_485_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, AI_CS_Pin|AI_MOSI_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(AIN_CS_GPIO_Port, AIN_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, LIVE_LED_Pin|PER_LD_Pin|DISP_EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, LIVE_LED_Pin|DIO_LD_Pin|DISP_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, DIO_WR_Pin|SPI_CLK_Pin|PER_MOSI_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, DIO_WR_Pin|SPI2_CLK_Pin|SPI2_MOSI_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, PSP_EN_Pin|DIO_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, FLS_CS_Pin|DIO_CS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : DO_EN_Pin */
   GPIO_InitStruct.Pin = DO_EN_Pin;
@@ -1153,21 +1155,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(RS_485_DIR_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : AI_CS_Pin AI_MOSI_Pin */
-  GPIO_InitStruct.Pin = AI_CS_Pin|AI_MOSI_Pin;
+  /*Configure GPIO pin : AIN_CS_Pin */
+  GPIO_InitStruct.Pin = AIN_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(AIN_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : AI_MISO_Pin */
-  GPIO_InitStruct.Pin = AI_MISO_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(AI_MISO_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : LIVE_LED_Pin PER_LD_Pin */
-  GPIO_InitStruct.Pin = LIVE_LED_Pin|PER_LD_Pin;
+  /*Configure GPIO pins : LIVE_LED_Pin DIO_LD_Pin */
+  GPIO_InitStruct.Pin = LIVE_LED_Pin|DIO_LD_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1186,21 +1182,21 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(TS_INT_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DIO_WR_Pin SPI_CLK_Pin PER_MOSI_Pin */
-  GPIO_InitStruct.Pin = DIO_WR_Pin|SPI_CLK_Pin|PER_MOSI_Pin;
+  /*Configure GPIO pins : DIO_WR_Pin SPI2_CLK_Pin SPI2_MOSI_Pin */
+  GPIO_InitStruct.Pin = DIO_WR_Pin|SPI2_CLK_Pin|SPI2_MOSI_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PER_MISO_Pin */
-  GPIO_InitStruct.Pin = PER_MISO_Pin;
+  /*Configure GPIO pin : SPI2_MISO_Pin */
+  GPIO_InitStruct.Pin = SPI2_MISO_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(PER_MISO_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(SPI2_MISO_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PSP_EN_Pin DIO_CS_Pin */
-  GPIO_InitStruct.Pin = PSP_EN_Pin|DIO_CS_Pin;
+  /*Configure GPIO pins : FLS_CS_Pin DIO_CS_Pin */
+  GPIO_InitStruct.Pin = FLS_CS_Pin|DIO_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1239,11 +1235,6 @@ void LiveLedOn(void)
 void LiveLedOff(void)
 {
   HAL_GPIO_WritePin(LIVE_LED_GPIO_Port, LIVE_LED_Pin, GPIO_PIN_RESET);
-}
-
-/* DCDC ----------------------------------------------------------------------*/
-void PSP_Enable(){
-  HAL_GPIO_WritePin(PSP_EN_GPIO_Port, PSP_EN_Pin, GPIO_PIN_SET);
 }
 
 /* Flash ---------------------------------------------------------------------*/
