@@ -1,14 +1,15 @@
 #include <gui/passwordscreen_screen/PasswordScreenView.hpp>
 #include <string>
 
-std::string mPinCode;
+Unicode::UnicodeChar mPinCode[10];
 
 PasswordScreenView::PasswordScreenView()
 {
 	lblPinIsNotCorrect.setVisible(false);
 	lblPinIsNotCorrect.invalidate();
 
-	mPinCode = "";
+  memset(mPinCode, 0, sizeof(mPinCode));
+  memset(lblPinCodeBuffer, 0, sizeof(lblPinCodeBuffer));
 }
 
 void PasswordScreenView::setupScreen()
@@ -32,13 +33,18 @@ void PasswordScreenView::SetIncoreectHide()
 }
 
 
-void PasswordScreenView::AppendPinCode(char PinCode)
+void PasswordScreenView::AppendPinCode(Unicode::UnicodeChar pinChar)
 {
-	mPinCode.append(&PinCode);
-	int length = mPinCode.length();
-	Unicode::strncpy(lblPinCodeBuffer, mPinCode.c_str(), length + 1);
-	lblPinCode.invalidate();
-	SetIncoreectHide();
+  uint32_t length = Unicode::strlen(mPinCode);
+
+  if(length < 5)
+  {
+    mPinCode[length] = pinChar;
+    mPinCode[length + 1] = 0;
+    Unicode::strncpy(lblPinCodeBuffer, mPinCode, length + 1);
+  }
+  lblPinCode.invalidate();
+  SetIncoreectHide();
 }
 
 void PasswordScreenView::ClickBtn0()
@@ -93,14 +99,16 @@ void PasswordScreenView::ClickBtn9()
 
 void PasswordScreenView::ClickBtnOK()
 {
-	if (mPinCode == "0")
-	{
-		application().gotoServiceScreenScreenNoTransition();
-	}
-	else
-	{
-		mPinCode = "";
-		lblPinIsNotCorrect.setVisible(true);
-		lblPinIsNotCorrect.invalidate();
-	}
+  if (mPinCode[0] == '0')
+  {
+    application().gotoServiceScreenScreenNoTransition();
+  }
+  else
+  {
+    memset(mPinCode, 0, sizeof(mPinCode));
+    memset(lblPinCodeBuffer, 0, sizeof(lblPinCodeBuffer));
+
+    lblPinIsNotCorrect.setVisible(true);
+    lblPinIsNotCorrect.invalidate();
+  }
 }

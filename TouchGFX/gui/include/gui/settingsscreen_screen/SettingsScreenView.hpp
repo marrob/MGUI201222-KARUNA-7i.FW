@@ -3,7 +3,6 @@
 
 #include <gui_generated/settingsscreen_screen/SettingsScreenViewBase.hpp>
 #include <gui/settingsscreen_screen/SettingsScreenPresenter.hpp>
-#include <gui/common/BackendCommunicator.hpp>
 
 class SettingsScreenView : public SettingsScreenViewBase
 {
@@ -15,7 +14,6 @@ public:
     virtual void tearDownScreen();
          
 protected:
-    BackendCommunicator mCommunicator;
 
 };
 

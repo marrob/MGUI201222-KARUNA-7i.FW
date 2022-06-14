@@ -30,7 +30,7 @@ public:
     virtual void ClickBtnOK();
 
     void SetIncoreectHide();
-    void AppendPinCode(char PinCode);
+    void AppendPinCode(Unicode::UnicodeChar PinCode);
 
 
 protected:

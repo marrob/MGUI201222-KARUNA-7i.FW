@@ -3,7 +3,7 @@
 
 #include <gui_generated/offscreen_screen/OffScreenViewBase.hpp>
 #include <gui/offscreen_screen/OffScreenPresenter.hpp>
-#include <gui/common/BackendCommunicator.hpp>
+
 
 class OffScreenView : public OffScreenViewBase
 {
@@ -14,8 +14,12 @@ public:
     virtual void tearDownScreen();
     virtual void btnScreenOnClick(); 
 
+#ifdef SIMULATOR
+    void GuiItfBacklightEnable();
+    void GuiItfBacklightDisable();
+#endif
+
 protected:
-    BackendCommunicator mCommunicator;
 
 };
 

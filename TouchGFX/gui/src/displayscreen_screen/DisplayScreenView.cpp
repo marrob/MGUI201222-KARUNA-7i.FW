@@ -1,5 +1,25 @@
 #include <gui/displayscreen_screen/DisplayScreenView.hpp>
- 
+
+#ifdef SIMULATOR
+uint8_t DisplayScreenView::GuiItfSetBacklight(uint8_t percent)
+{
+  return percent;
+}
+
+uint8_t DisplayScreenView::GuiItfGetBacklight(void)
+{
+  return 42; //Ez egy sokkal szebb sz�m
+}
+
+#else
+extern "C"
+{
+  uint8_t GuiItfSetBacklight(uint8_t percent);
+  uint8_t GuiItfGetBacklight(void);
+}
+#endif
+
+
 DisplayScreenView::DisplayScreenView() :
 	sliderValueChangedCallback(this, &DisplayScreenView::sliderValueChangedCallbackHandler)
 {
@@ -10,7 +30,7 @@ void DisplayScreenView::setupScreen()
 {
 	DisplayScreenViewBase::setupScreen();
 	sldrBrightnes.setNewValueCallback(sliderValueChangedCallback);
-	sldrBrightnes.setValue(mCommunicator.GuiItfGetBacklight());
+	sldrBrightnes.setValue(GuiItfGetBacklight());
 }
 
 void DisplayScreenView::sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value)
@@ -21,7 +41,7 @@ void DisplayScreenView::sliderValueChangedCallbackHandler(const touchgfx::Slider
 
 		Unicode::snprintf(lblBrightnessBuffer, 8, "%d", value);
 		lblBrightness.invalidate();
-		mCommunicator.GuiItfSetBacklight((uint8_t)value);
+		GuiItfSetBacklight((uint8_t)value);
 	}
 }
 

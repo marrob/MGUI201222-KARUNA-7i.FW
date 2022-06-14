@@ -3,7 +3,6 @@
 
 #include <gui_generated/main_screen/MainViewBase.hpp>
 #include <gui/main_screen/MainPresenter.hpp>
-#include <gui/common/BackendCommunicator.hpp>
 
 class MainView : public MainViewBase
 {
@@ -44,8 +43,23 @@ public:
 	void CopyBit(int input, int* output, int CopyFrom, int CopyTo);
 	void SetBit(uint8_t* input, bool bit, int SetTo);
 
+
+#ifdef SIMULATOR
+
+  //Karuna
+  uint8_t GuiItfGetKarunaStatus();
+  void GuiItfKarunaControl(uint8_t p_Output);
+
+  //DAS Clock
+  double GuiItfGetDasMV341Temp();
+  bool GuiItfGetDasStatusLock1();
+  bool GuiItfGetDasStatusLock2();
+  bool GuiItfGetDasIntExt();
+#endif
+
+
 protected:
-	BackendCommunicator mCommunicator;
+
 
 private:
 	uint8_t count;

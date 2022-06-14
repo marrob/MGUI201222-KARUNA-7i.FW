@@ -67,7 +67,13 @@ uint32_t GuiItfGetKarunaUptimeCnt(void);
 /* DasClock-------------------------------------------------------------------*/
 uint8_t GuiItfGetDasClockVersion(char *fw, char *uid, char *pcb);
 uint32_t GuiItfGetDasClockUptimeCnt(void);
-double GuiItfGetDasClockMV341Temp(void);
+float GuiItfGetDasClockMV341Temp(void);
+float GuiItfGetDasClockMVOCX1Temp(void);
+float GuiItfGetDasClockMVOCX2Temp(void);
+float GuiItfGetDasClockMV341Current(void);
+float GuiItfGetDasClockMVOCX1Current(void);
+float GuiItfGetDasClockMVOCX2Current(void);
+float GuiItfGetDasClockMainVoltage(void);
 uint8_t GuiItfGetDasClockStatusLock1(void);
 uint8_t GuiItfGetDasClockStatusLock2(void);
 uint8_t GuiItfGetDasClockIsExt(void);

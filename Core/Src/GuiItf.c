@@ -193,9 +193,38 @@ uint32_t GuiItfGetDasClockUptimeCnt(void)
   return Device.DasClock.UpTimeSec;
 }
 
-double GuiItfGetDasClockMV341Temp(void)
+float GuiItfGetDasClockMV341Temp(void)
 {
   return Device.DasClock.AI[DAS_AI_MV341_TEMP];
+}
+
+float GuiItfGetDasClockMVOCX1Temp(void)
+{
+  return Device.DasClock.AI[DAS_AI_MV205_1_TEMP];
+}
+float GuiItfGetDasClockMVOCX2Temp(void)
+{
+  return Device.DasClock.AI[DAS_AI_MV205_2_TEMP];
+}
+
+float GuiItfGetDasClockMV341Current(void)
+{
+  return Device.DasClock.AI[DAS_AI_MV341_I_MA];
+}
+
+float GuiItfGetDasClockMVOCX1Current(void)
+{
+  return Device.DasClock.AI[DAS_AI_MV205_1_I_MA];
+}
+
+float GuiItfGetDasClockMVOCX2Current(void)
+{
+  return Device.DasClock.AI[DAS_AI_MV205_2_I_MA];
+}
+
+float GuiItfGetDasClockMainVoltage(void)
+{
+  return Device.DasClock.AI[DAS_AI_U_MAIN];
 }
 
 uint8_t GuiItfGetDasClockStatusLock1(void)
@@ -207,10 +236,12 @@ uint8_t GuiItfGetDasClockStatusLock2(void)
 {
   return Device.DasClock.DI & DAS_DI_LOCK2;
 }
+
 uint8_t GuiItfGetDasClockIsExt(void)
 {
   return Device.DasClock.DI & DAS_DI_EXT_IS_EN;
 }
+
 
 /* RTC -----------------------------------------------------------------------*/
 /*
