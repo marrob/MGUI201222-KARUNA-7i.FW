@@ -953,7 +953,7 @@
           },
           {
             "Type": "TextArea",
-            "Name": "textArea2_1",
+            "Name": "textArea3",
             "X": 88,
             "Y": 186,
             "Width": 931,
@@ -978,7 +978,7 @@
           },
           {
             "Type": "RadioButton",
-            "Name": "rdbtnEnableSelected",
+            "Name": "rdbtnLastState",
             "X": 33,
             "Y": 184,
             "Width": 44,
@@ -991,7 +991,7 @@
           },
           {
             "Type": "TextArea",
-            "Name": "textArea2_1_1",
+            "Name": "textArea4",
             "X": 88,
             "Y": 283,
             "Width": 931,
@@ -1115,6 +1115,28 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
               "ActionComponent": "PasswordScreen"
+            }
+          },
+          {
+            "InteractionName": "SelectAllOutputAtStartUp",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnEnableAll"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "RdbBtnSelectEnableAllOutputAtStartUp"
+            }
+          },
+          {
+            "InteractionName": "SelectLastStateAtStartUp",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnLastState"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "RdbBtnSelectLastOutputStatAtStartUp"
             }
           }
         ]

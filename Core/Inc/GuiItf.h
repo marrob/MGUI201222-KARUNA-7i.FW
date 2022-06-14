@@ -31,7 +31,7 @@
 #define KRN_CTRL_I2S            ((uint8_t)1<<3)
 
 /*** Saved Flags for Karuna ***/
-#define KRN_FLAG_ALL_DO_EN    ((uint8_t)1<<0)
+#define KRN_FLAG_ALL_OUT_EN_AT_STARTUP    ((uint8_t)1<<0)
 
 /*** DasClock ***/
 //Host:0, Device:2

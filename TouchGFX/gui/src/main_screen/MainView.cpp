@@ -90,9 +90,6 @@ extern "C"
 }
 #endif
 
-// Initialize static member of class Box
-
-static bool  mAlreadyStarted;
 static bool  mIsHdmiON;
 static bool  mIsRcaON;
 static bool  mIsXlrON;
@@ -124,46 +121,27 @@ int mAudioFormat;
 //Gui Refresh
 int mTickCount;
 
-
-
 MainView::MainView()
 {
-	// Support of larger displays for this example
-	// is handled by showing a black box in the
-	// unused part of the display.
-  /*
-	if (HAL::DISPLAY_WIDTH > backgroundImage.getWidth() ||
-			HAL::DISPLAY_HEIGHT > backgroundImage.getHeight())
-	{
-		backgroundBox.setVisible(true);
-	}
-	*/
+  GRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
+  CORECOLOR = touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
+  BLACKCOLOR = touchgfx::Color::getColorFrom24BitRGB(0, 0, 0);
+  DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
+  MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
+  REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
 
-	GRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
-	CORECOLOR = touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
-	BLACKCOLOR = touchgfx::Color::getColorFrom24BitRGB(0, 0, 0);
-	DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
-	MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
-	REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
-	 
-	//Init outputs
-	if (!mAlreadyStarted)
-	{
-		//OUTPUTS 
-		mIsBncON = GuitIfGetKarunaIsBncSet();
-		mIsHdmiON = GuitIfGetKarunaIsHdmiSet();
-		mIsRcaON = GuitIfGetKarunaIsRcaSet();
-		mIsXlrON = GuitIfGetKarunaIsXlrSet();
+  //OUTPUTS
+  mIsBncON = GuitIfGetKarunaIsBncSet();
+  mIsHdmiON = GuitIfGetKarunaIsHdmiSet();
+  mIsRcaON = GuitIfGetKarunaIsRcaSet();
+  mIsXlrON = GuitIfGetKarunaIsXlrSet();
 
-		// Simulate CLOCK lock
-		mIs24Locked = true;
-		mIs245Locked = true;
-		mIs22Locked = true;
-		mIsIntExt = false;
+  // Simulate CLOCK lock
+  mIs24Locked = true;
+  mIs245Locked = true;
+  mIs22Locked = true;
+  mIsIntExt = false;
 
-		mAlreadyStarted = true;
-	} 
-	
 	RefreshHDMIOutput();
 	RefreshRCAOutput();
 	RefreshBNCOutput();

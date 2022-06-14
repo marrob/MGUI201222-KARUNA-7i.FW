@@ -20,6 +20,10 @@ extern "C"
 
 SettingsScreenView::SettingsScreenView()
 {
+  if(GuiItfGetKarunaOutputsAllEnabledAfterStart())
+    radioButtonGroup1.setSelected(rdbtnEnableAll);
+  else
+    radioButtonGroup1.setSelected(rdbtnLastState);
 }
 
 void SettingsScreenView::setupScreen()
@@ -31,3 +35,13 @@ void SettingsScreenView::tearDownScreen()
 {
     SettingsScreenViewBase::tearDownScreen();
 } 
+
+void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
+{
+  GuiItfSetKarunaOutputsIsAllEnabledAfterStart(1);
+}
+
+void SettingsScreenView::RdbBtnSelectLastOutputStatAtStartUp()
+{
+  GuiItfSetKarunaOutputsIsAllEnabledAfterStart(0);
+}

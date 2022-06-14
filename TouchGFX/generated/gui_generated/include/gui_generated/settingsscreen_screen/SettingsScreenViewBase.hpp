@@ -24,6 +24,19 @@ public:
     virtual ~SettingsScreenViewBase() {}
     virtual void setupScreen();
 
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void RdbBtnSelectEnableAllOutputAtStartUp()
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void RdbBtnSelectLastOutputStatAtStartUp()
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -39,10 +52,10 @@ protected:
     touchgfx::RadioButton rdbtnEnableAll;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea2;
-    touchgfx::TextArea textArea2_1;
+    touchgfx::TextArea textArea3;
     touchgfx::ToggleButton chbxMCLKON;
-    touchgfx::RadioButton rdbtnEnableSelected;
-    touchgfx::TextArea textArea2_1_1;
+    touchgfx::RadioButton rdbtnLastState;
+    touchgfx::TextArea textArea4;
     touchgfx::Line line1;
     touchgfx::PainterRGB565 line1Painter;
     touchgfx::Line line1_1;
@@ -57,12 +70,14 @@ private:
      */
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+    touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButton&> radioButtonSelectedCallback;
 
     /*
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
+    void radioButtonSelectedCallbackHandler(const touchgfx::AbstractButton& src);
 
     /*
      * Canvas Buffer Size

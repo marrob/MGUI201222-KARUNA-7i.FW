@@ -12,7 +12,16 @@ public:
     virtual ~SettingsScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
-         
+
+    virtual void RdbBtnSelectEnableAllOutputAtStartUp();
+    virtual void RdbBtnSelectLastOutputStatAtStartUp();
+
+#ifdef SIMULATOR
+    uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
+    void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
+#endif
+
+
 protected:
 
 };

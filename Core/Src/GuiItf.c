@@ -49,11 +49,16 @@ uint8_t GuiItfLoad(void)
     BacklightSet(value);
 
     /*** Karuna ***/
-    EepromU32Read(EEP_KARUNA_SAVED_DO_ADDR, &value);
-    Device.Karuna.DO = value;
-
     EepromU32Read(EEP_KARUNA_SAVED_FLAGS_ADDR, &value);
     Device.Karuna.SavedFlags = value;
+
+    if(Device.Karuna.SavedFlags & KRN_FLAG_ALL_OUT_EN_AT_STARTUP)
+      Device.Karuna.DO = KRN_CTRL_RCA | KRN_CTRL_BNC | KRN_CTRL_XLR | KRN_CTRL_I2S;
+    else
+    {
+      EepromU32Read(EEP_KARUNA_SAVED_DO_ADDR, &value);
+      Device.Karuna.DO = value;
+    }
 
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
@@ -82,7 +87,7 @@ uint8_t GuiItfSetDefault(void)
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, value);
   Device.Karuna.DO = value;
 
-  value = KRN_FLAG_ALL_DO_EN;
+  value = KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
   EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, value);
   Device.Karuna.SavedFlags = value;
 
@@ -213,15 +218,15 @@ uint8_t GuitIfGetKarunaIsXlrSet()
 
 uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 {
-  return Device.Karuna.SavedFlags & KRN_FLAG_ALL_DO_EN;
+  return Device.Karuna.SavedFlags & KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
 }
 
 void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
 {
   if(onoff)
-    Device.Karuna.SavedFlags |= KRN_FLAG_ALL_DO_EN;
+    Device.Karuna.SavedFlags |= KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
   else
-    Device.Karuna.SavedFlags &= ~KRN_FLAG_ALL_DO_EN;
+    Device.Karuna.SavedFlags &= ~KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
 
   EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
 }

@@ -10,7 +10,8 @@
 
 SettingsScreenViewBase::SettingsScreenViewBase() :
     buttonCallback(this, &SettingsScreenViewBase::buttonCallbackHandler),
-    flexButtonCallback(this, &SettingsScreenViewBase::flexButtonCallbackHandler)
+    flexButtonCallback(this, &SettingsScreenViewBase::flexButtonCallbackHandler),
+    radioButtonSelectedCallback(this, &SettingsScreenViewBase::radioButtonSelectedCallbackHandler)
 {
 
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
@@ -52,23 +53,23 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     textArea2.setLinespacing(0);
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AGOP));
 
-    textArea2_1.setPosition(88, 186, 931, 40);
-    textArea2_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea2_1.setLinespacing(0);
-    textArea2_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9IH2));
+    textArea3.setPosition(88, 186, 931, 40);
+    textArea3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    textArea3.setLinespacing(0);
+    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9IH2));
 
     chbxMCLKON.setXY(33, 281);
     chbxMCLKON.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
 
-    rdbtnEnableSelected.setXY(33, 184);
-    rdbtnEnableSelected.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
-    rdbtnEnableSelected.setSelected(false);
-    rdbtnEnableSelected.setDeselectionEnabled(false);
+    rdbtnLastState.setXY(33, 184);
+    rdbtnLastState.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
+    rdbtnLastState.setSelected(false);
+    rdbtnLastState.setDeselectionEnabled(false);
 
-    textArea2_1_1.setPosition(88, 283, 931, 40);
-    textArea2_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea2_1_1.setLinespacing(0);
-    textArea2_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E2A));
+    textArea4.setPosition(88, 283, 931, 40);
+    textArea4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    textArea4.setLinespacing(0);
+    textArea4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E2A));
 
     line1.setPosition(64, 253, 920, 15);
     line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
@@ -102,15 +103,16 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     add(rdbtnEnableAll);
     add(textArea1);
     add(textArea2);
-    add(textArea2_1);
+    add(textArea3);
     add(chbxMCLKON);
-    add(rdbtnEnableSelected);
-    add(textArea2_1_1);
+    add(rdbtnLastState);
+    add(textArea4);
     add(line1);
     add(line1_1);
     add(btnShowService);
     radioButtonGroup1.add(rdbtnEnableAll);
-    radioButtonGroup1.add(rdbtnEnableSelected);
+    radioButtonGroup1.add(rdbtnLastState);
+    radioButtonGroup1.setRadioButtonSelectedHandler(radioButtonSelectedCallback);
 }
 
 void SettingsScreenViewBase::setupScreen()
@@ -137,5 +139,23 @@ void SettingsScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractB
         //When btnShowService clicked change screen to PasswordScreen
         //Go to PasswordScreen with no screen transition
         application().gotoPasswordScreenScreenNoTransition();
+    }
+}
+
+void SettingsScreenViewBase::radioButtonSelectedCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &rdbtnEnableAll)
+    {
+        //SelectAllOutputAtStartUp
+        //When rdbtnEnableAll selected call virtual function
+        //Call RdbBtnSelectEnableAllOutputAtStartUp
+        RdbBtnSelectEnableAllOutputAtStartUp();
+    }
+    else if (&src == &rdbtnLastState)
+    {
+        //SelectLastStateAtStartUp
+        //When rdbtnLastState selected call virtual function
+        //Call RdbBtnSelectLastOutputStatAtStartUp
+        RdbBtnSelectLastOutputStatAtStartUp();
     }
 }
