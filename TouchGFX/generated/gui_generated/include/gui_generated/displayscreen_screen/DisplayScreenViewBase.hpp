@@ -14,9 +14,9 @@
 #include <touchgfx/containers/Slider.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/RadioButton.hpp>
+#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class DisplayScreenViewBase : public touchgfx::View<DisplayScreenPresenter>
@@ -65,10 +65,10 @@ protected:
     touchgfx::TextArea textArea2_3_3;
     touchgfx::RadioButton rdbtnSet120;
     touchgfx::TextArea textArea2_3_4;
-    touchgfx::Line line1;
-    touchgfx::PainterRGB565 line1Painter;
     touchgfx::TextAreaWithOneWildcard lblBrightness;
     touchgfx::TextArea textArea2_1_1_1;
+    touchgfx::Line line1;
+    touchgfx::PainterRGB565 line1Painter;
     touchgfx::RadioButtonGroup<7> radioButtonGroup1;
 
     /*

@@ -4,7 +4,17 @@
 
 FONT_TABLE_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::GlyphNode glyphs_consola_70_4bpp[] FONT_TABLE_LOCATION_FLASH_ATTRIBUTE = {
-    {     0, 0x003F,  22,  49,  48,  10,  38,   0,   0, 0x00 }
+    {     0, 0x0030,  33,  47,  46,   3,  38,   0,   0, 0x00 },
+    {   799, 0x0031,  31,  45,  45,   4,  38,   0,   0, 0x00 },
+    {  1519, 0x0032,  30,  46,  46,   5,  38,   0,   0, 0x00 },
+    {  2209, 0x0033,  29,  47,  46,   5,  38,   0,   0, 0x00 },
+    {  2914, 0x0034,  36,  45,  45,   1,  38,   0,   0, 0x00 },
+    {  3724, 0x0035,  28,  46,  45,   6,  38,   0,   0, 0x00 },
+    {  4368, 0x0036,  31,  46,  45,   4,  38,   0,   0, 0x00 },
+    {  5104, 0x0037,  31,  45,  45,   4,  38,   0,   0, 0x00 },
+    {  5824, 0x0038,  31,  47,  46,   4,  38,   0,   0, 0x00 },
+    {  6576, 0x0039,  32,  46,  46,   3,  38,   0,   0, 0x00 },
+    {  7312, 0x003F,  22,  49,  48,  10,  38,   0,   0, 0x00 }
 };
 
 // consola_70_4bpp
@@ -22,6 +32,6 @@ touchgfx::GeneratedFont& getFont_consola_70_4bpp();
 
 touchgfx::GeneratedFont& getFont_consola_70_4bpp()
 {
-    static touchgfx::GeneratedFont consola_70_4bpp(glyphs_consola_70_4bpp, 1, 70, 1, 4, 1, 0, 0, unicodes_consola_70_4bpp, kerning_consola_70_4bpp, 63, 0, 0, 0);
+    static touchgfx::GeneratedFont consola_70_4bpp(glyphs_consola_70_4bpp, 11, 70, 1, 4, 1, 0, 0, unicodes_consola_70_4bpp, kerning_consola_70_4bpp, 63, 0, 0, 0);
     return consola_70_4bpp;
 }

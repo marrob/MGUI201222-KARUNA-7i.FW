@@ -86,29 +86,14 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     line1_1.setLineWidth(2);
     line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    textArea2_1_1_1.setPosition(40, 384, 295, 44);
-    textArea2_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea2_1_1_1.setLinespacing(0);
-    textArea2_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9C3M));
-
-    lblKarunaUptime.setPosition(344, 384, 137, 44);
-    lblKarunaUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblKarunaUptime.setLinespacing(0);
-    Unicode::snprintf(lblKarunaUptimeBuffer, LBLKARUNAUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_P0TG).getText());
-    lblKarunaUptime.setWildcard(lblKarunaUptimeBuffer);
-    lblKarunaUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_542M));
-
-    textArea2_1_1_1_1.setPosition(40, 425, 326, 44);
-    textArea2_1_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea2_1_1_1_1.setLinespacing(0);
-    textArea2_1_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XUER));
-
-    lblClockUptime.setPosition(379, 425, 137, 44);
-    lblClockUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClockUptime.setLinespacing(0);
-    Unicode::snprintf(lblClockUptimeBuffer, LBLCLOCKUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_WF3B).getText());
-    lblClockUptime.setWildcard(lblClockUptimeBuffer);
-    lblClockUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_URPR));
+    btnShowService.setBoxWithBorderPosition(0, 0, 500, 90);
+    btnShowService.setBorderSize(1);
+    btnShowService.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnShowService.setText(TypedText(T___SINGLEUSE_YTJC));
+    btnShowService.setTextPosition(-20, 20, 500, 90);
+    btnShowService.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnShowService.setPosition(519, 505, 500, 90);
+    btnShowService.setAction(flexButtonCallback);
 
     add(__background);
     add(box1);
@@ -123,10 +108,7 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     add(textArea2_1_1);
     add(line1);
     add(line1_1);
-    add(textArea2_1_1_1);
-    add(lblKarunaUptime);
-    add(textArea2_1_1_1_1);
-    add(lblClockUptime);
+    add(btnShowService);
     radioButtonGroup1.add(rdbtnEnableAll);
     radioButtonGroup1.add(rdbtnEnableSelected);
 }
@@ -148,5 +130,12 @@ void SettingsScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractB
         //When btnDisplay clicked change screen to Main
         //Go to Main with screen transition towards West
         application().gotoMainScreenSlideTransitionWest();
+    }
+    else if (&src == &btnShowService)
+    {
+        //ShowPassword
+        //When btnShowService clicked change screen to PasswordScreen
+        //Go to PasswordScreen with no screen transition
+        application().gotoPasswordScreenScreenNoTransition();
     }
 }

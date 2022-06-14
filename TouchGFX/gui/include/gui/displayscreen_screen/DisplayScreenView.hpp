@@ -3,21 +3,23 @@
 
 #include <gui_generated/displayscreen_screen/DisplayScreenViewBase.hpp>
 #include <gui/displayscreen_screen/DisplayScreenPresenter.hpp>
+#include <gui/common/BackendCommunicator.hpp>
 
 class DisplayScreenView : public DisplayScreenViewBase 
 {
+
+
 public:
+
     DisplayScreenView();
     virtual ~DisplayScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-#ifdef SIMULATOR
-    uint8_t GuiItfSetBacklight(uint8_t percent);
-    uint8_t GuiItfGetBacklight(void);
-#endif
-
-protected:
+private:
+     
+protected: 
+    BackendCommunicator mCommunicator;
 
 
     /*

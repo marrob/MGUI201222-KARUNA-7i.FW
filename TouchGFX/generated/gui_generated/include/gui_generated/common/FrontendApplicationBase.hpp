@@ -34,6 +34,12 @@ public:
     // DisplayScreen
     void gotoDisplayScreenScreenSlideTransitionEast();
 
+    // ServiceScreen
+    void gotoServiceScreenScreenNoTransition();
+
+    // PasswordScreen
+    void gotoPasswordScreenScreenNoTransition();
+
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
@@ -52,6 +58,12 @@ protected:
 
     // DisplayScreen
     void gotoDisplayScreenScreenSlideTransitionEastImpl();
+
+    // ServiceScreen
+    void gotoServiceScreenScreenNoTransitionImpl();
+
+    // PasswordScreen
+    void gotoPasswordScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP
