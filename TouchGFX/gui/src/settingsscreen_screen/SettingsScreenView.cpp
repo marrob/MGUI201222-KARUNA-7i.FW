@@ -3,10 +3,11 @@
 int mTickGUICount;
 
 #ifdef SIMULATOR
-uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart()
+uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 {
+  return 0;
 }
-void SettingsScreenView::GuiItfBacklightDisable()
+void SettingsScreenView::GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
 {
 }
 #else
