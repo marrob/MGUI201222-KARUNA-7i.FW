@@ -39,9 +39,9 @@ uint8_t GuiItfLoad(void)
   {
     /*** Boot Up counter ***/
     EepromU32Read(EPP_BOOTUP_CNT_ADDR, &value);
-    Device.Diag.BootUpCnt = value;
-    Device.Diag.BootUpCnt++;
-    EepromU32Write(EPP_BOOTUP_CNT_ADDR, Device.Diag.BootUpCnt);
+    Device.Gui.BootUpCnt = value;
+    Device.Gui.BootUpCnt++;
+    EepromU32Write(EPP_BOOTUP_CNT_ADDR, Device.Gui.BootUpCnt);
 
     /*** Backlight ***/
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
@@ -66,7 +66,7 @@ uint8_t GuiItfSetDefault(void)
   /*** Boot Up counter ***/
   value = 0;
   EepromU32Write(EPP_BOOTUP_CNT_ADDR, value);
-  Device.Diag.BootUpCnt = value;
+  Device.Gui.BootUpCnt = value;
 
   /*** Backlight ***/
   value = 100;
@@ -100,22 +100,22 @@ uint8_t GuiItfSetDefault(void)
  * uid: 66DFF323530505243052936   size: DEVICE_UID_SIZE
  * pcb: V00                       size: DEVICE_PCB_SIZE
  */
-uint8_t GuiItfGetVersion(char *fw, char *uid, char *pcb)
+uint8_t GuiItfGetVersion(char **fw, char **uid, char **pcb)
 {
-  fw = DEVICE_FW;
-  uid = "?";
-  pcb = DEVICE_PCB;
+  *fw = Device.Gui.FW;
+  *uid = Device.Gui.UID;
+  *pcb = Device.Gui.PCB;
   return GUIITF_OK;
 }
 
 uint32_t GuiItfGetBootupCnt(void)
 {
-  return Device.Diag.BootUpCnt;
+  return Device.Gui.BootUpCnt;
 }
 
 uint32_t GuiItfUpTimSec(void)
 {
-  return Device.Diag.UpTimeSec;
+  return Device.Gui.UpTimeSec;
 }
 
 /* Karuna --------------------------------------------------------------------*/
@@ -124,11 +124,11 @@ uint32_t GuiItfUpTimSec(void)
  * uid: 66DFF323530505243052936   size: DEVICE_UID_SIZE
  * pcb: V00                       size: DEVICE_PCB_SIZE
  */
-uint8_t GuiItfGetKarunaVersion(char *fw, char *uid, char *pcb)
+uint8_t GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb)
 {
-  fw = Device.Karuna.FW;
-  uid = Device.Karuna.UID;
-  pcb = Device.Karuna.PCB;
+  *fw = Device.Karuna.FW;
+  *uid = Device.Karuna.UID;
+  *pcb = Device.Karuna.PCB;
   return GUIITF_OK;
 }
 
@@ -180,11 +180,11 @@ void GuiItfBacklightDisable(void)
  * uid: 66DFF323530505243052936   size: DEVICE_UID_SIZE
  * pcb: V00                       size: DEVICE_PCB_SIZE
  */
-uint8_t GuiItfGetDasClockVersion(char *fw, char *uid, char *pcb)
+uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb)
 {
-  fw = Device.DasClock.FW;
-  uid = Device.DasClock.UID;
-  pcb = Device.DasClock.PCB;
+  *fw = Device.DasClock.FW;
+  *uid = Device.DasClock.UID;
+  *pcb = Device.DasClock.PCB;
   return GUIITF_OK;
 }
 

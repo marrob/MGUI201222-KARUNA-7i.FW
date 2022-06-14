@@ -57,15 +57,15 @@
 /* GUI -----------------------------------------------------------------------*/
 uint8_t GuiItfLoad(void);
 uint8_t GuiItfSetDefault(void);
-uint8_t GuiItfGetVersion(char *fw, char *uid, char *pcb);
+uint8_t GuiItfGetVersion(char **fw, char **uid, char **pcb);
 
 /* Karuna --------------------------------------------------------------------*/
-uint8_t GuiItfGetKarunaVersion(char *fw, char *uid, char *pcb);
+uint8_t GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb);
 uint8_t GuiItfKarunaControl(uint8_t p_Output);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
 
 /* DasClock-------------------------------------------------------------------*/
-uint8_t GuiItfGetDasClockVersion(char *fw, char *uid, char *pcb);
+uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb);
 uint32_t GuiItfGetDasClockUptimeCnt(void);
 float GuiItfGetDasClockMV341Temp(void);
 float GuiItfGetDasClockMVOCX1Temp(void);

@@ -5,30 +5,28 @@
 
   uint32_t mUptimeCounterSim;
 
-
-  //GUI
-  uint8_t ServiceScreenView::GuiItfGetVersion(char* fw, char* uid, char* pcb)
+  /*** GUI ***/
+  uint8_t ServiceScreenView::GuiItfGetVersion(char **fw, char **uid, char **pcb)
   {
-    char fwGUI[25] = "220613_1242";
-    char uidGUI[25] = "0123456789ABCDEF0000001";
-    char pcbGUI[25] = "V01";
-
-    fw = fwGUI;
-    uid = uidGUI;
-    pcb = pcbGUI;
-    return GUIITF_OK;
+    char _fw[25] = "220613_1241";
+    char _uidI[25] = "0123456789ABCDEF0000001";
+    char _pcb[25] =  "V01" ;
+    *fw = _fw;
+    *uid = _uidI;
+    *pcb = _pcb;
+    return 0;
   }
 
-
-  //KARUNA
-  uint8_t ServiceScreenView::GuiItfGetKarunaVersion(char* fw, char* uid, char* pcb)
+  /*** Karuna ***/
+  uint8_t ServiceScreenView::GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb)
   {
-    //char fwDasClock[25]; char uidDasClock[25]; char pcbDasClock[25];
-
-    fw = "220613_1243";
-    uid = "0123456789ABCDEF0000002";
-    pcb = "V02";
-    return GUIITF_OK;
+    char _fw[25] = "220613_1242";
+    char _uidI[25] = "0123456789ABCDEF0000002";
+    char _pcb[25] =  "V02" ;
+    *fw = _fw;
+    *uid = _uidI;
+    *pcb = _pcb;
+    return 0;
   }
   uint32_t ServiceScreenView::GuiItfGetKarunaUptimeCnt()
   {
@@ -36,94 +34,62 @@
     return mUptimeCounterSim;
   }
 
-  uint8_t ServiceScreenView::GuiItfGetKarunaStatus()
+  /*** DasClock ***/
+  uint8_t ServiceScreenView::GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb)
   {
-    return 0b00000001;
-  }
-  void ServiceScreenView::GuiItfKarunaControl(uint8_t p_Output)
-  {
-  }
-
-  //DAS CLOCK
-  uint8_t ServiceScreenView::GuiItfGetDasClockVersion(char* fw, char* uid, char* pcb)
-  {
-    //char fwKaruna[25]; char uidKaruna[25]; char pcbKaruna[25];
-
-    fw = "220613_1244";
-    uid = "0123456789ABCDEF0000003";
-    pcb = "V03";
-    return GUIITF_OK;
+    char _fw[25] = "220613_1243";
+    char _uidI[25] = "0123456789ABCDEF0000003";
+    char _pcb[25] =  "V03" ;
+    *fw = _fw;
+    *uid = _uidI;
+    *pcb = _pcb;
+    return 0;
   }
   uint32_t ServiceScreenView::GuiItfGetDasClockUptimeCnt()
   {
     mUptimeCounterSim++;
     return mUptimeCounterSim;
   }
-
-  double ServiceScreenView::GuiItfGetDasClockMV341Temp()
+  float ServiceScreenView::GuiItfGetDasClockMV341Temp()
   {
     return 50.0;
   }
-  double ServiceScreenView::GuiItfGetDasClockMVOCX1Temp()
+  float ServiceScreenView::GuiItfGetDasClockMVOCX1Temp()
   {
     return 55.1;
   }
-  double ServiceScreenView::GuiItfGetDasClockMVOCX2Temp()
+  float ServiceScreenView::GuiItfGetDasClockMVOCX2Temp()
   {
     return 60.2;
   }
-
-  double ServiceScreenView::GuiItfGetDasClockMV341Current()
+  float ServiceScreenView::GuiItfGetDasClockMV341Current()
   {
     return 550.0;
   }
-  double ServiceScreenView::GuiItfGetDasClockMVOCX1Current()
+  float ServiceScreenView::GuiItfGetDasClockMVOCX1Current()
   {
     return 160.1;
   }
-  double ServiceScreenView::GuiItfGetDasClockMVOCX2Current()
+  float ServiceScreenView::GuiItfGetDasClockMVOCX2Current()
   {
     return 160.2;
   }
-
-  double ServiceScreenView::GuiItfGetDasClockMainVoltage()
+  float ServiceScreenView::GuiItfGetDasClockMainVoltage()
   {
     return 12.5;
   }
-  double ServiceScreenView::GuiItfGetDasClockRefVoltage()
-  {
-    return 6.25;
-  }
-
-  bool ServiceScreenView::GuiItfGetDasClockStatusLock1()
-  {
-    return true;
-  }
-  bool ServiceScreenView::GuiItfGetDasClockStatusLock2()
-  {
-    return true;
-  }
-  bool ServiceScreenView::GuiItfGetDasClockIsExt()
-  {
-    return false;
-  }
-
-
 #else
   extern "C"
   {
     /*** GUI ***/
-    uint8_t GuiItfGetVersion(char* fw, char* uid, char* pcb);
+    uint8_t GuiItfGetVersion(char **fw, char **uid, char **pcb);
 
-    //KARUNA
-    uint8_t GuiItfGetKarunaVersion(char* fw, char* uid, char* pcb);
+    /*** Karuna ***/
+    uint8_t GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb);
     uint32_t GuiItfGetKarunaUptimeCnt();
 
-    uint8_t GuiItfGetKarunaStatus();
-    void GuiItfKarunaControl(uint8_t p_Output);
-
     /*** DasClock ***/
-    uint8_t GuiItfGetDasClockVersion(char* fw, char* uid, char* pcb);
+    uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb);
     uint32_t GuiItfGetDasClockUptimeCnt();
 
     float GuiItfGetDasClockMV341Temp();
@@ -135,12 +101,6 @@
     float GuiItfGetDasClockMVOCX2Current();
 
     float GuiItfGetDasClockMainVoltage();
-
-    bool GuiItfGetDasClockStatusLock1();
-    bool GuiItfGetDasClockStatusLock2();
-    bool GuiItfGetDasClockIsExt();
-
-
   }
 #endif
 
@@ -212,33 +172,37 @@ void ServiceScreenView::RefreshServiceInfo()
 	lblClockCurrent_1.invalidate();
 	lblClockCurrent_2.invalidate();
 	lblDASClockSupplyVoltage.invalidate();
-	lblDASClockRefVoltage.invalidate();
 }
 
 void ServiceScreenView::GetVersionInfo()
 {
-	std::string sep = " - ";
-	char* fwGUI = nullptr; char* uidGUI = nullptr; char* pcbGUI = nullptr;
-	char* fwKaruna = nullptr; char* uidKaruna = nullptr; char* pcbKaruna = nullptr;
-	char* fwDasClock = nullptr; char* uidDasClock = nullptr; char* pcbDasClock = nullptr;
+  std::string sep = " - ";
+  char *fw = nullptr;
+  char *uid = nullptr;
+  char *pcb = nullptr;
+  Unicode::UnicodeChar uni_fw[25];
+  Unicode::UnicodeChar uni_uid[25];
+  Unicode::UnicodeChar uni_pcb[25];
 
-	GuiItfGetVersion(fwGUI, uidGUI, pcbGUI);
-	GuiItfGetKarunaVersion(fwKaruna, uidKaruna, pcbKaruna);
-	GuiItfGetDasClockVersion(fwDasClock, uidDasClock, pcbDasClock);
+  GuiItfGetVersion(&fw, &uid, &pcb);
+  Unicode::fromUTF8((const uint8_t*)fw, uni_fw, sizeof(uni_fw));
+  Unicode::fromUTF8((const uint8_t*)uid, uni_uid, sizeof(uni_uid));
+  Unicode::fromUTF8((const uint8_t*)pcb, uni_pcb, sizeof(uni_pcb));
+  Unicode::snprintf(lblGUIFwVersionBuffer, sizeof(lblGUIFwVersionBuffer), "%s-%s-%s", uni_fw, uni_uid, uni_pcb);
 
-	std::string FW = fwGUI + sep + uidGUI + sep + pcbGUI;
-	int length = FW.length();
-	Unicode::strncpy(lblGUIFwVersionBuffer, FW.c_str(), length + 1);
+  GuiItfGetKarunaVersion(&fw, &uid, &pcb);
+  Unicode::fromUTF8((const uint8_t*)fw, uni_fw, sizeof(uni_fw));
+  Unicode::fromUTF8((const uint8_t*)uid, uni_uid, sizeof(uni_uid));
+  Unicode::fromUTF8((const uint8_t*)pcb, uni_pcb, sizeof(uni_pcb));
+  Unicode::snprintf(lblKarunaFwVersionBuffer, sizeof(lblKarunaFwVersionBuffer), "%s-%s-%s", uni_fw, uni_uid, uni_pcb);
 
-	FW = fwKaruna + sep + uidKaruna + sep + pcbKaruna;
-	length = FW.length();
-	Unicode::strncpy(lblKarunaFwVersionBuffer, FW.c_str(), length + 1);
+  GuiItfGetDasClockVersion(&fw, &uid, &pcb);
+  Unicode::fromUTF8((const uint8_t*)fw, uni_fw, sizeof(uni_fw));
+  Unicode::fromUTF8((const uint8_t*)uid, uni_uid, sizeof(uni_uid));
+  Unicode::fromUTF8((const uint8_t*)pcb, uni_pcb, sizeof(uni_pcb));
+  Unicode::snprintf(lblDASClockFwVersionBuffer, sizeof(lblDASClockFwVersionBuffer), "%s-%s-%s", uni_fw, uni_uid, uni_pcb);
 
-	FW = fwDasClock + sep + uidDasClock + sep + pcbDasClock;
-	length = FW.length();
-	Unicode::strncpy(lblDASClockFwVersionBuffer, FW.c_str(), length + 1);
-
-	lblGUIFwVersion.invalidate();
-	lblKarunaFwVersion.invalidate();
-	lblDASClockFwVersion.invalidate();
+  lblGUIFwVersion.invalidate();
+  lblKarunaFwVersion.invalidate();
+  lblDASClockFwVersion.invalidate();
 }

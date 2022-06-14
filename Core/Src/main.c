@@ -324,12 +324,18 @@ int main(void)
   hLiveLed.HalfPeriodTimeMs = 500;
   LiveLedInit(&hLiveLed);
 
+  /*** Versions ***/
+  sprintf(Device.Gui.FW, "%s",DEVICE_FW);
+  sprintf(Device.Gui.UID, "%4lX%4lX%4lX",HAL_GetUIDw0(), HAL_GetUIDw1(), HAL_GetUIDw2());
+  sprintf(Device.Gui.PCB, "%s",DEVICE_PCB);
+
+
 //  while(1)
   //  LogFlashReadId();
 
-  LogFlashWriteLine("Hello World");
+ // LogFlashWriteLine("Hello World");
 
-  LogFlashWriteLine("It is a Test");
+ // LogFlashWriteLine("It is a Test");
 
   /* USER CODE END 2 */
 
@@ -1322,7 +1328,7 @@ void UsbParser(char *request)
       }
       else if(!strcmp(cmd,"UPTIME?"))
       {
-        sprintf(response, "%lld", Device.Diag.UpTimeSec);
+        sprintf(response, "%lld", Device.Gui.UpTimeSec);
       }
       else if(!strcmp(cmd, "DIS:LIG?"))
       {
@@ -1743,7 +1749,7 @@ void LiveLedOsTask(void *argument)
         {
           flag = 1;
           LiveLedOff();
-          Device.Diag.UpTimeSec++;
+          Device.Gui.UpTimeSec++;
         }
       }
       osDelay(10);

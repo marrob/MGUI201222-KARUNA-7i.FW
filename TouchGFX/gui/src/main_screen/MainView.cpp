@@ -12,7 +12,7 @@ uint8_t MainView::GuiItfGetKarunaStatus()
 void MainView::GuiItfKarunaControl(uint8_t p_Output)
 {
 }
-double MainView::GuiItfGetDasClockMV341Temp()
+float MainView::GuiItfGetDasClockMV341Temp()
 {
   return 60;
 }
@@ -29,6 +29,7 @@ bool MainView::GuiItfGetDasClockIsExt()
   return false;
 }
 
+
 #else
 extern "C"
 {
@@ -37,7 +38,7 @@ extern "C"
   void GuiItfKarunaControl(uint8_t p_Output);
 
   //DasClock
-  double GuiItfGetDasClockMV341Temp();
+  float GuiItfGetDasClockMV341Temp();
   uint8_t GuiItfGetDasClockStatusLock1();
   uint8_t GuiItfGetDasClockStatusLock2();
   uint8_t GuiItfGetDasClockIsExt();
@@ -613,7 +614,7 @@ void MainView::RefreshKarunaAndClockInfo()
 	SetBitDepth(KRN_STAT);
 	SetFreq(KRN_STAT);  
  
-	double temp = GuiItfGetDasClockMV341Temp();
+	float temp = GuiItfGetDasClockMV341Temp();
 	SetTemp((int)temp);
 
 	mIs22Locked = GuiItfGetDasClockStatusLock1();

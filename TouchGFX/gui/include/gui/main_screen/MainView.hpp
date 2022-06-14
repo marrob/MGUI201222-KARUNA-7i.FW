@@ -46,15 +46,16 @@ public:
 
 #ifdef SIMULATOR
 
-  //Karuna
+  /*** Karuna ****/
   uint8_t GuiItfGetKarunaStatus();
   void GuiItfKarunaControl(uint8_t p_Output);
 
-  //DAS Clock
-  double GuiItfGetDasMV341Temp();
-  bool GuiItfGetDasStatusLock1();
-  bool GuiItfGetDasStatusLock2();
-  bool GuiItfGetDasIntExt();
+  /*** Clock ***/
+  float GuiItfGetDasClockMV341Temp();
+
+  bool GuiItfGetDasClockStatusLock1();
+  bool GuiItfGetDasClockStatusLock2();
+  bool GuiItfGetDasClockIsExt();
 #endif
 
 

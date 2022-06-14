@@ -191,20 +191,6 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblDASClockSupplyVoltage.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IO03));
     scrlContainerService.add(lblDASClockSupplyVoltage);
 
-    lblDASClockRefVoltageTitle.setPosition(23, 724, 399, 44);
-    lblDASClockRefVoltageTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockRefVoltageTitle.setLinespacing(0);
-    lblDASClockRefVoltageTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Q846));
-    scrlContainerService.add(lblDASClockRefVoltageTitle);
-
-    lblDASClockRefVoltage.setPosition(437, 724, 184, 44);
-    lblDASClockRefVoltage.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockRefVoltage.setLinespacing(0);
-    Unicode::snprintf(lblDASClockRefVoltageBuffer, LBLDASCLOCKREFVOLTAGE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ODE1).getText());
-    lblDASClockRefVoltage.setWildcard(lblDASClockRefVoltageBuffer);
-    lblDASClockRefVoltage.setTypedText(touchgfx::TypedText(T___SINGLEUSE_V3NC));
-    scrlContainerService.add(lblDASClockRefVoltage);
-
     line4.setPosition(40, 375, 920, 15);
     line4Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
     line4.setPainter(line4Painter);

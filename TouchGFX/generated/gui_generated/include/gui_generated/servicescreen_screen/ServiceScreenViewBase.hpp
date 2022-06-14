@@ -58,8 +58,6 @@ protected:
     touchgfx::TextArea lblDASClockTitle;
     touchgfx::TextArea lblDASClockSupplyVoltageTitle;
     touchgfx::TextAreaWithOneWildcard lblDASClockSupplyVoltage;
-    touchgfx::TextArea lblDASClockRefVoltageTitle;
-    touchgfx::TextAreaWithOneWildcard lblDASClockRefVoltage;
     touchgfx::Line line4;
     touchgfx::PainterRGB565 line4Painter;
     touchgfx::Line line3;
@@ -99,8 +97,6 @@ protected:
     touchgfx::Unicode::UnicodeChar lblClockCurrent_2Buffer[LBLCLOCKCURRENT_2_SIZE];
     static const uint16_t LBLDASCLOCKSUPPLYVOLTAGE_SIZE = 12;
     touchgfx::Unicode::UnicodeChar lblDASClockSupplyVoltageBuffer[LBLDASCLOCKSUPPLYVOLTAGE_SIZE];
-    static const uint16_t LBLDASCLOCKREFVOLTAGE_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblDASClockRefVoltageBuffer[LBLDASCLOCKREFVOLTAGE_SIZE];
     static const uint16_t LBLGUIFWVERSION_SIZE = 50;
     touchgfx::Unicode::UnicodeChar lblGUIFwVersionBuffer[LBLGUIFWVERSION_SIZE];
     static const uint16_t LBLKARUNAFWVERSION_SIZE = 50;

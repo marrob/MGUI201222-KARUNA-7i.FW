@@ -190,15 +190,6 @@
       <Text Id="__SingleUse_IGHU" Alignment="Right" TypographyId="Default">
         <Translation Language="GB">Show Log</Translation>
       </Text>
-      <Text Id="__SingleUse_ODE1" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">0</Translation>
-      </Text>
-      <Text Id="__SingleUse_V3NC" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">&lt;value&gt; V</Translation>
-      </Text>
-      <Text Id="__SingleUse_Q846" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">DAS clock ref voltage: </Translation>
-      </Text>
       <Text Id="__SingleUse_O7GB" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">0</Translation>
       </Text>

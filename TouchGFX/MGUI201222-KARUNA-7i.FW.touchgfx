@@ -2130,41 +2130,6 @@
                 }
               },
               {
-                "Type": "TextArea",
-                "Name": "lblDASClockRefVoltageTitle",
-                "X": 23,
-                "Y": 724,
-                "Width": 399,
-                "Height": 44,
-                "TextId": "__SingleUse_Q846",
-                "TextRotation": "0",
-                "Color": {
-                  "Red": 200,
-                  "Green": 200,
-                  "Blue": 200
-                }
-              },
-              {
-                "Type": "TextArea",
-                "Name": "lblDASClockRefVoltage",
-                "X": 437,
-                "Y": 724,
-                "Width": 184,
-                "Height": 44,
-                "TextId": "__SingleUse_V3NC",
-                "TextRotation": "0",
-                "Color": {
-                  "Red": 200,
-                  "Green": 200,
-                  "Blue": 200
-                },
-                "Wildcard1": {
-                  "TextId": "__SingleUse_ODE1",
-                  "UseBuffer": true,
-                  "BufferSize": 12
-                }
-              },
-              {
                 "Type": "Line",
                 "Name": "line4",
                 "X": 40,

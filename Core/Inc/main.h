@@ -108,14 +108,22 @@ typedef struct _DiagTypeDef
   uint32_t RS485RdyCnt;
 
   uint32_t PowerLedTaskCounter;
-  uint64_t UpTimeSec;
 
-  uint32_t BootUpCnt;
+
+
 }Diag_t;
 
 typedef struct _AppTypeDef
 {
   Diag_t Diag;
+  struct _Gui
+  {
+    char FW[DEVICE_FW_SIZE];
+    char UID[DEVICE_UID_SIZE];
+    char PCB[DEVICE_PCB_SIZE];
+    uint32_t BootUpCnt;
+    uint64_t UpTimeSec;
+  }Gui;
   struct _Karuna
   {
     char FW[DEVICE_FW_SIZE];
