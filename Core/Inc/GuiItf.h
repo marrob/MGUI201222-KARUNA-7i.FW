@@ -29,9 +29,11 @@
 #define KRN_CTRL_BNC            ((uint8_t)1<<1)
 #define KRN_CTRL_XLR            ((uint8_t)1<<2)
 #define KRN_CTRL_I2S            ((uint8_t)1<<3)
+#define KRN_CTRL_MCLK_I2S_EN    ((uint8_t)1<<4)
 
 /*** Saved Flags for Karuna ***/
 #define KRN_FLAG_ALL_OUT_EN_AT_STARTUP    ((uint8_t)1<<0)
+#define KRN_FLAG_MSTR_CLK_ON_I2S_EN       ((uint8_t)1<<1)
 
 /*** DasClock ***/
 //Host:0, Device:2
@@ -76,6 +78,8 @@ uint8_t GuitIfGetKarunaIsXlrSet(void);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
 uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
 void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
+void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
+uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
 
 /* DasClock-------------------------------------------------------------------*/
 uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb);

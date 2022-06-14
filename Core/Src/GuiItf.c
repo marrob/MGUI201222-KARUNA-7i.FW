@@ -60,6 +60,11 @@ uint8_t GuiItfLoad(void)
       Device.Karuna.DO = value;
     }
 
+    if(Device.Karuna.SavedFlags & KRN_FLAG_MSTR_CLK_ON_I2S_EN)
+      Device.Karuna.DO |= KRN_CTRL_MCLK_I2S_EN;
+    else
+      Device.Karuna.DO &= ~KRN_CTRL_MCLK_I2S_EN;
+
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
     Device.LogLastPageAddress = value;
@@ -231,6 +236,25 @@ void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
   EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
 }
 
+void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
+{
+  if(onoff)
+  {
+    Device.Karuna.DO |= KRN_CTRL_MCLK_I2S_EN;
+    Device.Karuna.SavedFlags |= KRN_FLAG_MSTR_CLK_ON_I2S_EN;
+  }
+  else
+  {
+    Device.Karuna.DO &= ~KRN_CTRL_MCLK_I2S_EN;
+    Device.Karuna.SavedFlags &= ~KRN_FLAG_MSTR_CLK_ON_I2S_EN;
+  }
+  EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
+}
+
+uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
+{
+  return Device.Karuna.SavedFlags & KRN_FLAG_MSTR_CLK_ON_I2S_EN;
+}
 
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent)

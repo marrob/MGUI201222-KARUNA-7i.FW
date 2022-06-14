@@ -973,6 +973,7 @@
             "Y": 281,
             "Width": 44,
             "Height": 44,
+            "InitialStatePressed": true,
             "Pressed": "OFF_44x44.png",
             "Released": "ON_44x44.png"
           },
@@ -1137,6 +1138,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "RdbBtnSelectLastOutputStatAtStartUp"
+            }
+          },
+          {
+            "InteractionName": "ClickOnMasterClockOnI2S",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "chbxMCLKON"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "ClickMasterClkOnI2S"
             }
           }
         ]

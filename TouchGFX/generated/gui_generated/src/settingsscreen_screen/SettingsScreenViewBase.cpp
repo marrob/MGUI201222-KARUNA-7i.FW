@@ -60,6 +60,8 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
 
     chbxMCLKON.setXY(33, 281);
     chbxMCLKON.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
+    chbxMCLKON.forceState(true);
+    chbxMCLKON.setAction(buttonCallback);
 
     rdbtnLastState.setXY(33, 184);
     rdbtnLastState.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
@@ -122,6 +124,13 @@ void SettingsScreenViewBase::setupScreen()
 
 void SettingsScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
 {
+    if (&src == &chbxMCLKON)
+    {
+        //ClickOnMasterClockOnI2S
+        //When chbxMCLKON clicked call virtual function
+        //Call ClickMasterClkOnI2S
+        ClickMasterClkOnI2S();
+    }
 }
 
 void SettingsScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)

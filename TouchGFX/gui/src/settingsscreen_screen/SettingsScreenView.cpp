@@ -10,11 +10,20 @@ uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 void SettingsScreenView::GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
 {
 }
+void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
+{
+}
+uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
+{
+  return 1;
+}
 #else
 extern "C"
 {
   uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart();
   void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
+  void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
+  uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
 }
 #endif
 
@@ -25,16 +34,21 @@ SettingsScreenView::SettingsScreenView()
     radioButtonGroup1.setSelected(rdbtnEnableAll);
   else
     radioButtonGroup1.setSelected(rdbtnLastState);
+
+  if(GuiItfGetKarunaMasterClkOnI2SIsEnabled())
+    chbxMCLKON.forceState(true);
+  else
+    chbxMCLKON.forceState(false);
 }
 
 void SettingsScreenView::setupScreen()
 {
-    SettingsScreenViewBase::setupScreen(); 
+  SettingsScreenViewBase::setupScreen();
 }
 
 void SettingsScreenView::tearDownScreen()
 {
-    SettingsScreenViewBase::tearDownScreen();
+  SettingsScreenViewBase::tearDownScreen();
 } 
 
 void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
@@ -45,4 +59,12 @@ void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
 void SettingsScreenView::RdbBtnSelectLastOutputStatAtStartUp()
 {
   GuiItfSetKarunaOutputsIsAllEnabledAfterStart(0);
+}
+
+void SettingsScreenView::ClickMasterClkOnI2S()
+{
+  if(chbxMCLKON.getState())
+    GuiItfSetKarunaMasterClkOnI2S(1);
+  else
+    GuiItfSetKarunaMasterClkOnI2S(0);
 }
