@@ -48,14 +48,20 @@ public:
 
   /*** Karuna ****/
   uint8_t GuiItfGetKarunaStatus();
-  void GuiItfKarunaControl(uint8_t p_Output);
+  void GuiItfSetKarunaHdmi(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsHdmiSet(void);
+  void GuiItfSetKarunaRca(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsRcaSet(void);
+  void GuiItfSetKarunaBnc(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsBncSet(void);
+  void GuiItfSetKarunaXlr(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsXlrSet(void);
 
   /*** Clock ***/
   float GuiItfGetDasClockMV341Temp();
-
-  bool GuiItfGetDasClockStatusLock1();
-  bool GuiItfGetDasClockStatusLock2();
-  bool GuiItfGetDasClockIsExt();
+  uint8_t GuiItfGetDasClockStatusLock1();
+  uint8_t GuiItfGetDasClockStatusLock2();
+  uint8_t GuiItfGetDasClockIsExt();
 #endif
 
 

@@ -11,14 +11,15 @@
 #include "GuiItf.h"
 #include "EEPROM.h"
 
-#define EEP_MAGICWORD_ADDR       0x0000
-#define EPP_BOOTUP_CNT_ADDR      0x0004
-#define EEP_BACKLIGHT_ADDR       0x0008
-#define EEP_KARUNA_CTRL_ADDR     0x000C
-#define EEP_RTC_IS_SET_ADDR      0x0010
-#define EEP_LOG_LAST_PAGE_ADDR   0x0014
+#define EEP_MAGICWORD_ADDR                  0x0000
+#define EPP_BOOTUP_CNT_ADDR                 0x0004
+#define EEP_BACKLIGHT_ADDR                  0x0008
+#define EEP_KARUNA_SAVED_DO_ADDR            0x000C
+#define EEP_RTC_IS_SET_ADDR                 0x0010
+#define EEP_LOG_LAST_PAGE_ADDR              0x0014
+#define EEP_KARUNA_SAVED_FLAGS_ADDR         0x0018
 
-#define MAGIC_WORD               0x55AA55AA
+#define MAGIC_WORD                          0x55AA55AA
 
 
 /* Private user code ---------------------------------------------------------*/
@@ -47,9 +48,12 @@ uint8_t GuiItfLoad(void)
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
     BacklightSet(value);
 
-    /*** KARUNA CTRL ***/
-    EepromU32Read(EEP_KARUNA_CTRL_ADDR, &value);
+    /*** Karuna ***/
+    EepromU32Read(EEP_KARUNA_SAVED_DO_ADDR, &value);
     Device.Karuna.DO = value;
+
+    EepromU32Read(EEP_KARUNA_SAVED_FLAGS_ADDR, &value);
+    Device.Karuna.SavedFlags = value;
 
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
@@ -73,10 +77,14 @@ uint8_t GuiItfSetDefault(void)
   EepromU32Write(EEP_BACKLIGHT_ADDR, value);
   BacklightSet((uint8_t)value);
 
-  /*** KARUNA CTRL ***/
-  value = (KRN_CTRL_RCA) | (KRN_CTRL_BNC) | (KRN_CTRL_XLR) | (KRN_CTRL_I2S);
-  EepromU32Write(EEP_KARUNA_CTRL_ADDR, value);
+  /*** Karuna ***/
+  value = KRN_CTRL_RCA | KRN_CTRL_BNC | KRN_CTRL_XLR | KRN_CTRL_I2S;
+  EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, value);
   Device.Karuna.DO = value;
+
+  value = KRN_FLAG_ALL_DO_EN;
+  EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, value);
+  Device.Karuna.SavedFlags = value;
 
   /*** RTC ***/
   value = 0x01;
@@ -87,6 +95,7 @@ uint8_t GuiItfSetDefault(void)
   value = 0;
   EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, value);
   Device.LogLastPageAddress = value;
+
 
   /*** Magic Word ***/
   value = MAGIC_WORD;
@@ -142,12 +151,81 @@ uint8_t GuiItfGetKarunaStatus(void)
   return Device.Karuna.DI;
 }
 
-uint8_t GuiItfKarunaControl(uint8_t output)
+void GuiItfSetKarunaHdmi(uint8_t onoff)
 {
-  Device.Karuna.DO = output;
-  EepromU32Write(EEP_KARUNA_CTRL_ADDR, output);
-  return GUIITF_OK;
+  if(onoff)
+    Device.Karuna.DO |= KRN_CTRL_I2S;
+  else
+    Device.Karuna.DO &= ~KRN_CTRL_I2S;
+
+  EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
 }
+
+uint8_t GuitIfGetKarunaIsHdmiSet(void)
+{
+  return Device.Karuna.DO & KRN_CTRL_I2S;
+}
+
+void GuiItfSetKarunaRca(uint8_t onoff)
+{
+  if(onoff)
+    Device.Karuna.DO |= KRN_CTRL_RCA;
+  else
+    Device.Karuna.DO &= ~KRN_CTRL_RCA;
+
+  EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+}
+
+uint8_t GuitIfGetKarunaIsRcaSet(void)
+{
+  return Device.Karuna.DO & KRN_CTRL_RCA;
+}
+
+void GuiItfSetKarunaBnc(uint8_t onoff)
+{
+  if(onoff)
+    Device.Karuna.DO |= (KRN_CTRL_BNC);
+  else
+    Device.Karuna.DO &= ~KRN_CTRL_BNC;
+
+  EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+}
+
+uint8_t GuitIfGetKarunaIsBncSet(void)
+{
+  return Device.Karuna.DO & KRN_CTRL_BNC;
+}
+
+void GuiItfSetKarunaXlr(uint8_t onoff)
+{
+  if(onoff)
+    Device.Karuna.DO |= KRN_CTRL_XLR;
+  else
+    Device.Karuna.DO &= ~KRN_CTRL_XLR;
+
+  EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+}
+
+uint8_t GuitIfGetKarunaIsXlrSet()
+{
+  return Device.Karuna.DO & KRN_CTRL_XLR;
+}
+
+uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
+{
+  return Device.Karuna.SavedFlags & KRN_FLAG_ALL_DO_EN;
+}
+
+void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
+{
+  if(onoff)
+    Device.Karuna.SavedFlags |= KRN_FLAG_ALL_DO_EN;
+  else
+    Device.Karuna.SavedFlags &= ~KRN_FLAG_ALL_DO_EN;
+
+  EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
+}
+
 
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent)

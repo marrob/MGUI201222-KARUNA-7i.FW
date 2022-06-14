@@ -134,6 +134,7 @@ typedef struct _AppTypeDef
     uint8_t DI;
     uint8_t DO;
     uint32_t UpTimeSec;
+    uint32_t SavedFlags;
   }Karuna;
   struct _DasClock
   {

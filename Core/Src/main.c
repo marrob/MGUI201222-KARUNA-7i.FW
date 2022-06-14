@@ -170,28 +170,28 @@ static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32))
 
 RS485TxItem_t RS485TxCollection[] =
 {
-    /*** Karuna ***/
-    {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-    {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-    {"#%02X DO %02X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
-    {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
-    {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
-    {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  /*** Karuna ***/
+  {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
+  {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
+  {"#%02X DO %02X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
+  {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
 
-    /*** DasClock ***/
-    {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-    {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
-    {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
-    {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  /*** DasClock ***/
+  {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
+  {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
 
-    {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-    {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2100 },
-    {"#%02X AI? 1",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2200 },
-    {"#%02X AI? 2",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2300 },
-    {"#%02X AI? 3",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2400 },
-    {"#%02X AI? 4",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2500 },
-    {"#%02X AI? 5",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2600 },
-    {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
+  {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
+  {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2100 },
+  {"#%02X AI? 1",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2200 },
+  {"#%02X AI? 2",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2300 },
+  {"#%02X AI? 3",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2400 },
+  {"#%02X AI? 4",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2500 },
+  {"#%02X AI? 5",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2600 },
+  {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
 };
 
 LiveLED_HnadleTypeDef hLiveLed;
@@ -259,6 +259,7 @@ int main(void)
   /* USER CODE END 1 */
 
   /* Enable I-Cache---------------------------------------------------------*/
+
   SCB_EnableICache();
 
   /* Enable D-Cache---------------------------------------------------------*/
