@@ -37,6 +37,11 @@ public:
         // Override and implement this function in SettingsScreen
     }
 
+    virtual void ClickMasterClkOnI2S()
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
