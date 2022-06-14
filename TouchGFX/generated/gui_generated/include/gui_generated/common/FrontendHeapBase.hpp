@@ -22,6 +22,10 @@
 #include <gui/settingsscreen_screen/SettingsScreenPresenter.hpp>
 #include <gui/displayscreen_screen/DisplayScreenView.hpp>
 #include <gui/displayscreen_screen/DisplayScreenPresenter.hpp>
+#include <gui/servicescreen_screen/ServiceScreenView.hpp>
+#include <gui/servicescreen_screen/ServiceScreenPresenter.hpp>
+#include <gui/passwordscreen_screen/PasswordScreenView.hpp>
+#include <gui/passwordscreen_screen/PasswordScreenPresenter.hpp>
 
 
 /**
@@ -48,7 +52,9 @@ public:
             touchgfx::meta::TypeList< OffScreenView,
             touchgfx::meta::TypeList< SettingsScreenView,
             touchgfx::meta::TypeList< DisplayScreenView,
-            touchgfx::meta::Nil > > >
+            touchgfx::meta::TypeList< ServiceScreenView,
+            touchgfx::meta::TypeList< PasswordScreenView,
+            touchgfx::meta::Nil > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -64,7 +70,9 @@ public:
             touchgfx::meta::TypeList< OffScreenPresenter,
             touchgfx::meta::TypeList< SettingsScreenPresenter,
             touchgfx::meta::TypeList< DisplayScreenPresenter,
-            touchgfx::meta::Nil > > >
+            touchgfx::meta::TypeList< ServiceScreenPresenter,
+            touchgfx::meta::TypeList< PasswordScreenPresenter,
+            touchgfx::meta::Nil > > > > >
             > GeneratedPresenterTypes;
 
     /**

@@ -1,22 +1,21 @@
 #include <gui/displayscreen_screen/DisplayScreenView.hpp>
 
-
 #ifdef SIMULATOR
 uint8_t DisplayScreenView::GuiItfSetBacklight(uint8_t percent)
-{ 
+{
   return percent;
 }
 
 uint8_t DisplayScreenView::GuiItfGetBacklight(void)
 {
-  return 42; //Ez egy sokkal szebb szám 
+  return 42; //Ez egy sokkal szebb szï¿½m
 }
 
 #else
 extern "C"
 {
-	uint8_t GuiItfSetBacklight(uint8_t percent);
-	uint8_t GuiItfGetBacklight(void);
+  uint8_t GuiItfSetBacklight(uint8_t percent);
+  uint8_t GuiItfGetBacklight(void);
 }
 #endif
 

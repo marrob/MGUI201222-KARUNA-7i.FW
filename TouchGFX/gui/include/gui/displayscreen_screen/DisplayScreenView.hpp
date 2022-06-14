@@ -4,9 +4,13 @@
 #include <gui_generated/displayscreen_screen/DisplayScreenViewBase.hpp>
 #include <gui/displayscreen_screen/DisplayScreenPresenter.hpp>
 
+
 class DisplayScreenView : public DisplayScreenViewBase 
 {
+
+
 public:
+
     DisplayScreenView();
     virtual ~DisplayScreenView() {}
     virtual void setupScreen();
@@ -17,9 +21,9 @@ public:
     uint8_t GuiItfGetBacklight(void);
 #endif
 
+private:
+     
 protected:
-
-
     /*
      * Callback Declarations
      */

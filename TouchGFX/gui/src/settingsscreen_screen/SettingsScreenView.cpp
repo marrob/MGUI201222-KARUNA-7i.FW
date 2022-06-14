@@ -1,33 +1,30 @@
 #include <gui/settingsscreen_screen/SettingsScreenView.hpp>
 
-uint32_t mUptimeCounter;
 int mTickGUICount;
 
 #ifdef SIMULATOR
-
-uint32_t SettingsScreenView::GuiItfGetKarunaUptimeCnt()
+uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 {
-  mUptimeCounter++;
-  return mUptimeCounter;
+  return 0;
 }
-
-uint32_t SettingsScreenView::GuiItfGetDasClockUptimeCnt()
+void SettingsScreenView::GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
 {
-	mUptimeCounter++;
-	return mUptimeCounter;
 }
-
 #else
 extern "C"
-{ 
-	uint32_t GuiItfGetKarunaUptimeCnt();
-	uint32_t GuiItfGetDasClockUptimeCnt();
+{
+  uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart();
+  void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
 }
 #endif
 
+
 SettingsScreenView::SettingsScreenView()
 {
-
+  if(GuiItfGetKarunaOutputsAllEnabledAfterStart())
+    radioButtonGroup1.setSelected(rdbtnEnableAll);
+  else
+    radioButtonGroup1.setSelected(rdbtnLastState);
 }
 
 void SettingsScreenView::setupScreen()
@@ -38,21 +35,14 @@ void SettingsScreenView::setupScreen()
 void SettingsScreenView::tearDownScreen()
 {
     SettingsScreenViewBase::tearDownScreen();
+} 
+
+void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
+{
+  GuiItfSetKarunaOutputsIsAllEnabledAfterStart(1);
 }
 
-void SettingsScreenView::handleTickEvent()
+void SettingsScreenView::RdbBtnSelectLastOutputStatAtStartUp()
 {
-	mTickGUICount++;
-	//Wait for 0.5sec
-	if (mTickGUICount % 30 == 0)
-	{
-		uint32_t uptime = GuiItfGetKarunaUptimeCnt();
-		Unicode::snprintf(lblKarunaUptimeBuffer , 11, "%d", uptime);
-
-		uint32_t uptimeClock = GuiItfGetDasClockUptimeCnt();
-		Unicode::snprintf(lblClockUptimeBuffer, 11, "%d", uptimeClock);
-
-		lblKarunaUptime.invalidate();
-		lblClockUptime.invalidate();
-	}
+  GuiItfSetKarunaOutputsIsAllEnabledAfterStart(0);
 }

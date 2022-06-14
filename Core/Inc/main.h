@@ -108,14 +108,22 @@ typedef struct _DiagTypeDef
   uint32_t RS485RdyCnt;
 
   uint32_t PowerLedTaskCounter;
-  uint64_t UpTimeSec;
 
-  uint32_t BootUpCnt;
+
+
 }Diag_t;
 
 typedef struct _AppTypeDef
 {
   Diag_t Diag;
+  struct _Gui
+  {
+    char FW[DEVICE_FW_SIZE];
+    char UID[DEVICE_UID_SIZE];
+    char PCB[DEVICE_PCB_SIZE];
+    uint32_t BootUpCnt;
+    uint64_t UpTimeSec;
+  }Gui;
   struct _Karuna
   {
     char FW[DEVICE_FW_SIZE];
@@ -126,6 +134,7 @@ typedef struct _AppTypeDef
     uint8_t DI;
     uint8_t DO;
     uint32_t UpTimeSec;
+    uint32_t SavedFlags;
   }Karuna;
   struct _DasClock
   {
@@ -147,6 +156,7 @@ typedef struct _AppTypeDef
     uint16_t Inputs;
   }Peri;
   char Now[DEVICE_TIMESTAMP_SIZE];
+  uint32_t LogLastPageAddress;
 }Device_t;
 
 extern Device_t Device;
@@ -171,12 +181,8 @@ uint8_t RtcGetNowToString(char *timestamp_string);
 #define DO_EN_GPIO_Port GPIOI
 #define RS_485_DIR_Pin GPIO_PIN_8
 #define RS_485_DIR_GPIO_Port GPIOF
-#define AI_CS_Pin GPIO_PIN_0
-#define AI_CS_GPIO_Port GPIOA
-#define AI_MOSI_Pin GPIO_PIN_1
-#define AI_MOSI_GPIO_Port GPIOA
-#define AI_MISO_Pin GPIO_PIN_6
-#define AI_MISO_GPIO_Port GPIOA
+#define AIN_CS_Pin GPIO_PIN_0
+#define AIN_CS_GPIO_Port GPIOA
 #define LIVE_LED_Pin GPIO_PIN_4
 #define LIVE_LED_GPIO_Port GPIOC
 #define TS_RST_Pin GPIO_PIN_11
@@ -185,18 +191,18 @@ uint8_t RtcGetNowToString(char *timestamp_string);
 #define TS_INT_GPIO_Port GPIOH
 #define DIO_WR_Pin GPIO_PIN_12
 #define DIO_WR_GPIO_Port GPIOB
-#define SPI_CLK_Pin GPIO_PIN_13
-#define SPI_CLK_GPIO_Port GPIOB
-#define PER_MISO_Pin GPIO_PIN_14
-#define PER_MISO_GPIO_Port GPIOB
-#define PER_MOSI_Pin GPIO_PIN_15
-#define PER_MOSI_GPIO_Port GPIOB
-#define PSP_EN_Pin GPIO_PIN_2
-#define PSP_EN_GPIO_Port GPIOG
+#define SPI2_CLK_Pin GPIO_PIN_13
+#define SPI2_CLK_GPIO_Port GPIOB
+#define SPI2_MISO_Pin GPIO_PIN_14
+#define SPI2_MISO_GPIO_Port GPIOB
+#define SPI2_MOSI_Pin GPIO_PIN_15
+#define SPI2_MOSI_GPIO_Port GPIOB
+#define FLS_CS_Pin GPIO_PIN_2
+#define FLS_CS_GPIO_Port GPIOG
 #define DIO_CS_Pin GPIO_PIN_3
 #define DIO_CS_GPIO_Port GPIOG
-#define PER_LD_Pin GPIO_PIN_6
-#define PER_LD_GPIO_Port GPIOC
+#define DIO_LD_Pin GPIO_PIN_6
+#define DIO_LD_GPIO_Port GPIOC
 #define DISP_EN_Pin GPIO_PIN_7
 #define DISP_EN_GPIO_Port GPIOC
 #define BTN_PWM_Pin GPIO_PIN_8

@@ -101,15 +101,6 @@
       <Text Id="__SingleUse_G2P3" Alignment="Left" TypographyId="Value">
         <Translation Language="GB">DoP</Translation>
       </Text>
-      <Text Id="__SingleUse_9C3M" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">Karuna uptime counter : </Translation>
-      </Text>
-      <Text Id="__SingleUse_542M" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">&lt;value&gt;</Translation>
-      </Text>
-      <Text Id="__SingleUse_P0TG" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">0</Translation>
-      </Text>
       <Text Id="__SingleUse_ONW5" Alignment="Right" TypographyId="Settings">
         <Translation Language="GB">&lt;value&gt;%</Translation>
       </Text>
@@ -121,20 +112,182 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_WF3B" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">0</Translation>
-      </Text>
-      <Text Id="__SingleUse_URPR" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_5V6W" Alignment="Left" TypographyId="Desc">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
-      <Text Id="__SingleUse_XUER" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_1IJL" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_LZC3" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock firmware version :</Translation>
+      </Text>
+      <Text Id="__SingleUse_ALOO" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Karuna firmware version :</Translation>
+      </Text>
+      <Text Id="__SingleUse_369R" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_HQS5" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">GUI firmware version :</Translation>
+      </Text>
+      <Text Id="__SingleUse_F7DE" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">GUI</Translation>
+      </Text>
+      <Text Id="__SingleUse_PMC0" Alignment="Left" TypographyId="Typography_00">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_H4DE" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">The PIN is not correct</Translation>
+      </Text>
+      <Text Id="__SingleUse_CJEC" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Back</Translation>
+      </Text>
+      <Text Id="__SingleUse_LOWN" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">OK</Translation>
+      </Text>
+      <Text Id="__SingleUse_G81B" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_YQCS" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">the PIN code</Translation>
+      </Text>
+      <Text Id="__SingleUse_Q977" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Please enter</Translation>
+      </Text>
+      <Text Id="__SingleUse_L5OG" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_7J4G" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">3</Translation>
+      </Text>
+      <Text Id="__SingleUse_O6OI" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">2</Translation>
+      </Text>
+      <Text Id="__SingleUse_9F30" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">1</Translation>
+      </Text>
+      <Text Id="__SingleUse_DPOV" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">6</Translation>
+      </Text>
+      <Text Id="__SingleUse_8WBT" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">5</Translation>
+      </Text>
+      <Text Id="__SingleUse_X6QP" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">4</Translation>
+      </Text>
+      <Text Id="__SingleUse_70WT" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">9</Translation>
+      </Text>
+      <Text Id="__SingleUse_XAZG" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">8</Translation>
+      </Text>
+      <Text Id="__SingleUse_3CBB" Alignment="Center" TypographyId="Typography_00">
+        <Translation Language="GB">7</Translation>
+      </Text>
+      <Text Id="__SingleUse_YTJC" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Service menu</Translation>
+      </Text>
+      <Text Id="__SingleUse_IGHU" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Show Log</Translation>
+      </Text>
+      <Text Id="__SingleUse_O7GB" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_IO03" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; V</Translation>
+      </Text>
+      <Text Id="__SingleUse_0OEF" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock supply voltage : </Translation>
+      </Text>
+      <Text Id="__SingleUse_M3N5" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_FZOH" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; mA</Translation>
+      </Text>
+      <Text Id="__SingleUse_96H9" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock OCXO2  heat current: </Translation>
+      </Text>
+      <Text Id="__SingleUse_VPCY" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_D7C7" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; mA</Translation>
+      </Text>
+      <Text Id="__SingleUse_5I8K" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock OCXO 1  heat current : </Translation>
+      </Text>
+      <Text Id="__SingleUse_JC1W" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_XPFN" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; mA</Translation>
+      </Text>
+      <Text Id="__SingleUse_SR1D" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Clock OCXO main heat current :</Translation>
+      </Text>
+      <Text Id="__SingleUse_4Y09" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_JPI8" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; °C</Translation>
+      </Text>
+      <Text Id="__SingleUse_6FTC" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">DAS clock uptime counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_VO29" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_MSR2" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; °C</Translation>
+      </Text>
+      <Text Id="__SingleUse_6D36" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock uptime counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_OOXJ" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_3S8R" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt; °C</Translation>
+      </Text>
+      <Text Id="__SingleUse_LNP8" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Clock OCXO main temperature :</Translation>
+      </Text>
+      <Text Id="__SingleUse_3V0X" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">DAS Clock</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZZEL" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_26LX" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_WW6U" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">DAS clock uptime counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_N8QV" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_UULC" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_1O0C" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Karuna uptime counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_6I2J" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Karuna</Translation>
+      </Text>
+      <Text Id="__SingleUse_PS8U" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Service Menu</Translation>
+      </Text>
+      <Text Id="__SingleUse_HW10" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Back</Translation>
       </Text>
     </TextGroup>
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />

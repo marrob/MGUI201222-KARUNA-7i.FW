@@ -44,23 +44,29 @@ public:
 	void SetBit(uint8_t* input, bool bit, int SetTo);
 
 
-
-
 #ifdef SIMULATOR
 
-	//Karuna
-	uint8_t GuiItfGetKarunaStatus();
-	void GuiItfKarunaControl(uint8_t p_Output);
+  /*** Karuna ****/
+  uint8_t GuiItfGetKarunaStatus();
+  void GuiItfSetKarunaHdmi(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsHdmiSet(void);
+  void GuiItfSetKarunaRca(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsRcaSet(void);
+  void GuiItfSetKarunaBnc(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsBncSet(void);
+  void GuiItfSetKarunaXlr(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsXlrSet(void);
 
-	//DAS Clock
-	double GuiItfGetDasMV341Temp();
-	bool GuiItfGetDasStatusLock1();
-	bool GuiItfGetDasStatusLock2();
-	bool GuiItfGetDasIntExt();
+  /*** Clock ***/
+  float GuiItfGetDasClockMV341Temp();
+  uint8_t GuiItfGetDasClockStatusLock1();
+  uint8_t GuiItfGetDasClockStatusLock2();
+  uint8_t GuiItfGetDasClockIsExt();
 #endif
 
 
 protected:
+
 
 private:
 	uint8_t count;

@@ -1,4 +1,5 @@
 #include <gui/offscreen_screen/OffScreenView.hpp>
+ 
 
 #ifdef SIMULATOR
 void OffScreenView::GuiItfBacklightEnable()

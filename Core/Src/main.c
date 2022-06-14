@@ -30,6 +30,7 @@
 #include <queue.h>
 #include <stdlib.h>
 #include "GuiItf.h"
+#include "LiveLed.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -75,6 +76,9 @@ typedef struct _RS485TxItem
 #define SDRAM_MODEREG_WRITEBURST_MODE_PROGRAMMED ((uint16_t)0x0000)
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
 #define SDRAM_BUFFER_SIZE                        ((uint32_t)0x1000)
+
+
+#define WITHOUT_RTOS
 
 /* USER CODE END PD */
 
@@ -166,29 +170,31 @@ static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32))
 
 RS485TxItem_t RS485TxCollection[] =
 {
-    /*** Karuna ***/
-    {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-    {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-    {"#%02X DO %02X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
-    {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
-    {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
-    {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  /*** Karuna ***/
+  {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
+  {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
+  {"#%02X DO %02X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
+  {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
 
-    /*** DasClock ***/
-    {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-    {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
-    {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
-    {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  /*** DasClock ***/
+  {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
+  {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
 
-    {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-    {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2100 },
-    {"#%02X AI? 1",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2200 },
-    {"#%02X AI? 2",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2300 },
-    {"#%02X AI? 3",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2400 },
-    {"#%02X AI? 4",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2500 },
-    {"#%02X AI? 5",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2600 },
-    {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
+  {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
+  {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2100 },
+  {"#%02X AI? 1",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2200 },
+  {"#%02X AI? 2",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2300 },
+  {"#%02X AI? 3",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2400 },
+  {"#%02X AI? 4",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2500 },
+  {"#%02X AI? 5",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2600 },
+  {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
 };
+
+LiveLED_HnadleTypeDef hLiveLed;
 
 /* USER CODE END PV */
 
@@ -211,7 +217,7 @@ static void MX_I2C1_Init(void);
 static void MX_RTC_Init(void);
 void StartDefaultTask(void *argument);
 void UsbRxTask(void *argument);
-void LiveLedTask(void *argument);
+void LiveLedOsTask(void *argument);
 void RS485RxTask(void *argument);
 void RS485TxTask(void *argument);
 void PeriTask(void *argument);
@@ -253,6 +259,7 @@ int main(void)
   /* USER CODE END 1 */
 
   /* Enable I-Cache---------------------------------------------------------*/
+
   SCB_EnableICache();
 
   /* Enable D-Cache---------------------------------------------------------*/
@@ -312,6 +319,24 @@ int main(void)
   /*** EEPROM ***/
   EepromInit(&hi2c1);
 
+  /*** LiveLed ***/
+  hLiveLed.LedOffFnPtr = &LiveLedOff;
+  hLiveLed.LedOnFnPtr = &LiveLedOn;
+  hLiveLed.HalfPeriodTimeMs = 500;
+  LiveLedInit(&hLiveLed);
+
+  /*** Versions ***/
+  sprintf(Device.Gui.FW, "%s",DEVICE_FW);
+  sprintf(Device.Gui.UID, "%4lX%4lX%4lX",HAL_GetUIDw0(), HAL_GetUIDw1(), HAL_GetUIDw2());
+  sprintf(Device.Gui.PCB, "%s",DEVICE_PCB);
+
+
+//  while(1)
+  //  LogFlashReadId();
+
+ // LogFlashWriteLine("Hello World");
+
+ // LogFlashWriteLine("It is a Test");
 
   /* USER CODE END 2 */
 
@@ -346,7 +371,7 @@ int main(void)
   UsbRx_TaskHandle = osThreadNew(UsbRxTask, NULL, &UsbRx_Task_attributes);
 
   /* creation of LiveLed_Task */
-  LiveLed_TaskHandle = osThreadNew(LiveLedTask, NULL, &LiveLed_Task_attributes);
+  LiveLed_TaskHandle = osThreadNew(LiveLedOsTask, NULL, &LiveLed_Task_attributes);
 
   /* creation of RS485Rx_Task */
   RS485Rx_TaskHandle = osThreadNew(RS485RxTask, NULL, &RS485Rx_Task_attributes);
@@ -359,7 +384,7 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  //ConsoleWrite("FreeRTOS osKernelStart()");
+  printf("FreeRTOS osKernelStart()");
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -374,6 +399,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+   // LiveLedTask(&hLiveLed);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -911,7 +937,7 @@ static void MX_USART1_UART_Init(void)
 
   /* USER CODE END USART1_Init 1 */
   huart1.Instance = USART1;
-  huart1.Init.BaudRate = 460800;
+  huart1.Init.BaudRate = 115200;
   huart1.Init.WordLength = UART_WORDLENGTH_8B;
   huart1.Init.StopBits = UART_STOPBITS_1;
   huart1.Init.Parity = UART_PARITY_NONE;
@@ -1113,19 +1139,19 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(RS_485_DIR_GPIO_Port, RS_485_DIR_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, AI_CS_Pin|AI_MOSI_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(AIN_CS_GPIO_Port, AIN_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, LIVE_LED_Pin|PER_LD_Pin|DISP_EN_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, LIVE_LED_Pin|DIO_LD_Pin|DISP_EN_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, DIO_WR_Pin|SPI_CLK_Pin|PER_MOSI_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, DIO_WR_Pin|SPI2_CLK_Pin|SPI2_MOSI_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOG, PSP_EN_Pin|DIO_CS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOG, FLS_CS_Pin|DIO_CS_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin : DO_EN_Pin */
   GPIO_InitStruct.Pin = DO_EN_Pin;
@@ -1141,21 +1167,15 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(RS_485_DIR_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : AI_CS_Pin AI_MOSI_Pin */
-  GPIO_InitStruct.Pin = AI_CS_Pin|AI_MOSI_Pin;
+  /*Configure GPIO pin : AIN_CS_Pin */
+  GPIO_InitStruct.Pin = AIN_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+  HAL_GPIO_Init(AIN_CS_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : AI_MISO_Pin */
-  GPIO_InitStruct.Pin = AI_MISO_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(AI_MISO_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : LIVE_LED_Pin PER_LD_Pin */
-  GPIO_InitStruct.Pin = LIVE_LED_Pin|PER_LD_Pin;
+  /*Configure GPIO pins : LIVE_LED_Pin DIO_LD_Pin */
+  GPIO_InitStruct.Pin = LIVE_LED_Pin|DIO_LD_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -1174,23 +1194,23 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(TS_INT_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : DIO_WR_Pin SPI_CLK_Pin PER_MOSI_Pin */
-  GPIO_InitStruct.Pin = DIO_WR_Pin|SPI_CLK_Pin|PER_MOSI_Pin;
+  /*Configure GPIO pins : DIO_WR_Pin SPI2_CLK_Pin SPI2_MOSI_Pin */
+  GPIO_InitStruct.Pin = DIO_WR_Pin|SPI2_CLK_Pin|SPI2_MOSI_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : PER_MISO_Pin */
-  GPIO_InitStruct.Pin = PER_MISO_Pin;
+  /*Configure GPIO pin : SPI2_MISO_Pin */
+  GPIO_InitStruct.Pin = SPI2_MISO_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(PER_MISO_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(SPI2_MISO_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : PSP_EN_Pin DIO_CS_Pin */
-  GPIO_InitStruct.Pin = PSP_EN_Pin|DIO_CS_Pin;
+  /*Configure GPIO pins : FLS_CS_Pin DIO_CS_Pin */
+  GPIO_InitStruct.Pin = FLS_CS_Pin|DIO_CS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
@@ -1205,17 +1225,17 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 /* printf -------------------------------------------------------------------*/
-/*
+
 int _write(int file, char *ptr, int len)
 {
   HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 100);
   return len;
 }
-*/
+
 
 void ConsoleWrite(char *str)
 {
-  HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), 100);
+  //HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), 100);
 }
 
 /* LEDs ---------------------------------------------------------------------*/
@@ -1227,11 +1247,6 @@ void LiveLedOn(void)
 void LiveLedOff(void)
 {
   HAL_GPIO_WritePin(LIVE_LED_GPIO_Port, LIVE_LED_Pin, GPIO_PIN_RESET);
-}
-
-/* DCDC ----------------------------------------------------------------------*/
-void PSP_Enable(){
-  HAL_GPIO_WritePin(PSP_EN_GPIO_Port, PSP_EN_Pin, GPIO_PIN_SET);
 }
 
 /* Flash ---------------------------------------------------------------------*/
@@ -1314,7 +1329,7 @@ void UsbParser(char *request)
       }
       else if(!strcmp(cmd,"UPTIME?"))
       {
-        sprintf(response, "%lld", Device.Diag.UpTimeSec);
+        sprintf(response, "%lld", Device.Gui.UpTimeSec);
       }
       else if(!strcmp(cmd, "DIS:LIG?"))
       {
@@ -1702,43 +1717,46 @@ void UsbRxTask(void *argument)
   /* USER CODE END UsbRxTask */
 }
 
-/* USER CODE BEGIN Header_LiveLedTask */
+/* USER CODE BEGIN Header_LiveLedOsTask */
 /**
 * @brief Function implementing the LiveLed_Task thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_LiveLedTask */
-void LiveLedTask(void *argument)
+/* USER CODE END Header_LiveLedOsTask */
+void LiveLedOsTask(void *argument)
 {
-  /* USER CODE BEGIN LiveLedTask */
+  /* USER CODE BEGIN LiveLedOsTask */
   /* Infinite loop */
-  uint32_t timestamp = 0;
-  uint8_t flag = 0;
-
-  osDelay(1000);
-  BacklightEnable();
   for(;;)
   {
-    if(HAL_GetTick() - timestamp > 500)
+    uint32_t timestamp = 0;
+    uint8_t flag = 0;
+
+    osDelay(1000);
+    BacklightEnable();
+    for(;;)
     {
-      timestamp = HAL_GetTick();
-      if(flag)
+      if(HAL_GetTick() - timestamp > 500)
       {
-        flag = 0;
-        LiveLedOn();
-        RtcGetNowToString(Device.Now);
+        timestamp = HAL_GetTick();
+        if(flag)
+        {
+          flag = 0;
+          LiveLedOn();
+          RtcGetNowToString(Device.Now);
+        }
+        else
+        {
+          flag = 1;
+          LiveLedOff();
+          Device.Gui.UpTimeSec++;
+        }
       }
-      else
-      {
-        flag = 1;
-        LiveLedOff();
-        Device.Diag.UpTimeSec++;
-      }
+      osDelay(10);
     }
-    osDelay(10);
   }
-  /* USER CODE END LiveLedTask */
+  /* USER CODE END LiveLedOsTask */
 }
 
 /* USER CODE BEGIN Header_RS485RxTask */
@@ -1866,6 +1884,7 @@ void PeriTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
+    /*
     Device.Peri.Inputs = PeriGetInputs();
     PeriSetOutputs(Device.Peri.Outputs);
 
@@ -1873,7 +1892,7 @@ void PeriTask(void *argument)
     Device.Peri.Temperatures[AI_CH1] = PeriGetTemperature(MCP320X_CH1);
     Device.Peri.Temperatures[AI_CH2] = PeriGetTemperature(MCP320X_CH2);
     Device.Peri.Temperatures[AI_CH3] = PeriGetTemperature(MCP320X_CH3);
-
+    */
     osDelay(100);
   }
   /* USER CODE END PeriTask */

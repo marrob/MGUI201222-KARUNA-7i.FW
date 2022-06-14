@@ -15,7 +15,6 @@
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class SettingsScreenViewBase : public touchgfx::View<SettingsScreenPresenter>
@@ -24,6 +23,19 @@ public:
     SettingsScreenViewBase();
     virtual ~SettingsScreenViewBase() {}
     virtual void setupScreen();
+
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void RdbBtnSelectEnableAllOutputAtStartUp()
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void RdbBtnSelectLastOutputStatAtStartUp()
+    {
+        // Override and implement this function in SettingsScreen
+    }
 
 protected:
     FrontendApplication& application() {
@@ -40,27 +52,16 @@ protected:
     touchgfx::RadioButton rdbtnEnableAll;
     touchgfx::TextArea textArea1;
     touchgfx::TextArea textArea2;
-    touchgfx::TextArea textArea2_1;
+    touchgfx::TextArea textArea3;
     touchgfx::ToggleButton chbxMCLKON;
-    touchgfx::RadioButton rdbtnEnableSelected;
-    touchgfx::TextArea textArea2_1_1;
+    touchgfx::RadioButton rdbtnLastState;
+    touchgfx::TextArea textArea4;
     touchgfx::Line line1;
     touchgfx::PainterRGB565 line1Painter;
     touchgfx::Line line1_1;
     touchgfx::PainterRGB565 line1_1Painter;
-    touchgfx::TextArea textArea2_1_1_1;
-    touchgfx::TextAreaWithOneWildcard lblKarunaUptime;
-    touchgfx::TextArea textArea2_1_1_1_1;
-    touchgfx::TextAreaWithOneWildcard lblClockUptime;
+    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnShowService;
     touchgfx::RadioButtonGroup<2> radioButtonGroup1;
-
-    /*
-     * Wildcard Buffers
-     */
-    static const uint16_t LBLKARUNAUPTIME_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblKarunaUptimeBuffer[LBLKARUNAUPTIME_SIZE];
-    static const uint16_t LBLCLOCKUPTIME_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClockUptimeBuffer[LBLCLOCKUPTIME_SIZE];
 
 private:
 
@@ -69,12 +70,14 @@ private:
      */
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+    touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButton&> radioButtonSelectedCallback;
 
     /*
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
+    void radioButtonSelectedCallbackHandler(const touchgfx::AbstractButton& src);
 
     /*
      * Canvas Buffer Size

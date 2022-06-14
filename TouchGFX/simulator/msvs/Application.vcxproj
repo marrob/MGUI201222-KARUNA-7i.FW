@@ -33,6 +33,12 @@
     <ClCompile Include="..\..\gui\src\displayscreen_screen\DisplayScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\displayscreen_screen\DisplayScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\displayscreen_screen\DisplayScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\passwordscreen_screen\PasswordScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\passwordscreen_screen\PasswordScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\passwordscreen_screen\PasswordScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\servicescreen_screen\ServiceScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\servicescreen_screen\ServiceScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\servicescreen_screen\ServiceScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -195,6 +201,12 @@
     <ClInclude Include="..\..\gui\include\gui\displayscreen_screen\DisplayScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\displayscreen_screen\DisplayScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\displayscreen_screen\DisplayScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\passwordscreen_screen\PasswordScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\passwordscreen_screen\PasswordScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\passwordscreen_screen\PasswordScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\servicescreen_screen\ServiceScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\servicescreen_screen\ServiceScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\servicescreen_screen\ServiceScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

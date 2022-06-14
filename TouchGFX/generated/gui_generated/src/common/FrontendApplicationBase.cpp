@@ -17,6 +17,10 @@
 #include <gui/settingsscreen_screen/SettingsScreenPresenter.hpp>
 #include <gui/displayscreen_screen/DisplayScreenView.hpp>
 #include <gui/displayscreen_screen/DisplayScreenPresenter.hpp>
+#include <gui/servicescreen_screen/ServiceScreenView.hpp>
+#include <gui/servicescreen_screen/ServiceScreenPresenter.hpp>
+#include <gui/passwordscreen_screen/PasswordScreenView.hpp>
+#include <gui/passwordscreen_screen/PasswordScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -96,4 +100,30 @@ void FrontendApplicationBase::gotoDisplayScreenScreenSlideTransitionEast()
 void FrontendApplicationBase::gotoDisplayScreenScreenSlideTransitionEastImpl()
 {
     touchgfx::makeTransition<DisplayScreenView, DisplayScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// ServiceScreen
+
+void FrontendApplicationBase::gotoServiceScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoServiceScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoServiceScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<ServiceScreenView, ServiceScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// PasswordScreen
+
+void FrontendApplicationBase::gotoPasswordScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoPasswordScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoPasswordScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<PasswordScreenView, PasswordScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

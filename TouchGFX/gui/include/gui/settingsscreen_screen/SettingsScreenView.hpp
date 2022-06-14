@@ -6,18 +6,21 @@
 
 class SettingsScreenView : public SettingsScreenViewBase
 {
-public:
+public: 
+
     SettingsScreenView();
     virtual ~SettingsScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-    virtual void handleTickEvent();
-     
+    virtual void RdbBtnSelectEnableAllOutputAtStartUp();
+    virtual void RdbBtnSelectLastOutputStatAtStartUp();
+
 #ifdef SIMULATOR
-    uint32_t GuiItfGetKarunaUptimeCnt();
-    uint32_t GuiItfGetDasClockUptimeCnt();
+    uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
+    void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
 #endif
+
 
 protected:
 
