@@ -7,14 +7,12 @@
 class MainView : public MainViewBase
 {
 public:
-	MainView();
-	void SetOnAllOutput();
-	virtual ~MainView() {}
-	virtual void setupScreen();
+	MainView(); 
+	virtual ~MainView() {} 
 	virtual void ToggleHDMI();
-	virtual  void ToggleRCA();
-	virtual  void ToggleBNC();
-	virtual  void ToggleXLR();
+	virtual void ToggleRCA();
+	virtual void ToggleBNC();
+	virtual void ToggleXLR();
 
 	virtual void handleTickEvent();
 

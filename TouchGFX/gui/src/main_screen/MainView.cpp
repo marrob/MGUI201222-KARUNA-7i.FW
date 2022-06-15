@@ -5,6 +5,12 @@
 
 #ifdef SIMULATOR
 
+//Simulated flash memory
+static uint8_t  SimIsHdmiON;
+static uint8_t  SimIsRcaON;
+static uint8_t  SimIsXlrON;
+static uint8_t  SimIsBncON;
+
 uint8_t MainView::GuiItfGetKarunaStatus()
 {
   return 0b00000001;
@@ -12,47 +18,47 @@ uint8_t MainView::GuiItfGetKarunaStatus()
 
 void MainView::GuiItfSetKarunaHdmi(uint8_t onfoff)
 {
-
+	SimIsHdmiON = onfoff;
 }
 
 uint8_t MainView::GuitIfGetKarunaIsHdmiSet(void)
 {
-  return 1;
+  return SimIsHdmiON;
 }
 
 void MainView::GuiItfSetKarunaRca(uint8_t onfoff)
 {
-
+	SimIsRcaON = 0;
 }
 
 uint8_t MainView::GuitIfGetKarunaIsRcaSet(void)
 {
-  return 1;
+  return SimIsRcaON;
 }
 
 void MainView::GuiItfSetKarunaBnc(uint8_t onfoff)
 {
-
+	SimIsBncON = onfoff;
 }
 
 uint8_t MainView::GuitIfGetKarunaIsBncSet(void)
 {
-  return 1;
+  return SimIsBncON;
 }
 
 void MainView::GuiItfSetKarunaXlr(uint8_t onfoff)
 {
-
+	SimIsXlrON = onfoff;
 }
 
 uint8_t MainView::GuitIfGetKarunaIsXlrSet(void)
 {
-  return 1;
+  return SimIsXlrON;
 }
 
 float MainView::GuiItfGetDasClockMV341Temp(void)
 {
-  return 60;
+  return 52.8f;
 }
 uint8_t MainView::GuiItfGetDasClockStatusLock1(void)
 {
@@ -90,6 +96,7 @@ extern "C"
 }
 #endif
 
+//OUTPUTS
 static bool  mIsHdmiON;
 static bool  mIsRcaON;
 static bool  mIsXlrON;
@@ -129,53 +136,14 @@ MainView::MainView()
   DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
   MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
   REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
-
-  //OUTPUTS
-  mIsBncON = GuitIfGetKarunaIsBncSet();
-  mIsHdmiON = GuitIfGetKarunaIsHdmiSet();
-  mIsRcaON = GuitIfGetKarunaIsRcaSet();
-  mIsXlrON = GuitIfGetKarunaIsXlrSet();
-
-  // Simulate CLOCK lock
-  mIs24Locked = true;
-  mIs245Locked = true;
-  mIs22Locked = true;
-  mIsIntExt = false;
-
-	RefreshHDMIOutput();
-	RefreshRCAOutput();
-	RefreshBNCOutput();
-	RefreshXLROutput();
-	 
-	//Audio and Clocks temperature
-	RefreshKarunaAndClockInfo();
+   
+  //Audio and Clocks temperature
+  RefreshKarunaAndClockInfo();
 }
-
-void MainView::SetOnAllOutput()
-{
-	mIsBncON = true;
-	mIsHdmiON = true;
-	mIsRcaON = true;
-	mIsXlrON = true;
-
-	RefreshHDMIOutput();
-	RefreshRCAOutput();
-	RefreshBNCOutput();
-	RefreshXLROutput(); 
-}
-
-void MainView::setupScreen()
-{
-
-}
-
-
+  
 //AUDIO OUTPUTS
-
 void MainView::RefreshHDMIOutput()
-{
-  GuiItfSetKarunaHdmi(mIsHdmiON);
-
+{ 
 	btnHDMI.setBoxWithBorderColors(GetOutputColor(mIsHdmiON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsHdmiON)
 	{
@@ -191,9 +159,7 @@ void MainView::RefreshHDMIOutput()
 }
 
 void MainView::RefreshRCAOutput()
-{
-  GuiItfSetKarunaRca(mIsRcaON);
-
+{ 
 	btnRCA.setBoxWithBorderColors(GetOutputColor(mIsRcaON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsRcaON)
 	{
@@ -207,9 +173,7 @@ void MainView::RefreshRCAOutput()
 }
 
 void MainView::RefreshBNCOutput()
-{
-  GuiItfSetKarunaBnc(mIsBncON);
-
+{ 
 	btnBNC.setBoxWithBorderColors(GetOutputColor(mIsBncON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsBncON)
 	{
@@ -223,9 +187,7 @@ void MainView::RefreshBNCOutput()
 }
 
 void MainView::RefreshXLROutput()
-{
-  GuiItfSetKarunaXlr(mIsXlrON);
-
+{ 
 	btnXLR.setBoxWithBorderColors(GetOutputColor(mIsXlrON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
 	if (mIsXlrON)
 	{
@@ -524,28 +486,25 @@ void  MainView::SetFreq(int p_AudiFormat)
 void MainView::ToggleHDMI()
 {
 	mIsHdmiON = !mIsHdmiON;
-	RefreshHDMIOutput();
+	GuiItfSetKarunaHdmi(mIsHdmiON); 
 }
 
 void MainView::ToggleRCA()
 {
 	mIsRcaON = !mIsRcaON;
-
-	RefreshRCAOutput();
+	GuiItfSetKarunaRca(mIsRcaON); 
 }
 
 void MainView::ToggleBNC()
 {
 	mIsBncON = !mIsBncON;
-
-	RefreshBNCOutput();
+	GuiItfSetKarunaBnc(mIsBncON); 
 }
 
 void MainView::ToggleXLR()
 {
 	mIsXlrON = !mIsXlrON;
-
-	RefreshXLROutput();
+	GuiItfSetKarunaXlr(mIsXlrON);
 }
 
 
@@ -602,6 +561,7 @@ void MainView::RefreshKarunaAndClockInfo()
 	float temp = GuiItfGetDasClockMV341Temp();
 	SetTemp((int)temp);
 
+	//Refresh Clock Status
 	mIs22Locked = GuiItfGetDasClockStatusLock1();
 	mIs245Locked = GuiItfGetDasClockStatusLock2();
 	mIs24Locked = mIs245Locked && mIs22Locked;
@@ -611,4 +571,15 @@ void MainView::RefreshKarunaAndClockInfo()
 	Refresh245Lock();
 	Refresh22Lock();
 	RefreshIntExt(); 
+
+	//Refresh Karuna outputs
+	mIsBncON = GuitIfGetKarunaIsBncSet();
+	mIsHdmiON = GuitIfGetKarunaIsHdmiSet();
+	mIsRcaON = GuitIfGetKarunaIsRcaSet();
+	mIsXlrON = GuitIfGetKarunaIsXlrSet();
+
+	RefreshHDMIOutput();
+	RefreshRCAOutput();
+	RefreshBNCOutput();
+	RefreshXLROutput();
 }

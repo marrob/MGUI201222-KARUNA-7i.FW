@@ -10,10 +10,10 @@ uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 void SettingsScreenView::GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
 {
 }
-void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
+void SettingsScreenView::GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
 {
 }
-uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
+uint8_t SettingsScreenView::GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
 {
   return 1;
 }
