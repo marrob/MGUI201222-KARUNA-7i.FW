@@ -141,10 +141,37 @@ MainView::MainView()
   RefreshKarunaAndClockInfo();
 }
   
+
+//Toogle outputs
+
+void MainView::ToggleHDMI()
+{
+	mIsHdmiON = !mIsHdmiON;
+	GuiItfSetKarunaHdmi(mIsHdmiON);
+}
+
+void MainView::ToggleRCA()
+{
+	mIsRcaON = !mIsRcaON;
+	GuiItfSetKarunaRca(mIsRcaON);
+}
+
+void MainView::ToggleBNC()
+{
+	mIsBncON = !mIsBncON;
+	GuiItfSetKarunaBnc(mIsBncON);
+}
+
+void MainView::ToggleXLR()
+{
+	mIsXlrON = !mIsXlrON;
+	GuiItfSetKarunaXlr(mIsXlrON);
+}
+
 //AUDIO OUTPUTS
 void MainView::RefreshHDMIOutput()
 { 
-	btnHDMI.setBoxWithBorderColors(GetOutputColor(mIsHdmiON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
+	btnHDMI.setBoxWithBorderColors(GetOutputPressColor(mIsHdmiON), GetOutputReleaseColor(mIsHdmiON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsHdmiON)
 	{
 		btnHDMI.setBitmaps(Bitmap(BITMAP_HDMI_80X80_FB_ID), Bitmap(BITMAP_HDMI_80X80_S_ID));
@@ -160,7 +187,7 @@ void MainView::RefreshHDMIOutput()
 
 void MainView::RefreshRCAOutput()
 { 
-	btnRCA.setBoxWithBorderColors(GetOutputColor(mIsRcaON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
+	btnRCA.setBoxWithBorderColors(GetOutputPressColor(mIsRcaON), GetOutputReleaseColor(mIsRcaON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsRcaON)
 	{
 		btnRCA.setBitmaps(Bitmap(BITMAP_RCA_80X80_FB_ID), Bitmap(BITMAP_RCA_80X80_S_ID));
@@ -174,7 +201,7 @@ void MainView::RefreshRCAOutput()
 
 void MainView::RefreshBNCOutput()
 { 
-	btnBNC.setBoxWithBorderColors(GetOutputColor(mIsBncON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
+	btnBNC.setBoxWithBorderColors(GetOutputPressColor(mIsBncON), GetOutputReleaseColor(mIsBncON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsBncON)
 	{
 		btnBNC.setBitmaps(Bitmap(BITMAP_BNC_80X80_FB_ID), Bitmap(BITMAP_BNC_80X80_S_ID));
@@ -188,7 +215,7 @@ void MainView::RefreshBNCOutput()
 
 void MainView::RefreshXLROutput()
 { 
-	btnXLR.setBoxWithBorderColors(GetOutputColor(mIsXlrON), DARKGRAYCOLOR, BLACKCOLOR, BLACKCOLOR);
+	btnXLR.setBoxWithBorderColors(GetOutputPressColor(mIsXlrON), GetOutputReleaseColor(mIsXlrON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsXlrON)
 	{
 		btnXLR.setBitmaps(Bitmap(BITMAP_XLR_80X80_FB_ID), Bitmap(BITMAP_XLR_80X80_S_ID));
@@ -481,38 +508,23 @@ void  MainView::SetFreq(int p_AudiFormat)
 	lblValueFreq.invalidate();
 }
 
-//Toogle outputs
-
-void MainView::ToggleHDMI()
-{
-	mIsHdmiON = !mIsHdmiON;
-	GuiItfSetKarunaHdmi(mIsHdmiON); 
-}
-
-void MainView::ToggleRCA()
-{
-	mIsRcaON = !mIsRcaON;
-	GuiItfSetKarunaRca(mIsRcaON); 
-}
-
-void MainView::ToggleBNC()
-{
-	mIsBncON = !mIsBncON;
-	GuiItfSetKarunaBnc(mIsBncON); 
-}
-
-void MainView::ToggleXLR()
-{
-	mIsXlrON = !mIsXlrON;
-	GuiItfSetKarunaXlr(mIsXlrON);
-}
-
-
-colortype MainView::GetOutputColor(bool p_State)
+colortype MainView::GetOutputPressColor(bool p_State)
 {
 	if (!p_State)
 	{
 		return BLACKCOLOR;
+	}
+	else
+	{
+		return CORECOLOR;
+	}
+}
+
+colortype MainView::GetOutputReleaseColor(bool p_State)
+{
+	if (!p_State)
+	{
+		return DARKGRAYCOLOR;
 	}
 	else
 	{
