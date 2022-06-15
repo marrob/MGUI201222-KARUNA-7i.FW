@@ -31,6 +31,9 @@
 #include <stdlib.h>
 #include "GuiItf.h"
 #include "LiveLed.h"
+
+#include "Log.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -238,6 +241,8 @@ void RS485DirRx(void);
 void RS485Parser(char *response);
 void RS485UartTx(char *str);
 
+uint8_t DeviceTimeUpdate(void);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -330,6 +335,15 @@ int main(void)
   sprintf(Device.Gui.UID, "%4lX%4lX%4lX",HAL_GetUIDw0(), HAL_GetUIDw1(), HAL_GetUIDw2());
   sprintf(Device.Gui.PCB, "%s",DEVICE_PCB);
 
+  uint16_t id;
+
+  LogFlashReadId((uint8_t*)&id, sizeof(id));
+  //LogErase();
+  uint8_t w[] = "Hello";
+  uint8_t r[sizeof(w)];
+  LogWriteLine(1, w, sizeof(w));
+  memset(r, 0, sizeof(r));
+  LogReadLine(1,r, sizeof(r));
 
 //  while(1)
   //  LogFlashReadId();
@@ -1465,18 +1479,43 @@ uint8_t RtcGet(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint
   *mins = time.Minutes;
   *secs = time.Seconds;
 
+
   return DEVICE_OK;
 }
 
-uint8_t RtcGetNowToString(char *timestamp_string)
+char str[80];
+uint8_t DeviceTimeUpdate()
 {
-  memset(timestamp_string, 0x00, DEVICE_TIMESTAMP_SIZE);
-  uint8_t year, month, day, hours, mins, secs;
+  uint8_t year, mon, day, hour, min, sec;
 
-  if(RtcGet(&year, &month, &day, &hours, &mins, &secs) != DEVICE_OK)
+  if(RtcGet(&year, &mon, &day, &hour, &min, &sec) != DEVICE_OK)
     return DEVICE_FAIL;
 
-  sprintf(timestamp_string,"%02d%02d%02d-%02d%02d%02d", year, month, day, hours, mins, secs);
+  sprintf(Device.Time.NowString,"RTC:%02d%02d%02d-%02d%02d%02d", year, mon, day, hour, min, sec);
+
+  struct tm dt;
+  dt.tm_year = 2000 + year - 1900;
+  dt.tm_mon = mon - 1;
+  dt.tm_mday = day;
+  dt.tm_hour = hour;
+  dt.tm_min = min;
+  dt.tm_sec = sec;
+  dt.tm_isdst = 0; // Not daylight saving
+
+  Device.Time.PosixTime = mktime(&dt);
+
+  struct tm *tm_info  = localtime(&Device.Time.PosixTime);
+
+  Device.Time.tmDateTime.tm_year = tm_info->tm_year;
+  Device.Time.tmDateTime.tm_mon = tm_info->tm_mon;
+  Device.Time.tmDateTime.tm_mday = tm_info->tm_mday;
+  Device.Time.tmDateTime.tm_hour = tm_info->tm_hour;
+  Device.Time.tmDateTime.tm_min = tm_info->tm_min;
+  Device.Time.tmDateTime.tm_year = tm_info->tm_year;
+  Device.Time.tmDateTime.tm_sec = tm_info->tm_sec;
+  Device.Time.tmDateTime.tm_isdst = tm_info->tm_isdst;
+
+  strftime(str, 80, "%Y-%m-%d %H:%M:%S", tm_info );
 
   return DEVICE_OK;
 }
@@ -1744,7 +1783,7 @@ void LiveLedOsTask(void *argument)
         {
           flag = 0;
           LiveLedOn();
-          RtcGetNowToString(Device.Now);
+          DeviceTimeUpdate();
         }
         else
         {

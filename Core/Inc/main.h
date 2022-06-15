@@ -37,8 +37,9 @@ extern "C" {
 #include "DisplayLight.h"
 #include "PowerLed.h"
 #include "GuiItf.h"
-#include "Peri.h"
+#include "Periph.h"
 #include "eeprom.h"
+#include <time.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -153,8 +154,20 @@ typedef struct _AppTypeDef
     uint32_t Outputs;
     uint32_t Inputs;
   }Peri;
-  char Now[DEVICE_TIMESTAMP_SIZE];
-  uint32_t LogLastPageAddress;
+
+
+  struct _Log
+  {
+    uint32_t LastLine;
+  }Log;
+
+  struct _DateTime
+  {
+    char NowString[30];
+    time_t PosixTime;
+    struct tm tmDateTime;
+  }Time;
+
 }Device_t;
 
 extern Device_t Device;
@@ -170,7 +183,7 @@ void Error_Handler(void);
 /*** RTC ***/
 uint8_t RtcSet(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min, uint8_t sec);
 uint8_t RtcGet(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
-uint8_t RtcGetNowToString(char *timestamp_string);
+
 
 /* USER CODE END EFP */
 

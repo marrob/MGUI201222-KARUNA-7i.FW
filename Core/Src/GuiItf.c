@@ -67,7 +67,7 @@ uint8_t GuiItfLoad(void)
 
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
-    Device.LogLastPageAddress = value;
+    Device.Log.LastLine = value;
   }
   return GUIITF_OK;
 }
@@ -104,7 +104,7 @@ uint8_t GuiItfSetDefault(void)
   /*** Log ***/
   value = 0;
   EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, value);
-  Device.LogLastPageAddress = value;
+  Device.Log.LastLine = value;
 
 
   /*** Magic Word ***/
@@ -204,6 +204,7 @@ void GuiItfSetKarunaBnc(uint8_t onoff)
 uint8_t GuitIfGetKarunaIsBncSet(void)
 {
   return Device.Karuna.DO & KRN_DO_BNC_EN;
+ // return Device.Karuna.DO & KRN_DO_BNC_EN;
 }
 
 void GuiItfSetKarunaXlr(uint8_t onoff)
@@ -372,12 +373,12 @@ uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *days, uint8_t *hour
 
 uint32_t GuiItfLogGetLasPageAddr(void)
 {
-  return Device.LogLastPageAddress;
+  return Device.Log.LastLine;
 }
 
 void GuiItfLogIncPageAddr(void)
 {
-  Device.LogLastPageAddress++;
-  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.LogLastPageAddress);
+  Device.Log.LastLine++;
+  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.Log.LastLine);
 }
 

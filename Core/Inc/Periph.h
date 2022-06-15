@@ -35,8 +35,9 @@ uint16_t PeriGetInputs(void);
 void PeriSetOutputs(uint8_t data);
 
 /* LogFlash ------------------------------------------------------------------*/
-void LogFlashReadId (void);
-uint8_t LogFlashWriteLine(char *str);
-
+uint8_t LogFlashReadId (uint8_t *data, uint32_t size);
+uint8_t LogFlashErase(void);
+uint8_t LogFlashWriteLine(uint32_t addr, uint8_t *data, uint32_t size);
+uint8_t LogFlashReadLine(uint32_t line, uint8_t *data, uint32_t size);
 
 #endif /* _ANALOG_INPUTS_H_ */
