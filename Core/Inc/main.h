@@ -109,8 +109,6 @@ typedef struct _DiagTypeDef
 
   uint32_t PowerLedTaskCounter;
 
-
-
 }Diag_t;
 
 typedef struct _AppTypeDef
@@ -131,8 +129,8 @@ typedef struct _AppTypeDef
     char PCB[DEVICE_PCB_SIZE];
     uint32_t OkCnt;
     uint32_t UnknownCnt;
-    uint8_t DI;
-    uint8_t DO;
+    uint32_t DI;
+    uint32_t DO;
     uint32_t UpTimeSec;
     uint32_t SavedFlags;
   }Karuna;
@@ -143,8 +141,8 @@ typedef struct _AppTypeDef
     char PCB[DEVICE_PCB_SIZE];
     uint32_t OkCnt;
     uint32_t UnknownCnt;
-    uint8_t DO;
-    uint8_t DI;
+    uint32_t DO;
+    uint32_t DI;
     double AI[DAS_AI_CHANNELS];
     uint32_t UpTimeSec;
   }DasClock;
@@ -152,8 +150,8 @@ typedef struct _AppTypeDef
   {
     double AnalogInputs[4];
     double Temperatures[4];
-    uint8_t Outputs;
-    uint16_t Inputs;
+    uint32_t Outputs;
+    uint32_t Inputs;
   }Peri;
   char Now[DEVICE_TIMESTAMP_SIZE];
   uint32_t LogLastPageAddress;
