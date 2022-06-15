@@ -7,6 +7,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 #include "DisplayLight.h"
 #include "GuiItf.h"
 #include "EEPROM.h"
@@ -67,7 +68,7 @@ uint8_t GuiItfLoad(void)
 
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
-    Device.Log.LastLine = value;
+    Device.Log.LastAddress = value;
   }
   return GUIITF_OK;
 }
@@ -99,12 +100,21 @@ uint8_t GuiItfSetDefault(void)
   /*** RTC ***/
   value = 0x01;
   EepromU32Write(EEP_RTC_IS_SET_ADDR, value);
-  RtcSet(22, 6, 10, 13, 45, 30);
+
+  struct tm tm_info;
+  tm_info.tm_year = 2022 - 1900; // 2022
+  tm_info.tm_mon = 6 - 1; //Junius
+  tm_info.tm_mday = 1;
+  tm_info.tm_hour = 2;
+  tm_info.tm_min = 3;
+  tm_info.tm_sec = 4;
+  tm_info.tm_isdst = 0;
+  DeviceRtcSet(mktime(&tm_info));
 
   /*** Log ***/
   value = 0;
   EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, value);
-  Device.Log.LastLine = value;
+  Device.Log.LastAddress = value;
 
 
   /*** Magic Word ***/
@@ -352,33 +362,31 @@ uint8_t GuiItfGetDasClockIsExt(void)
 
 
 /* RTC -----------------------------------------------------------------------*/
-/*
- * year:  0..99
- * month: 1..12
- * days:  1..31
- * hours: 0..23
- * mins:  0..59
- * secs:  0..59
- */
-uint8_t GuiItfSetRtc(uint8_t year, uint8_t month, uint8_t days, uint8_t hours, uint8_t mins, uint8_t secs)
+void GuiItfSetRtc(time_t dt)
 {
-  return RtcSet(year, month, days, hours, mins, secs);
+  DeviceRtcSet(dt);
 }
-uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *days, uint8_t *hours, uint8_t *mins, uint8_t *secs)
+
+void GuiItfGetRtc(time_t *dt)
 {
-  return  RtcGet(year, month, days, hours, mins, secs);
+  *dt = Device.DateTime.PosixTime;
 }
 
 /* Log -----------------------------------------------------------------------*/
-
-uint32_t GuiItfLogGetLasPageAddr(void)
+uint32_t GuiItfLogGetLastAddress(void)
 {
-  return Device.Log.LastLine;
+  return Device.Log.LastAddress;
 }
 
-void GuiItfLogIncPageAddr(void)
+void GuiItfLogIncPage(void)
 {
-  Device.Log.LastLine++;
-  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.Log.LastLine);
+  Device.Log.LastAddress++;
+  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.Log.LastAddress);
 }
+
+void GuitItfLogGetLine(uint32_t address, char *line, uint32_t size)
+{
+  LogFlashReadLine(address, (uint8_t*)line, size);
+}
+
 

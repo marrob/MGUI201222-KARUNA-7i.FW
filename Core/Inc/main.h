@@ -79,7 +79,7 @@ extern "C" {
 #define RS485_ARG2_LENGTH     35
 
 /*** YYMMDD-HHmmss ***/
-#define DEVICE_TIMESTAMP_SIZE 14
+#define DEVICE_DT_STR_SIZE    20
 
 typedef struct _DiagTypeDef
 {
@@ -158,15 +158,15 @@ typedef struct _AppTypeDef
 
   struct _Log
   {
-    uint32_t LastLine;
+    uint32_t LastAddress;
   }Log;
 
   struct _DateTime
   {
-    char NowString[30];
+    char Now[DEVICE_DT_STR_SIZE];
     time_t PosixTime;
     struct tm tmDateTime;
-  }Time;
+  }DateTime;
 
 }Device_t;
 
@@ -181,9 +181,11 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 
 /*** RTC ***/
-uint8_t RtcSet(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min, uint8_t sec);
-uint8_t RtcGet(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
+uint8_t DeviceRtcSet(time_t dt);
+uint8_t DeviceRtcGet(time_t *dt);
 
+/*** Log **/
+void DeviceLogWriteLine(char *line);
 
 /* USER CODE END EFP */
 

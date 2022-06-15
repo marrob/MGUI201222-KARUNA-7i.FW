@@ -674,11 +674,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/vt100.h</locationURI>
 		</link>
 		<link>
-			<name>Drivers/Common/Src/StringPlus.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Src/StringPlus.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/Common/Src/common.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Src/common.c</locationURI>

@@ -13,11 +13,8 @@
 #include "GuiItf.h"
 
 /*** Log Flash ***/
-#define LOG_FLASH_PAGE_SIZE     256
-
 static void Spi2Transmitt(uint8_t *data, uint32_t size);
 static void Spi2Receive(uint8_t *data, uint32_t size);
-
 static uint16_t FlashReadStatusReg(void);
 
 /* Private user code ---------------------------------------------------------*/
@@ -88,7 +85,7 @@ uint8_t LogFlashReadId (uint8_t *data, uint32_t size)
   return LOG_OK;
 }
 
-uint8_t LogWriteLine(uint32_t line, uint8_t *data, uint32_t size)
+uint8_t LogFlashWriteLine(uint32_t line, uint8_t *data, uint32_t size)
 {
   if(line > 0xFFFFFF)
     return LOG_OUT_OF_RNG;
@@ -96,7 +93,7 @@ uint8_t LogWriteLine(uint32_t line, uint8_t *data, uint32_t size)
   if(size == 0)
     return 0;
 
-  uint32_t page = line * 256;
+  uint32_t page = line * LOG_FLASH_PAGE_SIZE;
 
   /*** WREN - Write Enable***/
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
@@ -128,9 +125,9 @@ uint8_t LogWriteLine(uint32_t line, uint8_t *data, uint32_t size)
   return LOG_OK;
 }
 
-uint8_t LogReadLine(uint32_t line, uint8_t *data, uint32_t size)
+uint8_t LogFlashReadLine(uint32_t line, uint8_t *data, uint32_t size)
 {
-  uint32_t page = line * 256;
+  uint32_t page = line * LOG_FLASH_PAGE_SIZE;
 
   if(line > 0xFFFFFF)
     return LOG_OUT_OF_RNG;
@@ -159,10 +156,15 @@ uint8_t LogReadLine(uint32_t line, uint8_t *data, uint32_t size)
   Spi2Transmitt(cmd, sizeof(cmd));
   Spi2Receive(data, size);
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
+
+  for(uint32_t i = 0; i < size; i++ )
+    if(data[i]==255)
+      data[i]=0;
+
   return LOG_OK;
 }
 
-uint8_t LogErase(void)
+uint8_t LogFlashErase(void)
 {
   /*** WREN - Write Enable***/
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);

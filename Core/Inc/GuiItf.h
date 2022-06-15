@@ -8,6 +8,7 @@
 #ifndef _GUIITF_H_
 #define _GUIITF_H_
 
+#include <time.h>
 
 #define GUIITF_OK             0x00
 #define GUIITF_FAIL           0x01
@@ -105,13 +106,12 @@ uint8_t GuiItfSetBacklight(uint8_t percent);
 uint8_t GuiItfGetBacklight(void);
 void GuiItfBacklightEnable(void);
 void GuiItfBacklightDisable(void);
-
 /* RTC -----------------------------------------------------------------------*/
-uint8_t GuiItfSetRtc(uint8_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t mins, uint8_t secs);
-uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
-
+void GuiItfSetRtc(time_t dt);
+void GuiItfGetRtc(time_t *dt);
 /* Log -----------------------------------------------------------------------*/
-uint32_t GuiItfLogGetLasPageAddr(void);
-void GuiItfLogIncPageAddr(void);
+uint32_t GuiItfLogGetLastAddress(void);
+void GuitItfLogGetLine(uint32_t address, char *line, uint32_t size);
+void GuiItfLogIncPage(void);
 
 #endif /* _GUIITF_H_ */
