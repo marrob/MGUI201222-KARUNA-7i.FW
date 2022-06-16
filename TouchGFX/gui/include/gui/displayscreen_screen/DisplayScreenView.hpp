@@ -16,9 +16,25 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
 
+    virtual void handleTickEvent();
+
+    virtual void rbtnSelect0OffTmr();
+    virtual void rbtnSelect1OffTmr();
+    virtual void rbtnSelect5OffTmr();
+    virtual void rbtnSelect10OffTmr();
+    virtual void rbtnSelect30OffTmr();
+    virtual void rbtnSelect60OffTmr();
+    virtual void rbtnSelect120OffTmr();
+
+    void GetOfTimerValue();
+
+
 #ifdef SIMULATOR
     uint8_t GuiItfSetBacklight(uint8_t percent);
     uint8_t GuiItfGetBacklight(void);
+    void GuiItfSetBackLightAutoOff(uint32_t sec);
+    uint32_t GuiItfGetBacklightAutoOff(void);
+    uint32_t GuiItfGetRemainingTimeToOff(void);
 #endif
 
 private:

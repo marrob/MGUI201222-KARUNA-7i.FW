@@ -112,6 +112,12 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_USF5" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">00:00</Translation>
+      </Text>
+      <Text Id="__SingleUse_SC3P" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Time To Off  &lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_GJVC" Alignment="Left" TypographyId="SWText">
         <Translation Language="GB">06.06.2022 09:50:36</Translation>
       </Text>
@@ -358,7 +364,7 @@
     <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,." WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="SWText_high" Font="arialbd.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
     <Typography Id="SWText" Font="arial.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,." WildcardCharacterRanges="0-9" />

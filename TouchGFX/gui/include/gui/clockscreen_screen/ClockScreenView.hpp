@@ -12,6 +12,8 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
     virtual void handleTickEvent();
+
+    void RequestCurrentTime();
      
     virtual void scrollYearUpdateItem(textContainer& item, int16_t itemIndex);
     virtual void scrollYearUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);

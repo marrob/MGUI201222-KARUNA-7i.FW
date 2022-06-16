@@ -26,8 +26,9 @@ void ClockScreenView::GuiItfGetRtc(time_t* dt)
 
 		simDateTime = mktime(&tm_info);
 	}
-	dt = &simDateTime;
-	dt = dt;
+	simDateTime++;
+	*dt = simDateTime;
+	//dt = dt;
 }
 
 #else
@@ -132,19 +133,24 @@ void ClockScreenView::handleTickEvent()
 	//Wait for 
 	if (mClockTickCount % 10 == 0)
 	{
-		time_t dt = 1655407282;
-		time_t* dtp = &dt;
-		GuiItfGetRtc(dtp);
-		struct tm* tm_info = gmtime(dtp);
-		char strDateTime[25];
-		strftime(strDateTime, 25, "%Y.%m.%d %H:%M:%S", tm_info);
-
-
-		Unicode::UnicodeChar uni_DateTime[25];
-		Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
-		Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
-		lblDateTime.invalidate();
+		RequestCurrentTime();
 	}
+}
+
+void ClockScreenView::RequestCurrentTime()
+{
+	//time_t dt = 1655407282;
+	time_t dtp;// = &dt;
+	GuiItfGetRtc(&dtp);
+	struct tm* tm_info = gmtime(&dtp);
+	char strDateTime[25];
+	strftime(strDateTime, 25, "%d.%m.%Y %H:%M:%S", tm_info);
+
+
+	Unicode::UnicodeChar uni_DateTime[25];
+	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
+	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
+	lblDateTime.invalidate();
 }
 
 void ClockScreenView::SetClockTime()
@@ -158,32 +164,31 @@ void ClockScreenView::SetClockTime()
 	int sec = scrollSec.getSelectedItem();
 
 
-	tm tm_info;
-	tm_info.tm_year = year + 2000;
-	tm_info.tm_mon = month;
+	struct tm tm_info;
+	tm_info.tm_year = year + 100;
+	tm_info.tm_mon = month - 1;
 	tm_info.tm_mday = day;
-	tm_info.tm_hour = hour;
+	tm_info.tm_hour = hour + 1;
 	tm_info.tm_min = min;
 	tm_info.tm_sec = sec;
-	tm_info.tm_isdst = 0;
-	tm* ptm = &tm_info;
+	tm_info.tm_isdst = 0; 
 
-	time_t setTime = mktime(ptm);
+	time_t setTime = mktime(&tm_info);
 	GuiItfSetRtc(setTime);
 }
 
 void ClockScreenView::GetClockTime()
 { 
-	time_t dt = 1655407282;
-	time_t* dtp = &dt;
-	GuiItfGetRtc(dtp);
-	struct tm* tm_info = gmtime(dtp);
+	//time_t dt = 1655407282;
+	time_t dtp;// = &dt;
+	GuiItfGetRtc(&dtp);
+	struct tm* tm_info = gmtime(&dtp);
 
 	uint16_t year = tm_info->tm_year + 1900;
 	uint8_t mon = tm_info->tm_mon;
 	uint8_t day = tm_info->tm_mday-1;
 
-	uint8_t hour = tm_info->tm_hour;
+	uint8_t hour = tm_info->tm_hour + 1;
 	uint8_t min = tm_info->tm_min;
 	uint8_t sec = tm_info->tm_sec;
 	 

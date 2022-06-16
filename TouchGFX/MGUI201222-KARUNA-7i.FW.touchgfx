@@ -1633,7 +1633,7 @@
               {
                 "Type": "RadioButton",
                 "Name": "rdbtnSet30",
-                "X": 214,
+                "X": 259,
                 "Y": 69,
                 "Width": 44,
                 "Height": 44,
@@ -1646,7 +1646,7 @@
               {
                 "Type": "TextArea",
                 "Name": "textArea2_3_2",
-                "X": 269,
+                "X": 314,
                 "Y": 69,
                 "Width": 267,
                 "Height": 42,
@@ -1661,7 +1661,7 @@
               {
                 "Type": "RadioButton",
                 "Name": "rdbtnSet60",
-                "X": 214,
+                "X": 259,
                 "Y": 124,
                 "Width": 44,
                 "Height": 44,
@@ -1674,7 +1674,7 @@
               {
                 "Type": "TextArea",
                 "Name": "textArea2_3_3",
-                "X": 269,
+                "X": 314,
                 "Y": 124,
                 "Width": 267,
                 "Height": 42,
@@ -1689,7 +1689,7 @@
               {
                 "Type": "RadioButton",
                 "Name": "rdbtnSet120",
-                "X": 214,
+                "X": 259,
                 "Y": 179,
                 "Width": 44,
                 "Height": 44,
@@ -1702,7 +1702,7 @@
               {
                 "Type": "TextArea",
                 "Name": "textArea2_3_4",
-                "X": 269,
+                "X": 314,
                 "Y": 179,
                 "Width": 267,
                 "Height": 42,
@@ -1747,6 +1747,26 @@
                   "Red": 200,
                   "Green": 200,
                   "Blue": 200
+                }
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblTimeToOff",
+                "X": 259,
+                "Y": 15,
+                "Width": 267,
+                "Height": 42,
+                "TextId": "__SingleUse_SC3P",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 200,
+                  "Green": 200,
+                  "Blue": 200
+                },
+                "Wildcard1": {
+                  "TextId": "__SingleUse_USF5",
+                  "UseBuffer": true,
+                  "BufferSize": 10
                 }
               }
             ]
@@ -1805,6 +1825,83 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "sldrBrightnesChanged"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect0OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet0"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect0OffTmr"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect1OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect1OffTmr"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect5OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet5"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect5OffTmr"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect10OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet10"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect10OffTmr"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect30OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet30"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect30OffTmr"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect60OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet60"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect60OffTmr"
+            }
+          },
+          {
+            "InteractionName": "rbtnSelect120OffTmr",
+            "Trigger": {
+              "Type": "TriggerRadioButtonSelected",
+              "TriggerComponent": "rdbtnSet120"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "rbtnSelect120OffTmr"
             }
           }
         ]
