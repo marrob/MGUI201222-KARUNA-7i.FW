@@ -13,6 +13,7 @@ public:
     virtual void setupScreen();
     virtual void tearDownScreen();
     virtual void handleTickEvent();
+    virtual void OnClickFactoryReset();
     void RefreshServiceInfo();
     void GetVersionInfo();
 
@@ -38,6 +39,8 @@ public:
   float GuiItfGetDasClockMVOCX2Current();
 
   float GuiItfGetDasClockMainVoltage();
+
+  void GuiItfFacotryReset(void);
 
 #endif
      

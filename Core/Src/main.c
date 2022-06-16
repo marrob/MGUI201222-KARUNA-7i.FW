@@ -168,15 +168,15 @@ const osMessageQueueAttr_t USBUartRxQueue_attributes = {
 Device_t Device;
 __IO unsigned long RTOSRunTimeStatTick;
 
-static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
+static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] /*__attribute__ ((aligned (32)))*/;
 static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
 
 RS485TxItem_t RS485TxCollection[] =
 {
   /*** Karuna ***/
   {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-  {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-  {"#%02X DO %08X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
+  {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 100 },
+  {"#%02X DO %08X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 100 },
   {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4000 },
   {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4200 },
   {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4600 },
@@ -247,10 +247,6 @@ uint8_t DeviceTimeUpdate(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void SayHelloWorld(uint8_t p)
-{
-  printf("Hello World");
-}
 /* USER CODE END 0 */
 
 /**
@@ -340,27 +336,13 @@ int main(void)
   DeviceTimeUpdate();
 
   /*** Falsh Playgorund ***/
-  //uint16_t id;
-  //LogFlashReadId((uint8_t*)&id, sizeof(id));
-  //LogErase();
-  //uint8_t w[] = "Hello";
-  //uint8_t r[sizeof(w)];
-  //LogFlashWriteLine(1, w, sizeof(w));
-  //memset(r, 0, sizeof(r));
-  //LogFlashReadLine(1,r, sizeof(r));
-
-  char bufi[256];
+  char buf[256];
   for(uint32_t i = 0; i < GuiItfLogGetLastAddress(); i++)
   {
-    GuitItfLogGetLine(i,bufi, sizeof(bufi));
-    printf( "%s\n", bufi);
+    GuitItfLogGetLine(i,buf, sizeof(buf));
+    printf( "%s\n", buf);
   }
-//  while(1)
-  //  LogFlashReadId();
 
- // LogFlashWriteLine("Hello World");
-
- // LogFlashWriteLine("It is a Test");
 
   /* USER CODE END 2 */
 
@@ -408,7 +390,6 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  printf("FreeRTOS osKernelStart()");
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -423,7 +404,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-   // LiveLedTask(&hLiveLed);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -1357,7 +1337,7 @@ void UsbParser(char *request)
       }
       else if(!strcmp(cmd, "DIS:LIG?"))
       {
-        sprintf(response, "%d", BacklightGet());
+        sprintf(response, "%d", Device.Backlight.LightPercent);
       }
 //        else if(!strcmp(cmd, "LED:LIG?"))
 //        {
@@ -1473,6 +1453,7 @@ uint8_t DeviceRtcSet(time_t dt)
 
   return DEVICE_OK;
 }
+
 
 uint8_t DeviceRtcGet(time_t *dt)
 {
@@ -1661,21 +1642,7 @@ void RS485Parser(char *response)
   }
 }
 
-/*- Log ----------------------------------------------------------------------*/
-void DeviceLogWriteLine(char *line)
-{
-  char buffer[LOG_FLASH_PAGE_SIZE];
-  memset(buffer, 0 , sizeof(buffer));
-  uint8_t line_size = strlen(line);
-  uint8_t dt_size = strlen(Device.DateTime.Now);
-  if(line_size + dt_size < sizeof(buffer))
-    sprintf(buffer, "%s:%s", Device.DateTime.Now, line );
 
-  if(strlen(buffer) < LOG_FLASH_PAGE_SIZE)
-    LogFlashWriteLine(Device.Log.LastAddress, (uint8_t*)buffer, strlen(buffer));
-
-  GuiItfLogIncPage();
-}
 
 /* USER CODE END 4 */
 
@@ -1690,7 +1657,7 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
 
-  DeviceLogWriteLine("Start Default Task");
+  LogWriteLine("Start Default Task");
 
   MX_TouchGFX_Process();
   /* Infinite loop */

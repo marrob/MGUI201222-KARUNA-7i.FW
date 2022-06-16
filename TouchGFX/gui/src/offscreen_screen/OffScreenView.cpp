@@ -2,17 +2,13 @@
  
 
 #ifdef SIMULATOR
-void OffScreenView::GuiItfBacklightEnable()
-{
-}
-void OffScreenView::GuiItfBacklightDisable()
+void OffScreenView::GuiItfSetBacklightEn(uint8_t onoff)
 {
 }
 #else
 extern "C"
 {
-    void GuiItfBacklightEnable();
-    void GuiItfBacklightDisable();
+  void GuiItfSetBacklightEn(uint8_t onoff);
 }
 #endif
 
@@ -24,7 +20,7 @@ OffScreenView::OffScreenView()
 void OffScreenView::setupScreen()
 {
   OffScreenViewBase::setupScreen();
-  GuiItfBacklightDisable();
+  GuiItfSetBacklightEn(0);
 }
 
 void OffScreenView::tearDownScreen()
@@ -34,5 +30,5 @@ void OffScreenView::tearDownScreen()
 
 void OffScreenView::btnScreenOnClick() 
 {
-  GuiItfBacklightEnable();
+  GuiItfSetBacklightEn(1);
 }

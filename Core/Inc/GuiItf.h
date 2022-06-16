@@ -83,7 +83,7 @@ void GuiItfSetKarunaXlr(uint8_t onfoff);
 uint8_t GuitIfGetKarunaIsXlrSet(void);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
 uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
-void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
+void GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff);
 void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
 uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
 
@@ -104,8 +104,9 @@ uint8_t GuiItfGetDasClockIsExt(void);
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent);
 uint8_t GuiItfGetBacklight(void);
-void GuiItfBacklightEnable(void);
-void GuiItfBacklightDisable(void);
+void GuiItfSetBacklightEn(uint8_t onoff);
+void GuiItfSetBackLightAutoOff(uint32_t sec);
+uint32_t GuiItfGetBaclightAutoOff(void);
 /* RTC -----------------------------------------------------------------------*/
 void GuiItfSetRtc(time_t dt);
 void GuiItfGetRtc(time_t *dt);

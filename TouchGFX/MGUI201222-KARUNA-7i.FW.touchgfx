@@ -2869,7 +2869,7 @@
             },
             "Action": {
               "Type": "ActionCustom",
-              "FunctionName": "FactoryReset"
+              "FunctionName": "OnClickFactoryReset"
             }
           }
         ]

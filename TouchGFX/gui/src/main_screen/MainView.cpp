@@ -554,10 +554,12 @@ bool MainView::ToBinary(int number, int position)
 void MainView::handleTickEvent()
 {
 	mTickCount++;
+
+	RefreshKarunaAndClockInfo();
 	//Wait for 0.5sec
 	if (mTickCount % 30 == 0)
 	{
-		RefreshKarunaAndClockInfo();
+
 	}
 }
 

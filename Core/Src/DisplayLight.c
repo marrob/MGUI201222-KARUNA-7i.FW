@@ -13,7 +13,6 @@
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-Backlight_t _backLight;
 
 static TIM_HandleTypeDef *_htim;
 /* Private function prototypes -----------------------------------------------*/
@@ -28,18 +27,13 @@ void BacklightInit(TIM_HandleTypeDef *htim)
 
 uint8_t BacklightSet(uint8_t percent)
 {
-  _backLight.LightPercent = percent;
+  Device.Backlight.LightPercent = percent;
   percent = 100 - percent;
   uint32_t arr = __HAL_TIM_GET_AUTORELOAD(_htim);
   uint32_t ccr = (arr * percent) / 100;
   __HAL_TIM_SET_COMPARE(_htim,TIM_CHANNEL_4, ccr);
 
   return DISPLAY_LIGHT_OK;
-}
-
-uint8_t BacklightGet(void)
-{
-  return  _backLight.LightPercent;
 }
 
 
