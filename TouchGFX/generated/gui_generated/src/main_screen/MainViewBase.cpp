@@ -17,7 +17,7 @@ MainViewBase::MainViewBase() :
     __background.setPosition(0, 0, 1024, 600);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    box1.setPosition(0, -2, 1024, 600);
+    box1.setPosition(0, 0, 1024, 600);
     box1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
     btnHDMI.setBoxWithBorderPosition(0, 0, 80, 80);
@@ -202,6 +202,14 @@ MainViewBase::MainViewBase() :
     circTemp3Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     circTemp3.setPainter(circTemp3Painter);
 
+    lblMasterClkEnable_1_3_1_1.setXY(704, 460);
+    lblMasterClkEnable_1_3_1_1.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
+    lblMasterClkEnable_1_3_1_1.setLinespacing(0);
+    Unicode::snprintf(lblMasterClkEnable_1_3_1_1Buffer, LBLMASTERCLKENABLE_1_3_1_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GJVC).getText());
+    lblMasterClkEnable_1_3_1_1.setWildcard(lblMasterClkEnable_1_3_1_1Buffer);
+    lblMasterClkEnable_1_3_1_1.resizeToCurrentText();
+    lblMasterClkEnable_1_3_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HGJP));
+
     add(__background);
     add(box1);
     add(btnHDMI);
@@ -225,6 +233,7 @@ MainViewBase::MainViewBase() :
     add(circTemp1);
     add(circTemp2);
     add(circTemp3);
+    add(lblMasterClkEnable_1_3_1_1);
 }
 
 void MainViewBase::setupScreen()

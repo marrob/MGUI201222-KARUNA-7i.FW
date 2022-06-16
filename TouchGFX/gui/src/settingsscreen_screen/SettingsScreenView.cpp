@@ -43,16 +43,15 @@ SettingsScreenView::SettingsScreenView()
 
 void SettingsScreenView::setupScreen()
 {
-	SettingsScreenViewBase::setupScreen();
-	scrollYear.animateToItem(2022);
-	scrollMonth.animateToItem(1);
-	scrollDay.animateToItem(1);
+	SettingsScreenViewBase::setupScreen(); 
 }
 
 void SettingsScreenView::tearDownScreen()
 {
 	SettingsScreenViewBase::tearDownScreen();
 }
+
+//OUTPUT SETTINGS
 
 void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
 {
@@ -70,65 +69,4 @@ void SettingsScreenView::ClickMasterClkOnI2S()
 		GuiItfSetKarunaMasterClkOnI2S(1);
 	else
 		GuiItfSetKarunaMasterClkOnI2S(0);
-}
-
-void SettingsScreenView::scrollYearUpdateItem(textContainer& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollYearUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollMonthUpdateItem(textContainer& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex + 1);
-}
-
-void SettingsScreenView::scrollMonthUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex + 1);
-}
-
-void SettingsScreenView::scrollDayUpdateItem(textContainer& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex + 1);
-}
-
-void SettingsScreenView::scrollDayUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex + 1);
-}
-
-
-void SettingsScreenView::scrollHourUpdateItem(textContainer& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollHourUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollMinUpdateItem(textContainer& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollMinUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollSecUpdateItem(textContainer& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
-}
-
-void SettingsScreenView::scrollSecUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
-{
-	item.updateText(itemIndex);
 }

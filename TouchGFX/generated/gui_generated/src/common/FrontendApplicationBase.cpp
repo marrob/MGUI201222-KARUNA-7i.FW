@@ -21,6 +21,8 @@
 #include <gui/servicescreen_screen/ServiceScreenPresenter.hpp>
 #include <gui/passwordscreen_screen/PasswordScreenView.hpp>
 #include <gui/passwordscreen_screen/PasswordScreenPresenter.hpp>
+#include <gui/clockscreen_screen/ClockScreenView.hpp>
+#include <gui/clockscreen_screen/ClockScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -89,6 +91,17 @@ void FrontendApplicationBase::gotoSettingsScreenScreenSlideTransitionEastImpl()
     touchgfx::makeTransition<SettingsScreenView, SettingsScreenPresenter, touchgfx::SlideTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
+void FrontendApplicationBase::gotoSettingsScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoSettingsScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoSettingsScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<SettingsScreenView, SettingsScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 // DisplayScreen
 
 void FrontendApplicationBase::gotoDisplayScreenScreenSlideTransitionEast()
@@ -126,4 +139,17 @@ void FrontendApplicationBase::gotoPasswordScreenScreenNoTransition()
 void FrontendApplicationBase::gotoPasswordScreenScreenNoTransitionImpl()
 {
     touchgfx::makeTransition<PasswordScreenView, PasswordScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// ClockScreen
+
+void FrontendApplicationBase::gotoClockScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoClockScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoClockScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<ClockScreenView, ClockScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
