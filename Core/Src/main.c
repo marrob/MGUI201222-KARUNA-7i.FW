@@ -31,6 +31,9 @@
 #include <stdlib.h>
 #include "GuiItf.h"
 #include "LiveLed.h"
+
+#include "Log.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -173,16 +176,16 @@ RS485TxItem_t RS485TxCollection[] =
   /*** Karuna ***/
   {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
   {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-  {"#%02X DO %02X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
-  {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
-  {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
-  {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 1000 },
+  {"#%02X DO %08X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
+  {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4000 },
+  {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4200 },
+  {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4600 },
 
   /*** DasClock ***/
   {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-  {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
-  {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
-  {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 3000 },
+  {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5000 },
+  {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5200 },
+  {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5400 },
 
   {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
   {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2100 },
@@ -237,6 +240,8 @@ void RS485DirTx(void);
 void RS485DirRx(void);
 void RS485Parser(char *response);
 void RS485UartTx(char *str);
+
+uint8_t DeviceTimeUpdate(void);
 
 /* USER CODE END PFP */
 
@@ -318,6 +323,7 @@ int main(void)
 
   /*** EEPROM ***/
   EepromInit(&hi2c1);
+  GuiItfLoad();
 
   /*** LiveLed ***/
   hLiveLed.LedOffFnPtr = &LiveLedOff;
@@ -330,7 +336,25 @@ int main(void)
   sprintf(Device.Gui.UID, "%4lX%4lX%4lX",HAL_GetUIDw0(), HAL_GetUIDw1(), HAL_GetUIDw2());
   sprintf(Device.Gui.PCB, "%s",DEVICE_PCB);
 
+  /*** Date ***/
+  DeviceTimeUpdate();
 
+  /*** Falsh Playgorund ***/
+  //uint16_t id;
+  //LogFlashReadId((uint8_t*)&id, sizeof(id));
+  //LogErase();
+  //uint8_t w[] = "Hello";
+  //uint8_t r[sizeof(w)];
+  //LogFlashWriteLine(1, w, sizeof(w));
+  //memset(r, 0, sizeof(r));
+  //LogFlashReadLine(1,r, sizeof(r));
+
+  char bufi[256];
+  for(uint32_t i = 0; i < GuiItfLogGetLastAddress(); i++)
+  {
+    GuitItfLogGetLine(i,bufi, sizeof(bufi));
+    printf( "%s\n", bufi);
+  }
 //  while(1)
   //  LogFlashReadId();
 
@@ -1427,20 +1451,22 @@ void UsbParser(char *request)
 }
 
 /* RTC -----------------------------------------------------------------------*/
-uint8_t RtcSet(uint8_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t mins, uint8_t secs)
+uint8_t DeviceRtcSet(time_t dt)
 {
+  struct tm *tm_info = gmtime(&dt);
+
   RTC_DateTypeDef date;
-  date.Year = year;
-  date.Month = month;
-  date.Date = day;
+  date.Year = tm_info->tm_year - 100;
+  date.Month = tm_info->tm_mon + 1;
+  date.Date = tm_info->tm_mday;
   date.WeekDay = 0;
   if(HAL_RTC_SetDate(&hrtc, &date, RTC_FORMAT_BIN) != HAL_OK)
     return DEVICE_FAIL;
 
   RTC_TimeTypeDef time;
-  time.Hours = hours;
-  time.Minutes = mins;
-  time.Seconds = secs;
+  time.Hours = tm_info->tm_hour;
+  time.Minutes = tm_info->tm_min;
+  time.Seconds = tm_info->tm_sec;
 
   if(HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN) != HAL_OK)
     return DEVICE_FAIL;
@@ -1448,35 +1474,44 @@ uint8_t RtcSet(uint8_t year, uint8_t month, uint8_t day, uint8_t hours, uint8_t 
   return DEVICE_OK;
 }
 
-uint8_t RtcGet(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs)
+uint8_t DeviceRtcGet(time_t *dt)
 {
-
   RTC_DateTypeDef date;
   if(HAL_RTC_GetDate(&hrtc, &date, RTC_FORMAT_BIN) != HAL_OK)
     return DEVICE_FAIL;
-  *year = date.Year;
-  *month = date.Month;
-  *day = date.Date;
 
   RTC_TimeTypeDef time;
   if(HAL_RTC_GetTime(&hrtc, &time, RTC_FORMAT_BIN) != HAL_OK)
     return DEVICE_FAIL;
-  *hours = time.Hours;
-  *mins = time.Minutes;
-  *secs = time.Seconds;
 
+  struct tm tm_info;
+  tm_info.tm_year = 2000 - 1900 + date.Year ;
+  tm_info.tm_mon = date.Month - 1;
+  tm_info.tm_mday = date.Date;
+  tm_info.tm_hour = time.Hours;
+  tm_info.tm_min = time.Minutes;
+  tm_info.tm_sec = time.Seconds;
+  tm_info.tm_isdst = 0;
+  *dt = mktime(&tm_info);
   return DEVICE_OK;
 }
 
-uint8_t RtcGetNowToString(char *timestamp_string)
+uint8_t DeviceTimeUpdate()
 {
-  memset(timestamp_string, 0x00, DEVICE_TIMESTAMP_SIZE);
-  uint8_t year, month, day, hours, mins, secs;
-
-  if(RtcGet(&year, &month, &day, &hours, &mins, &secs) != DEVICE_OK)
+  if(DeviceRtcGet(&Device.DateTime.PosixTime) != DEVICE_OK)
     return DEVICE_FAIL;
 
-  sprintf(timestamp_string,"%02d%02d%02d-%02d%02d%02d", year, month, day, hours, mins, secs);
+  struct tm *tm_info  = localtime(&Device.DateTime.PosixTime);
+  Device.DateTime.tmDateTime.tm_year = tm_info->tm_year;
+  Device.DateTime.tmDateTime.tm_mon = tm_info->tm_mon;
+  Device.DateTime.tmDateTime.tm_mday = tm_info->tm_mday;
+  Device.DateTime.tmDateTime.tm_hour = tm_info->tm_hour;
+  Device.DateTime.tmDateTime.tm_min = tm_info->tm_min;
+  Device.DateTime.tmDateTime.tm_year = tm_info->tm_year;
+  Device.DateTime.tmDateTime.tm_sec = tm_info->tm_sec;
+  Device.DateTime.tmDateTime.tm_isdst = tm_info->tm_isdst;
+
+  strftime(Device.DateTime.Now, DEVICE_DT_STR_SIZE, "%Y-%m-%d %H:%M:%S", tm_info );
 
   return DEVICE_OK;
 }
@@ -1625,6 +1660,23 @@ void RS485Parser(char *response)
     }
   }
 }
+
+/*- Log ----------------------------------------------------------------------*/
+void DeviceLogWriteLine(char *line)
+{
+  char buffer[LOG_FLASH_PAGE_SIZE];
+  memset(buffer, 0 , sizeof(buffer));
+  uint8_t line_size = strlen(line);
+  uint8_t dt_size = strlen(Device.DateTime.Now);
+  if(line_size + dt_size < sizeof(buffer))
+    sprintf(buffer, "%s:%s", Device.DateTime.Now, line );
+
+  if(strlen(buffer) < LOG_FLASH_PAGE_SIZE)
+    LogFlashWriteLine(Device.Log.LastAddress, (uint8_t*)buffer, strlen(buffer));
+
+  GuiItfLogIncPage();
+}
+
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_StartDefaultTask */
@@ -1638,7 +1690,7 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
 
-  GuiItfLoad();
+  DeviceLogWriteLine("Start Default Task");
 
   MX_TouchGFX_Process();
   /* Infinite loop */
@@ -1744,7 +1796,7 @@ void LiveLedOsTask(void *argument)
         {
           flag = 0;
           LiveLedOn();
-          RtcGetNowToString(Device.Now);
+          DeviceTimeUpdate();
         }
         else
         {
