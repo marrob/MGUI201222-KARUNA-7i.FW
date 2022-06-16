@@ -168,15 +168,15 @@ const osMessageQueueAttr_t USBUartRxQueue_attributes = {
 Device_t Device;
 __IO unsigned long RTOSRunTimeStatTick;
 
-static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
+static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] /*__attribute__ ((aligned (32)))*/;
 static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
 
 RS485TxItem_t RS485TxCollection[] =
 {
   /*** Karuna ***/
   {"#%02X UPTIME?", KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
-  {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
-  {"#%02X DO %08X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 200 },
+  {"#%02X DI?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 100 },
+  {"#%02X DO %08X", KRN_HOST_TX_ADDR, TX_ITEM_INT_ARG, &Device.Karuna.DO, 100 },
   {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4000 },
   {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4200 },
   {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4600 },
@@ -358,9 +358,9 @@ int main(void)
 //  while(1)
   //  LogFlashReadId();
 
- // LogFlashWriteLine("Hello World");
+ // LogFlash("Hello World");
 
- // LogFlashWriteLine("It is a Test");
+ // LogFlashWrite("It is a Test");
 
   /* USER CODE END 2 */
 
@@ -1661,21 +1661,7 @@ void RS485Parser(char *response)
   }
 }
 
-/*- Log ----------------------------------------------------------------------*/
-void DeviceLogWriteLine(char *line)
-{
-  char buffer[LOG_FLASH_PAGE_SIZE];
-  memset(buffer, 0 , sizeof(buffer));
-  uint8_t line_size = strlen(line);
-  uint8_t dt_size = strlen(Device.DateTime.Now);
-  if(line_size + dt_size < sizeof(buffer))
-    sprintf(buffer, "%s:%s", Device.DateTime.Now, line );
 
-  if(strlen(buffer) < LOG_FLASH_PAGE_SIZE)
-    LogFlashWriteLine(Device.Log.LastAddress, (uint8_t*)buffer, strlen(buffer));
-
-  GuiItfLogIncPage();
-}
 
 /* USER CODE END 4 */
 
@@ -1690,7 +1676,7 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
 
-  DeviceLogWriteLine("Start Default Task");
+  LogWriteLine("Start Default Task");
 
   MX_TouchGFX_Process();
   /* Infinite loop */

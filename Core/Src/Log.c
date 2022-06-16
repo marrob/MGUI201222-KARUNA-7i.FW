@@ -85,15 +85,15 @@ uint8_t LogFlashReadId (uint8_t *data, uint32_t size)
   return LOG_OK;
 }
 
-uint8_t LogFlashWriteLine(uint32_t line, uint8_t *data, uint32_t size)
+uint8_t LogFlashWrite(uint32_t addr, uint8_t *data, uint32_t size)
 {
-  if(line > 0xFFFFFF)
+  if(addr > 0xFFFFFF)
     return LOG_OUT_OF_RNG;
 
   if(size == 0)
     return 0;
 
-  uint32_t page = line * LOG_FLASH_PAGE_SIZE;
+  uint32_t page = addr * LOG_FLASH_PAGE_SIZE;
 
   /*** WREN - Write Enable***/
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_RESET);
@@ -125,11 +125,11 @@ uint8_t LogFlashWriteLine(uint32_t line, uint8_t *data, uint32_t size)
   return LOG_OK;
 }
 
-uint8_t LogFlashReadLine(uint32_t line, uint8_t *data, uint32_t size)
+uint8_t LogFlashRead(uint32_t addr, uint8_t *data, uint32_t size)
 {
-  uint32_t page = line * LOG_FLASH_PAGE_SIZE;
+  uint32_t page = addr * LOG_FLASH_PAGE_SIZE;
 
-  if(line > 0xFFFFFF)
+  if(addr > 0xFFFFFF)
     return LOG_OUT_OF_RNG;
 
   if(size > 256)
@@ -199,6 +199,27 @@ uint16_t FlashReadStatusReg(void)
   HAL_GPIO_WritePin(FLS_CS_GPIO_Port, FLS_CS_Pin, GPIO_PIN_SET);
 
   return status;
+}
+
+uint8_t LogWriteLine(char *line)
+{
+  static char buffer[LOG_FLASH_PAGE_SIZE];
+  memset(buffer, 0 , sizeof(buffer));
+  uint8_t line_size = strlen(line);
+  uint8_t dt_size = strlen(Device.DateTime.Now);
+  if(line_size + dt_size < sizeof(buffer))
+    sprintf(buffer, "%s: %s", Device.DateTime.Now, line );
+  else
+    return LOG_FAIL;
+
+  if(strlen(buffer) < LOG_FLASH_PAGE_SIZE)
+    LogFlashWrite(Device.Log.LastAddress, (uint8_t*)buffer, strlen(buffer));
+  else
+    return LOG_FAIL;
+
+  GuiItfLogIncPage();
+
+  return LOG_OK;
 }
 
 

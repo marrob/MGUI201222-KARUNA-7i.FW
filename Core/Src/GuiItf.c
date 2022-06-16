@@ -7,7 +7,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-
+#include "Log.h"
 #include "DisplayLight.h"
 #include "GuiItf.h"
 #include "EEPROM.h"
@@ -174,16 +174,21 @@ uint8_t GuiItfGetKarunaStatus(void)
 void GuiItfSetKarunaHdmi(uint8_t onoff)
 {
   if(onoff)
+  {
+    LogWriteLine("GuiItfSetKarunaHdmi: On");
     Device.Karuna.DO |= KRN_DO_I2S_EN;
+  }
   else
+  {
+    LogWriteLine("GuiItfSetKarunaHdmi: Off");
     Device.Karuna.DO &= ~KRN_DO_I2S_EN;
-
+  }
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
 }
 
 uint8_t GuitIfGetKarunaIsHdmiSet(void)
 {
-  return Device.Karuna.DO & KRN_DO_I2S_EN;
+  return (Device.Karuna.DI & KRN_DI_I2S) == KRN_DI_I2S;
 }
 
 void GuiItfSetKarunaRca(uint8_t onoff)
@@ -198,7 +203,7 @@ void GuiItfSetKarunaRca(uint8_t onoff)
 
 uint8_t GuitIfGetKarunaIsRcaSet(void)
 {
-  return Device.Karuna.DO & KRN_DO_RCA_EN;
+  return (Device.Karuna.DI & KRN_DI_RCA) == KRN_DI_RCA;
 }
 
 void GuiItfSetKarunaBnc(uint8_t onoff)
@@ -213,8 +218,7 @@ void GuiItfSetKarunaBnc(uint8_t onoff)
 
 uint8_t GuitIfGetKarunaIsBncSet(void)
 {
-  return Device.Karuna.DO & KRN_DO_BNC_EN;
- // return Device.Karuna.DO & KRN_DO_BNC_EN;
+  return (Device.Karuna.DI & KRN_DI_BNC) == KRN_DI_BNC;
 }
 
 void GuiItfSetKarunaXlr(uint8_t onoff)
@@ -229,7 +233,7 @@ void GuiItfSetKarunaXlr(uint8_t onoff)
 
 uint8_t GuitIfGetKarunaIsXlrSet()
 {
-  return Device.Karuna.DO & KRN_DO_XLR_EN;
+  return (Device.Karuna.DI & KRN_DI_XLR) == KRN_DI_XLR;
 }
 
 uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
@@ -386,7 +390,7 @@ void GuiItfLogIncPage(void)
 
 void GuitItfLogGetLine(uint32_t address, char *line, uint32_t size)
 {
-  LogFlashReadLine(address, (uint8_t*)line, size);
+  LogFlashRead(address, (uint8_t*)line, size);
 }
 
 
