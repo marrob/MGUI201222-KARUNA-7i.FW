@@ -67,13 +67,13 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblKarunaUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UULC));
     scrlContainerService.add(lblKarunaUptime);
 
-    lblDASClockUptimeTitle.setPosition(27, 329, 326, 44);
+    lblDASClockUptimeTitle.setPosition(27, 335, 326, 44);
     lblDASClockUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockUptimeTitle.setLinespacing(0);
     lblDASClockUptimeTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WW6U));
     scrlContainerService.add(lblDASClockUptimeTitle);
 
-    lblClockUptime.setPosition(441, 329, 184, 44);
+    lblClockUptime.setPosition(441, 335, 184, 44);
     lblClockUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockUptime.setLinespacing(0);
     Unicode::snprintf(lblClockUptimeBuffer, LBLCLOCKUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ZZEL).getText());
@@ -81,13 +81,13 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClockUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_26LX));
     scrlContainerService.add(lblClockUptime);
 
-    lblDASClockTempTitle_0.setPosition(27, 382, 399, 44);
+    lblDASClockTempTitle_0.setPosition(27, 388, 399, 44);
     lblDASClockTempTitle_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_0.setLinespacing(0);
     lblDASClockTempTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LNP8));
     scrlContainerService.add(lblDASClockTempTitle_0);
 
-    lblClocktemp_0.setPosition(441, 382, 184, 44);
+    lblClocktemp_0.setPosition(441, 388, 184, 44);
     lblClocktemp_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_0.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_0Buffer, LBLCLOCKTEMP_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_OOXJ).getText());
@@ -95,13 +95,13 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClocktemp_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3S8R));
     scrlContainerService.add(lblClocktemp_0);
 
-    lblDASClockTempTitle_1.setPosition(27, 426, 326, 44);
+    lblDASClockTempTitle_1.setPosition(27, 432, 399, 44);
     lblDASClockTempTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_1.setLinespacing(0);
     lblDASClockTempTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6D36));
     scrlContainerService.add(lblDASClockTempTitle_1);
 
-    lblClocktemp_1.setPosition(441, 426, 184, 44);
+    lblClocktemp_1.setPosition(441, 432, 184, 44);
     lblClocktemp_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_1.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_1Buffer, LBLCLOCKTEMP_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VO29).getText());
@@ -109,7 +109,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClocktemp_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MSR2));
     scrlContainerService.add(lblClocktemp_1);
 
-    lblClocktemp_2.setPosition(441, 470, 184, 44);
+    lblClocktemp_2.setPosition(441, 476, 184, 44);
     lblClocktemp_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_2.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_2Buffer, LBLCLOCKTEMP_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_4Y09).getText());
@@ -117,13 +117,13 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClocktemp_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JPI8));
     scrlContainerService.add(lblClocktemp_2);
 
-    lblDASClockCurrentTitle_0.setPosition(23, 527, 399, 44);
+    lblDASClockCurrentTitle_0.setPosition(23, 533, 399, 44);
     lblDASClockCurrentTitle_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockCurrentTitle_0.setLinespacing(0);
     lblDASClockCurrentTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_SR1D));
     scrlContainerService.add(lblDASClockCurrentTitle_0);
 
-    lblClockCurrent_0.setPosition(437, 527, 184, 44);
+    lblClockCurrent_0.setPosition(437, 533, 184, 44);
     lblClockCurrent_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_0.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_0Buffer, LBLCLOCKCURRENT_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_JC1W).getText());
@@ -131,13 +131,13 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClockCurrent_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XPFN));
     scrlContainerService.add(lblClockCurrent_0);
 
-    lblDASClockCurrentTitle_1.setPosition(23, 571, 399, 44);
+    lblDASClockCurrentTitle_1.setPosition(23, 577, 399, 44);
     lblDASClockCurrentTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockCurrentTitle_1.setLinespacing(0);
     lblDASClockCurrentTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5I8K));
     scrlContainerService.add(lblDASClockCurrentTitle_1);
 
-    lblClockCurrent_1.setPosition(437, 571, 184, 44);
+    lblClockCurrent_1.setPosition(437, 577, 184, 44);
     lblClockCurrent_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_1.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_1Buffer, LBLCLOCKCURRENT_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VPCY).getText());
@@ -145,19 +145,19 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClockCurrent_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D7C7));
     scrlContainerService.add(lblClockCurrent_1);
 
-    lblDASClockCurrentTitle_2.setPosition(23, 615, 399, 44);
+    lblDASClockCurrentTitle_2.setPosition(23, 621, 399, 44);
     lblDASClockCurrentTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockCurrentTitle_2.setLinespacing(0);
     lblDASClockCurrentTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_96H9));
     scrlContainerService.add(lblDASClockCurrentTitle_2);
 
-    lblDASClockTempTitle_2.setPosition(27, 470, 326, 44);
+    lblDASClockTempTitle_2.setPosition(27, 476, 399, 44);
     lblDASClockTempTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_2.setLinespacing(0);
     lblDASClockTempTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6FTC));
     scrlContainerService.add(lblDASClockTempTitle_2);
 
-    lblClockCurrent_2.setPosition(437, 615, 184, 44);
+    lblClockCurrent_2.setPosition(437, 621, 184, 44);
     lblClockCurrent_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_2.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_2Buffer, LBLCLOCKCURRENT_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_M3N5).getText());
@@ -171,19 +171,19 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblKarunaTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6I2J));
     scrlContainerService.add(lblKarunaTitle);
 
-    lblDASClockTitle.setPosition(10, 244, 294, 44);
+    lblDASClockTitle.setPosition(10, 241, 294, 44);
     lblDASClockTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTitle.setLinespacing(0);
     lblDASClockTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3V0X));
     scrlContainerService.add(lblDASClockTitle);
 
-    lblDASClockSupplyVoltageTitle.setPosition(23, 680, 399, 44);
+    lblDASClockSupplyVoltageTitle.setPosition(23, 673, 399, 44);
     lblDASClockSupplyVoltageTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltageTitle.setLinespacing(0);
     lblDASClockSupplyVoltageTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0OEF));
     scrlContainerService.add(lblDASClockSupplyVoltageTitle);
 
-    lblDASClockSupplyVoltage.setPosition(437, 680, 184, 44);
+    lblDASClockSupplyVoltage.setPosition(437, 673, 184, 44);
     lblDASClockSupplyVoltage.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltage.setLinespacing(0);
     Unicode::snprintf(lblDASClockSupplyVoltageBuffer, LBLDASCLOCKSUPPLYVOLTAGE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_O7GB).getText());
@@ -191,7 +191,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblDASClockSupplyVoltage.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IO03));
     scrlContainerService.add(lblDASClockSupplyVoltage);
 
-    line4.setPosition(40, 375, 920, 15);
+    line4.setPosition(40, 381, 920, 15);
     line4Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
     line4.setPainter(line4Painter);
     line4.setStart(0, 0);
@@ -200,7 +200,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     line4.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     scrlContainerService.add(line4);
 
-    line3.setPosition(40, 517, 920, 15);
+    line3.setPosition(40, 523, 920, 15);
     line3Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
     line3.setPainter(line3Painter);
     line3.setStart(0, 0);
@@ -263,7 +263,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblKarunaFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ALOO));
     scrlContainerService.add(lblKarunaFwVerTitle);
 
-    lblDASFwVerTitle.setPosition(27, 287, 345, 44);
+    lblDASFwVerTitle.setPosition(27, 289, 345, 44);
     lblDASFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASFwVerTitle.setLinespacing(0);
     lblDASFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LZC3));
@@ -278,7 +278,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblKarunaFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1IJL));
     scrlContainerService.add(lblKarunaFwVersion);
 
-    lblDASClockFwVersion.setPosition(382, 293, 596, 33);
+    lblDASClockFwVersion.setPosition(382, 295, 596, 33);
     lblDASClockFwVersion.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockFwVersion.setLinespacing(0);
     lblDASClockFwVersion.setAlpha(100);
@@ -286,6 +286,16 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblDASClockFwVersion.setWildcard(lblDASClockFwVersionBuffer);
     lblDASClockFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5V6W));
     scrlContainerService.add(lblDASClockFwVersion);
+
+    btnFactoryReset.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnFactoryReset.setBorderSize(1);
+    btnFactoryReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnFactoryReset.setText(TypedText(T___SINGLEUSE_MABJ));
+    btnFactoryReset.setTextPosition(-20, 20, 974, 90);
+    btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnFactoryReset.setPosition(23, 752, 974, 90);
+    btnFactoryReset.setAction(flexButtonCallback);
+    scrlContainerService.add(btnFactoryReset);
     scrlContainerService.setScrollbarsPermanentlyVisible();
     scrlContainerService.setScrollbarsVisible(false);
 
@@ -311,5 +321,12 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
         //When btnBack clicked change screen to Main
         //Go to Main with no screen transition
         application().gotoMainScreenNoTransition();
+    }
+    else if (&src == &btnFactoryReset)
+    {
+        //FactoryReset
+        //When btnFactoryReset clicked call virtual function
+        //Call FactoryReset
+        FactoryReset();
     }
 }

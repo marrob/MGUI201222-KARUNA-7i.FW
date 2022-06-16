@@ -23,6 +23,14 @@ public:
     virtual ~ServiceScreenViewBase() {}
     virtual void setupScreen();
 
+    /*
+     * Virtual Action Handlers
+     */
+    virtual void FactoryReset()
+    {
+        // Override and implement this function in ServiceScreen
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -75,6 +83,7 @@ protected:
     touchgfx::TextArea lblDASFwVerTitle;
     touchgfx::TextAreaWithOneWildcard lblKarunaFwVersion;
     touchgfx::TextAreaWithOneWildcard lblDASClockFwVersion;
+    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnFactoryReset;
 
     /*
      * Wildcard Buffers

@@ -7,14 +7,12 @@
 class MainView : public MainViewBase
 {
 public:
-	MainView();
-	void SetOnAllOutput();
-	virtual ~MainView() {}
-	virtual void setupScreen();
+	MainView(); 
+	virtual ~MainView() {} 
 	virtual void ToggleHDMI();
-	virtual  void ToggleRCA();
-	virtual  void ToggleBNC();
-	virtual  void ToggleXLR();
+	virtual void ToggleRCA();
+	virtual void ToggleBNC();
+	virtual void ToggleXLR();
 
 	virtual void handleTickEvent();
 
@@ -37,7 +35,8 @@ public:
 	void SetTemp(int p_Temp);
 	void PaintDot(colortype p_Dot1, colortype p_Dot2, colortype p_Dot3);
 
-	colortype GetOutputColor(bool p_State);
+	colortype GetOutputPressColor(bool p_State);
+	colortype GetOutputReleaseColor(bool p_State);
 	colortype GetLockColor(bool p_State);
 	bool ToBinary(int number, int p_Position);
 	void CopyBit(int input, int* output, int CopyFrom, int CopyTo);

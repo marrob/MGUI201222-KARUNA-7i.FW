@@ -39,6 +39,10 @@
     <ClCompile Include="..\..\gui\src\servicescreen_screen\ServiceScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\servicescreen_screen\ServiceScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\servicescreen_screen\ServiceScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\textContainer.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\textContainerBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\TextContainerHigh.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\TextContainerHighBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -207,6 +211,10 @@
     <ClInclude Include="..\..\gui\include\gui\servicescreen_screen\ServiceScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\servicescreen_screen\ServiceScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\servicescreen_screen\ServiceScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\textContainer.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\textContainerBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\TextContainerHigh.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\TextContainerHighBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

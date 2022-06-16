@@ -17,6 +17,21 @@ public:
     virtual void RdbBtnSelectLastOutputStatAtStartUp();
     virtual void ClickMasterClkOnI2S();
 
+    virtual void scrollYearUpdateItem(textContainer& item, int16_t itemIndex);
+    virtual void scrollYearUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);
+    virtual void scrollMonthUpdateItem(textContainer& item, int16_t itemIndex);
+    virtual void scrollMonthUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);
+    virtual void scrollDayUpdateItem(textContainer& item, int16_t itemIndex);
+    virtual void scrollDayUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);
+
+
+    virtual void scrollHourUpdateItem(textContainer& item, int16_t itemIndex);
+    virtual void scrollHourUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);
+    virtual void scrollMinUpdateItem(textContainer& item, int16_t itemIndex);
+    virtual void scrollMinUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);
+    virtual void scrollSecUpdateItem(textContainer& item, int16_t itemIndex);
+    virtual void scrollSecUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex);
+
 #ifdef SIMULATOR
     uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
     void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);

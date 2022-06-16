@@ -444,7 +444,18 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Table_Asap_Regular_40_4bpp.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/Table_consola_70_4bpp.cpp</name>
+
+			<name>Application/User/gui/TextContainerHigh.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/TextContainerHigh.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/textContainer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/textContainer.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DisplayScreenPresenter.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Table_consola_70_4bpp.cpp</locationURI>
 		</link>
@@ -529,7 +540,18 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_DISPLAY.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_GoBack.cpp</name>
+
+			<name>Application/User/generated/Font_arial_35_4bpp_0.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Font_arial_35_4bpp_0.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Font_arialbd_40_4bpp_0.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Font_arialbd_40_4bpp_0.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Font_consola_70_4bpp_0.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_GoBack.cpp</locationURI>
 		</link>
@@ -559,7 +581,18 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_ON_44x44.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_RCA_80x80_fb.cpp</name>
+
+			<name>Application/User/generated/Kerning_arial_35_4bpp.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Kerning_arial_35_4bpp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Kerning_arialbd_40_4bpp.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Kerning_arialbd_40_4bpp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Kerning_consola_70_4bpp.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_RCA_80x80_fb.cpp</locationURI>
 		</link>
@@ -584,7 +617,17 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_XLR_80x80_fb.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_XLR_80x80_s.cpp</name>
+			<name>Application/User/generated/Table_arial_35_4bpp.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Table_arial_35_4bpp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Table_arialbd_40_4bpp.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/fonts/src/Table_arialbd_40_4bpp.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/Table_consola_70_4bpp.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_XLR_80x80_s.cpp</locationURI>
 		</link>
@@ -614,7 +657,17 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/main_screen/MainView.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/gui/Model.cpp</name>
+			<name>Application/User/generated/TextContainerHighBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/TextContainerHighBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/textContainerBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/textContainerBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DisplayScreenViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/model/Model.cpp</locationURI>
 		</link>
