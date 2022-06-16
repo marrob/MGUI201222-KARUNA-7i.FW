@@ -95,7 +95,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblClocktemp_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3S8R));
     scrlContainerService.add(lblClocktemp_0);
 
-    lblDASClockTempTitle_1.setPosition(27, 432, 326, 44);
+    lblDASClockTempTitle_1.setPosition(27, 432, 399, 44);
     lblDASClockTempTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_1.setLinespacing(0);
     lblDASClockTempTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6D36));
@@ -151,7 +151,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblDASClockCurrentTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_96H9));
     scrlContainerService.add(lblDASClockCurrentTitle_2);
 
-    lblDASClockTempTitle_2.setPosition(27, 476, 326, 44);
+    lblDASClockTempTitle_2.setPosition(27, 476, 399, 44);
     lblDASClockTempTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_2.setLinespacing(0);
     lblDASClockTempTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6FTC));
@@ -286,6 +286,16 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     lblDASClockFwVersion.setWildcard(lblDASClockFwVersionBuffer);
     lblDASClockFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5V6W));
     scrlContainerService.add(lblDASClockFwVersion);
+
+    btnFactoryReset.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnFactoryReset.setBorderSize(1);
+    btnFactoryReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnFactoryReset.setText(TypedText(T___SINGLEUSE_MABJ));
+    btnFactoryReset.setTextPosition(-20, 20, 974, 90);
+    btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnFactoryReset.setPosition(23, 752, 974, 90);
+    btnFactoryReset.setAction(flexButtonCallback);
+    scrlContainerService.add(btnFactoryReset);
     scrlContainerService.setScrollbarsPermanentlyVisible();
     scrlContainerService.setScrollbarsVisible(false);
 
@@ -311,5 +321,12 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
         //When btnBack clicked change screen to Main
         //Go to Main with no screen transition
         application().gotoMainScreenNoTransition();
+    }
+    else if (&src == &btnFactoryReset)
+    {
+        //FactoryReset
+        //When btnFactoryReset clicked call virtual function
+        //Call FactoryReset
+        FactoryReset();
     }
 }

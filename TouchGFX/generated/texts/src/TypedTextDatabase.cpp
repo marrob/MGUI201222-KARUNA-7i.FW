@@ -10,13 +10,17 @@ extern touchgfx::GeneratedFont& getFont_micross_25_4bpp();
 extern touchgfx::GeneratedFont& getFont_micross_65_4bpp();
 extern touchgfx::GeneratedFont& getFont_corbell_30_4bpp();
 extern touchgfx::GeneratedFont& getFont_consola_70_4bpp();
+extern touchgfx::GeneratedFont& getFont_arialbd_40_4bpp();
+extern touchgfx::GeneratedFont& getFont_arial_35_4bpp();
 
 const touchgfx::Font* touchgfx_fonts[] = {
     &(getFont_Asap_Regular_40_4bpp()),
     &(getFont_micross_25_4bpp()),
     &(getFont_micross_65_4bpp()),
     &(getFont_corbell_30_4bpp()),
-    &(getFont_consola_70_4bpp())
+    &(getFont_consola_70_4bpp()),
+    &(getFont_arialbd_40_4bpp()),
+    &(getFont_arial_35_4bpp())
 };
 
 extern const touchgfx::TypedText::TypedTextData typedText_database_DEFAULT[];
@@ -59,6 +63,20 @@ const touchgfx::TypedText::TypedTextData typedText_database_DEFAULT[] TEXT_LOCAT
     { 3, touchgfx::RIGHT, touchgfx::TEXT_DIRECTION_LTR },
     { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
     { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 0, touchgfx::CENTER, touchgfx::TEXT_DIRECTION_LTR },
+    { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 5, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 5, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 5, touchgfx::CENTER, touchgfx::TEXT_DIRECTION_LTR },
+    { 0, touchgfx::CENTER, touchgfx::TEXT_DIRECTION_LTR },
+    { 6, touchgfx::CENTER, touchgfx::TEXT_DIRECTION_LTR },
+    { 0, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
+    { 0, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
     { 1, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
     { 1, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
     { 3, touchgfx::LEFT, touchgfx::TEXT_DIRECTION_LTR },
@@ -165,6 +183,12 @@ void resetFont(touchgfx::FontId fontId)
         break;
     case 4:
         touchgfx_fonts[4] = &(getFont_consola_70_4bpp());
+        break;
+    case 5:
+        touchgfx_fonts[5] = &(getFont_arialbd_40_4bpp());
+        break;
+    case 6:
+        touchgfx_fonts[6] = &(getFont_arial_35_4bpp());
         break;
     }
 }

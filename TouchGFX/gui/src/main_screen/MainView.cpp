@@ -13,7 +13,7 @@ static uint8_t  SimIsBncON;
 
 uint8_t MainView::GuiItfGetKarunaStatus()
 {
-  return 0b00000001;
+	return 0b00000001;
 }
 
 void MainView::GuiItfSetKarunaHdmi(uint8_t onfoff)
@@ -23,17 +23,17 @@ void MainView::GuiItfSetKarunaHdmi(uint8_t onfoff)
 
 uint8_t MainView::GuitIfGetKarunaIsHdmiSet(void)
 {
-  return SimIsHdmiON;
+	return 1; //SimIsHdmiON;
 }
 
 void MainView::GuiItfSetKarunaRca(uint8_t onfoff)
 {
-	SimIsRcaON = 0;
+	SimIsRcaON = onfoff;
 }
 
 uint8_t MainView::GuitIfGetKarunaIsRcaSet(void)
 {
-  return SimIsRcaON;
+	return 0;// SimIsRcaON;
 }
 
 void MainView::GuiItfSetKarunaBnc(uint8_t onfoff)
@@ -43,7 +43,7 @@ void MainView::GuiItfSetKarunaBnc(uint8_t onfoff)
 
 uint8_t MainView::GuitIfGetKarunaIsBncSet(void)
 {
-  return SimIsBncON;
+	return SimIsBncON;
 }
 
 void MainView::GuiItfSetKarunaXlr(uint8_t onfoff)
@@ -53,46 +53,46 @@ void MainView::GuiItfSetKarunaXlr(uint8_t onfoff)
 
 uint8_t MainView::GuitIfGetKarunaIsXlrSet(void)
 {
-  return SimIsXlrON;
+	return SimIsXlrON;
 }
 
 float MainView::GuiItfGetDasClockMV341Temp(void)
 {
-  return 52.8f;
+	return 52.8f;
 }
 uint8_t MainView::GuiItfGetDasClockStatusLock1(void)
 {
-  return true;
+	return true;
 }
 uint8_t MainView::GuiItfGetDasClockStatusLock2(void)
 {
-  return true;
+	return true;
 }
 uint8_t MainView::GuiItfGetDasClockIsExt(void)
 {
-  return false;
+	return false;
 }
 
 
 #else
 extern "C"
 {
-  /*** Karuna ***/
-  uint8_t GuiItfGetKarunaStatus();
-  void GuiItfSetKarunaHdmi(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsHdmiSet(void);
-  void GuiItfSetKarunaRca(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsRcaSet(void);
-  void GuiItfSetKarunaBnc(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsBncSet(void);
-  void GuiItfSetKarunaXlr(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsXlrSet(void);
+	/*** Karuna ***/
+	uint8_t GuiItfGetKarunaStatus();
+	void GuiItfSetKarunaHdmi(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsHdmiSet(void);
+	void GuiItfSetKarunaRca(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsRcaSet(void);
+	void GuiItfSetKarunaBnc(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsBncSet(void);
+	void GuiItfSetKarunaXlr(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsXlrSet(void);
 
-  /*** DasClock***/
-  float GuiItfGetDasClockMV341Temp();
-  uint8_t GuiItfGetDasClockStatusLock1();
-  uint8_t GuiItfGetDasClockStatusLock2();
-  uint8_t GuiItfGetDasClockIsExt();
+	/*** DasClock***/
+	float GuiItfGetDasClockMV341Temp();
+	uint8_t GuiItfGetDasClockStatusLock1();
+	uint8_t GuiItfGetDasClockStatusLock2();
+	uint8_t GuiItfGetDasClockIsExt();
 }
 #endif
 
@@ -107,7 +107,7 @@ static bool mIs24Locked;
 static bool mIs245Locked;
 static bool mIs22Locked;
 static bool mIsIntExt;
- 
+
 //Default colors
 colortype GRAYCOLOR;
 colortype MIDGRAYCOLOR;
@@ -117,7 +117,7 @@ colortype DARKGRAYCOLOR;
 colortype REDCOLOR;
 
 //Buttons
-uint8_t mKarunaControl; 
+uint8_t mKarunaControl;
 
 //Temperature
 int mTemp;
@@ -130,17 +130,17 @@ int mTickCount;
 
 MainView::MainView()
 {
-  GRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
-  CORECOLOR = touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
-  BLACKCOLOR = touchgfx::Color::getColorFrom24BitRGB(0, 0, 0);
-  DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
-  MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
-  REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
-   
-  //Audio and Clocks temperature
-  RefreshKarunaAndClockInfo();
+	GRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
+	CORECOLOR = touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
+	BLACKCOLOR = touchgfx::Color::getColorFrom24BitRGB(0, 0, 0);
+	DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
+	MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
+	REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
+
+	//Audio and Clocks temperature
+	RefreshKarunaAndClockInfo();
 }
-  
+
 
 //Toogle outputs
 
@@ -170,7 +170,7 @@ void MainView::ToggleXLR()
 
 //AUDIO OUTPUTS
 void MainView::RefreshHDMIOutput()
-{ 
+{
 	btnHDMI.setBoxWithBorderColors(GetOutputPressColor(mIsHdmiON), GetOutputReleaseColor(mIsHdmiON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsHdmiON)
 	{
@@ -186,7 +186,7 @@ void MainView::RefreshHDMIOutput()
 }
 
 void MainView::RefreshRCAOutput()
-{ 
+{
 	btnRCA.setBoxWithBorderColors(GetOutputPressColor(mIsRcaON), GetOutputReleaseColor(mIsRcaON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsRcaON)
 	{
@@ -200,7 +200,7 @@ void MainView::RefreshRCAOutput()
 }
 
 void MainView::RefreshBNCOutput()
-{ 
+{
 	btnBNC.setBoxWithBorderColors(GetOutputPressColor(mIsBncON), GetOutputReleaseColor(mIsBncON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsBncON)
 	{
@@ -214,7 +214,7 @@ void MainView::RefreshBNCOutput()
 }
 
 void MainView::RefreshXLROutput()
-{ 
+{
 	btnXLR.setBoxWithBorderColors(GetOutputPressColor(mIsXlrON), GetOutputReleaseColor(mIsXlrON), BLACKCOLOR, BLACKCOLOR);
 	if (mIsXlrON)
 	{
@@ -380,7 +380,7 @@ void  MainView::SetBitDepth(int p_AudiFormat)
 	}
 	else
 	{
-		Unicode::strncpy(lblValueBitDepthBuffer, "24 bit", 7); 		
+		Unicode::strncpy(lblValueBitDepthBuffer, "24 bit", 7);
 	}
 
 	//Ezt kell majd meghivni ha Lyuben kijavította a hibát de addig hazudunk
@@ -546,8 +546,8 @@ colortype MainView::GetLockColor(bool p_State)
 
 bool MainView::ToBinary(int number, int position)
 {
-  bool ret = ((1 << position) & number) != 0;
-  return ret;
+	bool ret = ((1 << position) & number) != 0;
+	return ret;
 }
 // Tick event
 
@@ -565,11 +565,11 @@ void MainView::RefreshKarunaAndClockInfo()
 {
 	//Read audio format
 	uint8_t  KRN_STAT = GuiItfGetKarunaStatus();
-	 
+
 	SetDSDPCM(KRN_STAT);
 	SetBitDepth(KRN_STAT);
 	SetFreq(KRN_STAT);
- 
+
 	float temp = GuiItfGetDasClockMV341Temp();
 	SetTemp((int)temp);
 
@@ -582,7 +582,7 @@ void MainView::RefreshKarunaAndClockInfo()
 	Refresh24Lock();
 	Refresh245Lock();
 	Refresh22Lock();
-	RefreshIntExt(); 
+	RefreshIntExt();
 
 	//Refresh Karuna outputs
 	mIsBncON = GuitIfGetKarunaIsBncSet();

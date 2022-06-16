@@ -9,12 +9,17 @@
 #include <gui/settingsscreen_screen/SettingsScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
-#include <touchgfx/widgets/BoxWithBorder.hpp>
-#include <touchgfx/widgets/RadioButton.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
+#include <touchgfx/widgets/BoxWithBorder.hpp>
+#include <touchgfx/containers/ScrollableContainer.hpp>
+#include <touchgfx/widgets/RadioButton.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
+#include <touchgfx/containers/Container.hpp>
+#include <touchgfx/containers/scrollers/ScrollWheelWithSelectionStyle.hpp>
+#include <gui/containers/textContainer.hpp>
+#include <gui/containers/TextContainerHigh.hpp>
 #include <touchgfx/widgets/RadioButtonGroup.hpp>
 
 class SettingsScreenViewBase : public touchgfx::View<SettingsScreenPresenter>
@@ -23,6 +28,66 @@ public:
     SettingsScreenViewBase();
     virtual ~SettingsScreenViewBase() {}
     virtual void setupScreen();
+
+    virtual void scrollMonthUpdateItem(textContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollMonthUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollDayUpdateItem(textContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollDayUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollYearUpdateItem(textContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollYearUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollHourUpdateItem(textContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollHourUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollMinUpdateItem(textContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollMinUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollSecUpdateItem(textContainer& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
+    virtual void scrollSecUpdateCenterItem(TextContainerHigh& item, int16_t itemIndex)
+    {
+        // Override and implement this function in SettingsScreen
+    }
 
     /*
      * Virtual Action Handlers
@@ -42,6 +107,11 @@ public:
         // Override and implement this function in SettingsScreen
     }
 
+    virtual void btnSetClockClick()
+    {
+        // Override and implement this function in SettingsScreen
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -52,20 +122,65 @@ protected:
      */
     touchgfx::Box __background;
     touchgfx::Box box1;
-    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnDisplay;
+    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnShowService;
+    touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnBack;
+    touchgfx::TextArea lblTitle;
     touchgfx::BoxWithBorder boxWithBorder1;
+    touchgfx::ScrollableContainer scrollableContainerSettings;
     touchgfx::RadioButton rdbtnEnableAll;
-    touchgfx::TextArea textArea1;
-    touchgfx::TextArea textArea2;
-    touchgfx::TextArea textArea3;
+    touchgfx::TextArea lblAllOutput;
+    touchgfx::TextArea lblLastState;
     touchgfx::ToggleButton chbxMCLKON;
     touchgfx::RadioButton rdbtnLastState;
-    touchgfx::TextArea textArea4;
+    touchgfx::TextArea lblMasterClkEnable;
     touchgfx::Line line1;
     touchgfx::PainterRGB565 line1Painter;
+    touchgfx::TextArea lblGUITitle;
+    touchgfx::Container containerClock;
+    touchgfx::Container contClockSettings;
+    touchgfx::BoxWithBorder boxWithBorder2;
+    touchgfx::ScrollWheelWithSelectionStyle scrollMonth;
+    touchgfx::DrawableListItems<textContainer, 6> scrollMonthListItems;
+    touchgfx::DrawableListItems<TextContainerHigh, 2> scrollMonthSelectedListItems;
+
+    touchgfx::ScrollWheelWithSelectionStyle scrollDay;
+    touchgfx::DrawableListItems<textContainer, 6> scrollDayListItems;
+    touchgfx::DrawableListItems<TextContainerHigh, 2> scrollDaySelectedListItems;
+
+    touchgfx::ScrollWheelWithSelectionStyle scrollYear;
+    touchgfx::DrawableListItems<textContainer, 6> scrollYearListItems;
+    touchgfx::DrawableListItems<TextContainerHigh, 2> scrollYearSelectedListItems;
+
+    touchgfx::ScrollWheelWithSelectionStyle scrollHour;
+    touchgfx::DrawableListItems<textContainer, 6> scrollHourListItems;
+    touchgfx::DrawableListItems<TextContainerHigh, 2> scrollHourSelectedListItems;
+
+    touchgfx::ScrollWheelWithSelectionStyle scrollMin;
+    touchgfx::DrawableListItems<textContainer, 6> scrollMinListItems;
+    touchgfx::DrawableListItems<TextContainerHigh, 2> scrollMinSelectedListItems;
+
+    touchgfx::ScrollWheelWithSelectionStyle scrollSec;
+    touchgfx::DrawableListItems<textContainer, 6> scrollSecListItems;
+    touchgfx::DrawableListItems<TextContainerHigh, 2> scrollSecSelectedListItems;
+
+    touchgfx::TextArea lblMasterClkEnable_1;
+    touchgfx::TextArea lblMasterClkEnable_1_1;
+    touchgfx::TextArea lblMasterClkEnable_1_1_1;
+    touchgfx::TextArea lblMasterClkEnable_1_2;
+    touchgfx::TextArea lblMasterClkEnable_1_1_2;
+    touchgfx::TextArea lblMasterClkEnable_1_1_1_1;
     touchgfx::Line line1_1;
     touchgfx::PainterRGB565 line1_1Painter;
-    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnShowService;
+    touchgfx::Line line1_1_1;
+    touchgfx::PainterRGB565 line1_1_1Painter;
+    touchgfx::Line line1_1_2;
+    touchgfx::PainterRGB565 line1_1_2Painter;
+    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnSetupClock;
+    touchgfx::TextArea lblClockTitle;
+    touchgfx::Line line1_2;
+    touchgfx::PainterRGB565 line1_2Painter;
+    touchgfx::Line line1_2_1;
+    touchgfx::PainterRGB565 line1_2_1Painter;
     touchgfx::RadioButtonGroup<2> radioButtonGroup1;
 
 private:
@@ -76,6 +191,7 @@ private:
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
     touchgfx::Callback<SettingsScreenViewBase, const touchgfx::AbstractButton&> radioButtonSelectedCallback;
+    touchgfx::Callback<SettingsScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
 
     /*
      * Callback Handler Declarations
@@ -83,6 +199,7 @@ private:
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
     void radioButtonSelectedCallbackHandler(const touchgfx::AbstractButton& src);
+    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
     /*
      * Canvas Buffer Size

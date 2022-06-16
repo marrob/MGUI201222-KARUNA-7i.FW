@@ -3,15 +3,16 @@
 /*********************************************************************************/
 #include <gui_generated/settingsscreen_screen/SettingsScreenViewBase.hpp>
 #include <touchgfx/Color.hpp>
-#include <BitmapDatabase.hpp>
 #include <texts/TextKeysAndLanguages.hpp>
+#include <BitmapDatabase.hpp>
 #include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 
 SettingsScreenViewBase::SettingsScreenViewBase() :
     buttonCallback(this, &SettingsScreenViewBase::buttonCallbackHandler),
     flexButtonCallback(this, &SettingsScreenViewBase::flexButtonCallbackHandler),
-    radioButtonSelectedCallback(this, &SettingsScreenViewBase::radioButtonSelectedCallbackHandler)
+    radioButtonSelectedCallback(this, &SettingsScreenViewBase::radioButtonSelectedCallbackHandler),
+    updateItemCallback(this, &SettingsScreenViewBase::updateItemCallbackHandler)
 {
 
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
@@ -22,73 +23,6 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     box1.setPosition(0, 0, 1024, 600);
     box1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    btnDisplay.setBoxWithBorderPosition(0, 0, 500, 90);
-    btnDisplay.setBorderSize(1);
-    btnDisplay.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
-    btnDisplay.setBitmaps(Bitmap(BITMAP_GOBACK_ID), Bitmap(BITMAP_GOBACK_ID));
-    btnDisplay.setBitmapXY(20, 5);
-    btnDisplay.setText(TypedText(T___SINGLEUSE_XWX2));
-    btnDisplay.setTextPosition(-20, 20, 500, 90);
-    btnDisplay.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnDisplay.setPosition(5, 505, 500, 90);
-    btnDisplay.setAction(flexButtonCallback);
-
-    boxWithBorder1.setPosition(5, 100, 1014, 400);
-    boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(25, 25, 25));
-    boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
-    boxWithBorder1.setBorderSize(1);
-
-    rdbtnEnableAll.setXY(33, 122);
-    rdbtnEnableAll.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
-    rdbtnEnableAll.setSelected(true);
-    rdbtnEnableAll.setDeselectionEnabled(false);
-
-    textArea1.setPosition(0, 10, 1024, 80);
-    textArea1.setColor(touchgfx::Color::getColorFromRGB(128, 128, 128));
-    textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YPEX));
-
-    textArea2.setPosition(88, 124, 931, 40);
-    textArea2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea2.setLinespacing(0);
-    textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AGOP));
-
-    textArea3.setPosition(88, 186, 931, 40);
-    textArea3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea3.setLinespacing(0);
-    textArea3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9IH2));
-
-    chbxMCLKON.setXY(33, 281);
-    chbxMCLKON.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
-    chbxMCLKON.forceState(true);
-    chbxMCLKON.setAction(buttonCallback);
-
-    rdbtnLastState.setXY(33, 184);
-    rdbtnLastState.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
-    rdbtnLastState.setSelected(false);
-    rdbtnLastState.setDeselectionEnabled(false);
-
-    textArea4.setPosition(88, 283, 931, 40);
-    textArea4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    textArea4.setLinespacing(0);
-    textArea4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E2A));
-
-    line1.setPosition(64, 253, 920, 15);
-    line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line1.setPainter(line1Painter);
-    line1.setStart(0, 0);
-    line1.setEnd(920, 1);
-    line1.setLineWidth(2);
-    line1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-
-    line1_1.setPosition(64, 351, 920, 15);
-    line1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line1_1.setPainter(line1_1Painter);
-    line1_1.setStart(0, 0);
-    line1_1.setEnd(920, 1);
-    line1_1.setLineWidth(2);
-    line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-
     btnShowService.setBoxWithBorderPosition(0, 0, 500, 90);
     btnShowService.setBorderSize(1);
     btnShowService.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
@@ -98,20 +32,295 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     btnShowService.setPosition(519, 505, 500, 90);
     btnShowService.setAction(flexButtonCallback);
 
+    btnBack.setBoxWithBorderPosition(0, 0, 500, 90);
+    btnBack.setBorderSize(1);
+    btnBack.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnBack.setBitmaps(Bitmap(BITMAP_GOBACK_ID), Bitmap(BITMAP_GOBACK_ID));
+    btnBack.setBitmapXY(20, 5);
+    btnBack.setText(TypedText(T___SINGLEUSE_XWX2));
+    btnBack.setTextPosition(-20, 20, 500, 90);
+    btnBack.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnBack.setPosition(5, 505, 500, 90);
+    btnBack.setAction(flexButtonCallback);
+
+    lblTitle.setPosition(0, 10, 1024, 80);
+    lblTitle.setColor(touchgfx::Color::getColorFromRGB(128, 128, 128));
+    lblTitle.setLinespacing(0);
+    lblTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YPEX));
+
+    boxWithBorder1.setPosition(5, 100, 1014, 400);
+    boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(25, 25, 25));
+    boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
+    boxWithBorder1.setBorderSize(1);
+
+    scrollableContainerSettings.setPosition(5, 100, 1014, 400);
+    scrollableContainerSettings.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+
+    rdbtnEnableAll.setXY(28, 60);
+    rdbtnEnableAll.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
+    rdbtnEnableAll.setSelected(true);
+    rdbtnEnableAll.setDeselectionEnabled(false);
+    scrollableContainerSettings.add(rdbtnEnableAll);
+
+    lblAllOutput.setPosition(83, 62, 931, 40);
+    lblAllOutput.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblAllOutput.setLinespacing(0);
+    lblAllOutput.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AGOP));
+    scrollableContainerSettings.add(lblAllOutput);
+
+    lblLastState.setPosition(83, 124, 931, 40);
+    lblLastState.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblLastState.setLinespacing(0);
+    lblLastState.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9IH2));
+    scrollableContainerSettings.add(lblLastState);
+
+    chbxMCLKON.setXY(28, 219);
+    chbxMCLKON.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
+    chbxMCLKON.forceState(true);
+    chbxMCLKON.setAction(buttonCallback);
+    scrollableContainerSettings.add(chbxMCLKON);
+
+    rdbtnLastState.setXY(28, 122);
+    rdbtnLastState.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
+    rdbtnLastState.setSelected(false);
+    rdbtnLastState.setDeselectionEnabled(false);
+    scrollableContainerSettings.add(rdbtnLastState);
+
+    lblMasterClkEnable.setPosition(83, 221, 931, 40);
+    lblMasterClkEnable.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable.setLinespacing(0);
+    lblMasterClkEnable.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E2A));
+    scrollableContainerSettings.add(lblMasterClkEnable);
+
+    line1.setPosition(55, 191, 920, 15);
+    line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1.setPainter(line1Painter);
+    line1.setStart(0, 0);
+    line1.setEnd(920, 1);
+    line1.setLineWidth(2);
+    line1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    scrollableContainerSettings.add(line1);
+
+    lblGUITitle.setPosition(10, 5, 294, 44);
+    lblGUITitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblGUITitle.setLinespacing(0);
+    lblGUITitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VP13));
+    scrollableContainerSettings.add(lblGUITitle);
+
+    containerClock.setPosition(10, 303, 995, 354);
+
+    contClockSettings.setPosition(18, 64, 631, 284);
+
+    boxWithBorder2.setPosition(0, 0, 631, 285);
+    boxWithBorder2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
+    boxWithBorder2.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
+    boxWithBorder2.setBorderSize(2);
+    contClockSettings.add(boxWithBorder2);
+
+    scrollMonth.setPosition(88, 74, 100, 200);
+    scrollMonth.setHorizontal(false);
+    scrollMonth.setCircular(false);
+    scrollMonth.setEasingEquation(touchgfx::EasingEquations::circEaseOut);
+    scrollMonth.setSwipeAcceleration(10);
+    scrollMonth.setDragAcceleration(10);
+    scrollMonth.setNumberOfItems(12);
+    scrollMonth.setSelectedItemOffset(72);
+    scrollMonth.setSelectedItemExtraSize(0, 0);
+    scrollMonth.setSelectedItemMargin(5, 5);
+    scrollMonth.setDrawableSize(50, 0);
+    scrollMonth.setDrawables(scrollMonthListItems, updateItemCallback,
+                              scrollMonthSelectedListItems, updateItemCallback);
+    scrollMonth.animateToItem(1, 0);
+    contClockSettings.add(scrollMonth);
+
+    scrollDay.setPosition(5, 74, 100, 200);
+    scrollDay.setHorizontal(false);
+    scrollDay.setCircular(false);
+    scrollDay.setEasingEquation(touchgfx::EasingEquations::circEaseOut);
+    scrollDay.setSwipeAcceleration(30);
+    scrollDay.setDragAcceleration(10);
+    scrollDay.setNumberOfItems(31);
+    scrollDay.setSelectedItemOffset(72);
+    scrollDay.setSelectedItemExtraSize(0, 0);
+    scrollDay.setSelectedItemMargin(5, 5);
+    scrollDay.setDrawableSize(50, 0);
+    scrollDay.setDrawables(scrollDayListItems, updateItemCallback,
+                              scrollDaySelectedListItems, updateItemCallback);
+    scrollDay.animateToItem(1, 0);
+    contClockSettings.add(scrollDay);
+
+    scrollYear.setPosition(215, 74, 100, 200);
+    scrollYear.setHorizontal(false);
+    scrollYear.setCircular(false);
+    scrollYear.setEasingEquation(touchgfx::EasingEquations::circEaseOut);
+    scrollYear.setSwipeAcceleration(10);
+    scrollYear.setDragAcceleration(10);
+    scrollYear.setNumberOfItems(2100);
+    scrollYear.setSelectedItemOffset(72);
+    scrollYear.setSelectedItemExtraSize(0, 0);
+    scrollYear.setSelectedItemMargin(5, 5);
+    scrollYear.setDrawableSize(50, 0);
+    scrollYear.setDrawables(scrollYearListItems, updateItemCallback,
+                              scrollYearSelectedListItems, updateItemCallback);
+    scrollYear.animateToItem(0, 0);
+    contClockSettings.add(scrollYear);
+
+    scrollHour.setPosition(357, 74, 100, 200);
+    scrollHour.setHorizontal(false);
+    scrollHour.setCircular(false);
+    scrollHour.setEasingEquation(touchgfx::EasingEquations::circEaseOut);
+    scrollHour.setSwipeAcceleration(10);
+    scrollHour.setDragAcceleration(10);
+    scrollHour.setNumberOfItems(24);
+    scrollHour.setSelectedItemOffset(72);
+    scrollHour.setSelectedItemExtraSize(0, 0);
+    scrollHour.setSelectedItemMargin(5, 5);
+    scrollHour.setDrawableSize(50, 0);
+    scrollHour.setDrawables(scrollHourListItems, updateItemCallback,
+                              scrollHourSelectedListItems, updateItemCallback);
+    scrollHour.animateToItem(1, 0);
+    contClockSettings.add(scrollHour);
+
+    scrollMin.setPosition(445, 74, 100, 200);
+    scrollMin.setHorizontal(false);
+    scrollMin.setCircular(false);
+    scrollMin.setEasingEquation(touchgfx::EasingEquations::circEaseOut);
+    scrollMin.setSwipeAcceleration(30);
+    scrollMin.setDragAcceleration(10);
+    scrollMin.setNumberOfItems(60);
+    scrollMin.setSelectedItemOffset(72);
+    scrollMin.setSelectedItemExtraSize(0, 0);
+    scrollMin.setSelectedItemMargin(5, 5);
+    scrollMin.setDrawableSize(50, 0);
+    scrollMin.setDrawables(scrollMinListItems, updateItemCallback,
+                              scrollMinSelectedListItems, updateItemCallback);
+    scrollMin.animateToItem(1, 0);
+    contClockSettings.add(scrollMin);
+
+    scrollSec.setPosition(531, 74, 100, 200);
+    scrollSec.setHorizontal(false);
+    scrollSec.setCircular(false);
+    scrollSec.setEasingEquation(touchgfx::EasingEquations::circEaseOut);
+    scrollSec.setSwipeAcceleration(10);
+    scrollSec.setDragAcceleration(10);
+    scrollSec.setNumberOfItems(60);
+    scrollSec.setSelectedItemOffset(72);
+    scrollSec.setSelectedItemExtraSize(0, 0);
+    scrollSec.setSelectedItemMargin(5, 5);
+    scrollSec.setDrawableSize(50, 0);
+    scrollSec.setDrawables(scrollSecListItems, updateItemCallback,
+                              scrollSecSelectedListItems, updateItemCallback);
+    scrollSec.animateToItem(0, 0);
+    contClockSettings.add(scrollSec);
+
+    lblMasterClkEnable_1.setXY(27, 10);
+    lblMasterClkEnable_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable_1.setLinespacing(0);
+    lblMasterClkEnable_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_P48A));
+    contClockSettings.add(lblMasterClkEnable_1);
+
+    lblMasterClkEnable_1_1.setXY(98, 10);
+    lblMasterClkEnable_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable_1_1.setLinespacing(0);
+    lblMasterClkEnable_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KKZZ));
+    contClockSettings.add(lblMasterClkEnable_1_1);
+
+    lblMasterClkEnable_1_1_1.setXY(239, 10);
+    lblMasterClkEnable_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable_1_1_1.setLinespacing(0);
+    lblMasterClkEnable_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CBO5));
+    contClockSettings.add(lblMasterClkEnable_1_1_1);
+
+    lblMasterClkEnable_1_2.setXY(378, 10);
+    lblMasterClkEnable_1_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable_1_2.setLinespacing(0);
+    lblMasterClkEnable_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_N05E));
+    contClockSettings.add(lblMasterClkEnable_1_2);
+
+    lblMasterClkEnable_1_1_2.setXY(472, 10);
+    lblMasterClkEnable_1_1_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable_1_1_2.setLinespacing(0);
+    lblMasterClkEnable_1_1_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_17ZT));
+    contClockSettings.add(lblMasterClkEnable_1_1_2);
+
+    lblMasterClkEnable_1_1_1_1.setXY(560, 10);
+    lblMasterClkEnable_1_1_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblMasterClkEnable_1_1_1_1.setLinespacing(0);
+    lblMasterClkEnable_1_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ICEL));
+    contClockSettings.add(lblMasterClkEnable_1_1_1_1);
+
+    line1_1.setPosition(27, 57, 576, 15);
+    line1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_1.setPainter(line1_1Painter);
+    line1_1.setStart(0, 0);
+    line1_1.setEnd(920, 1);
+    line1_1.setLineWidth(2);
+    line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    contClockSettings.add(line1_1);
+
+    line1_1_1.setPosition(27, 147, 576, 15);
+    line1_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_1_1.setPainter(line1_1_1Painter);
+    line1_1_1.setStart(0, 0);
+    line1_1_1.setEnd(920, 1);
+    line1_1_1.setLineWidth(2);
+    line1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    contClockSettings.add(line1_1_1);
+
+    line1_1_2.setPosition(27, 197, 576, 15);
+    line1_1_2Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_1_2.setPainter(line1_1_2Painter);
+    line1_1_2.setStart(0, 0);
+    line1_1_2.setEnd(920, 1);
+    line1_1_2.setLineWidth(2);
+    line1_1_2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    contClockSettings.add(line1_1_2);
+    containerClock.add(contClockSettings);
+
+    btnSetupClock.setBoxWithBorderPosition(0, 0, 306, 285);
+    btnSetupClock.setBorderSize(1);
+    btnSetupClock.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnSetupClock.setText(TypedText(T___SINGLEUSE_3FBP));
+    btnSetupClock.setTextPosition(0, 115, 306, 285);
+    btnSetupClock.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnSetupClock.setPosition(672, 63, 306, 285);
+    btnSetupClock.setAction(flexButtonCallback);
+    containerClock.add(btnSetupClock);
+
+    lblClockTitle.setPosition(8, -2, 294, 44);
+    lblClockTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblClockTitle.setLinespacing(0);
+    lblClockTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_W346));
+    containerClock.add(lblClockTitle);
+    scrollableContainerSettings.add(containerClock);
+
+    line1_2.setPosition(55, 280, 920, 15);
+    line1_2Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_2.setPainter(line1_2Painter);
+    line1_2.setStart(0, 0);
+    line1_2.setEnd(920, 1);
+    line1_2.setLineWidth(2);
+    line1_2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    scrollableContainerSettings.add(line1_2);
+
+    line1_2_1.setPosition(55, 677, 920, 15);
+    line1_2_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_2_1.setPainter(line1_2_1Painter);
+    line1_2_1.setStart(0, 0);
+    line1_2_1.setEnd(920, 1);
+    line1_2_1.setLineWidth(2);
+    line1_2_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    scrollableContainerSettings.add(line1_2_1);
+    scrollableContainerSettings.setScrollbarsPermanentlyVisible();
+    scrollableContainerSettings.setScrollbarsVisible(false);
+
     add(__background);
     add(box1);
-    add(btnDisplay);
-    add(boxWithBorder1);
-    add(rdbtnEnableAll);
-    add(textArea1);
-    add(textArea2);
-    add(textArea3);
-    add(chbxMCLKON);
-    add(rdbtnLastState);
-    add(textArea4);
-    add(line1);
-    add(line1_1);
     add(btnShowService);
+    add(btnBack);
+    add(lblTitle);
+    add(boxWithBorder1);
+    add(scrollableContainerSettings);
     radioButtonGroup1.add(rdbtnEnableAll);
     radioButtonGroup1.add(rdbtnLastState);
     radioButtonGroup1.setRadioButtonSelectedHandler(radioButtonSelectedCallback);
@@ -119,7 +328,60 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
 
 void SettingsScreenViewBase::setupScreen()
 {
-
+    scrollMonth.initialize();
+    for (int i = 0; i < scrollMonthListItems.getNumberOfDrawables(); i++)
+    {
+        scrollMonthListItems[i].initialize();
+    }
+    for (int i = 0; i < scrollMonthSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        scrollMonthSelectedListItems[i].initialize();
+    }
+    scrollDay.initialize();
+    for (int i = 0; i < scrollDayListItems.getNumberOfDrawables(); i++)
+    {
+        scrollDayListItems[i].initialize();
+    }
+    for (int i = 0; i < scrollDaySelectedListItems.getNumberOfDrawables(); i++)
+    {
+        scrollDaySelectedListItems[i].initialize();
+    }
+    scrollYear.initialize();
+    for (int i = 0; i < scrollYearListItems.getNumberOfDrawables(); i++)
+    {
+        scrollYearListItems[i].initialize();
+    }
+    for (int i = 0; i < scrollYearSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        scrollYearSelectedListItems[i].initialize();
+    }
+    scrollHour.initialize();
+    for (int i = 0; i < scrollHourListItems.getNumberOfDrawables(); i++)
+    {
+        scrollHourListItems[i].initialize();
+    }
+    for (int i = 0; i < scrollHourSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        scrollHourSelectedListItems[i].initialize();
+    }
+    scrollMin.initialize();
+    for (int i = 0; i < scrollMinListItems.getNumberOfDrawables(); i++)
+    {
+        scrollMinListItems[i].initialize();
+    }
+    for (int i = 0; i < scrollMinSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        scrollMinSelectedListItems[i].initialize();
+    }
+    scrollSec.initialize();
+    for (int i = 0; i < scrollSecListItems.getNumberOfDrawables(); i++)
+    {
+        scrollSecListItems[i].initialize();
+    }
+    for (int i = 0; i < scrollSecSelectedListItems.getNumberOfDrawables(); i++)
+    {
+        scrollSecSelectedListItems[i].initialize();
+    }
 }
 
 void SettingsScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
@@ -135,19 +397,26 @@ void SettingsScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButto
 
 void SettingsScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
 {
-    if (&src == &btnDisplay)
-    {
-        //ShowMain
-        //When btnDisplay clicked change screen to Main
-        //Go to Main with screen transition towards West
-        application().gotoMainScreenSlideTransitionWest();
-    }
-    else if (&src == &btnShowService)
+    if (&src == &btnShowService)
     {
         //ShowPassword
         //When btnShowService clicked change screen to PasswordScreen
         //Go to PasswordScreen with no screen transition
         application().gotoPasswordScreenScreenNoTransition();
+    }
+    else if (&src == &btnBack)
+    {
+        //ShowMain
+        //When btnBack clicked change screen to Main
+        //Go to Main with screen transition towards West
+        application().gotoMainScreenSlideTransitionWest();
+    }
+    else if (&src == &btnSetupClock)
+    {
+        //SetClockTime
+        //When btnSetupClock clicked call virtual function
+        //Call btnSetClockClick
+        btnSetClockClick();
     }
 }
 
@@ -166,5 +435,81 @@ void SettingsScreenViewBase::radioButtonSelectedCallbackHandler(const touchgfx::
         //When rdbtnLastState selected call virtual function
         //Call RdbBtnSelectLastOutputStatAtStartUp
         RdbBtnSelectLastOutputStatAtStartUp();
+    }
+}
+
+void SettingsScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
+{
+    if (items == &scrollMonthListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        textContainer* cc = (textContainer*)d;
+        scrollMonthUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &scrollMonthSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        TextContainerHigh* cc = (TextContainerHigh*)d;
+        scrollMonthUpdateCenterItem(*cc, itemIndex);
+    }
+    if (items == &scrollDayListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        textContainer* cc = (textContainer*)d;
+        scrollDayUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &scrollDaySelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        TextContainerHigh* cc = (TextContainerHigh*)d;
+        scrollDayUpdateCenterItem(*cc, itemIndex);
+    }
+    if (items == &scrollYearListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        textContainer* cc = (textContainer*)d;
+        scrollYearUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &scrollYearSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        TextContainerHigh* cc = (TextContainerHigh*)d;
+        scrollYearUpdateCenterItem(*cc, itemIndex);
+    }
+    if (items == &scrollHourListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        textContainer* cc = (textContainer*)d;
+        scrollHourUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &scrollHourSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        TextContainerHigh* cc = (TextContainerHigh*)d;
+        scrollHourUpdateCenterItem(*cc, itemIndex);
+    }
+    if (items == &scrollMinListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        textContainer* cc = (textContainer*)d;
+        scrollMinUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &scrollMinSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        TextContainerHigh* cc = (TextContainerHigh*)d;
+        scrollMinUpdateCenterItem(*cc, itemIndex);
+    }
+    if (items == &scrollSecListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        textContainer* cc = (textContainer*)d;
+        scrollSecUpdateItem(*cc, itemIndex);
+    }
+    else if (items == &scrollSecSelectedListItems)
+    {
+        touchgfx::Drawable* d = items->getDrawable(containerIndex);
+        TextContainerHigh* cc = (TextContainerHigh*)d;
+        scrollSecUpdateCenterItem(*cc, itemIndex);
     }
 }

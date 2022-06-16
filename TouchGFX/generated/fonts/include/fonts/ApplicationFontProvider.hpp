@@ -18,6 +18,8 @@ struct Typography
     static const touchgfx::FontId VALUE = 2;
     static const touchgfx::FontId SETTINGS = 3;
     static const touchgfx::FontId TYPOGRAPHY_00 = 4;
+    static const touchgfx::FontId SWTEXT_HIGH = 5;
+    static const touchgfx::FontId SWTEXT = 6;
 };
 
 struct TypographyFontIndex
@@ -27,7 +29,9 @@ struct TypographyFontIndex
     static const touchgfx::FontId VALUE = 2;         // micross_65_4bpp
     static const touchgfx::FontId SETTINGS = 3;      // corbell_30_4bpp
     static const touchgfx::FontId TYPOGRAPHY_00 = 4; // consola_70_4bpp
-    static const uint16_t NUMBER_OF_FONTS = 5;
+    static const touchgfx::FontId SWTEXT_HIGH = 5;   // arialbd_40_4bpp
+    static const touchgfx::FontId SWTEXT = 6;        // arial_35_4bpp
+    static const uint16_t NUMBER_OF_FONTS = 7;
 };
 
 class ApplicationFontProvider : public touchgfx::FontProvider
