@@ -329,10 +329,7 @@ uint8_t GuiItfGetBacklight(void)
 
 void GuiItfSetBacklightEn(uint8_t onoff)
 {
-  if(onoff)
-    BacklightEnable();
-  else
-    BacklightDisable();
+  BacklightEn(onoff);
 }
 
 /*
@@ -343,11 +340,18 @@ void GuiItfSetBackLightAutoOff(uint32_t sec)
 {
   Device.Backlight.AutoOffSec = sec;
   EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, sec);
+  if(sec!= 0)
+    DeviceBacklightOffTimerReset();
 }
 
-uint32_t GuiItfGetBaclightAutoOff(void)
+uint32_t GuiItfGetBacklightAutoOff(void)
 {
   return Device.Backlight.AutoOffSec;
+}
+
+uint32_t GuiItfGetRemainingTimeToOff(void)
+{
+  return Device.Backlight.RemainingTimeToOff;
 }
 
 /* DasClock -----------------------------------------------------------------*/

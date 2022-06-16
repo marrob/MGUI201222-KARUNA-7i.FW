@@ -260,7 +260,6 @@ int main(void)
   /* USER CODE END 1 */
 
   /* Enable I-Cache---------------------------------------------------------*/
-
   SCB_EnableICache();
 
   /* Enable D-Cache---------------------------------------------------------*/
@@ -302,7 +301,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   /*** Display ***/
-  BacklightDisable();
+  BacklightEn(0);
 
   /*** Flash ***/
   MX25_Init(&hqspi);
@@ -343,6 +342,8 @@ int main(void)
     printf( "%s\n", buf);
   }
 
+  /*** OffTimer ***/
+  //GuiItfSetBackLightAutoOff(20);
 
   /* USER CODE END 2 */
 
@@ -1194,8 +1195,8 @@ static void MX_GPIO_Init(void)
 
   /*Configure GPIO pin : TS_INT_Pin */
   GPIO_InitStruct.Pin = TS_INT_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(TS_INT_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DIO_WR_Pin SPI2_CLK_Pin SPI2_MOSI_Pin */
@@ -1224,6 +1225,10 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLDOWN;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(DISP_EN_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 }
 
@@ -1479,6 +1484,7 @@ uint8_t DeviceRtcGet(time_t *dt)
 
 uint8_t DeviceTimeUpdate()
 {
+  /*** Device Real Time Clock Update ***/
   if(DeviceRtcGet(&Device.DateTime.PosixTime) != DEVICE_OK)
     return DEVICE_FAIL;
 
@@ -1494,7 +1500,35 @@ uint8_t DeviceTimeUpdate()
 
   strftime(Device.DateTime.Now, DEVICE_DT_STR_SIZE, "%Y-%m-%d %H:%M:%S", tm_info );
 
+  /*** Display Backlight Auto Off Timer ***/
+  if(Device.Backlight.AutoOffSec != 0)
+  {
+    if(Device.Backlight.TimestampToOff == Device.DateTime.PosixTime)
+    {
+      BacklightEn(0);
+      Device.Backlight.TouchInterrupt = 0;
+    }
+    if(Device.Backlight.TimestampToOff > Device.DateTime.PosixTime)
+      Device.Backlight.RemainingTimeToOff = Device.Backlight.TimestampToOff - Device.DateTime.PosixTime;
+  }
+  else
+  {
+    Device.Backlight.RemainingTimeToOff = 0;
+    Device.Backlight.TouchInterrupt = 0;
+  }
   return DEVICE_OK;
+}
+
+void DeviceBacklightOffTimerReset(void)
+{
+  Device.Backlight.TimestampToOff = Device.Backlight.AutoOffSec + Device.DateTime.PosixTime;
+  BacklightEn(1);
+}
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  Device.Backlight.TouchInterrupt ++;
+  DeviceBacklightOffTimerReset();
 }
 
 /* RS485----------------------------------------------------------------------*/
@@ -1753,7 +1787,7 @@ void LiveLedOsTask(void *argument)
     uint8_t flag = 0;
 
     osDelay(1000);
-    BacklightEnable();
+    BacklightEn(1);
     for(;;)
     {
       if(HAL_GetTick() - timestamp > 500)

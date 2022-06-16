@@ -12,18 +12,13 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-
-
 /* Exported macro ------------------------------------------------------------*/
 #define DISPLAY_LIGHT_OK  0
 /* Exported functions ------------------------------------------------------- */
 
 void BacklightInit(TIM_HandleTypeDef *htim);
 uint8_t BacklightSet(uint8_t percent);
-uint8_t BacklightGet(void);
-void BacklightEnable(void);
-void BacklightDisable(void);
-
+void BacklightEn(uint8_t onoff);
 
 #endif /* APPLICATION_USER_CORE_INC_DISPLAYLIGHT_H_ */
 
