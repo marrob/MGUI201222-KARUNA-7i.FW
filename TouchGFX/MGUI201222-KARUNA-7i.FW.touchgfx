@@ -832,7 +832,59 @@
           },
           {
             "Type": "FlexButton",
-            "Name": "btnDisplay",
+            "Name": "btnShowService",
+            "X": 519,
+            "Y": 505,
+            "Width": 500,
+            "Height": 90,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "X": -20,
+                "Y": 20,
+                "TextId": "__SingleUse_YTJC",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "ColorPressed": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                }
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 500,
+                "Height": 90,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 1,
+                "ColorPressed": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "ColorBorderReleased": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "ColorBorderPressed": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnBack",
             "X": 5,
             "Y": 505,
             "Width": 500,
@@ -890,6 +942,20 @@
             ]
           },
           {
+            "Type": "TextArea",
+            "Name": "lblTitle",
+            "Y": 10,
+            "Width": 1024,
+            "Height": 80,
+            "TextId": "__SingleUse_YPEX",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 128,
+              "Green": 128,
+              "Blue": 128
+            }
+          },
+          {
             "Type": "BoxWithBorder",
             "Name": "boxWithBorder1",
             "X": 5,
@@ -909,185 +975,533 @@
             "BorderSize": 1
           },
           {
-            "Type": "RadioButton",
-            "Name": "rdbtnEnableAll",
-            "X": 33,
-            "Y": 122,
-            "Width": 44,
-            "Height": 44,
-            "Selected": true,
-            "FileNameSelected": "ON_44x44.png",
-            "FileNameSelectedPressed": "OFF_44x44.png",
-            "FileNameUnselected": "OFF_44x44.png",
-            "FileNameUnselectedPressed": "ON_44x44.png",
-            "RadioButtonGroup": "radioButtonGroup1"
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea1",
-            "Y": 10,
-            "Width": 1024,
-            "Height": 80,
-            "TextId": "__SingleUse_YPEX",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 128,
-              "Green": 128,
-              "Blue": 128
-            }
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea2",
-            "X": 88,
-            "Y": 124,
-            "Width": 931,
-            "Height": 40,
-            "TextId": "__SingleUse_AGOP",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 200,
-              "Green": 200,
-              "Blue": 200
-            }
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea3",
-            "X": 88,
-            "Y": 186,
-            "Width": 931,
-            "Height": 40,
-            "TextId": "__SingleUse_9IH2",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 200,
-              "Green": 200,
-              "Blue": 200
-            }
-          },
-          {
-            "Type": "ToggleButton",
-            "Name": "chbxMCLKON",
-            "X": 33,
-            "Y": 281,
-            "Width": 44,
-            "Height": 44,
-            "InitialStatePressed": true,
-            "Pressed": "OFF_44x44.png",
-            "Released": "ON_44x44.png"
-          },
-          {
-            "Type": "RadioButton",
-            "Name": "rdbtnLastState",
-            "X": 33,
-            "Y": 184,
-            "Width": 44,
-            "Height": 44,
-            "FileNameSelected": "ON_44x44.png",
-            "FileNameSelectedPressed": "OFF_44x44.png",
-            "FileNameUnselected": "OFF_44x44.png",
-            "FileNameUnselectedPressed": "ON_44x44.png",
-            "RadioButtonGroup": "radioButtonGroup1"
-          },
-          {
-            "Type": "TextArea",
-            "Name": "textArea4",
-            "X": 88,
-            "Y": 283,
-            "Width": 931,
-            "Height": 40,
-            "TextId": "__SingleUse_4E2A",
-            "TextRotation": "0",
-            "Color": {
-              "Red": 200,
-              "Green": 200,
-              "Blue": 200
-            }
-          },
-          {
-            "Type": "Line",
-            "Name": "line1",
-            "X": 64,
-            "Y": 253,
-            "Width": 920,
-            "Height": 15,
-            "Color": {
-              "Red": 64,
-              "Green": 64,
-              "Blue": 64
+            "Type": "ScrollableContainer",
+            "Name": "scrollableContainerSettings",
+            "X": 5,
+            "Y": 100,
+            "Width": 1014,
+            "Height": 400,
+            "HorizontalScrollEnabled": true,
+            "VerticalScrollEnabled": true,
+            "ScrollbarsVisible": true,
+            "ScrollbarsColor": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
             },
-            "EndX": 920,
-            "EndY": 1,
-            "LineWidth": 2,
-            "LineEndingStyle": "Butt"
-          },
-          {
-            "Type": "Line",
-            "Name": "line1_1",
-            "X": 64,
-            "Y": 351,
-            "Width": 920,
-            "Height": 15,
-            "Color": {
-              "Red": 64,
-              "Green": 64,
-              "Blue": 64
-            },
-            "EndX": 920,
-            "EndY": 1,
-            "LineWidth": 2,
-            "LineEndingStyle": "Butt"
-          },
-          {
-            "Type": "FlexButton",
-            "Name": "btnShowService",
-            "X": 519,
-            "Y": 505,
-            "Width": 500,
-            "Height": 90,
-            "ButtonTrigger": {
-              "Type": "ClickButtonTrigger"
-            },
-            "ButtonStyles": [
+            "ScrollbarsAlpha": 255,
+            "Components": [
               {
-                "Type": "TextButtonStyle",
-                "X": -20,
-                "Y": 20,
-                "TextId": "__SingleUse_YTJC",
+                "Type": "RadioButton",
+                "Name": "rdbtnEnableAll",
+                "X": 28,
+                "Y": 60,
+                "Width": 44,
+                "Height": 44,
+                "Selected": true,
+                "FileNameSelected": "ON_44x44.png",
+                "FileNameSelectedPressed": "OFF_44x44.png",
+                "FileNameUnselected": "OFF_44x44.png",
+                "FileNameUnselectedPressed": "ON_44x44.png",
+                "RadioButtonGroup": "radioButtonGroup1"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblAllOutput",
+                "X": 83,
+                "Y": 62,
+                "Width": 931,
+                "Height": 40,
+                "TextId": "__SingleUse_AGOP",
                 "TextRotation": "0",
-                "ColorReleased": {
-                  "Red": 150,
-                  "Green": 118,
-                  "Blue": 73
-                },
-                "ColorPressed": {
-                  "Red": 64,
-                  "Green": 64,
-                  "Blue": 64
+                "Color": {
+                  "Red": 200,
+                  "Green": 200,
+                  "Blue": 200
                 }
               },
               {
-                "Type": "BoxWithBorderButtonStyle",
-                "Width": 500,
-                "Height": 90,
-                "LockToFlexButtonSize": true,
-                "BorderSize": 1,
-                "ColorPressed": {
-                  "Red": 32,
-                  "Green": 32,
-                  "Blue": 32
-                },
-                "ColorBorderReleased": {
-                  "Red": 100,
-                  "Green": 100,
-                  "Blue": 100
-                },
-                "ColorBorderPressed": {
-                  "Red": 100,
-                  "Green": 100,
-                  "Blue": 100
+                "Type": "TextArea",
+                "Name": "lblLastState",
+                "X": 83,
+                "Y": 124,
+                "Width": 931,
+                "Height": 40,
+                "TextId": "__SingleUse_9IH2",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 200,
+                  "Green": 200,
+                  "Blue": 200
                 }
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "chbxMCLKON",
+                "X": 28,
+                "Y": 219,
+                "Width": 44,
+                "Height": 44,
+                "InitialStatePressed": true,
+                "Pressed": "OFF_44x44.png",
+                "Released": "ON_44x44.png"
+              },
+              {
+                "Type": "RadioButton",
+                "Name": "rdbtnLastState",
+                "X": 28,
+                "Y": 122,
+                "Width": 44,
+                "Height": 44,
+                "FileNameSelected": "ON_44x44.png",
+                "FileNameSelectedPressed": "OFF_44x44.png",
+                "FileNameUnselected": "OFF_44x44.png",
+                "FileNameUnselectedPressed": "ON_44x44.png",
+                "RadioButtonGroup": "radioButtonGroup1"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblMasterClkEnable",
+                "X": 83,
+                "Y": 221,
+                "Width": 931,
+                "Height": 40,
+                "TextId": "__SingleUse_4E2A",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 200,
+                  "Green": 200,
+                  "Blue": 200
+                }
+              },
+              {
+                "Type": "Line",
+                "Name": "line1",
+                "X": 55,
+                "Y": 191,
+                "Width": 920,
+                "Height": 15,
+                "Color": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                },
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
+                "LineEndingStyle": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblGUITitle",
+                "X": 10,
+                "Y": 5,
+                "Width": 294,
+                "Height": 44,
+                "TextId": "__SingleUse_VP13",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 200,
+                  "Green": 200,
+                  "Blue": 200
+                }
+              },
+              {
+                "Type": "Container",
+                "Name": "containerClock",
+                "X": 10,
+                "Y": 303,
+                "Width": 995,
+                "Height": 354,
+                "Components": [
+                  {
+                    "Type": "Container",
+                    "Name": "contClockSettings",
+                    "X": 18,
+                    "Y": 64,
+                    "Width": 631,
+                    "Height": 284,
+                    "Components": [
+                      {
+                        "Type": "BoxWithBorder",
+                        "Name": "boxWithBorder2",
+                        "Width": 631,
+                        "Height": 285,
+                        "BorderColor": {
+                          "Red": 100,
+                          "Green": 100,
+                          "Blue": 100
+                        },
+                        "BorderSize": 2
+                      },
+                      {
+                        "Type": "ScrollWheel",
+                        "Name": "scrollMonth",
+                        "X": 88,
+                        "Y": 74,
+                        "Width": 100,
+                        "Height": 200,
+                        "SelectedItemOffset": 72,
+                        "UseSelectedStyle": true,
+                        "SelectedItemTemplateName": "TextContainerHigh",
+                        "MarginBefore": 5,
+                        "MarginAfter": 5,
+                        "ItemTemplateName": "textContainer",
+                        "NumberofItems": 12,
+                        "InitialElement": 1,
+                        "Easing": "Circ",
+                        "EasingOption": "Out",
+                        "SwipeAcceleration": 1.0,
+                        "DragAcceleration": 1.0
+                      },
+                      {
+                        "Type": "ScrollWheel",
+                        "Name": "scrollDay",
+                        "X": 5,
+                        "Y": 74,
+                        "Width": 100,
+                        "Height": 200,
+                        "SelectedItemOffset": 72,
+                        "UseSelectedStyle": true,
+                        "SelectedItemTemplateName": "TextContainerHigh",
+                        "MarginBefore": 5,
+                        "MarginAfter": 5,
+                        "ItemTemplateName": "textContainer",
+                        "NumberofItems": 31,
+                        "InitialElement": 1,
+                        "Easing": "Circ",
+                        "EasingOption": "Out",
+                        "SwipeAcceleration": 3.0,
+                        "DragAcceleration": 1.0
+                      },
+                      {
+                        "Type": "ScrollWheel",
+                        "Name": "scrollYear",
+                        "X": 215,
+                        "Y": 74,
+                        "Width": 100,
+                        "Height": 200,
+                        "SelectedItemOffset": 72,
+                        "UseSelectedStyle": true,
+                        "SelectedItemTemplateName": "TextContainerHigh",
+                        "MarginBefore": 5,
+                        "MarginAfter": 5,
+                        "ItemTemplateName": "textContainer",
+                        "NumberofItems": 2100,
+                        "Easing": "Circ",
+                        "EasingOption": "Out",
+                        "SwipeAcceleration": 1.0,
+                        "DragAcceleration": 1.0
+                      },
+                      {
+                        "Type": "ScrollWheel",
+                        "Name": "scrollHour",
+                        "X": 357,
+                        "Y": 74,
+                        "Width": 100,
+                        "Height": 200,
+                        "SelectedItemOffset": 72,
+                        "UseSelectedStyle": true,
+                        "SelectedItemTemplateName": "TextContainerHigh",
+                        "MarginBefore": 5,
+                        "MarginAfter": 5,
+                        "ItemTemplateName": "textContainer",
+                        "NumberofItems": 24,
+                        "InitialElement": 1,
+                        "Easing": "Circ",
+                        "EasingOption": "Out",
+                        "SwipeAcceleration": 1.0,
+                        "DragAcceleration": 1.0
+                      },
+                      {
+                        "Type": "ScrollWheel",
+                        "Name": "scrollMin",
+                        "X": 445,
+                        "Y": 74,
+                        "Width": 100,
+                        "Height": 200,
+                        "SelectedItemOffset": 72,
+                        "UseSelectedStyle": true,
+                        "SelectedItemTemplateName": "TextContainerHigh",
+                        "MarginBefore": 5,
+                        "MarginAfter": 5,
+                        "ItemTemplateName": "textContainer",
+                        "NumberofItems": 60,
+                        "InitialElement": 1,
+                        "Easing": "Circ",
+                        "EasingOption": "Out",
+                        "SwipeAcceleration": 3.0,
+                        "DragAcceleration": 1.0
+                      },
+                      {
+                        "Type": "ScrollWheel",
+                        "Name": "scrollSec",
+                        "X": 531,
+                        "Y": 74,
+                        "Width": 100,
+                        "Height": 200,
+                        "SelectedItemOffset": 72,
+                        "UseSelectedStyle": true,
+                        "SelectedItemTemplateName": "TextContainerHigh",
+                        "MarginBefore": 5,
+                        "MarginAfter": 5,
+                        "ItemTemplateName": "textContainer",
+                        "NumberofItems": 60,
+                        "Easing": "Circ",
+                        "EasingOption": "Out",
+                        "SwipeAcceleration": 1.0,
+                        "DragAcceleration": 1.0
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "lblMasterClkEnable_1",
+                        "X": 27,
+                        "Y": 10,
+                        "Width": 47,
+                        "Height": 37,
+                        "TextId": "__SingleUse_P48A",
+                        "TextRotation": "0",
+                        "Color": {
+                          "Red": 200,
+                          "Green": 200,
+                          "Blue": 200
+                        },
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "lblMasterClkEnable_1_1",
+                        "X": 98,
+                        "Y": 10,
+                        "Width": 80,
+                        "Height": 37,
+                        "TextId": "__SingleUse_KKZZ",
+                        "TextRotation": "0",
+                        "Color": {
+                          "Red": 200,
+                          "Green": 200,
+                          "Blue": 200
+                        },
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "lblMasterClkEnable_1_1_1",
+                        "X": 239,
+                        "Y": 10,
+                        "Width": 53,
+                        "Height": 37,
+                        "TextId": "__SingleUse_CBO5",
+                        "TextRotation": "0",
+                        "Color": {
+                          "Red": 200,
+                          "Green": 200,
+                          "Blue": 200
+                        },
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "lblMasterClkEnable_1_2",
+                        "X": 378,
+                        "Y": 10,
+                        "Width": 59,
+                        "Height": 37,
+                        "TextId": "__SingleUse_N05E",
+                        "TextRotation": "0",
+                        "Color": {
+                          "Red": 200,
+                          "Green": 200,
+                          "Blue": 200
+                        },
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "lblMasterClkEnable_1_1_2",
+                        "X": 472,
+                        "Y": 10,
+                        "Width": 46,
+                        "Height": 37,
+                        "TextId": "__SingleUse_17ZT",
+                        "TextRotation": "0",
+                        "Color": {
+                          "Red": 200,
+                          "Green": 200,
+                          "Blue": 200
+                        },
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "TextArea",
+                        "Name": "lblMasterClkEnable_1_1_1_1",
+                        "X": 560,
+                        "Y": 10,
+                        "Width": 43,
+                        "Height": 37,
+                        "TextId": "__SingleUse_ICEL",
+                        "TextRotation": "0",
+                        "Color": {
+                          "Red": 200,
+                          "Green": 200,
+                          "Blue": 200
+                        },
+                        "AutoSize": true
+                      },
+                      {
+                        "Type": "Line",
+                        "Name": "line1_1",
+                        "X": 27,
+                        "Y": 57,
+                        "Width": 576,
+                        "Height": 15,
+                        "Color": {
+                          "Red": 64,
+                          "Green": 64,
+                          "Blue": 64
+                        },
+                        "EndX": 920,
+                        "EndY": 1,
+                        "LineWidth": 2,
+                        "LineEndingStyle": "Butt"
+                      },
+                      {
+                        "Type": "Line",
+                        "Name": "line1_1_1",
+                        "X": 27,
+                        "Y": 147,
+                        "Width": 576,
+                        "Height": 15,
+                        "Color": {
+                          "Red": 64,
+                          "Green": 64,
+                          "Blue": 64
+                        },
+                        "EndX": 920,
+                        "EndY": 1,
+                        "LineWidth": 2,
+                        "LineEndingStyle": "Butt"
+                      },
+                      {
+                        "Type": "Line",
+                        "Name": "line1_1_2",
+                        "X": 27,
+                        "Y": 197,
+                        "Width": 576,
+                        "Height": 15,
+                        "Color": {
+                          "Red": 64,
+                          "Green": 64,
+                          "Blue": 64
+                        },
+                        "EndX": 920,
+                        "EndY": 1,
+                        "LineWidth": 2,
+                        "LineEndingStyle": "Butt"
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "FlexButton",
+                    "Name": "btnSetupClock",
+                    "X": 672,
+                    "Y": 63,
+                    "Width": 306,
+                    "Height": 285,
+                    "ButtonTrigger": {
+                      "Type": "ClickButtonTrigger"
+                    },
+                    "ButtonStyles": [
+                      {
+                        "Type": "TextButtonStyle",
+                        "Y": 115,
+                        "TextId": "__SingleUse_3FBP",
+                        "TextRotation": "0",
+                        "ColorReleased": {
+                          "Red": 150,
+                          "Green": 118,
+                          "Blue": 73
+                        },
+                        "ColorPressed": {
+                          "Red": 64,
+                          "Green": 64,
+                          "Blue": 64
+                        }
+                      },
+                      {
+                        "Type": "BoxWithBorderButtonStyle",
+                        "Width": 306,
+                        "Height": 285,
+                        "LockToFlexButtonSize": true,
+                        "BorderSize": 1,
+                        "ColorPressed": {
+                          "Red": 32,
+                          "Green": 32,
+                          "Blue": 32
+                        },
+                        "ColorBorderReleased": {
+                          "Red": 100,
+                          "Green": 100,
+                          "Blue": 100
+                        },
+                        "ColorBorderPressed": {
+                          "Red": 100,
+                          "Green": 100,
+                          "Blue": 100
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "Type": "TextArea",
+                    "Name": "lblClockTitle",
+                    "X": 8,
+                    "Y": -2,
+                    "Width": 294,
+                    "Height": 44,
+                    "TextId": "__SingleUse_W346",
+                    "TextRotation": "0",
+                    "Color": {
+                      "Red": 200,
+                      "Green": 200,
+                      "Blue": 200
+                    }
+                  }
+                ]
+              },
+              {
+                "Type": "Line",
+                "Name": "line1_2",
+                "X": 55,
+                "Y": 280,
+                "Width": 920,
+                "Height": 15,
+                "Color": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                },
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
+                "LineEndingStyle": "Butt"
+              },
+              {
+                "Type": "Line",
+                "Name": "line1_2_1",
+                "X": 55,
+                "Y": 677,
+                "Width": 920,
+                "Height": 15,
+                "Color": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                },
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
+                "LineEndingStyle": "Butt"
               }
             ]
           }
@@ -1097,7 +1511,7 @@
             "InteractionName": "ShowMain",
             "Trigger": {
               "Type": "TriggerClicked",
-              "TriggerComponent": "btnDisplay"
+              "TriggerComponent": "btnBack"
             },
             "Action": {
               "Type": "ActionGotoScreen",
@@ -1149,6 +1563,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "ClickMasterClkOnI2S"
+            }
+          },
+          {
+            "InteractionName": "SetClockTime",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnSetupClock"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "btnSetClockClick"
             }
           }
         ]
@@ -1857,7 +2282,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockUptimeTitle",
                 "X": 27,
-                "Y": 329,
+                "Y": 335,
                 "Width": 326,
                 "Height": 44,
                 "TextId": "__SingleUse_WW6U",
@@ -1872,7 +2297,7 @@
                 "Type": "TextArea",
                 "Name": "lblClockUptime",
                 "X": 441,
-                "Y": 329,
+                "Y": 335,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_26LX",
@@ -1892,7 +2317,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockTempTitle_0",
                 "X": 27,
-                "Y": 382,
+                "Y": 388,
                 "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_LNP8",
@@ -1907,7 +2332,7 @@
                 "Type": "TextArea",
                 "Name": "lblClocktemp_0",
                 "X": 441,
-                "Y": 382,
+                "Y": 388,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_3S8R",
@@ -1927,8 +2352,8 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockTempTitle_1",
                 "X": 27,
-                "Y": 426,
-                "Width": 326,
+                "Y": 432,
+                "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_6D36",
                 "TextRotation": "0",
@@ -1942,7 +2367,7 @@
                 "Type": "TextArea",
                 "Name": "lblClocktemp_1",
                 "X": 441,
-                "Y": 426,
+                "Y": 432,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_MSR2",
@@ -1962,7 +2387,7 @@
                 "Type": "TextArea",
                 "Name": "lblClocktemp_2",
                 "X": 441,
-                "Y": 470,
+                "Y": 476,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_JPI8",
@@ -1982,7 +2407,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockCurrentTitle_0",
                 "X": 23,
-                "Y": 527,
+                "Y": 533,
                 "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_SR1D",
@@ -1997,7 +2422,7 @@
                 "Type": "TextArea",
                 "Name": "lblClockCurrent_0",
                 "X": 437,
-                "Y": 527,
+                "Y": 533,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_XPFN",
@@ -2017,7 +2442,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockCurrentTitle_1",
                 "X": 23,
-                "Y": 571,
+                "Y": 577,
                 "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_5I8K",
@@ -2032,7 +2457,7 @@
                 "Type": "TextArea",
                 "Name": "lblClockCurrent_1",
                 "X": 437,
-                "Y": 571,
+                "Y": 577,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_D7C7",
@@ -2052,7 +2477,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockCurrentTitle_2",
                 "X": 23,
-                "Y": 615,
+                "Y": 621,
                 "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_96H9",
@@ -2067,8 +2492,8 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockTempTitle_2",
                 "X": 27,
-                "Y": 470,
-                "Width": 326,
+                "Y": 476,
+                "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_6FTC",
                 "TextRotation": "0",
@@ -2082,7 +2507,7 @@
                 "Type": "TextArea",
                 "Name": "lblClockCurrent_2",
                 "X": 437,
-                "Y": 615,
+                "Y": 621,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_FZOH",
@@ -2117,7 +2542,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockTitle",
                 "X": 10,
-                "Y": 244,
+                "Y": 241,
                 "Width": 294,
                 "Height": 44,
                 "TextId": "__SingleUse_3V0X",
@@ -2132,7 +2557,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockSupplyVoltageTitle",
                 "X": 23,
-                "Y": 680,
+                "Y": 673,
                 "Width": 399,
                 "Height": 44,
                 "TextId": "__SingleUse_0OEF",
@@ -2147,7 +2572,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockSupplyVoltage",
                 "X": 437,
-                "Y": 680,
+                "Y": 673,
                 "Width": 184,
                 "Height": 44,
                 "TextId": "__SingleUse_IO03",
@@ -2167,7 +2592,7 @@
                 "Type": "Line",
                 "Name": "line4",
                 "X": 40,
-                "Y": 375,
+                "Y": 381,
                 "Width": 920,
                 "Height": 15,
                 "Color": {
@@ -2184,7 +2609,7 @@
                 "Type": "Line",
                 "Name": "line3",
                 "X": 40,
-                "Y": 517,
+                "Y": 523,
                 "Width": 920,
                 "Height": 15,
                 "Color": {
@@ -2317,7 +2742,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASFwVerTitle",
                 "X": 27,
-                "Y": 287,
+                "Y": 289,
                 "Width": 345,
                 "Height": 44,
                 "TextId": "__SingleUse_LZC3",
@@ -2352,7 +2777,7 @@
                 "Type": "TextArea",
                 "Name": "lblDASClockFwVersion",
                 "X": 382,
-                "Y": 293,
+                "Y": 295,
                 "Width": 596,
                 "Height": 33,
                 "TextId": "__SingleUse_5V6W",
@@ -2367,6 +2792,58 @@
                   "UseBuffer": true,
                   "BufferSize": 50
                 }
+              },
+              {
+                "Type": "FlexButton",
+                "Name": "btnFactoryReset",
+                "X": 23,
+                "Y": 752,
+                "Width": 974,
+                "Height": 90,
+                "ButtonTrigger": {
+                  "Type": "ClickButtonTrigger"
+                },
+                "ButtonStyles": [
+                  {
+                    "Type": "TextButtonStyle",
+                    "X": -20,
+                    "Y": 20,
+                    "TextId": "__SingleUse_MABJ",
+                    "TextRotation": "0",
+                    "ColorReleased": {
+                      "Red": 150,
+                      "Green": 118,
+                      "Blue": 73
+                    },
+                    "ColorPressed": {
+                      "Red": 64,
+                      "Green": 64,
+                      "Blue": 64
+                    }
+                  },
+                  {
+                    "Type": "BoxWithBorderButtonStyle",
+                    "Width": 974,
+                    "Height": 90,
+                    "LockToFlexButtonSize": true,
+                    "BorderSize": 1,
+                    "ColorPressed": {
+                      "Red": 32,
+                      "Green": 32,
+                      "Blue": 32
+                    },
+                    "ColorBorderReleased": {
+                      "Red": 100,
+                      "Green": 100,
+                      "Blue": 100
+                    },
+                    "ColorBorderPressed": {
+                      "Red": 100,
+                      "Green": 100,
+                      "Blue": 100
+                    }
+                  }
+                ]
               }
             ]
           }
@@ -2382,6 +2859,17 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
               "ActionComponent": "Main"
+            }
+          },
+          {
+            "InteractionName": "FactoryReset",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnFactoryReset"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "FactoryReset"
             }
           }
         ]
@@ -3327,7 +3815,100 @@
         ]
       }
     ],
-    "CustomContainerDefinitions": [],
+    "CustomContainerDefinitions": [
+      {
+        "Name": "textContainer",
+        "Width": 100,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "text",
+            "Y": 7,
+            "Width": 100,
+            "Height": 35,
+            "TextId": "__SingleUse_FGW4",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 107,
+              "Green": 85,
+              "Blue": 54
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_X53I",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": []
+      },
+      {
+        "Name": "TextContainerHigh",
+        "Width": 100,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "Line",
+            "Name": "line0",
+            "Y": 44,
+            "Width": 100,
+            "Height": 15,
+            "Visible": false,
+            "Color": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "StartX": 2,
+            "StartY": 2,
+            "EndX": 98,
+            "EndY": 2,
+            "LineWidth": 2,
+            "LineEndingStyle": "Round"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "text",
+            "Y": 3,
+            "Width": 100,
+            "Height": 52,
+            "TextId": "__SingleUse_T1YD",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 150,
+              "Green": 118,
+              "Blue": 73
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_QH9M",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "Line",
+            "Name": "line1",
+            "Y": 3,
+            "Width": 100,
+            "Height": 15,
+            "Visible": false,
+            "Color": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "StartX": 2,
+            "StartY": 4,
+            "EndX": 98,
+            "EndY": 4,
+            "LineWidth": 2,
+            "LineEndingStyle": "Round"
+          }
+        ],
+        "Interactions": []
+      }
+    ],
     "Name": "MGUI201222-KARUNA-7i.FW",
     "Resolution": {
       "Width": 1024,

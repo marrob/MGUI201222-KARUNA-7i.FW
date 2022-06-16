@@ -56,27 +56,27 @@
   }
   float ServiceScreenView::GuiItfGetDasClockMVOCX1Temp()
   {
-    return 55.1;
+    return 55.1f;
   }
   float ServiceScreenView::GuiItfGetDasClockMVOCX2Temp()
   {
-    return 60.2;
+    return 60.2f;
   }
   float ServiceScreenView::GuiItfGetDasClockMV341Current()
   {
-    return 550.0;
+    return 550.0f;
   }
   float ServiceScreenView::GuiItfGetDasClockMVOCX1Current()
   {
-    return 160.1;
+    return 160.1f;
   }
   float ServiceScreenView::GuiItfGetDasClockMVOCX2Current()
   {
-    return 160.2;
+    return 160.2f;
   }
   float ServiceScreenView::GuiItfGetDasClockMainVoltage()
   {
-    return 12.5;
+    return 12.5f;
   }
 #else
   extern "C"

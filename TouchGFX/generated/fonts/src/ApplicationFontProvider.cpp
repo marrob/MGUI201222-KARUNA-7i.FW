@@ -24,6 +24,12 @@ touchgfx::Font* ApplicationFontProvider::getFont(touchgfx::FontId typography)
     case Typography::TYPOGRAPHY_00:
         // consola_70_4bpp
         return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[4]);
+    case Typography::SWTEXT_HIGH:
+        // arialbd_40_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[5]);
+    case Typography::SWTEXT:
+        // arial_35_4bpp
+        return const_cast<touchgfx::Font*>(TypedTextDatabase::getFonts()[6]);
     default:
         return 0;
     }

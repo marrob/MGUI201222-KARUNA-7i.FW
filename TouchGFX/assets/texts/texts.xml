@@ -45,7 +45,7 @@
         <Translation Language="GB">Back</Translation>
       </Text>
       <Text Id="__SingleUse_YPEX" Alignment="Center" TypographyId="Value">
-        <Translation Language="GB">Karuna Settings</Translation>
+        <Translation Language="GB">Device Settings</Translation>
       </Text>
       <Text Id="__SingleUse_AGOP" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Enable all output at startup.</Translation>
@@ -112,6 +112,48 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_3FBP" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Set clock time</Translation>
+      </Text>
+      <Text Id="__SingleUse_ICEL" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Sec</Translation>
+      </Text>
+      <Text Id="__SingleUse_17ZT" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Min</Translation>
+      </Text>
+      <Text Id="__SingleUse_N05E" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Hour</Translation>
+      </Text>
+      <Text Id="__SingleUse_CBO5" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Year</Translation>
+      </Text>
+      <Text Id="__SingleUse_KKZZ" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Month</Translation>
+      </Text>
+      <Text Id="__SingleUse_P48A" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Day</Translation>
+      </Text>
+      <Text Id="__SingleUse_X53I" Alignment="Left" TypographyId="SWText_high">
+        <Translation Language="GB">10</Translation>
+      </Text>
+      <Text Id="__SingleUse_QH9M" Alignment="Left" TypographyId="SWText_high">
+        <Translation Language="GB">10</Translation>
+      </Text>
+      <Text Id="__SingleUse_T1YD" Alignment="Center" TypographyId="SWText_high">
+        <Translation Language="GB">&lt;val&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_MABJ" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">!!! Fatcory Reset !!!</Translation>
+      </Text>
+      <Text Id="__SingleUse_FGW4" Alignment="Center" TypographyId="SWText">
+        <Translation Language="GB">&lt;val&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_W346" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Clock</Translation>
+      </Text>
+      <Text Id="__SingleUse_VP13" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Karuna</Translation>
+      </Text>
       <Text Id="__SingleUse_5V6W" Alignment="Left" TypographyId="Desc">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
@@ -233,7 +275,7 @@
         <Translation Language="GB">&lt;value&gt; °C</Translation>
       </Text>
       <Text Id="__SingleUse_6FTC" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">DAS clock uptime counter : </Translation>
+        <Translation Language="GB">DAS clock OCXO 2  temperature :</Translation>
       </Text>
       <Text Id="__SingleUse_VO29" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">0</Translation>
@@ -242,7 +284,7 @@
         <Translation Language="GB">&lt;value&gt; °C</Translation>
       </Text>
       <Text Id="__SingleUse_6D36" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">DAS clock uptime counter : </Translation>
+        <Translation Language="GB">DAS clock OCXO 1  temperature : </Translation>
       </Text>
       <Text Id="__SingleUse_OOXJ" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">0</Translation>
@@ -291,5 +333,7 @@
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="SWText_high" Font="arialbd.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="SWText" Font="arial.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
   </Typographies>
 </TextDatabase>
