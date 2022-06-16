@@ -326,7 +326,7 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
     {
         //FactoryReset
         //When btnFactoryReset clicked call virtual function
-        //Call FactoryReset
-        FactoryReset();
+        //Call OnClickFactoryReset
+        OnClickFactoryReset();
     }
 }

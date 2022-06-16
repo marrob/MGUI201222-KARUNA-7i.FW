@@ -26,7 +26,7 @@ public:
     /*
      * Virtual Action Handlers
      */
-    virtual void FactoryReset()
+    virtual void OnClickFactoryReset()
     {
         // Override and implement this function in ServiceScreen
     }

@@ -69,6 +69,7 @@ uint8_t GuiItfLoad(void)
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
     Device.Log.LastAddress = value;
+
   }
   return GUIITF_OK;
 }
@@ -84,7 +85,7 @@ uint8_t GuiItfSetDefault(void)
   Device.Gui.BootUpCnt = value;
 
   /*** Backlight ***/
-  value = 100;
+  value = 50;
   EepromU32Write(EEP_BACKLIGHT_ADDR, value);
   BacklightSet((uint8_t)value);
 
@@ -115,6 +116,8 @@ uint8_t GuiItfSetDefault(void)
   value = 0;
   EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, value);
   Device.Log.LastAddress = value;
+
+  LogFlashErase(); //Here we have to wait for a long time....
 
 
   /*** Magic Word ***/
@@ -147,6 +150,12 @@ uint32_t GuiItfUpTimSec(void)
   return Device.Gui.UpTimeSec;
 }
 
+void GuiItfFacotryReset(void)
+{
+  GuiItfSetDefault();
+  NVIC_SystemReset();
+}
+
 /* Karuna --------------------------------------------------------------------*/
 /*
  * fw:  220510_2157               size: DEVICE_FW_SIZE
@@ -174,16 +183,15 @@ uint8_t GuiItfGetKarunaStatus(void)
 void GuiItfSetKarunaHdmi(uint8_t onoff)
 {
   if(onoff)
-  {
-    LogWriteLine("GuiItfSetKarunaHdmi: On");
     Device.Karuna.DO |= KRN_DO_I2S_EN;
-  }
   else
-  {
-    LogWriteLine("GuiItfSetKarunaHdmi: Off");
     Device.Karuna.DO &= ~KRN_DO_I2S_EN;
-  }
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetKarunaHdmi: On");
+  else
+    LogWriteLine("GuiItfSetKarunaHdmi: Off");
 }
 
 uint8_t GuitIfGetKarunaIsHdmiSet(void)
@@ -199,6 +207,11 @@ void GuiItfSetKarunaRca(uint8_t onoff)
     Device.Karuna.DO &= ~KRN_DO_RCA_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetKarunaRca: On");
+  else
+    LogWriteLine("GuiItfSetKarunaRca: Off");
 }
 
 uint8_t GuitIfGetKarunaIsRcaSet(void)
@@ -214,6 +227,11 @@ void GuiItfSetKarunaBnc(uint8_t onoff)
     Device.Karuna.DO &= ~KRN_DO_BNC_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetKarunaBnc: On");
+  else
+    LogWriteLine("GuiItfSetKarunaBnc: Off");
 }
 
 uint8_t GuitIfGetKarunaIsBncSet(void)
@@ -229,6 +247,11 @@ void GuiItfSetKarunaXlr(uint8_t onoff)
     Device.Karuna.DO &= ~KRN_DO_XLR_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetKarunaXlr: On");
+  else
+    LogWriteLine("GuiItfSetKarunaXlr: Off");
 }
 
 uint8_t GuitIfGetKarunaIsXlrSet()
@@ -241,7 +264,7 @@ uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
   return Device.Karuna.SavedFlags & KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
 }
 
-void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
+void GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff)
 {
   if(onoff)
     Device.Karuna.SavedFlags |= KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
@@ -249,6 +272,11 @@ void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
     Device.Karuna.SavedFlags &= ~KRN_FLAG_ALL_OUT_EN_AT_STARTUP;
 
   EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetKarunaOutputsAllEnabledAfterStart: On");
+  else
+    LogWriteLine("GuiItfSetKarunaOutputsAllEnabledAfterStart: Off");
 }
 
 void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
@@ -264,6 +292,11 @@ void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
     Device.Karuna.SavedFlags &= ~KRN_FLAG_MSTR_CLK_ON_I2S_EN;
   }
   EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetKarunaMasterClkOnI2S: On");
+  else
+    LogWriteLine("GuiItfSetKarunaMasterClkOnI2S: Off");
 }
 
 uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
@@ -366,31 +399,76 @@ uint8_t GuiItfGetDasClockIsExt(void)
 
 
 /* RTC -----------------------------------------------------------------------*/
+/*
+ * Example Set RTC:
+ * struct tm tm_info;
+ * tm_info.tm_year = 2022 - 1900; // 2022
+ * tm_info.tm_mon = 6 - 1; //Juni
+ * tm_info.tm_mday = 1;
+ * tm_info.tm_hour = 2;
+ * tm_info.tm_min = 3;
+ * tm_info.tm_sec = 4;
+ * tm_info.tm_isdst = 0;
+ *
+ * DeviceRtcSet(mktime(&tm_info));
+ */
 void GuiItfSetRtc(time_t dt)
 {
   DeviceRtcSet(dt);
 }
 
+/*
+ * Example Get RTC:
+ * time_t dt;
+ * GuiItfGetRtc(&dt);
+ * struct tm *tm_info = gmtime(&dt);
+ *
+ * uint16_t year = tm_info->tm_year + 1900;
+ * uint8_t mon = tm_info->tm_mon + 1;
+ * uint8_t day = tm_info->tm_mday;
+ *
+ * uint8_t hour = tm_info->tm_hour;
+ * uint8_t min = tm_info->tm_min;
+ * uint8_t sec = tm_info->tm_sec;
+ */
 void GuiItfGetRtc(time_t *dt)
 {
   *dt = Device.DateTime.PosixTime;
 }
 
 /* Log -----------------------------------------------------------------------*/
+/* *** Example - Read Log ***
+ * char buf[256];
+ * for(uint32_t i = 0; i < GuiItfLogGetLastAddress(); i++)
+ * {
+ *  GuitItfLogGetLine(i, buf, sizeof(buf));
+ *   printf( "%s\n", buf);
+ * }
+ *
+ * *** Example 2 - Write to Log ***
+ *
+ * LogWriteLine("Hello World);
+ *
+ */
 uint32_t GuiItfLogGetLastAddress(void)
 {
   return Device.Log.LastAddress;
 }
 
-void GuiItfLogIncPage(void)
-{
-  Device.Log.LastAddress++;
-  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.Log.LastAddress);
-}
-
 void GuitItfLogGetLine(uint32_t address, char *line, uint32_t size)
 {
   LogFlashRead(address, (uint8_t*)line, size);
+}
+
+/*
+ * Only for backend...
+ */
+void GuiItfLogIncPage(void)
+{
+  Device.Log.LastAddress++;
+  if(Device.Log.LastAddress > LOG_FLASH_MAX_LINE)
+    Device.Log.LastAddress = 0;
+  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.Log.LastAddress);
 }
 
 

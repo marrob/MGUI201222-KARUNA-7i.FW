@@ -247,10 +247,6 @@ uint8_t DeviceTimeUpdate(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void SayHelloWorld(uint8_t p)
-{
-  printf("Hello World");
-}
 /* USER CODE END 0 */
 
 /**
@@ -340,27 +336,13 @@ int main(void)
   DeviceTimeUpdate();
 
   /*** Falsh Playgorund ***/
-  //uint16_t id;
-  //LogFlashReadId((uint8_t*)&id, sizeof(id));
-  //LogErase();
-  //uint8_t w[] = "Hello";
-  //uint8_t r[sizeof(w)];
-  //LogFlashWriteLine(1, w, sizeof(w));
-  //memset(r, 0, sizeof(r));
-  //LogFlashReadLine(1,r, sizeof(r));
-
-  char bufi[256];
+  char buf[256];
   for(uint32_t i = 0; i < GuiItfLogGetLastAddress(); i++)
   {
-    GuitItfLogGetLine(i,bufi, sizeof(bufi));
-    printf( "%s\n", bufi);
+    GuitItfLogGetLine(i,buf, sizeof(buf));
+    printf( "%s\n", buf);
   }
-//  while(1)
-  //  LogFlashReadId();
 
- // LogFlash("Hello World");
-
- // LogFlashWrite("It is a Test");
 
   /* USER CODE END 2 */
 
@@ -408,7 +390,6 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
-  printf("FreeRTOS osKernelStart()");
   /* USER CODE END RTOS_THREADS */
 
   /* USER CODE BEGIN RTOS_EVENTS */
@@ -423,7 +404,6 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-   // LiveLedTask(&hLiveLed);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -1473,6 +1453,7 @@ uint8_t DeviceRtcSet(time_t dt)
 
   return DEVICE_OK;
 }
+
 
 uint8_t DeviceRtcGet(time_t *dt)
 {

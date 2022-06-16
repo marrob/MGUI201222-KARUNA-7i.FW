@@ -163,7 +163,9 @@ uint8_t LogFlashRead(uint32_t addr, uint8_t *data, uint32_t size)
 
   return LOG_OK;
 }
-
+/*
+ * we have to wait for a long time ...
+ */
 uint8_t LogFlashErase(void)
 {
   /*** WREN - Write Enable***/
