@@ -105,6 +105,8 @@ uint8_t GuiItfGetDasClockIsExt(void);
 uint8_t GuiItfSetBacklight(uint8_t percent);
 uint8_t GuiItfGetBacklight(void);
 void GuiItfSetBacklightEn(uint8_t onoff);
+void GuiItfSetBackLightAutoOff(uint32_t sec);
+uint32_t GuiItfGetBaclightAutoOff(void);
 /* RTC -----------------------------------------------------------------------*/
 void GuiItfSetRtc(time_t dt);
 void GuiItfGetRtc(time_t *dt);

@@ -153,7 +153,7 @@ typedef struct _AppTypeDef
     double Temperatures[4];
     uint32_t Outputs;
     uint32_t Inputs;
-  }Peri;
+  }Periph;
 
   struct _Log
   {
@@ -169,6 +169,7 @@ typedef struct _AppTypeDef
 
   struct _Backlight
   {
+    uint32_t AutoOffSec;
     uint8_t LightPercent;
   } Backlight;
 

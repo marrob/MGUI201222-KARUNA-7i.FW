@@ -50,7 +50,8 @@ uint8_t GuiItfLoad(void)
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
     BacklightSet(value);
 
-
+    EepromU32Read(EEP_BACKLIGHT_AUTO_OFF_ADDR, &value);
+    Device.Backlight.AutoOffSec = value;
 
     /*** Karuna ***/
     EepromU32Read(EEP_KARUNA_SAVED_FLAGS_ADDR, &value);
@@ -91,6 +92,10 @@ uint8_t GuiItfSetDefault(void)
   value = 50;
   EepromU32Write(EEP_BACKLIGHT_ADDR, value);
   BacklightSet((uint8_t)value);
+
+  value = 0;
+  EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, value);
+  Device.Backlight.AutoOffSec = value;
 
   /*** Karuna ***/
   value = KRN_DO_RCA_EN | KRN_DO_BNC_EN | KRN_DO_XLR_EN | KRN_DO_I2S_EN;
@@ -330,10 +335,19 @@ void GuiItfSetBacklightEn(uint8_t onoff)
     BacklightDisable();
 }
 
-
+/*
+ * 0  -> Off
+ * 60 -> 1min
+ */
 void GuiItfSetBackLightAutoOff(uint32_t sec)
 {
+  Device.Backlight.AutoOffSec = sec;
+  EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, sec);
+}
 
+uint32_t GuiItfGetBaclightAutoOff(void)
+{
+  return Device.Backlight.AutoOffSec;
 }
 
 /* DasClock -----------------------------------------------------------------*/
