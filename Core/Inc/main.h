@@ -169,8 +169,11 @@ typedef struct _AppTypeDef
 
   struct _Backlight
   {
-    uint32_t AutoOffSec;
+    uint32_t AutoOffSec;    //If it is not 0, then it is valid time
+    uint32_t RemainingTimeToOff;
+    time_t TimestampToOff;
     uint8_t LightPercent;
+    uint32_t TouchInterrupt;
   } Backlight;
 
 }Device_t;
@@ -192,6 +195,9 @@ uint8_t DeviceRtcGet(time_t *dt);
 /*** Log **/
 void DeviceLogWriteLine(char *line);
 
+/*** Backlight Off Timer ***/
+void DeviceBacklightOffTimerReset(void);
+
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
@@ -207,6 +213,7 @@ void DeviceLogWriteLine(char *line);
 #define TS_RST_GPIO_Port GPIOH
 #define TS_INT_Pin GPIO_PIN_12
 #define TS_INT_GPIO_Port GPIOH
+#define TS_INT_EXTI_IRQn EXTI15_10_IRQn
 #define DIO_WR_Pin GPIO_PIN_12
 #define DIO_WR_GPIO_Port GPIOB
 #define SPI2_CLK_Pin GPIO_PIN_13

@@ -36,12 +36,12 @@ uint8_t BacklightSet(uint8_t percent)
   return DISPLAY_LIGHT_OK;
 }
 
-
-void BacklightEnable(){
-  HAL_GPIO_WritePin(DISP_EN_GPIO_Port, DISP_EN_Pin, GPIO_PIN_SET);
-}
-void BacklightDisable(){
-  HAL_GPIO_WritePin(DISP_EN_GPIO_Port, DISP_EN_Pin, GPIO_PIN_RESET);
+void BacklightEn(uint8_t onoff)
+{
+  if(onoff)
+    HAL_GPIO_WritePin(DISP_EN_GPIO_Port, DISP_EN_Pin, GPIO_PIN_SET);
+  else
+    HAL_GPIO_WritePin(DISP_EN_GPIO_Port, DISP_EN_Pin, GPIO_PIN_RESET);
 }
 
 /************************ (C) COPYRIGHT KonvolucioBt ***********END OF FILE****/
