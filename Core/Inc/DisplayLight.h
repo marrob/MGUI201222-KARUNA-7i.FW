@@ -12,10 +12,7 @@
 /* Exported types ------------------------------------------------------------*/
 /* Exported constants --------------------------------------------------------*/
 
-typedef struct _Backlight
-{
-  uint8_t LightPercent;
-} Backlight_t;
+
 
 /* Exported macro ------------------------------------------------------------*/
 #define DISPLAY_LIGHT_OK  0

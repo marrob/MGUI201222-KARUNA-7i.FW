@@ -1337,7 +1337,7 @@ void UsbParser(char *request)
       }
       else if(!strcmp(cmd, "DIS:LIG?"))
       {
-        sprintf(response, "%d", BacklightGet());
+        sprintf(response, "%d", Device.Backlight.LightPercent);
       }
 //        else if(!strcmp(cmd, "LED:LIG?"))
 //        {
