@@ -343,7 +343,7 @@ int main(void)
   }
 
   /*** OffTimer ***/
-  //GuiItfSetBackLightAutoOff(20);
+  GuiItfSetBackLightAutoOff(0);
 
   /* USER CODE END 2 */
 
@@ -1527,8 +1527,11 @@ void DeviceBacklightOffTimerReset(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  Device.Backlight.TouchInterrupt ++;
-  DeviceBacklightOffTimerReset();
+  if(Device.Backlight.AutoOffSec)
+  {
+    Device.Backlight.TouchInterrupt ++;
+    DeviceBacklightOffTimerReset();
+  }
 }
 
 /* RS485----------------------------------------------------------------------*/
