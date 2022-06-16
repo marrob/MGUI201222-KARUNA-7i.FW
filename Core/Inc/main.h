@@ -37,8 +37,9 @@ extern "C" {
 #include "DisplayLight.h"
 #include "PowerLed.h"
 #include "GuiItf.h"
-#include "Peri.h"
+#include "Periph.h"
 #include "eeprom.h"
+#include <time.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -78,7 +79,7 @@ extern "C" {
 #define RS485_ARG2_LENGTH     35
 
 /*** YYMMDD-HHmmss ***/
-#define DEVICE_TIMESTAMP_SIZE 14
+#define DEVICE_DT_STR_SIZE    20
 
 typedef struct _DiagTypeDef
 {
@@ -109,8 +110,6 @@ typedef struct _DiagTypeDef
 
   uint32_t PowerLedTaskCounter;
 
-
-
 }Diag_t;
 
 typedef struct _AppTypeDef
@@ -131,8 +130,8 @@ typedef struct _AppTypeDef
     char PCB[DEVICE_PCB_SIZE];
     uint32_t OkCnt;
     uint32_t UnknownCnt;
-    uint8_t DI;
-    uint8_t DO;
+    uint32_t DI;
+    uint32_t DO;
     uint32_t UpTimeSec;
     uint32_t SavedFlags;
   }Karuna;
@@ -143,8 +142,8 @@ typedef struct _AppTypeDef
     char PCB[DEVICE_PCB_SIZE];
     uint32_t OkCnt;
     uint32_t UnknownCnt;
-    uint8_t DO;
-    uint8_t DI;
+    uint32_t DO;
+    uint32_t DI;
     double AI[DAS_AI_CHANNELS];
     uint32_t UpTimeSec;
   }DasClock;
@@ -152,11 +151,23 @@ typedef struct _AppTypeDef
   {
     double AnalogInputs[4];
     double Temperatures[4];
-    uint8_t Outputs;
-    uint16_t Inputs;
+    uint32_t Outputs;
+    uint32_t Inputs;
   }Peri;
-  char Now[DEVICE_TIMESTAMP_SIZE];
-  uint32_t LogLastPageAddress;
+
+
+  struct _Log
+  {
+    uint32_t LastAddress;
+  }Log;
+
+  struct _DateTime
+  {
+    char Now[DEVICE_DT_STR_SIZE];
+    time_t PosixTime;
+    struct tm tmDateTime;
+  }DateTime;
+
 }Device_t;
 
 extern Device_t Device;
@@ -170,9 +181,11 @@ void Error_Handler(void);
 /* USER CODE BEGIN EFP */
 
 /*** RTC ***/
-uint8_t RtcSet(uint8_t year, uint8_t month, uint8_t day, uint8_t hour, uint8_t min, uint8_t sec);
-uint8_t RtcGet(uint8_t *year, uint8_t *month, uint8_t *day, uint8_t *hours, uint8_t *mins, uint8_t *secs);
-uint8_t RtcGetNowToString(char *timestamp_string);
+uint8_t DeviceRtcSet(time_t dt);
+uint8_t DeviceRtcGet(time_t *dt);
+
+/*** Log **/
+void DeviceLogWriteLine(char *line);
 
 /* USER CODE END EFP */
 

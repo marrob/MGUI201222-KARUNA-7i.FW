@@ -48,15 +48,15 @@ void GT911_Init(I2C_HandleTypeDef *i2c)
 
     uint8_t id_buffer[3] = {0,0,0};
     GT911_ReadRegister(i2c, GT911_REG_ID, id_buffer, sizeof(id_buffer));
-    printf("Touch:ID:%c%c%c\r\n",id_buffer[0],id_buffer[1],id_buffer[2]);
+    //printf("Touch:ID:%c%c%c\r\n",id_buffer[0],id_buffer[1],id_buffer[2]);
 
     uint8_t configVer =0;
     GT911_ReadRegister(i2c, GT911_REG_CFG_ADDR, &configVer, sizeof(configVer));
-    printf("Touch:Config_Version:%2x\r\n",configVer);
+    //printf("Touch:Config_Version:%2x\r\n",configVer);
 
     uint16_t fwVer=0;
     GT911_ReadRegister(i2c, GT911_REG_FW_VER, (uint8_t*)&fwVer, sizeof(fwVer));
-    printf("Touch:FirmwareVersion:%2x\r\n",fwVer);
+    //printf("Touch:FirmwareVersion:%2x\r\n",fwVer);
 
 
 }

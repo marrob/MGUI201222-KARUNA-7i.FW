@@ -7,6 +7,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+
 #include "DisplayLight.h"
 #include "GuiItf.h"
 #include "EEPROM.h"
@@ -53,7 +54,7 @@ uint8_t GuiItfLoad(void)
     Device.Karuna.SavedFlags = value;
 
     if(Device.Karuna.SavedFlags & KRN_FLAG_ALL_OUT_EN_AT_STARTUP)
-      Device.Karuna.DO = KRN_CTRL_RCA | KRN_CTRL_BNC | KRN_CTRL_XLR | KRN_CTRL_I2S;
+      Device.Karuna.DO = KRN_DO_RCA_EN | KRN_DO_BNC_EN | KRN_DO_XLR_EN | KRN_DO_I2S_EN;
     else
     {
       EepromU32Read(EEP_KARUNA_SAVED_DO_ADDR, &value);
@@ -61,13 +62,13 @@ uint8_t GuiItfLoad(void)
     }
 
     if(Device.Karuna.SavedFlags & KRN_FLAG_MSTR_CLK_ON_I2S_EN)
-      Device.Karuna.DO |= KRN_CTRL_MCLK_I2S_EN;
+      Device.Karuna.DO |= KRN_DO_MCLK_I2S_EN;
     else
-      Device.Karuna.DO &= ~KRN_CTRL_MCLK_I2S_EN;
+      Device.Karuna.DO &= ~KRN_DO_MCLK_I2S_EN;
 
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
-    Device.LogLastPageAddress = value;
+    Device.Log.LastAddress = value;
   }
   return GUIITF_OK;
 }
@@ -88,7 +89,7 @@ uint8_t GuiItfSetDefault(void)
   BacklightSet((uint8_t)value);
 
   /*** Karuna ***/
-  value = KRN_CTRL_RCA | KRN_CTRL_BNC | KRN_CTRL_XLR | KRN_CTRL_I2S;
+  value = KRN_DO_RCA_EN | KRN_DO_BNC_EN | KRN_DO_XLR_EN | KRN_DO_I2S_EN;
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, value);
   Device.Karuna.DO = value;
 
@@ -99,12 +100,21 @@ uint8_t GuiItfSetDefault(void)
   /*** RTC ***/
   value = 0x01;
   EepromU32Write(EEP_RTC_IS_SET_ADDR, value);
-  RtcSet(22, 6, 10, 13, 45, 30);
+
+  struct tm tm_info;
+  tm_info.tm_year = 2022 - 1900; // 2022
+  tm_info.tm_mon = 6 - 1; //Junius
+  tm_info.tm_mday = 1;
+  tm_info.tm_hour = 2;
+  tm_info.tm_min = 3;
+  tm_info.tm_sec = 4;
+  tm_info.tm_isdst = 0;
+  DeviceRtcSet(mktime(&tm_info));
 
   /*** Log ***/
   value = 0;
   EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, value);
-  Device.LogLastPageAddress = value;
+  Device.Log.LastAddress = value;
 
 
   /*** Magic Word ***/
@@ -164,61 +174,62 @@ uint8_t GuiItfGetKarunaStatus(void)
 void GuiItfSetKarunaHdmi(uint8_t onoff)
 {
   if(onoff)
-    Device.Karuna.DO |= KRN_CTRL_I2S;
+    Device.Karuna.DO |= KRN_DO_I2S_EN;
   else
-    Device.Karuna.DO &= ~KRN_CTRL_I2S;
+    Device.Karuna.DO &= ~KRN_DO_I2S_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
 }
 
 uint8_t GuitIfGetKarunaIsHdmiSet(void)
 {
-  return Device.Karuna.DO & KRN_CTRL_I2S;
+  return Device.Karuna.DO & KRN_DO_I2S_EN;
 }
 
 void GuiItfSetKarunaRca(uint8_t onoff)
 {
   if(onoff)
-    Device.Karuna.DO |= KRN_CTRL_RCA;
+    Device.Karuna.DO |= KRN_DO_RCA_EN;
   else
-    Device.Karuna.DO &= ~KRN_CTRL_RCA;
+    Device.Karuna.DO &= ~KRN_DO_RCA_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
 }
 
 uint8_t GuitIfGetKarunaIsRcaSet(void)
 {
-  return Device.Karuna.DO & KRN_CTRL_RCA;
+  return Device.Karuna.DO & KRN_DO_RCA_EN;
 }
 
 void GuiItfSetKarunaBnc(uint8_t onoff)
 {
   if(onoff)
-    Device.Karuna.DO |= (KRN_CTRL_BNC);
+    Device.Karuna.DO |= (KRN_DO_BNC_EN);
   else
-    Device.Karuna.DO &= ~KRN_CTRL_BNC;
+    Device.Karuna.DO &= ~KRN_DO_BNC_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
 }
 
 uint8_t GuitIfGetKarunaIsBncSet(void)
 {
-  return Device.Karuna.DO & KRN_CTRL_BNC;
+  return Device.Karuna.DO & KRN_DO_BNC_EN;
+ // return Device.Karuna.DO & KRN_DO_BNC_EN;
 }
 
 void GuiItfSetKarunaXlr(uint8_t onoff)
 {
   if(onoff)
-    Device.Karuna.DO |= KRN_CTRL_XLR;
+    Device.Karuna.DO |= KRN_DO_XLR_EN;
   else
-    Device.Karuna.DO &= ~KRN_CTRL_XLR;
+    Device.Karuna.DO &= ~KRN_DO_XLR_EN;
 
   EepromU32Write(EEP_KARUNA_SAVED_DO_ADDR, Device.Karuna.DO);
 }
 
 uint8_t GuitIfGetKarunaIsXlrSet()
 {
-  return Device.Karuna.DO & KRN_CTRL_XLR;
+  return Device.Karuna.DO & KRN_DO_XLR_EN;
 }
 
 uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
@@ -240,12 +251,12 @@ void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
 {
   if(onoff)
   {
-    Device.Karuna.DO |= KRN_CTRL_MCLK_I2S_EN;
+    Device.Karuna.DO |= KRN_DO_MCLK_I2S_EN;
     Device.Karuna.SavedFlags |= KRN_FLAG_MSTR_CLK_ON_I2S_EN;
   }
   else
   {
-    Device.Karuna.DO &= ~KRN_CTRL_MCLK_I2S_EN;
+    Device.Karuna.DO &= ~KRN_DO_MCLK_I2S_EN;
     Device.Karuna.SavedFlags &= ~KRN_FLAG_MSTR_CLK_ON_I2S_EN;
   }
   EepromU32Write(EEP_KARUNA_SAVED_FLAGS_ADDR, Device.Karuna.SavedFlags);
@@ -351,33 +362,31 @@ uint8_t GuiItfGetDasClockIsExt(void)
 
 
 /* RTC -----------------------------------------------------------------------*/
-/*
- * year:  0..99
- * month: 1..12
- * days:  1..31
- * hours: 0..23
- * mins:  0..59
- * secs:  0..59
- */
-uint8_t GuiItfSetRtc(uint8_t year, uint8_t month, uint8_t days, uint8_t hours, uint8_t mins, uint8_t secs)
+void GuiItfSetRtc(time_t dt)
 {
-  return RtcSet(year, month, days, hours, mins, secs);
+  DeviceRtcSet(dt);
 }
-uint8_t GuiItfGetRtc(uint8_t *year, uint8_t *month, uint8_t *days, uint8_t *hours, uint8_t *mins, uint8_t *secs)
+
+void GuiItfGetRtc(time_t *dt)
 {
-  return  RtcGet(year, month, days, hours, mins, secs);
+  *dt = Device.DateTime.PosixTime;
 }
 
 /* Log -----------------------------------------------------------------------*/
-
-uint32_t GuiItfLogGetLasPageAddr(void)
+uint32_t GuiItfLogGetLastAddress(void)
 {
-  return Device.LogLastPageAddress;
+  return Device.Log.LastAddress;
 }
 
-void GuiItfLogIncPageAddr(void)
+void GuiItfLogIncPage(void)
 {
-  Device.LogLastPageAddress++;
-  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.LogLastPageAddress);
+  Device.Log.LastAddress++;
+  EepromU32Write(EEP_LOG_LAST_PAGE_ADDR, Device.Log.LastAddress);
 }
+
+void GuitItfLogGetLine(uint32_t address, char *line, uint32_t size)
+{
+  LogFlashReadLine(address, (uint8_t*)line, size);
+}
+
 
