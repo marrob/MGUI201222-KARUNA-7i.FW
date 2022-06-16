@@ -40,6 +40,8 @@ public:
 
   float GuiItfGetDasClockMainVoltage();
 
+  void GuiItfFacotryReset(void);
+
 #endif
      
 protected:

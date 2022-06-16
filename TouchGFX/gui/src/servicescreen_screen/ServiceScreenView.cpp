@@ -79,7 +79,7 @@
     return 12.5f;
   }
 
-  void ServiceScreenView::OnClickFactoryReset()
+  void ServiceScreenView::GuiItfFacotryReset()
   {
 
   }

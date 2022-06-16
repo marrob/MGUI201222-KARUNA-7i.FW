@@ -155,7 +155,6 @@ typedef struct _AppTypeDef
     uint32_t Inputs;
   }Peri;
 
-
   struct _Log
   {
     uint32_t LastAddress;
@@ -167,6 +166,11 @@ typedef struct _AppTypeDef
     time_t PosixTime;
     struct tm tmDateTime;
   }DateTime;
+
+  struct _Backlight
+  {
+    uint8_t LightPercent;
+  } Backlight;
 
 }Device_t;
 
