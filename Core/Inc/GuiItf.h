@@ -83,7 +83,7 @@ void GuiItfSetKarunaXlr(uint8_t onfoff);
 uint8_t GuitIfGetKarunaIsXlrSet(void);
 uint32_t GuiItfGetKarunaUptimeCnt(void);
 uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
-void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
+void GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff);
 void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
 uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
 

@@ -7,7 +7,7 @@ uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 {
 	return 0;
 }
-void SettingsScreenView::GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff)
+void SettingsScreenView::GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff)
 {
 }
 void SettingsScreenView::GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
@@ -21,7 +21,7 @@ uint8_t SettingsScreenView::GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
 extern "C"
 {
 	uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart();
-	void GuiItfSetKarunaOutputsIsAllEnabledAfterStart(uint8_t onoff);
+	void GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff);
 	void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
 	uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
 }
@@ -56,12 +56,12 @@ void SettingsScreenView::tearDownScreen()
 
 void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
 {
-	GuiItfSetKarunaOutputsIsAllEnabledAfterStart(1);
+	GuiItfSetKarunaOutputsAllEnabledAfterStart(1);
 }
 
 void SettingsScreenView::RdbBtnSelectLastOutputStatAtStartUp()
 {
-	GuiItfSetKarunaOutputsIsAllEnabledAfterStart(0);
+	GuiItfSetKarunaOutputsAllEnabledAfterStart(0);
 }
 
 void SettingsScreenView::ClickMasterClkOnI2S()

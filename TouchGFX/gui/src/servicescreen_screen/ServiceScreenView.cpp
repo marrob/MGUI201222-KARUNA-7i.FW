@@ -78,6 +78,12 @@
   {
     return 12.5f;
   }
+
+  void ServiceScreenView::OnClickFactoryReset()
+  {
+
+  }
+
 #else
   extern "C"
   {
@@ -101,6 +107,8 @@
     float GuiItfGetDasClockMVOCX2Current();
 
     float GuiItfGetDasClockMainVoltage();
+
+    void GuiItfFacotryReset(void);
   }
 #endif
 
@@ -205,4 +213,9 @@ void ServiceScreenView::GetVersionInfo()
   lblGUIFwVersion.invalidate();
   lblKarunaFwVersion.invalidate();
   lblDASClockFwVersion.invalidate();
+}
+
+void ServiceScreenView::OnClickFactoryReset()
+{
+   GuiItfFacotryReset();
 }
