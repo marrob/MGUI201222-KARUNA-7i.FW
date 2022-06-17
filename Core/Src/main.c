@@ -343,9 +343,6 @@ int main(void)
     printf( "%s\n", buf);
   }
 
-  /*** OffTimer ***/
-  GuiItfSetBackLightAutoOff(0);
-
 /*** Time Zone ***/
 setenv("TZ", "UTC", 0);
 //setenv("TZ", "PST8PST", 1);
