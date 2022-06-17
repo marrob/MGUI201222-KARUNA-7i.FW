@@ -43,6 +43,9 @@
     <ClCompile Include="..\..\generated\gui_generated\src\containers\textContainerBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\TextContainerHigh.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\TextContainerHighBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\clockscreen_screen\ClockScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\clockscreen_screen\ClockScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\clockscreen_screen\ClockScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -215,6 +218,9 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\textContainerBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\TextContainerHigh.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\TextContainerHighBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\clockscreen_screen\ClockScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\clockscreen_screen\ClockScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\clockscreen_screen\ClockScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>
@@ -270,7 +276,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <DisableSpecificWarnings>4355</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>

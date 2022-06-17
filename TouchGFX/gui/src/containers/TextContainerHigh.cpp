@@ -12,6 +12,6 @@ void TextContainerHigh::initialize()
 
 void TextContainerHigh::updateText(int16_t value)
 {
-    Unicode::snprintf(textBuffer, TEXT_SIZE, "%d", value);
+    Unicode::snprintf(textBuffer, TEXT_SIZE, "%02d", value);
     text.invalidate();
 }

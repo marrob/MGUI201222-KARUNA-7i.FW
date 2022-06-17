@@ -31,6 +31,8 @@ public:
     // SettingsScreen
     void gotoSettingsScreenScreenSlideTransitionEast();
 
+    void gotoSettingsScreenScreenNoTransition();
+
     // DisplayScreen
     void gotoDisplayScreenScreenSlideTransitionEast();
 
@@ -39,6 +41,9 @@ public:
 
     // PasswordScreen
     void gotoPasswordScreenScreenNoTransition();
+
+    // ClockScreen
+    void gotoClockScreenScreenNoTransition();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -56,6 +61,8 @@ protected:
     // SettingsScreen
     void gotoSettingsScreenScreenSlideTransitionEastImpl();
 
+    void gotoSettingsScreenScreenNoTransitionImpl();
+
     // DisplayScreen
     void gotoDisplayScreenScreenSlideTransitionEastImpl();
 
@@ -64,6 +71,9 @@ protected:
 
     // PasswordScreen
     void gotoPasswordScreenScreenNoTransitionImpl();
+
+    // ClockScreen
+    void gotoClockScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

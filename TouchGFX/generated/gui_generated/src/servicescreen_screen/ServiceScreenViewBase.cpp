@@ -39,17 +39,12 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     btnLog.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
     btnLog.setPosition(519, 506, 500, 90);
 
-    lblTitle.setPosition(365, 10, 294, 44);
-    lblTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblTitle.setLinespacing(0);
-    lblTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PS8U));
-
-    boxWithBorder1.setPosition(5, 64, 1014, 434);
+    boxWithBorder1.setPosition(5, 100, 1014, 400);
     boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(25, 25, 25));
     boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     boxWithBorder1.setBorderSize(1);
 
-    scrlContainerService.setPosition(5, 64, 1014, 434);
+    scrlContainerService.setPosition(5, 100, 1014, 400);
     scrlContainerService.enableHorizontalScroll(false);
     scrlContainerService.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
@@ -299,13 +294,18 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     scrlContainerService.setScrollbarsPermanentlyVisible();
     scrlContainerService.setScrollbarsVisible(false);
 
+    textArea1.setPosition(0, 10, 1024, 80);
+    textArea1.setColor(touchgfx::Color::getColorFromRGB(128, 128, 128));
+    textArea1.setLinespacing(0);
+    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LJNE));
+
     add(__background);
     add(box1);
     add(btnBack);
     add(btnLog);
-    add(lblTitle);
     add(boxWithBorder1);
     add(scrlContainerService);
+    add(textArea1);
 }
 
 void ServiceScreenViewBase::setupScreen()
@@ -317,10 +317,10 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
 {
     if (&src == &btnBack)
     {
-        //ShowMain
-        //When btnBack clicked change screen to Main
-        //Go to Main with no screen transition
-        application().gotoMainScreenNoTransition();
+        //ShowSettings
+        //When btnBack clicked change screen to SettingsScreen
+        //Go to SettingsScreen with no screen transition
+        application().gotoSettingsScreenScreenNoTransition();
     }
     else if (&src == &btnFactoryReset)
     {

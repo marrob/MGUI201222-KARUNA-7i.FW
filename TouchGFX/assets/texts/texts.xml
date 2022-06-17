@@ -112,26 +112,65 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
-      <Text Id="__SingleUse_3FBP" Alignment="Center" TypographyId="Default">
+      <Text Id="__SingleUse_USF5" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">00:00</Translation>
+      </Text>
+      <Text Id="__SingleUse_SC3P" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Time To Off  &lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_GJVC" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">06.06.2022 09:50:36</Translation>
+      </Text>
+      <Text Id="__SingleUse_HGJP" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_LJNE" Alignment="Center" TypographyId="Value">
+        <Translation Language="GB">Service menu</Translation>
+      </Text>
+      <Text Id="__SingleUse_U9MK" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">06.06.2022 09:50:36</Translation>
+      </Text>
+      <Text Id="__SingleUse_PJKD" Alignment="Center" TypographyId="SWText">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_HFD2" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">and time</Translation>
+      </Text>
+      <Text Id="__SingleUse_3USL" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">Current date</Translation>
+      </Text>
+      <Text Id="__SingleUse_23R7" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Clock</Translation>
+      </Text>
+      <Text Id="__SingleUse_37JV" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Set Clock time</Translation>
+      </Text>
+      <Text Id="__SingleUse_AYJC" Alignment="Right" TypographyId="Default">
         <Translation Language="GB">Set clock time</Translation>
       </Text>
-      <Text Id="__SingleUse_ICEL" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_9D4M" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Sec</Translation>
       </Text>
-      <Text Id="__SingleUse_17ZT" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_6A9X" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Min</Translation>
       </Text>
-      <Text Id="__SingleUse_N05E" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_NP4N" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Hour</Translation>
       </Text>
-      <Text Id="__SingleUse_CBO5" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_9I9C" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Year</Translation>
       </Text>
-      <Text Id="__SingleUse_KKZZ" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_9VLR" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Month</Translation>
       </Text>
-      <Text Id="__SingleUse_P48A" Alignment="Left" TypographyId="Settings">
+      <Text Id="__SingleUse_NJLN" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Day</Translation>
+      </Text>
+      <Text Id="__SingleUse_DUXL" Alignment="Center" TypographyId="Value">
+        <Translation Language="GB">Time Settings</Translation>
+      </Text>
+      <Text Id="__SingleUse_IKXG" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Back</Translation>
       </Text>
       <Text Id="__SingleUse_X53I" Alignment="Left" TypographyId="SWText_high">
         <Translation Language="GB">10</Translation>
@@ -147,9 +186,6 @@
       </Text>
       <Text Id="__SingleUse_FGW4" Alignment="Center" TypographyId="SWText">
         <Translation Language="GB">&lt;val&gt;</Translation>
-      </Text>
-      <Text Id="__SingleUse_W346" Alignment="Left" TypographyId="Default">
-        <Translation Language="GB">Clock</Translation>
       </Text>
       <Text Id="__SingleUse_VP13" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Karuna</Translation>
@@ -319,9 +355,6 @@
       <Text Id="__SingleUse_6I2J" Alignment="Left" TypographyId="Default">
         <Translation Language="GB">Karuna</Translation>
       </Text>
-      <Text Id="__SingleUse_PS8U" Alignment="Center" TypographyId="Default">
-        <Translation Language="GB">Service Menu</Translation>
-      </Text>
       <Text Id="__SingleUse_HW10" Alignment="Right" TypographyId="Default">
         <Translation Language="GB">Back</Translation>
       </Text>
@@ -329,11 +362,11 @@
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_" WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,." WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="SWText_high" Font="arialbd.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="SWText" Font="arial.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
+    <Typography Id="SWText" Font="arial.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,." WildcardCharacterRanges="0-9" />
   </Typographies>
 </TextDatabase>

@@ -10,7 +10,8 @@
 
 DisplayScreenViewBase::DisplayScreenViewBase() :
     flexButtonCallback(this, &DisplayScreenViewBase::flexButtonCallbackHandler),
-    sliderValueChangedCallback(this, &DisplayScreenViewBase::sliderValueChangedCallbackHandler)
+    sliderValueChangedCallback(this, &DisplayScreenViewBase::sliderValueChangedCallbackHandler),
+    radioButtonSelectedCallback(this, &DisplayScreenViewBase::radioButtonSelectedCallbackHandler)
 {
 
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
@@ -18,7 +19,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     __background.setPosition(0, 0, 1024, 600);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    box1.setPosition(0, 0, 1024, 600);
+    box1.setPosition(0, -9, 1024, 600);
     box1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
     boxWithBorder1.setPosition(5, 100, 1014, 400);
@@ -115,37 +116,37 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     textArea2_3_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_7E5B));
     container1.add(textArea2_3_1);
 
-    rdbtnSet30.setXY(214, 69);
+    rdbtnSet30.setXY(259, 69);
     rdbtnSet30.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
     rdbtnSet30.setSelected(false);
     rdbtnSet30.setDeselectionEnabled(false);
     container1.add(rdbtnSet30);
 
-    textArea2_3_2.setPosition(269, 69, 267, 42);
+    textArea2_3_2.setPosition(314, 69, 267, 42);
     textArea2_3_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_2.setLinespacing(0);
     textArea2_3_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_J0VM));
     container1.add(textArea2_3_2);
 
-    rdbtnSet60.setXY(214, 124);
+    rdbtnSet60.setXY(259, 124);
     rdbtnSet60.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
     rdbtnSet60.setSelected(false);
     rdbtnSet60.setDeselectionEnabled(false);
     container1.add(rdbtnSet60);
 
-    textArea2_3_3.setPosition(269, 124, 267, 42);
+    textArea2_3_3.setPosition(314, 124, 267, 42);
     textArea2_3_3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_3.setLinespacing(0);
     textArea2_3_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KJC4));
     container1.add(textArea2_3_3);
 
-    rdbtnSet120.setXY(214, 179);
+    rdbtnSet120.setXY(259, 179);
     rdbtnSet120.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
     rdbtnSet120.setSelected(false);
     rdbtnSet120.setDeselectionEnabled(false);
     container1.add(rdbtnSet120);
 
-    textArea2_3_4.setPosition(269, 179, 267, 42);
+    textArea2_3_4.setPosition(314, 179, 267, 42);
     textArea2_3_4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_4.setLinespacing(0);
     textArea2_3_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AQQB));
@@ -164,6 +165,14 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     textArea2_1_1_1.setLinespacing(0);
     textArea2_1_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FF38));
     container1.add(textArea2_1_1_1);
+
+    lblTimeToOff.setPosition(259, 15, 267, 42);
+    lblTimeToOff.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblTimeToOff.setLinespacing(0);
+    Unicode::snprintf(lblTimeToOffBuffer, LBLTIMETOOFF_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_USF5).getText());
+    lblTimeToOff.setWildcard(lblTimeToOffBuffer);
+    lblTimeToOff.setTypedText(touchgfx::TypedText(T___SINGLEUSE_SC3P));
+    container1.add(lblTimeToOff);
 
     line1.setPosition(60, 409, 920, 15);
     line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
@@ -190,6 +199,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     radioButtonGroup1.add(rdbtnSet30);
     radioButtonGroup1.add(rdbtnSet60);
     radioButtonGroup1.add(rdbtnSet120);
+    radioButtonGroup1.setRadioButtonSelectedHandler(radioButtonSelectedCallback);
 }
 
 void DisplayScreenViewBase::setupScreen()
@@ -223,5 +233,58 @@ void DisplayScreenViewBase::sliderValueChangedCallbackHandler(const touchgfx::Sl
         //When sldrBrightnes value changed call virtual function
         //Call sldrBrightnesChanged
         sldrBrightnesChanged(value);
+    }
+}
+
+void DisplayScreenViewBase::radioButtonSelectedCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &rdbtnSet0)
+    {
+        //rbtnSelect0OffTmr
+        //When rdbtnSet0 selected call virtual function
+        //Call rbtnSelect0OffTmr
+        rbtnSelect0OffTmr();
+    }
+    else if (&src == &rdbtnSet1)
+    {
+        //rbtnSelect1OffTmr
+        //When rdbtnSet1 selected call virtual function
+        //Call rbtnSelect1OffTmr
+        rbtnSelect1OffTmr();
+    }
+    else if (&src == &rdbtnSet5)
+    {
+        //rbtnSelect5OffTmr
+        //When rdbtnSet5 selected call virtual function
+        //Call rbtnSelect5OffTmr
+        rbtnSelect5OffTmr();
+    }
+    else if (&src == &rdbtnSet10)
+    {
+        //rbtnSelect10OffTmr
+        //When rdbtnSet10 selected call virtual function
+        //Call rbtnSelect10OffTmr
+        rbtnSelect10OffTmr();
+    }
+    else if (&src == &rdbtnSet30)
+    {
+        //rbtnSelect30OffTmr
+        //When rdbtnSet30 selected call virtual function
+        //Call rbtnSelect30OffTmr
+        rbtnSelect30OffTmr();
+    }
+    else if (&src == &rdbtnSet60)
+    {
+        //rbtnSelect60OffTmr
+        //When rdbtnSet60 selected call virtual function
+        //Call rbtnSelect60OffTmr
+        rbtnSelect60OffTmr();
+    }
+    else if (&src == &rdbtnSet120)
+    {
+        //rbtnSelect120OffTmr
+        //When rdbtnSet120 selected call virtual function
+        //Call rbtnSelect120OffTmr
+        rbtnSelect120OffTmr();
     }
 }

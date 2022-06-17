@@ -34,6 +34,41 @@ public:
         // Override and implement this function in DisplayScreen
     }
 
+    virtual void rbtnSelect0OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
+    virtual void rbtnSelect1OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
+    virtual void rbtnSelect5OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
+    virtual void rbtnSelect10OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
+    virtual void rbtnSelect30OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
+    virtual void rbtnSelect60OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
+    virtual void rbtnSelect120OffTmr()
+    {
+        // Override and implement this function in DisplayScreen
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -67,6 +102,7 @@ protected:
     touchgfx::TextArea textArea2_3_4;
     touchgfx::TextAreaWithOneWildcard lblBrightness;
     touchgfx::TextArea textArea2_1_1_1;
+    touchgfx::TextAreaWithOneWildcard lblTimeToOff;
     touchgfx::Line line1;
     touchgfx::PainterRGB565 line1Painter;
     touchgfx::RadioButtonGroup<7> radioButtonGroup1;
@@ -76,6 +112,8 @@ protected:
      */
     static const uint16_t LBLBRIGHTNESS_SIZE = 10;
     touchgfx::Unicode::UnicodeChar lblBrightnessBuffer[LBLBRIGHTNESS_SIZE];
+    static const uint16_t LBLTIMETOOFF_SIZE = 10;
+    touchgfx::Unicode::UnicodeChar lblTimeToOffBuffer[LBLTIMETOOFF_SIZE];
 
 private:
 
@@ -84,12 +122,14 @@ private:
      */
     touchgfx::Callback<DisplayScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
     touchgfx::Callback<DisplayScreenViewBase, const touchgfx::Slider&, int> sliderValueChangedCallback;
+    touchgfx::Callback<DisplayScreenViewBase, const touchgfx::AbstractButton&> radioButtonSelectedCallback;
 
     /*
      * Callback Handler Declarations
      */
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
     void sliderValueChangedCallbackHandler(const touchgfx::Slider& src, int value);
+    void radioButtonSelectedCallbackHandler(const touchgfx::AbstractButton& src);
 
     /*
      * Canvas Buffer Size

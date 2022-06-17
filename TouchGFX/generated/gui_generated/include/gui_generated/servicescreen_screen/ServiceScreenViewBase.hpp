@@ -9,9 +9,9 @@
 #include <gui/servicescreen_screen/ServiceScreenPresenter.hpp>
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
-#include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
 #include <touchgfx/containers/ScrollableContainer.hpp>
+#include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
@@ -43,7 +43,6 @@ protected:
     touchgfx::Box box1;
     touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnBack;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnLog;
-    touchgfx::TextArea lblTitle;
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::ScrollableContainer scrlContainerService;
     touchgfx::TextArea lblKarunaUptimeTitle;
@@ -84,6 +83,7 @@ protected:
     touchgfx::TextAreaWithOneWildcard lblKarunaFwVersion;
     touchgfx::TextAreaWithOneWildcard lblDASClockFwVersion;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnFactoryReset;
+    touchgfx::TextArea textArea1;
 
     /*
      * Wildcard Buffers
