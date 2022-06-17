@@ -1293,8 +1293,7 @@
           {
             "InteractionName": "SetClockTime",
             "Trigger": {
-              "Type": "TriggerClicked",
-              "TriggerComponent": "btnSetupClock"
+              "Type": "TriggerClicked"
             },
             "Action": {
               "Type": "ActionCustom",
@@ -3857,14 +3856,13 @@
                     "Y": 74,
                     "Width": 100,
                     "Height": 200,
-                    "SelectedItemOffset": 72,
+                    "SelectedItemOffset": 70,
                     "UseSelectedStyle": true,
                     "SelectedItemTemplateName": "TextContainerHigh",
                     "MarginBefore": 5,
                     "MarginAfter": 5,
                     "ItemTemplateName": "textContainer",
                     "NumberofItems": 31,
-                    "InitialElement": 1,
                     "Easing": "Circ",
                     "EasingOption": "Out",
                     "SwipeAcceleration": 3.0,
