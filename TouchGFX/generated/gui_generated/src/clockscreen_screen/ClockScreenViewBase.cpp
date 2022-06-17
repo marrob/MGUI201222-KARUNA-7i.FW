@@ -84,13 +84,13 @@ ClockScreenViewBase::ClockScreenViewBase() :
     scrollDay.setSwipeAcceleration(30);
     scrollDay.setDragAcceleration(10);
     scrollDay.setNumberOfItems(31);
-    scrollDay.setSelectedItemOffset(72);
+    scrollDay.setSelectedItemOffset(70);
     scrollDay.setSelectedItemExtraSize(0, 0);
     scrollDay.setSelectedItemMargin(5, 5);
     scrollDay.setDrawableSize(50, 0);
     scrollDay.setDrawables(scrollDayListItems, updateItemCallback,
                               scrollDaySelectedListItems, updateItemCallback);
-    scrollDay.animateToItem(1, 0);
+    scrollDay.animateToItem(0, 0);
     contClockSettings.add(scrollDay);
 
     scrollYear.setPosition(204, 74, 100, 200);

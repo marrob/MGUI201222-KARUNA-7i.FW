@@ -1,6 +1,6 @@
 #include <gui/clockscreen_screen/ClockScreenView.hpp>
 #include <time.h>
-
+#include <stdlib.h>
 
 #ifdef SIMULATOR
 
@@ -28,7 +28,6 @@ void ClockScreenView::GuiItfGetRtc(time_t* dt)
 	}
 	simDateTime++;
 	*dt = simDateTime;
-	//dt = dt;
 }
 
 #else
@@ -139,64 +138,57 @@ void ClockScreenView::handleTickEvent()
 
 void ClockScreenView::RequestCurrentTime()
 {
-	//time_t dt = 1655407282;
-	time_t dtp;// = &dt;
-	GuiItfGetRtc(&dtp);
-	struct tm* tm_info = gmtime(&dtp);
-	char strDateTime[25];
-	strftime(strDateTime, 25, "%d.%m.%Y %H:%M:%S", tm_info);
+  time_t dtp;
+  GuiItfGetRtc(&dtp);
+  struct tm* tm_info = gmtime(&dtp);
+  char strDateTime[25];
+  strftime(strDateTime, 25, "%d.%m.%Y %H:%M:%S", tm_info);
 
-
-	Unicode::UnicodeChar uni_DateTime[25];
-	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
-	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
-	lblDateTime.invalidate();
+  Unicode::UnicodeChar uni_DateTime[25];
+  Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
+  Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
+  lblDateTime.invalidate();
 }
 
 void ClockScreenView::SetClockTime()
 {
-	int year = scrollYear.getSelectedItem();
-	int month = scrollMonth.getSelectedItem() + 1;
-	int day = scrollDay.getSelectedItem() + 1;
+  /*               Day   Month   Year   Hour    Min    Sec
+  *  komponens:    02       06   2022    10      21    42
+  *  tm:            2       5     122    10      21    42
+  */
+  struct tm tm_info;
+  tm_info.tm_year = scrollYear.getSelectedItem() + 100;//tm_year 1900-tól eltelet sec száma
+  tm_info.tm_mon = scrollMonth.getSelectedItem(); //tm_mon: 0..11 és a 0-indexen a jobb oldalon 1 van.
+  tm_info.tm_mday = scrollDay.getSelectedItem() + 1; //tm_mday:1..31 és + 1 mert nincs nulla
+  tm_info.tm_hour = scrollHour.getSelectedItem();
+  tm_info.tm_min = scrollMin.getSelectedItem();
+  tm_info.tm_sec = scrollSec.getSelectedItem();
+  tm_info.tm_isdst = 0;
 
-	int hour = scrollHour.getSelectedItem();
-	int min = scrollMin.getSelectedItem();
-	int sec = scrollSec.getSelectedItem();
-
-
-	struct tm tm_info;
-	tm_info.tm_year = year + 100;
-	tm_info.tm_mon = month - 1;
-	tm_info.tm_mday = day;
-	tm_info.tm_hour = hour + 1;
-	tm_info.tm_min = min;
-	tm_info.tm_sec = sec;
-	tm_info.tm_isdst = 0; 
-
-	time_t setTime = mktime(&tm_info);
-	GuiItfSetRtc(setTime);
+  _timezone = 0;
+  time_t setTime = mktime(&tm_info);
+  GuiItfSetRtc(setTime);
 }
 
 void ClockScreenView::GetClockTime()
-{ 
-	//time_t dt = 1655407282;
-	time_t dtp;// = &dt;
-	GuiItfGetRtc(&dtp);
-	struct tm* tm_info = gmtime(&dtp);
+{
+  time_t dt;
+  GuiItfGetRtc(&dt);
+  struct tm* tm_info = gmtime(&dt);
 
-	uint16_t year = tm_info->tm_year + 1900;
-	uint8_t mon = tm_info->tm_mon;
-	uint8_t day = tm_info->tm_mday-1;
+  uint16_t year = tm_info->tm_year + 1900;
+  uint8_t mon = tm_info->tm_mon;
+  uint8_t day = tm_info->tm_mday;
 
-	uint8_t hour = tm_info->tm_hour + 1;
-	uint8_t min = tm_info->tm_min;
-	uint8_t sec = tm_info->tm_sec;
-	 
-	scrollYear.animateToItem(year-2000);
-	scrollMonth.animateToItem(mon);
-	scrollDay.animateToItem(day);
+  uint8_t hour = tm_info->tm_hour;
+  uint8_t min = tm_info->tm_min;
+  uint8_t sec = tm_info->tm_sec;
 
-	scrollHour.animateToItem(hour);
-	scrollMin.animateToItem(min);
-	scrollSec.animateToItem(sec); 
+  scrollYear.animateToItem(year - 2000);
+  scrollMonth.animateToItem(mon);
+  scrollDay.animateToItem(day - 1);
+
+  scrollHour.animateToItem(hour);
+  scrollMin.animateToItem(min);
+  scrollSec.animateToItem(sec);
 }

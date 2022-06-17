@@ -31,6 +31,7 @@
 #include <stdlib.h>
 #include "GuiItf.h"
 #include "LiveLed.h"
+#include <time.h>
 
 #include "Log.h"
 
@@ -344,6 +345,13 @@ int main(void)
 
   /*** OffTimer ***/
   GuiItfSetBackLightAutoOff(0);
+
+/*** Time Zone ***/
+setenv("TZ", "UTC", 0);
+//setenv("TZ", "PST8PST", 1);
+tzset();
+
+  //clock_settime();
 
   /* USER CODE END 2 */
 
@@ -1438,6 +1446,22 @@ void UsbParser(char *request)
 /* RTC -----------------------------------------------------------------------*/
 uint8_t DeviceRtcSet(time_t dt)
 {
+#if rtc_test
+  /*** Loopback for test ***/
+  struct tm tm_out = {0};
+  struct tm *tm_in = gmtime(&dt);
+
+  tm_out.tm_year = tm_in->tm_year;
+  tm_out.tm_mon = tm_in->tm_mon;
+  tm_out.tm_mday = tm_in->tm_mday;
+
+  tm_out.tm_hour = tm_in->tm_hour;
+  tm_out.tm_min = tm_in->tm_min;
+  tm_out.tm_sec = tm_in->tm_sec;
+
+  Device.DateTime.PosixTime = mktime(&tm_out);
+#endif
+
   struct tm *tm_info = gmtime(&dt);
 
   RTC_DateTypeDef date;
@@ -1452,13 +1476,14 @@ uint8_t DeviceRtcSet(time_t dt)
   time.Hours = tm_info->tm_hour;
   time.Minutes = tm_info->tm_min;
   time.Seconds = tm_info->tm_sec;
+  time.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+  time.StoreOperation = RTC_STOREOPERATION_SET;
 
   if(HAL_RTC_SetTime(&hrtc, &time, RTC_FORMAT_BIN) != HAL_OK)
     return DEVICE_FAIL;
 
   return DEVICE_OK;
 }
-
 
 uint8_t DeviceRtcGet(time_t *dt)
 {
@@ -1477,8 +1502,15 @@ uint8_t DeviceRtcGet(time_t *dt)
   tm_info.tm_hour = time.Hours;
   tm_info.tm_min = time.Minutes;
   tm_info.tm_sec = time.Seconds;
-  tm_info.tm_isdst = 0;
+  if (time.DayLightSaving == RTC_DAYLIGHTSAVING_SUB1H)
+    tm_info.tm_isdst = -1;
+  else if (time.DayLightSaving == RTC_DAYLIGHTSAVING_ADD1H)
+    tm_info.tm_isdst = 1;
+  else
+    tm_info.tm_isdst = 0;
+
   *dt = mktime(&tm_info);
+
   return DEVICE_OK;
 }
 
