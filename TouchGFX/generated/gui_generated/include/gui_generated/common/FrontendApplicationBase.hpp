@@ -45,6 +45,9 @@ public:
     // ClockScreen
     void gotoClockScreenScreenNoTransition();
 
+    // LogScreen
+    void gotoLogScreenScreenNoTransition();
+
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
     FrontendHeap& frontendHeap;
@@ -74,6 +77,9 @@ protected:
 
     // ClockScreen
     void gotoClockScreenScreenNoTransitionImpl();
+
+    // LogScreen
+    void gotoLogScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

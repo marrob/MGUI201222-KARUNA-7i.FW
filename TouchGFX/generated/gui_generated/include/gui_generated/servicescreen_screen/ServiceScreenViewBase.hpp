@@ -31,6 +31,11 @@ public:
         // Override and implement this function in ServiceScreen
     }
 
+    virtual void OnClickSoftReset()
+    {
+        // Override and implement this function in ServiceScreen
+    }
+
 protected:
     FrontendApplication& application() {
         return *static_cast<FrontendApplication*>(touchgfx::Application::getInstance());
@@ -83,6 +88,26 @@ protected:
     touchgfx::TextAreaWithOneWildcard lblKarunaFwVersion;
     touchgfx::TextAreaWithOneWildcard lblDASClockFwVersion;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnFactoryReset;
+    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnSoftReset;
+    touchgfx::Line line2_1;
+    touchgfx::PainterRGB565 line2_1Painter;
+    touchgfx::TextArea lblErrorCount1;
+    touchgfx::TextAreaWithOneWildcard lblError1;
+    touchgfx::TextArea lblErrorsTitle;
+    touchgfx::TextArea lblErrorCount4;
+    touchgfx::TextAreaWithOneWildcard lblError4;
+    touchgfx::TextArea lblErrorCount2;
+    touchgfx::TextAreaWithOneWildcard lblError2;
+    touchgfx::TextArea lblErrorCount5;
+    touchgfx::TextAreaWithOneWildcard lblError5;
+    touchgfx::TextArea lblErrorCount3;
+    touchgfx::TextAreaWithOneWildcard lblError3;
+    touchgfx::TextArea lblErrorCount6;
+    touchgfx::TextAreaWithOneWildcard lblError6;
+    touchgfx::Line line1_1;
+    touchgfx::PainterRGB565 line1_1Painter;
+    touchgfx::Line line1_1_1;
+    touchgfx::PainterRGB565 line1_1_1Painter;
     touchgfx::TextArea textArea1;
 
     /*
@@ -112,6 +137,18 @@ protected:
     touchgfx::Unicode::UnicodeChar lblKarunaFwVersionBuffer[LBLKARUNAFWVERSION_SIZE];
     static const uint16_t LBLDASCLOCKFWVERSION_SIZE = 50;
     touchgfx::Unicode::UnicodeChar lblDASClockFwVersionBuffer[LBLDASCLOCKFWVERSION_SIZE];
+    static const uint16_t LBLERROR1_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblError1Buffer[LBLERROR1_SIZE];
+    static const uint16_t LBLERROR4_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblError4Buffer[LBLERROR4_SIZE];
+    static const uint16_t LBLERROR2_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblError2Buffer[LBLERROR2_SIZE];
+    static const uint16_t LBLERROR5_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblError5Buffer[LBLERROR5_SIZE];
+    static const uint16_t LBLERROR3_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblError3Buffer[LBLERROR3_SIZE];
+    static const uint16_t LBLERROR6_SIZE = 12;
+    touchgfx::Unicode::UnicodeChar lblError6Buffer[LBLERROR6_SIZE];
 
 private:
 

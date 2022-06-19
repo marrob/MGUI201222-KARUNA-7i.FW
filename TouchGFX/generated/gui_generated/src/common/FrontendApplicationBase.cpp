@@ -23,6 +23,8 @@
 #include <gui/passwordscreen_screen/PasswordScreenPresenter.hpp>
 #include <gui/clockscreen_screen/ClockScreenView.hpp>
 #include <gui/clockscreen_screen/ClockScreenPresenter.hpp>
+#include <gui/logscreen_screen/LogScreenView.hpp>
+#include <gui/logscreen_screen/LogScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -152,4 +154,17 @@ void FrontendApplicationBase::gotoClockScreenScreenNoTransition()
 void FrontendApplicationBase::gotoClockScreenScreenNoTransitionImpl()
 {
     touchgfx::makeTransition<ClockScreenView, ClockScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// LogScreen
+
+void FrontendApplicationBase::gotoLogScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoLogScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoLogScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<LogScreenView, LogScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

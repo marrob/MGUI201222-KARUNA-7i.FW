@@ -17,6 +17,7 @@ public:
 	virtual void handleTickEvent();
 
 	void RefreshKarunaAndClockInfo();
+	void RequestCurrentTime();
 
 	void RefreshBNCOutput();
 	void RefreshRCAOutput();
@@ -61,6 +62,10 @@ public:
   uint8_t GuiItfGetDasClockStatusLock1();
   uint8_t GuiItfGetDasClockStatusLock2();
   uint8_t GuiItfGetDasClockIsExt();
+
+  /*** Time ***/
+  void GuiItfGetRtc(time_t* dt);
+
 #endif
 
 

@@ -168,7 +168,7 @@ void DisplayScreenView::handleTickEvent()
 	if (mDisplayTickCount % 30 == 0)
 	{
 		int remainSec = GuiItfGetRemainingTimeToOff();
-		if (remainSec > 0)
+		//if (remainSec > 0)
 		{	 
 			int RemainMinute = remainSec / 60;
 			int RemainSecond = remainSec % 60;

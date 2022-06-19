@@ -474,6 +474,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/displayscreen_screen/DisplayScreenView.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/LogScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/logscreen_screen/LogScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/LogScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/logscreen_screen/LogScreenView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/MainPresenter.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/main_screen/MainPresenter.cpp</locationURI>
@@ -682,6 +692,11 @@
 			<name>Application/User/generated/DisplayScreenViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/displayscreen_screen/DisplayScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/LogScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/logscreen_screen/LogScreenViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/MainViewBase.cpp</name>

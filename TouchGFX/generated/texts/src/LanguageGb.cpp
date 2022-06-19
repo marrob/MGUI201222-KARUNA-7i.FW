@@ -10,120 +10,144 @@ KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE;
 TEXT_LOCATION_FLASH_PRAGMA
 KEEP extern const uint32_t indicesGb[] TEXT_LOCATION_FLASH_ATTRIBUTE = {
     538, // T_TextId1
-    856, // T___SingleUse_GOXD
+    1045, // T___SingleUse_GOXD
     538, // T___SingleUse_8EJL
-    888, // T___SingleUse_7PO6
+    1077, // T___SingleUse_7PO6
     538, // T___SingleUse_J9QW
-    905, // T___SingleUse_LPXD
+    1094, // T___SingleUse_LPXD
     538, // T___SingleUse_YD6A
-    664, // T___SingleUse_C7U0
-    820, // T___SingleUse_SPLI
-    781, // T___SingleUse_VB1R
+    814, // T___SingleUse_C7U0
+    1002, // T___SingleUse_SPLI
+    963, // T___SingleUse_VB1R
     538, // T___SingleUse_IO3K
-    771, // T___SingleUse_WDG2
-    900, // T___SingleUse_XWX2
-    577, // T___SingleUse_YPEX
+    953, // T___SingleUse_WDG2
+    1089, // T___SingleUse_XWX2
+    727, // T___SingleUse_YPEX
     261, // T___SingleUse_AGOP
     291, // T___SingleUse_9IH2
     0, // T___SingleUse_4E2A
-    900, // T___SingleUse_GIYT
-    560, // T___SingleUse_6WFO
-    726, // T___SingleUse_BX5F
+    1089, // T___SingleUse_GIYT
+    710, // T___SingleUse_6WFO
+    898, // T___SingleUse_BX5F
     200, // T___SingleUse_L22C
-    761, // T___SingleUse_7ZX9
-    876, // T___SingleUse_HAQR
-    882, // T___SingleUse_KFWO
-    828, // T___SingleUse_7E5B
-    835, // T___SingleUse_J0VM
-    849, // T___SingleUse_KJC4
-    812, // T___SingleUse_AQQB
-    924, // T___SingleUse_4TRH
-    842, // T___SingleUse_ZC4G
-    737, // T___SingleUse_3FKW
-    932, // T___SingleUse_G2P3
-    791, // T___SingleUse_ONW5
-    920, // T___SingleUse_8FBD
-    623, // T___SingleUse_FF38
-    870, // T___SingleUse_USF5
+    943, // T___SingleUse_7ZX9
+    1065, // T___SingleUse_HAQR
+    1071, // T___SingleUse_KFWO
+    1010, // T___SingleUse_7E5B
+    1017, // T___SingleUse_J0VM
+    1031, // T___SingleUse_KJC4
+    994, // T___SingleUse_AQQB
+    1113, // T___SingleUse_4TRH
+    1024, // T___SingleUse_ZC4G
+    909, // T___SingleUse_3FKW
+    1121, // T___SingleUse_G2P3
+    973, // T___SingleUse_ONW5
+    1109, // T___SingleUse_8FBD
+    773, // T___SingleUse_FF38
+    933, // T___SingleUse_C0B1
+    876, // T___SingleUse_QJTD
+    1089, // T___SingleUse_FDYF
+    887, // T___SingleUse_BPY3
+    708, // T___SingleUse_RF2F
+    538, // T___SingleUse_OEZ5
+    674, // T___SingleUse_Y3LD
+    708, // T___SingleUse_5MBT
+    538, // T___SingleUse_K2VK
+    617, // T___SingleUse_QK7M
+    708, // T___SingleUse_R0CF
+    538, // T___SingleUse_38ZB
+    655, // T___SingleUse_9RS0
+    708, // T___SingleUse_XHJD
+    538, // T___SingleUse_4KV2
+    598, // T___SingleUse_D6QB
+    708, // T___SingleUse_5DU6
+    538, // T___SingleUse_WZ7O
+    636, // T___SingleUse_C0I2
+    1038, // T___SingleUse_OA7N
+    708, // T___SingleUse_PE5F
+    538, // T___SingleUse_NQJF
+    579, // T___SingleUse_CHHQ
+    560, // T___SingleUse_6ZDU
+    1059, // T___SingleUse_USF5
     525, // T___SingleUse_SC3P
-    540, // T___SingleUse_GJVC
+    693, // T___SingleUse_GJVC
     538, // T___SingleUse_HGJP
-    690, // T___SingleUse_LJNE
+    840, // T___SingleUse_LJNE
     540, // T___SingleUse_U9MK
     538, // T___SingleUse_PJKD
-    803, // T___SingleUse_HFD2
-    651, // T___SingleUse_3USL
-    755, // T___SingleUse_23R7
-    593, // T___SingleUse_37JV
-    608, // T___SingleUse_AYJC
-    944, // T___SingleUse_9D4M
-    940, // T___SingleUse_6A9X
-    910, // T___SingleUse_NP4N
-    915, // T___SingleUse_9I9C
-    894, // T___SingleUse_9VLR
-    928, // T___SingleUse_NJLN
-    637, // T___SingleUse_DUXL
-    900, // T___SingleUse_IKXG
-    948, // T___SingleUse_X53I
-    948, // T___SingleUse_QH9M
+    985, // T___SingleUse_HFD2
+    801, // T___SingleUse_3USL
+    927, // T___SingleUse_23R7
+    743, // T___SingleUse_37JV
+    758, // T___SingleUse_AYJC
+    1133, // T___SingleUse_9D4M
+    1129, // T___SingleUse_6A9X
+    1099, // T___SingleUse_NP4N
+    1104, // T___SingleUse_9I9C
+    1083, // T___SingleUse_9VLR
+    1117, // T___SingleUse_NJLN
+    787, // T___SingleUse_DUXL
+    1089, // T___SingleUse_IKXG
+    1137, // T___SingleUse_X53I
+    1137, // T___SingleUse_QH9M
     538, // T___SingleUse_T1YD
     503, // T___SingleUse_MABJ
     538, // T___SingleUse_FGW4
-    863, // T___SingleUse_VP13
+    1052, // T___SingleUse_VP13
     538, // T___SingleUse_5V6W
     538, // T___SingleUse_1IJL
     321, // T___SingleUse_LZC3
     406, // T___SingleUse_ALOO
     538, // T___SingleUse_369R
     457, // T___SingleUse_HQS5
-    936, // T___SingleUse_F7DE
-    874, // T___SingleUse_PMC0
+    1125, // T___SingleUse_F7DE
+    708, // T___SingleUse_PMC0
     480, // T___SingleUse_H4DE
-    900, // T___SingleUse_CJEC
-    951, // T___SingleUse_LOWN
+    1089, // T___SingleUse_CJEC
+    1140, // T___SingleUse_LOWN
     538, // T___SingleUse_G81B
-    703, // T___SingleUse_YQCS
-    677, // T___SingleUse_Q977
-    874, // T___SingleUse_L5OG
-    958, // T___SingleUse_7J4G
-    956, // T___SingleUse_O6OI
-    954, // T___SingleUse_9F30
+    853, // T___SingleUse_YQCS
+    827, // T___SingleUse_Q977
+    708, // T___SingleUse_L5OG
+    1147, // T___SingleUse_7J4G
+    1145, // T___SingleUse_O6OI
+    1143, // T___SingleUse_9F30
     558, // T___SingleUse_DPOV
-    962, // T___SingleUse_8WBT
-    960, // T___SingleUse_X6QP
-    966, // T___SingleUse_70WT
-    926, // T___SingleUse_XAZG
-    964, // T___SingleUse_3CBB
-    690, // T___SingleUse_YTJC
-    794, // T___SingleUse_IGHU
-    874, // T___SingleUse_O7GB
-    747, // T___SingleUse_IO03
+    1151, // T___SingleUse_8WBT
+    1149, // T___SingleUse_X6QP
+    1155, // T___SingleUse_70WT
+    1115, // T___SingleUse_XAZG
+    1153, // T___SingleUse_3CBB
+    840, // T___SingleUse_YTJC
+    976, // T___SingleUse_IGHU
+    708, // T___SingleUse_O7GB
+    919, // T___SingleUse_IO03
     350, // T___SingleUse_0OEF
-    874, // T___SingleUse_M3N5
-    716, // T___SingleUse_FZOH
+    708, // T___SingleUse_M3N5
+    866, // T___SingleUse_FZOH
     137, // T___SingleUse_96H9
-    874, // T___SingleUse_VPCY
-    716, // T___SingleUse_D7C7
+    708, // T___SingleUse_VPCY
+    866, // T___SingleUse_D7C7
     38, // T___SingleUse_5I8K
-    874, // T___SingleUse_JC1W
-    716, // T___SingleUse_XPFN
+    708, // T___SingleUse_JC1W
+    866, // T___SingleUse_XPFN
     169, // T___SingleUse_SR1D
-    874, // T___SingleUse_4Y09
-    721, // T___SingleUse_JPI8
+    708, // T___SingleUse_4Y09
+    871, // T___SingleUse_JPI8
     105, // T___SingleUse_6FTC
-    874, // T___SingleUse_VO29
-    721, // T___SingleUse_MSR2
+    708, // T___SingleUse_VO29
+    871, // T___SingleUse_MSR2
     72, // T___SingleUse_6D36
-    874, // T___SingleUse_OOXJ
-    721, // T___SingleUse_3S8R
+    708, // T___SingleUse_OOXJ
+    871, // T___SingleUse_3S8R
     231, // T___SingleUse_LNP8
-    751, // T___SingleUse_3V0X
-    874, // T___SingleUse_ZZEL
+    923, // T___SingleUse_3V0X
+    708, // T___SingleUse_ZZEL
     538, // T___SingleUse_26LX
     378, // T___SingleUse_WW6U
-    874, // T___SingleUse_N8QV
+    708, // T___SingleUse_N8QV
     538, // T___SingleUse_UULC
     432, // T___SingleUse_1O0C
-    863, // T___SingleUse_6I2J
-    900 // T___SingleUse_HW10
+    1052, // T___SingleUse_6I2J
+    1089 // T___SingleUse_HW10
 };
