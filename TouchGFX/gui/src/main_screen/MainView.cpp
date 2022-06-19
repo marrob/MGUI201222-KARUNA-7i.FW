@@ -2,8 +2,12 @@
 #include <touchgfx/Color.hpp>
 #include <touchgfx/containers/buttons/ImageButtonStyle.hpp>
 #include "BitmapDatabase.hpp"
+#include <time.h>
 
 #ifdef SIMULATOR
+
+//Sumlated Time
+time_t simMainDateTime;
 
 //Simulated flash memory
 static uint8_t  SimIsHdmiON;
@@ -11,6 +15,7 @@ static uint8_t  SimIsRcaON;
 static uint8_t  SimIsXlrON;
 static uint8_t  SimIsBncON;
 
+/*** Karuna ***/
 uint8_t MainView::GuiItfGetKarunaStatus()
 {
 	return 0b00000001;
@@ -56,6 +61,8 @@ uint8_t MainView::GuitIfGetKarunaIsXlrSet(void)
 	return SimIsXlrON;
 }
 
+/*** Das Clock ***/
+
 float MainView::GuiItfGetDasClockMV341Temp(void)
 {
 	return 52.8f;
@@ -71,6 +78,27 @@ uint8_t MainView::GuiItfGetDasClockStatusLock2(void)
 uint8_t MainView::GuiItfGetDasClockIsExt(void)
 {
 	return false;
+}
+
+/*** Time ***/
+
+void MainView::GuiItfGetRtc(time_t* dt)
+{
+	if (simMainDateTime == 0)
+	{
+		tm tm_info;
+		tm_info.tm_year = 2022 - 1900;
+		tm_info.tm_mon = 6 - 1;
+		tm_info.tm_mday = 16;
+		tm_info.tm_hour = 20;
+		tm_info.tm_min = 21;
+		tm_info.tm_sec = 22;
+		tm_info.tm_isdst = 0;
+
+		simMainDateTime = mktime(&tm_info);
+	}
+	simMainDateTime++;
+	*dt = simMainDateTime;
 }
 
 
@@ -93,6 +121,9 @@ extern "C"
 	uint8_t GuiItfGetDasClockStatusLock1();
 	uint8_t GuiItfGetDasClockStatusLock2();
 	uint8_t GuiItfGetDasClockIsExt();
+
+	/*** Time ***/
+	void GuiItfGetRtc(time_t* dt);
 }
 #endif
 
@@ -549,6 +580,7 @@ bool MainView::ToBinary(int number, int position)
 	bool ret = ((1 << position) & number) != 0;
 	return ret;
 }
+
 // Tick event
 
 void MainView::handleTickEvent()
@@ -557,9 +589,9 @@ void MainView::handleTickEvent()
 
 	RefreshKarunaAndClockInfo();
 	//Wait for 0.5sec
-	if (mTickCount % 30 == 0)
+	if (mTickCount % 10 == 0)
 	{
-
+		RequestCurrentTime();
 	}
 }
 
@@ -596,4 +628,18 @@ void MainView::RefreshKarunaAndClockInfo()
 	RefreshRCAOutput();
 	RefreshBNCOutput();
 	RefreshXLROutput();
+}
+
+void MainView::RequestCurrentTime()
+{
+	time_t dtp;
+	GuiItfGetRtc(&dtp);
+	struct tm* tm_info = gmtime(&dtp);
+	char strDateTime[25];
+	strftime(strDateTime, 25, "%d.%m.%Y %H:%M", tm_info);
+
+	Unicode::UnicodeChar uni_DateTime[25];
+	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
+	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
+	lblDateTime.invalidate();
 }

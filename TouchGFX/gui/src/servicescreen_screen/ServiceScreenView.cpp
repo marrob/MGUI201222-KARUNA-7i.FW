@@ -217,5 +217,10 @@ void ServiceScreenView::GetVersionInfo()
 
 void ServiceScreenView::OnClickFactoryReset()
 {
-   GuiItfFacotryReset();
+    GuiItfFacotryReset();
+}
+
+void ServiceScreenView::OnClickSoftReset()
+{
+    //CALL SOFT RESET
 }

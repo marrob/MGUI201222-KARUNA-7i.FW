@@ -74,7 +74,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet0.setDeselectionEnabled(false);
     container1.add(rdbtnSet0);
 
-    textArea2.setPosition(68, 15, 267, 42);
+    textArea2.setXY(68, 15);
     textArea2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2.setLinespacing(0);
     textArea2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_7ZX9));
@@ -86,7 +86,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet1.setDeselectionEnabled(false);
     container1.add(rdbtnSet1);
 
-    textArea2_2.setPosition(68, 70, 267, 42);
+    textArea2_2.setXY(68, 70);
     textArea2_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_2.setLinespacing(0);
     textArea2_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HAQR));
@@ -98,7 +98,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet5.setDeselectionEnabled(false);
     container1.add(rdbtnSet5);
 
-    textArea2_3.setPosition(68, 125, 267, 42);
+    textArea2_3.setXY(68, 125);
     textArea2_3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3.setLinespacing(0);
     textArea2_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KFWO));
@@ -110,7 +110,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet10.setDeselectionEnabled(false);
     container1.add(rdbtnSet10);
 
-    textArea2_3_1.setPosition(68, 180, 267, 42);
+    textArea2_3_1.setXY(68, 180);
     textArea2_3_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_1.setLinespacing(0);
     textArea2_3_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_7E5B));
@@ -122,7 +122,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet30.setDeselectionEnabled(false);
     container1.add(rdbtnSet30);
 
-    textArea2_3_2.setPosition(314, 69, 267, 42);
+    textArea2_3_2.setXY(314, 69);
     textArea2_3_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_2.setLinespacing(0);
     textArea2_3_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_J0VM));
@@ -134,7 +134,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet60.setDeselectionEnabled(false);
     container1.add(rdbtnSet60);
 
-    textArea2_3_3.setPosition(314, 124, 267, 42);
+    textArea2_3_3.setXY(314, 124);
     textArea2_3_3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_3.setLinespacing(0);
     textArea2_3_3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KJC4));
@@ -146,7 +146,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     rdbtnSet120.setDeselectionEnabled(false);
     container1.add(rdbtnSet120);
 
-    textArea2_3_4.setPosition(314, 179, 267, 42);
+    textArea2_3_4.setXY(314, 179);
     textArea2_3_4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     textArea2_3_4.setLinespacing(0);
     textArea2_3_4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AQQB));

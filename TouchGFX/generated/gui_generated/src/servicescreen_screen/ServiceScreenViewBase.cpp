@@ -38,6 +38,7 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     btnLog.setTextPosition(-20, 20, 500, 90);
     btnLog.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
     btnLog.setPosition(519, 506, 500, 90);
+    btnLog.setAction(flexButtonCallback);
 
     boxWithBorder1.setPosition(5, 100, 1014, 400);
     boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(25, 25, 25));
@@ -288,9 +289,136 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     btnFactoryReset.setText(TypedText(T___SINGLEUSE_MABJ));
     btnFactoryReset.setTextPosition(-20, 20, 974, 90);
     btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnFactoryReset.setPosition(23, 752, 974, 90);
+    btnFactoryReset.setPosition(23, 1053, 974, 90);
     btnFactoryReset.setAction(flexButtonCallback);
     scrlContainerService.add(btnFactoryReset);
+
+    btnSoftReset.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnSoftReset.setBorderSize(1);
+    btnSoftReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnSoftReset.setText(TypedText(T___SINGLEUSE_6ZDU));
+    btnSoftReset.setTextPosition(-20, 20, 974, 90);
+    btnSoftReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnSoftReset.setPosition(23, 949, 974, 90);
+    btnSoftReset.setAction(flexButtonCallback);
+    scrlContainerService.add(btnSoftReset);
+
+    line2_1.setPosition(40, 927, 920, 15);
+    line2_1Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
+    line2_1.setPainter(line2_1Painter);
+    line2_1.setStart(0, 0);
+    line2_1.setEnd(920, 1);
+    line2_1.setLineWidth(2);
+    line2_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    scrlContainerService.add(line2_1);
+
+    lblErrorCount1.setXY(27, 788);
+    lblErrorCount1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorCount1.setLinespacing(0);
+    lblErrorCount1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CHHQ));
+    scrlContainerService.add(lblErrorCount1);
+
+    lblError1.setPosition(250, 788, 184, 44);
+    lblError1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblError1.setLinespacing(0);
+    Unicode::snprintf(lblError1Buffer, LBLERROR1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_PE5F).getText());
+    lblError1.setWildcard(lblError1Buffer);
+    lblError1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NQJF));
+    scrlContainerService.add(lblError1);
+
+    lblErrorsTitle.setPosition(10, 734, 294, 44);
+    lblErrorsTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorsTitle.setLinespacing(0);
+    lblErrorsTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OA7N));
+    scrlContainerService.add(lblErrorsTitle);
+
+    lblErrorCount4.setXY(507, 788);
+    lblErrorCount4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorCount4.setLinespacing(0);
+    lblErrorCount4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_C0I2));
+    scrlContainerService.add(lblErrorCount4);
+
+    lblError4.setPosition(730, 788, 184, 44);
+    lblError4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblError4.setLinespacing(0);
+    Unicode::snprintf(lblError4Buffer, LBLERROR4_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_5DU6).getText());
+    lblError4.setWildcard(lblError4Buffer);
+    lblError4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WZ7O));
+    scrlContainerService.add(lblError4);
+
+    lblErrorCount2.setXY(27, 832);
+    lblErrorCount2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorCount2.setLinespacing(0);
+    lblErrorCount2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D6QB));
+    scrlContainerService.add(lblErrorCount2);
+
+    lblError2.setPosition(250, 832, 184, 44);
+    lblError2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblError2.setLinespacing(0);
+    Unicode::snprintf(lblError2Buffer, LBLERROR2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XHJD).getText());
+    lblError2.setWildcard(lblError2Buffer);
+    lblError2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4KV2));
+    scrlContainerService.add(lblError2);
+
+    lblErrorCount5.setXY(507, 832);
+    lblErrorCount5.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorCount5.setLinespacing(0);
+    lblErrorCount5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9RS0));
+    scrlContainerService.add(lblErrorCount5);
+
+    lblError5.setPosition(730, 832, 184, 44);
+    lblError5.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblError5.setLinespacing(0);
+    Unicode::snprintf(lblError5Buffer, LBLERROR5_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_R0CF).getText());
+    lblError5.setWildcard(lblError5Buffer);
+    lblError5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_38ZB));
+    scrlContainerService.add(lblError5);
+
+    lblErrorCount3.setXY(27, 876);
+    lblErrorCount3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorCount3.setLinespacing(0);
+    lblErrorCount3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QK7M));
+    scrlContainerService.add(lblErrorCount3);
+
+    lblError3.setPosition(250, 876, 184, 44);
+    lblError3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblError3.setLinespacing(0);
+    Unicode::snprintf(lblError3Buffer, LBLERROR3_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_5MBT).getText());
+    lblError3.setWildcard(lblError3Buffer);
+    lblError3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_K2VK));
+    scrlContainerService.add(lblError3);
+
+    lblErrorCount6.setXY(507, 876);
+    lblErrorCount6.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblErrorCount6.setLinespacing(0);
+    lblErrorCount6.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Y3LD));
+    scrlContainerService.add(lblErrorCount6);
+
+    lblError6.setPosition(730, 876, 184, 44);
+    lblError6.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblError6.setLinespacing(0);
+    Unicode::snprintf(lblError6Buffer, LBLERROR6_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_RF2F).getText());
+    lblError6.setWildcard(lblError6Buffer);
+    lblError6.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OEZ5));
+    scrlContainerService.add(lblError6);
+
+    line1_1.setPosition(40, 725, 920, 15);
+    line1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_1.setPainter(line1_1Painter);
+    line1_1.setStart(0, 0);
+    line1_1.setEnd(920, 1);
+    line1_1.setLineWidth(2);
+    line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    scrlContainerService.add(line1_1);
+
+    line1_1_1.setPosition(40, 1185, 920, 15);
+    line1_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
+    line1_1_1.setPainter(line1_1_1Painter);
+    line1_1_1.setStart(0, 0);
+    line1_1_1.setEnd(920, 1);
+    line1_1_1.setLineWidth(2);
+    line1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
+    scrlContainerService.add(line1_1_1);
     scrlContainerService.setScrollbarsPermanentlyVisible();
     scrlContainerService.setScrollbarsVisible(false);
 
@@ -322,11 +450,25 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
         //Go to SettingsScreen with no screen transition
         application().gotoSettingsScreenScreenNoTransition();
     }
+    else if (&src == &btnLog)
+    {
+        //ShowLog
+        //When btnLog clicked change screen to LogScreen
+        //Go to LogScreen with no screen transition
+        application().gotoLogScreenScreenNoTransition();
+    }
     else if (&src == &btnFactoryReset)
     {
         //FactoryReset
         //When btnFactoryReset clicked call virtual function
         //Call OnClickFactoryReset
         OnClickFactoryReset();
+    }
+    else if (&src == &btnSoftReset)
+    {
+        //SoftReset
+        //When btnSoftReset clicked call virtual function
+        //Call OnClickSoftReset
+        OnClickSoftReset();
     }
 }

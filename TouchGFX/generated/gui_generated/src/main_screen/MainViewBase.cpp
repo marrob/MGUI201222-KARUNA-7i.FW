@@ -202,13 +202,13 @@ MainViewBase::MainViewBase() :
     circTemp3Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     circTemp3.setPainter(circTemp3Painter);
 
-    lblMasterClkEnable_1_3_1_1.setXY(704, 460);
-    lblMasterClkEnable_1_3_1_1.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
-    lblMasterClkEnable_1_3_1_1.setLinespacing(0);
-    Unicode::snprintf(lblMasterClkEnable_1_3_1_1Buffer, LBLMASTERCLKENABLE_1_3_1_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GJVC).getText());
-    lblMasterClkEnable_1_3_1_1.setWildcard(lblMasterClkEnable_1_3_1_1Buffer);
-    lblMasterClkEnable_1_3_1_1.resizeToCurrentText();
-    lblMasterClkEnable_1_3_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HGJP));
+    lblDateTime.setXY(721, 463);
+    lblDateTime.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
+    lblDateTime.setLinespacing(0);
+    Unicode::snprintf(lblDateTimeBuffer, LBLDATETIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GJVC).getText());
+    lblDateTime.setWildcard(lblDateTimeBuffer);
+    lblDateTime.resizeToCurrentText();
+    lblDateTime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HGJP));
 
     add(__background);
     add(box1);
@@ -233,7 +233,7 @@ MainViewBase::MainViewBase() :
     add(circTemp1);
     add(circTemp2);
     add(circTemp3);
-    add(lblMasterClkEnable_1_3_1_1);
+    add(lblDateTime);
 }
 
 void MainViewBase::setupScreen()

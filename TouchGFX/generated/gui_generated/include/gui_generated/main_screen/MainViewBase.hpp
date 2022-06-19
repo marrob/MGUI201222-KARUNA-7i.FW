@@ -89,7 +89,7 @@ protected:
     touchgfx::PainterRGB565 circTemp2Painter;
     touchgfx::Circle circTemp3;
     touchgfx::PainterRGB565 circTemp3Painter;
-    touchgfx::TextAreaWithOneWildcard lblMasterClkEnable_1_3_1_1;
+    touchgfx::TextAreaWithOneWildcard lblDateTime;
 
     /*
      * Wildcard Buffers
@@ -102,8 +102,8 @@ protected:
     touchgfx::Unicode::UnicodeChar lblValueBitDepthBuffer[LBLVALUEBITDEPTH_SIZE];
     static const uint16_t LBLVALUEFREQ_SIZE = 10;
     touchgfx::Unicode::UnicodeChar lblValueFreqBuffer[LBLVALUEFREQ_SIZE];
-    static const uint16_t LBLMASTERCLKENABLE_1_3_1_1_SIZE = 25;
-    touchgfx::Unicode::UnicodeChar lblMasterClkEnable_1_3_1_1Buffer[LBLMASTERCLKENABLE_1_3_1_1_SIZE];
+    static const uint16_t LBLDATETIME_SIZE = 25;
+    touchgfx::Unicode::UnicodeChar lblDateTimeBuffer[LBLDATETIME_SIZE];
 
 private:
 

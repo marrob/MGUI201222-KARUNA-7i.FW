@@ -14,6 +14,7 @@ public:
     virtual void tearDownScreen();
     virtual void handleTickEvent();
     virtual void OnClickFactoryReset();
+    virtual void OnClickSoftReset();
     void RefreshServiceInfo();
     void GetVersionInfo();
 

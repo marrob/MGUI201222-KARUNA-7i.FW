@@ -55,7 +55,7 @@ ClockScreenViewBase::ClockScreenViewBase() :
 
     contClockSettings.setPosition(17, 49, 631, 284);
 
-    boxWithBorder2.setPosition(0, 0, 631, 285);
+    boxWithBorder2.setPosition(0, 0, 545, 284);
     boxWithBorder2.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
     boxWithBorder2.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     boxWithBorder2.setBorderSize(2);
@@ -155,6 +155,7 @@ ClockScreenViewBase::ClockScreenViewBase() :
     scrollSec.setDrawables(scrollSecListItems, updateItemCallback,
                               scrollSecSelectedListItems, updateItemCallback);
     scrollSec.animateToItem(1, 0);
+    scrollSec.setVisible(false);
     contClockSettings.add(scrollSec);
 
     lblClockDay.setXY(27, 10);
@@ -188,12 +189,13 @@ ClockScreenViewBase::ClockScreenViewBase() :
     contClockSettings.add(lblClockMin);
 
     lblClockSec.setXY(560, 10);
+    lblClockSec.setVisible(false);
     lblClockSec.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockSec.setLinespacing(0);
     lblClockSec.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9D4M));
     contClockSettings.add(lblClockSec);
 
-    lineHeader.setPosition(0, 57, 631, 17);
+    lineHeader.setPosition(0, 57, 545, 17);
     lineHeaderPainter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     lineHeader.setPainter(lineHeaderPainter);
     lineHeader.setStart(0, 0);
@@ -202,7 +204,7 @@ ClockScreenViewBase::ClockScreenViewBase() :
     lineHeader.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     contClockSettings.add(lineHeader);
 
-    lineSelector0.setPosition(27, 143, 576, 15);
+    lineSelector0.setPosition(34, 143, 484, 20);
     lineSelector0Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     lineSelector0.setPainter(lineSelector0Painter);
     lineSelector0.setStart(0, 0);
@@ -211,7 +213,7 @@ ClockScreenViewBase::ClockScreenViewBase() :
     lineSelector0.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     contClockSettings.add(lineSelector0);
 
-    lineSelector1.setPosition(27, 198, 576, 15);
+    lineSelector1.setPosition(34, 198, 484, 20);
     lineSelector1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     lineSelector1.setPainter(lineSelector1Painter);
     lineSelector1.setStart(0, 0);
@@ -221,7 +223,7 @@ ClockScreenViewBase::ClockScreenViewBase() :
     contClockSettings.add(lineSelector1);
     containerClock.add(contClockSettings);
 
-    lineSelector0_1.setPosition(678, 297, 294, 15);
+    lineSelector0_1.setPosition(590, 297, 382, 15);
     lineSelector0_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     lineSelector0_1.setPainter(lineSelector0_1Painter);
     lineSelector0_1.setStart(0, 0);
@@ -230,19 +232,19 @@ ClockScreenViewBase::ClockScreenViewBase() :
     lineSelector0_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     containerClock.add(lineSelector0_1);
 
-    lbClockCurrentDate.setXY(728, 114);
+    lbClockCurrentDate.setXY(684, 114);
     lbClockCurrentDate.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     lbClockCurrentDate.setLinespacing(0);
     lbClockCurrentDate.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3USL));
     containerClock.add(lbClockCurrentDate);
 
-    lbClockCurrentTime.setXY(758, 172);
+    lbClockCurrentTime.setXY(714, 172);
     lbClockCurrentTime.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     lbClockCurrentTime.setLinespacing(0);
     lbClockCurrentTime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HFD2));
     containerClock.add(lbClockCurrentTime);
 
-    lblDateTime.setXY(665, 227);
+    lblDateTime.setXY(621, 227);
     lblDateTime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDateTime.setLinespacing(0);
     Unicode::snprintf(lblDateTimeBuffer, LBLDATETIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_U9MK).getText());
@@ -251,7 +253,7 @@ ClockScreenViewBase::ClockScreenViewBase() :
     lblDateTime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PJKD));
     containerClock.add(lblDateTime);
 
-    lineSelector0_1_1.setPosition(678, 77, 294, 15);
+    lineSelector0_1_1.setPosition(590, 77, 382, 19);
     lineSelector0_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     lineSelector0_1_1.setPainter(lineSelector0_1_1Painter);
     lineSelector0_1_1.setStart(0, 0);

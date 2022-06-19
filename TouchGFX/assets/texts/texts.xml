@@ -112,6 +112,78 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_C0B1" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Next Page</Translation>
+      </Text>
+      <Text Id="__SingleUse_QJTD" Alignment="Center" TypographyId="Value">
+        <Translation Language="GB">Device Log</Translation>
+      </Text>
+      <Text Id="__SingleUse_FDYF" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Back</Translation>
+      </Text>
+      <Text Id="__SingleUse_BPY3" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Prev. Page</Translation>
+      </Text>
+      <Text Id="__SingleUse_RF2F" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_OEZ5" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y3LD" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Error_6 counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_5MBT" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_K2VK" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_QK7M" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Error_3 counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_R0CF" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_38ZB" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_9RS0" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Error_5 counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_XHJD" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_4KV2" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_D6QB" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Error_2 counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_5DU6" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_WZ7O" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_C0I2" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Error_4 counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_OA7N" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">Errors</Translation>
+      </Text>
+      <Text Id="__SingleUse_PE5F" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_NQJF" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_CHHQ" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Error_1 counter : </Translation>
+      </Text>
+      <Text Id="__SingleUse_6ZDU" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">!!! Soft Reset !!!</Translation>
+      </Text>
       <Text Id="__SingleUse_USF5" Alignment="Left" TypographyId="Desc">
         <Translation Language="GB">00:00</Translation>
       </Text>
@@ -119,7 +191,7 @@
         <Translation Language="GB">Time To Off  &lt;value&gt;</Translation>
       </Text>
       <Text Id="__SingleUse_GJVC" Alignment="Left" TypographyId="SWText">
-        <Translation Language="GB">06.06.2022 09:50:36</Translation>
+        <Translation Language="GB">06.06.2022 09:50</Translation>
       </Text>
       <Text Id="__SingleUse_HGJP" Alignment="Left" TypographyId="Desc">
         <Translation Language="GB">&lt;value&gt;</Translation>
