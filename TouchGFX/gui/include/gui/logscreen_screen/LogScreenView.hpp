@@ -11,6 +11,18 @@ public:
     virtual ~LogScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
+
+    virtual void OnClickNextPage(); 
+    virtual void OnClickPrevPage();
+
+#ifdef SIMULATOR
+     
+    /*** Log ***/
+    uint32_t GuiItfLogGetLastAddress(void);
+    void GuitItfLogGetLine(uint32_t address, char* line, uint32_t size); 
+
+#endif
+
 protected:
 };
 

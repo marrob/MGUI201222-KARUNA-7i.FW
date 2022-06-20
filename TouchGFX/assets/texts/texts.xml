@@ -112,6 +112,27 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_Y806" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">ERROR</Translation>
+      </Text>
+      <Text Id="__SingleUse_G4CD" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">WARN</Translation>
+      </Text>
+      <Text Id="__SingleUse_LTA0" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">INFO</Translation>
+      </Text>
+      <Text Id="__SingleUse_HXDW" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">23.08.2022 - 20.08.2022</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZK75" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">Date : &lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_9NVL" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">1234</Translation>
+      </Text>
+      <Text Id="__SingleUse_GCT7" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
       <Text Id="__SingleUse_C0B1" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">Next Page</Translation>
       </Text>
@@ -434,7 +455,7 @@
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,." WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,)" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />

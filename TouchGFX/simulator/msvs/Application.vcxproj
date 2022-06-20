@@ -49,6 +49,8 @@
     <ClCompile Include="..\..\gui\src\logscreen_screen\LogScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\logscreen_screen\LogScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\logscreen_screen\LogScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\ScrollElment.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\ScrollElmentBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -227,6 +229,8 @@
     <ClInclude Include="..\..\gui\include\gui\logscreen_screen\LogScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\logscreen_screen\LogScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\logscreen_screen\LogScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\ScrollElment.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ScrollElmentBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

@@ -158,10 +158,20 @@ uint32_t GuiItfUpTimSec(void)
   return Device.Gui.UpTimeSec;
 }
 
+void GuiItfSoftReset(void)
+{
+  NVIC_SystemReset();
+}
+
 void GuiItfFacotryReset(void)
 {
   GuiItfSetDefault();
   NVIC_SystemReset();
+}
+
+uint32_t GuiItfGetBusUartErrorCnt(void)
+{
+  return Device.Diag.RS485UartErrorCnt;
 }
 
 /* Karuna --------------------------------------------------------------------*/
@@ -312,46 +322,9 @@ uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
   return Device.Karuna.SavedFlags & KRN_FLAG_MSTR_CLK_ON_I2S_EN;
 }
 
-/* Backlight -----------------------------------------------------------------*/
-uint8_t GuiItfSetBacklight(uint8_t percent)
+uint32_t GuiItfGetKarunaUartErrorCnt(void)
 {
-  if(percent > 100)
-    return GUIITF_OUT_OF_RANGE;
-  BacklightSet(percent);
-  EepromU32Write(EEP_BACKLIGHT_ADDR, percent);
-  return GUIITF_OK;
-}
-
-uint8_t GuiItfGetBacklight(void)
-{
-  return Device.Backlight.LightPercent;
-}
-
-void GuiItfSetBacklightEn(uint8_t onoff)
-{
-  BacklightEn(onoff);
-}
-
-/*
- * 0  -> Off
- * 60 -> 1min
- */
-void GuiItfSetBackLightAutoOff(uint32_t sec)
-{
-  Device.Backlight.AutoOffSec = sec;
-  EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, sec);
-  if(sec!= 0)
-    DeviceBacklightOffTimerReset();
-}
-
-uint32_t GuiItfGetBacklightAutoOff(void)
-{
-  return Device.Backlight.AutoOffSec;
-}
-
-uint32_t GuiItfGetRemainingTimeToOff(void)
-{
-  return Device.Backlight.RemainingTimeToOff;
+  return Device.Karuna.UartErrorCnt;
 }
 
 uint8_t GuiItfGetBacklightIsEnabled(void)
@@ -427,6 +400,52 @@ uint8_t GuiItfGetDasClockIsExt(void)
   return Device.DasClock.DI & DAS_DI_EXT_IS_EN;
 }
 
+uint32_t GuiItfGetDasClocUartErrorCnt(void)
+{
+  return Device.DasClock.UartErrorCnt;
+}
+
+/* Backlight -----------------------------------------------------------------*/
+uint8_t GuiItfSetBacklight(uint8_t percent)
+{
+  if(percent > 100)
+    return GUIITF_OUT_OF_RANGE;
+  BacklightSet(percent);
+  EepromU32Write(EEP_BACKLIGHT_ADDR, percent);
+  return GUIITF_OK;
+}
+
+uint8_t GuiItfGetBacklight(void)
+{
+  return Device.Backlight.LightPercent;
+}
+
+void GuiItfSetBacklightEn(uint8_t onoff)
+{
+  BacklightEn(onoff);
+}
+
+/*
+ * 0  -> Off
+ * 60 -> 1min
+ */
+void GuiItfSetBackLightAutoOff(uint32_t sec)
+{
+  Device.Backlight.AutoOffSec = sec;
+  EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, sec);
+  if(sec!= 0)
+    DeviceBacklightOffTimerReset();
+}
+
+uint32_t GuiItfGetBacklightAutoOff(void)
+{
+  return Device.Backlight.AutoOffSec;
+}
+
+uint32_t GuiItfGetRemainingTimeToOff(void)
+{
+  return Device.Backlight.RemainingTimeToOff;
+}
 
 /* RTC -----------------------------------------------------------------------*/
 /*
@@ -467,7 +486,11 @@ void GuiItfGetRtc(time_t *dt)
 }
 
 /* Log -----------------------------------------------------------------------*/
-/* *** Example - Read Log ***
+/* A log egy sorát 0 és GuiItfLogGetLastAddress() között lehet lekérni
+ * GuitItfLogGetLine() segitségével..,.
+ *
+ *
+ * *** Example - Read Log ***
  * char buf[256];
  * for(uint32_t i = 0; i < GuiItfLogGetLastAddress(); i++)
  * {
