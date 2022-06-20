@@ -181,12 +181,15 @@ RS485TxItem_t RS485TxCollection[] =
   {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4000 },
   {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4200 },
   {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4600 },
+  {"#%02X BE?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4800 },
+
 
   /*** DasClock ***/
   {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
   {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5000 },
   {"#%02X UID?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5200 },
   {"#%02X PCB?",    DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5400 },
+  {"#%02X UE?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5400 },
 
   {"#%02X DI?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200 },
   {"#%02X AI? 0",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2100 },
@@ -1642,6 +1645,8 @@ void RS485Parser(char *response)
           Device.Karuna.DI = strtol(arg1, NULL, 16);
         else if(!strcmp(cmd, "DO"))
           Device.Karuna.DO = strtol(arg1, NULL, 16);
+        else if(!strcmp(cmd, "BE"))
+          Device.Karuna.UartErrorCnt = strtol(arg1, NULL, 16);
         else
           Device.Karuna.UnknownCnt++;
       }
@@ -1687,6 +1692,8 @@ void RS485Parser(char *response)
           Device.DasClock.DI = strtol(arg1, NULL, 16);
         else if(!strcmp(cmd, "DO"))
           Device.DasClock.DO = strtol(arg1, NULL, 16);
+        else if(!strcmp(cmd, "BE"))
+          Device.DasClock.UartErrorCnt = strtol(arg1, NULL, 16);
         else
           Device.DasClock.UnknownCnt++;
       }
@@ -1749,7 +1756,6 @@ void UsbRxTask(void *argument)
   static uint8_t startFlag;
   for(;;)
   {
-    Device.Diag.UsbUartTaskCounter++;
     if(strlen(USB_UART_RxBuffer)!=0)
     {
       if(!startFlag)
@@ -1767,7 +1773,6 @@ void UsbRxTask(void *argument)
           UsbParser(USB_UART_RxBuffer);
           memset(USB_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
           HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, RS485_BUFFER_SIZE);
-          Device.Diag.UsbUartRxCommandsCounter ++;
         }
       }
       if(startFlag)
@@ -1775,25 +1780,16 @@ void UsbRxTask(void *argument)
         if(HAL_GetTick() - timestamp > 500)
         {
           if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE))
-          {
-            Device.Diag.UsbUartOverrunErrorCounter++;
             __HAL_UART_CLEAR_FLAG(&huart1,UART_CLEAR_OREF);
-          }
           if(__HAL_UART_GET_FLAG(&huart1, USART_ISR_NE))
-          {
-            Device.Diag.UsbUartNoiseErrorCounter++;
             __HAL_UART_CLEAR_FLAG(&huart1,USART_ISR_NE);
-          }
           if(__HAL_UART_GET_FLAG(&huart1, USART_ISR_FE))
-          {
-            Device.Diag.UsbUartFrameErrorCounter++;
             __HAL_UART_CLEAR_FLAG(&huart1,USART_ISR_FE);
-          }
           startFlag = 0;
           HAL_UART_DMAStop(&huart1);
           memset(USB_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
           HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, RS485_BUFFER_SIZE);
-          Device.Diag.UsbUartTimeoutCounter ++;
+          Device.Diag.UsbUartErrorCnt ++;
         }
       }
     }
@@ -1859,7 +1855,6 @@ void RS485RxTask(void *argument)
   static uint8_t startFlag;
   for(;;)
   {
-    Device.Diag.BusUartTaskCounter++;
     if(strlen(RS485_UART_RxBuffer)!=0)
     {
       if(!startFlag)
@@ -1877,7 +1872,6 @@ void RS485RxTask(void *argument)
           RS485Parser(RS485_UART_RxBuffer);
           memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
           HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
-          Device.Diag.BusUartRxCommandsCounter ++;
         }
       }
       if(startFlag)
@@ -1885,25 +1879,16 @@ void RS485RxTask(void *argument)
         if(HAL_GetTick() - timestamp > 500)
         {
           if(__HAL_UART_GET_FLAG(&huart7, UART_FLAG_ORE))
-          {
-            Device.Diag.RS485OverrunErrorCnt++;
             __HAL_UART_CLEAR_FLAG(&huart7,UART_CLEAR_OREF);
-          }
           if(__HAL_UART_GET_FLAG(&huart7, USART_ISR_NE))
-          {
-            Device.Diag.RS485NoiseErrorCnt++;
             __HAL_UART_CLEAR_FLAG(&huart7,USART_ISR_NE);
-          }
           if(__HAL_UART_GET_FLAG(&huart7, USART_ISR_FE))
-          {
-            Device.Diag.RS485FrameErrorCnt++;
             __HAL_UART_CLEAR_FLAG(&huart7,USART_ISR_FE);
-          }
           startFlag = 0;
           HAL_UART_DMAStop(&huart7);
           memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
           HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
-          Device.Diag.BusUartTimeoutCounter ++;
+          Device.Diag.RS485UartErrorCnt ++;
         }
       }
     }
@@ -1946,9 +1931,7 @@ void RS485TxTask(void *argument)
             break;
           }
         }
-
         RS485UartTx(buffer);
-        Device.Diag.RS485RequestCnt++;
       }
       osDelay(10);
     }
@@ -1969,15 +1952,13 @@ void PeriTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    /*
-    Device.Peri.Inputs = PeriGetInputs();
-    PeriSetOutputs(Device.Peri.Outputs);
+    Device.Periph.Inputs = PeriGetInputs();
+    PeriSetOutputs(Device.Periph.Outputs);
 
-    Device.Peri.Temperatures[AI_CH0] = PeriGetTemperature(MCP320X_CH0);
-    Device.Peri.Temperatures[AI_CH1] = PeriGetTemperature(MCP320X_CH1);
-    Device.Peri.Temperatures[AI_CH2] = PeriGetTemperature(MCP320X_CH2);
-    Device.Peri.Temperatures[AI_CH3] = PeriGetTemperature(MCP320X_CH3);
-    */
+    Device.Periph.Temperatures[AI_CH0] = PeriGetTemperature(MCP320X_CH0);
+    Device.Periph.Temperatures[AI_CH1] = PeriGetTemperature(MCP320X_CH1);
+    Device.Periph.Temperatures[AI_CH2] = PeriGetTemperature(MCP320X_CH2);
+    Device.Periph.Temperatures[AI_CH3] = PeriGetTemperature(MCP320X_CH3);
     osDelay(100);
   }
   /* USER CODE END PeriTask */

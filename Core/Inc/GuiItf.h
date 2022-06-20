@@ -69,6 +69,11 @@
 uint8_t GuiItfLoad(void);
 uint8_t GuiItfSetDefault(void);
 uint8_t GuiItfGetVersion(char **fw, char **uid, char **pcb);
+uint32_t GuiItfGetBootupCnt(void);
+uint32_t GuiItfUpTimSec(void);
+void GuiItfFacotryReset(void);
+void GuiItfSoftReset(void);
+uint32_t GuiItfGetBusUartErrorCnt(void);
 
 /* Karuna --------------------------------------------------------------------*/
 uint8_t GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb);
@@ -86,6 +91,7 @@ uint8_t GuiItfGetKarunaOutputsAllEnabledAfterStart(void);
 void GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff);
 void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
 uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
+uint32_t GuiItfGetKarunaUartErrorCnt(void);
 
 /* DasClock-------------------------------------------------------------------*/
 uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb);
@@ -100,6 +106,7 @@ float GuiItfGetDasClockMainVoltage(void);
 uint8_t GuiItfGetDasClockStatusLock1(void);
 uint8_t GuiItfGetDasClockStatusLock2(void);
 uint8_t GuiItfGetDasClockIsExt(void);
+uint32_t GuiItfGetDasClocUartErrorCnt(void);
 
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent);
