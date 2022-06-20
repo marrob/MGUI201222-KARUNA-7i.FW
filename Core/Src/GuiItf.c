@@ -354,6 +354,11 @@ uint32_t GuiItfGetRemainingTimeToOff(void)
   return Device.Backlight.RemainingTimeToOff;
 }
 
+uint8_t GuiItfGetBacklightIsEnabled(void)
+{
+  return BacklightIsEnabled();
+}
+
 /* DasClock -----------------------------------------------------------------*/
 /*
  * fw:  220510_2157               size: DEVICE_FW_SIZE

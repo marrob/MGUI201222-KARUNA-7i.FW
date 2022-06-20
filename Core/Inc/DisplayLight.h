@@ -19,6 +19,7 @@
 void BacklightInit(TIM_HandleTypeDef *htim);
 uint8_t BacklightSet(uint8_t percent);
 void BacklightEn(uint8_t onoff);
+uint8_t BacklightIsEnabled(void);
 
 #endif /* APPLICATION_USER_CORE_INC_DISPLAYLIGHT_H_ */
 

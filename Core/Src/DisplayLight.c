@@ -39,9 +39,21 @@ uint8_t BacklightSet(uint8_t percent)
 void BacklightEn(uint8_t onoff)
 {
   if(onoff)
+  {
+    Device.Backlight.LightIsEnabled = 1,
     HAL_GPIO_WritePin(DISP_EN_GPIO_Port, DISP_EN_Pin, GPIO_PIN_SET);
+  }
   else
+  {
+    Device.Backlight.LightIsEnabled = 0,
     HAL_GPIO_WritePin(DISP_EN_GPIO_Port, DISP_EN_Pin, GPIO_PIN_RESET);
+  }
+}
+
+
+uint8_t BacklightIsEnabled(void)
+{
+  return Device.Backlight.LightIsEnabled;
 }
 
 /************************ (C) COPYRIGHT KonvolucioBt ***********END OF FILE****/

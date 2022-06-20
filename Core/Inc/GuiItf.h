@@ -108,6 +108,7 @@ void GuiItfSetBacklightEn(uint8_t onoff);
 void GuiItfSetBackLightAutoOff(uint32_t sec);
 uint32_t GuiItfGetBacklightAutoOff(void);
 uint32_t GuiItfGetRemainingTimeToOff(void);
+uint8_t GuiItfGetBacklightIsEnabled(void);
 
 /* RTC -----------------------------------------------------------------------*/
 void GuiItfSetRtc(time_t dt);

@@ -174,6 +174,7 @@ typedef struct _AppTypeDef
     time_t TimestampToOff;
     uint8_t LightPercent;
     uint32_t TouchInterrupt;
+    uint8_t LightIsEnabled;
   } Backlight;
 
 }Device_t;
