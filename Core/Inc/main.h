@@ -83,26 +83,9 @@ extern "C" {
 
 typedef struct _DiagTypeDef
 {
-  uint32_t BusUartRxCommandsCounter;
-  uint32_t UsbUartRxCommandsCounter;
+  uint32_t UsbUartErrorCnt;
 
-  uint32_t UsbUartTimeoutCounter;
-  uint32_t BusUartTimeoutCounter;
-
-  uint32_t BusUartTxCommandsCounter;
-
-  uint32_t UsbUartTaskCounter;
-  uint32_t BusUartTaskCounter;
-
-  uint32_t UsbUartOverrunErrorCounter;
-  uint32_t RS485OverrunErrorCnt;
-
-  uint32_t UsbUartNoiseErrorCounter;
-  uint32_t RS485NoiseErrorCnt;
-
-  uint32_t UsbUartFrameErrorCounter;
-  uint32_t RS485FrameErrorCnt;
-
+  uint32_t RS485UartErrorCnt;
   uint32_t RS485RequestCnt;
   uint32_t RS485UnknownCnt;
   uint32_t RS485ResponseCnt;
@@ -134,6 +117,7 @@ typedef struct _AppTypeDef
     uint32_t DO;
     uint32_t UpTimeSec;
     uint32_t SavedFlags;
+    uint32_t UartErrorCnt;
   }Karuna;
   struct _DasClock
   {
@@ -146,6 +130,7 @@ typedef struct _AppTypeDef
     uint32_t DI;
     double AI[DAS_AI_CHANNELS];
     uint32_t UpTimeSec;
+    uint32_t UartErrorCnt;
   }DasClock;
   struct
   {

@@ -17,6 +17,26 @@
     return 0;
   }
 
+  uint32_t ServiceScreenView::GuiItfGetBootupCnt(void)
+  {
+    return 10000;
+  }
+
+  uint32_t ServiceScreenView::GuiItfGetBusUartErrorCnt(void)
+  {
+    return 1;
+  }
+
+  void ServiceScreenView::GuiItfFacotryReset(void)
+  {
+
+  }
+
+  void ServiceScreenView::GuiItfSoftReset(void)
+  {
+
+  }
+
   /*** Karuna ***/
   uint8_t ServiceScreenView::GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb)
   {
@@ -28,10 +48,16 @@
     *pcb = _pcb;
     return 0;
   }
+
   uint32_t ServiceScreenView::GuiItfGetKarunaUptimeCnt()
   {
     mUptimeCounterSim++;
     return mUptimeCounterSim;
+  }
+
+  uint32_t ServiceScreenView::GuiItfGetKarunaUartErrorCnt(void)
+  {
+    return 2;
   }
 
   /*** DasClock ***/
@@ -79,9 +105,9 @@
     return 12.5f;
   }
 
-  void ServiceScreenView::GuiItfFacotryReset()
+  uint32_t ServiceScreenView::GuiItfGetDasClocUartErrorCnt(void)
   {
-
+    return 3;
   }
 
 #else
@@ -89,10 +115,15 @@
   {
     /*** GUI ***/
     uint8_t GuiItfGetVersion(char **fw, char **uid, char **pcb);
+    uint32_t GuiItfGetBootupCnt(void);
+    uint32_t GuiItfGetBusUartErrorCnt(void);
+    void GuiItfFacotryReset(void);
+    void GuiItfSoftReset(void);
 
     /*** Karuna ***/
     uint8_t GuiItfGetKarunaVersion(char **fw, char **uid, char **pcb);
     uint32_t GuiItfGetKarunaUptimeCnt();
+    uint32_t GuiItfGetKarunaUartErrorCnt(void);
 
     /*** DasClock ***/
     uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb);
@@ -101,14 +132,12 @@
     float GuiItfGetDasClockMV341Temp();
     float GuiItfGetDasClockMVOCX1Temp();
     float GuiItfGetDasClockMVOCX2Temp();
-
     float GuiItfGetDasClockMV341Current();
     float GuiItfGetDasClockMVOCX1Current();
     float GuiItfGetDasClockMVOCX2Current();
-
     float GuiItfGetDasClockMainVoltage();
 
-    void GuiItfFacotryReset(void);
+    uint32_t GuiItfGetDasClocUartErrorCnt(void);
   }
 #endif
 
@@ -217,10 +246,10 @@ void ServiceScreenView::GetVersionInfo()
 
 void ServiceScreenView::OnClickFactoryReset()
 {
-    GuiItfFacotryReset();
+  GuiItfFacotryReset();
 }
 
 void ServiceScreenView::OnClickSoftReset()
 {
-    //CALL SOFT RESET
+  GuiItfSoftReset();
 }
