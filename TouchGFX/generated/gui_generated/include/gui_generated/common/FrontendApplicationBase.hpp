@@ -17,13 +17,13 @@ public:
 
     virtual void changeToStartScreen()
     {
-        gotoMainScreenNoTransition();
+        gotoLogScreenScreenNoTransition();
     }
 
     // Main
-    void gotoMainScreenNoTransition();
-
     void gotoMainScreenSlideTransitionWest();
+
+    void gotoMainScreenNoTransition();
 
     // OffScreen
     void gotoOffScreenScreenSlideTransitionWest();
@@ -54,9 +54,9 @@ protected:
     Model& model;
 
     // Main
-    void gotoMainScreenNoTransitionImpl();
-
     void gotoMainScreenSlideTransitionWestImpl();
+
+    void gotoMainScreenNoTransitionImpl();
 
     // OffScreen
     void gotoOffScreenScreenSlideTransitionWestImpl();
