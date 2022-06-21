@@ -279,8 +279,8 @@ void PasswordScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractB
     {
         //ShowService
         //When btnDumb clicked change screen to ServiceScreen
-        //Go to ServiceScreen with no screen transition
-        application().gotoServiceScreenScreenNoTransition();
+        //Go to ServiceScreen with screen transition towards East
+        application().gotoServiceScreenScreenSlideTransitionEast();
     }
     else if (&src == &btnOK)
     {

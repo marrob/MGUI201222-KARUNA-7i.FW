@@ -342,8 +342,8 @@ void ClockScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButt
     {
         //ShowSettings
         //When btnBack clicked change screen to SettingsScreen
-        //Go to SettingsScreen with no screen transition
-        application().gotoSettingsScreenScreenNoTransition();
+        //Go to SettingsScreen with screen transition towards West
+        application().gotoSettingsScreenScreenSlideTransitionWest();
     }
 }
 

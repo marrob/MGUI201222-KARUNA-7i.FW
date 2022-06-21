@@ -183,8 +183,8 @@ void LogScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButton
     {
         //ShowService
         //When btnBack clicked change screen to ServiceScreen
-        //Go to ServiceScreen with no screen transition
-        application().gotoServiceScreenScreenNoTransition();
+        //Go to ServiceScreen with screen transition towards West
+        application().gotoServiceScreenScreenSlideTransitionWest();
     }
     else if (&src == &btnNextPage)
     {

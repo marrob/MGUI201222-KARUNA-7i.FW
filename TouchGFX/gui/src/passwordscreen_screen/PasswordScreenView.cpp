@@ -101,7 +101,7 @@ void PasswordScreenView::ClickBtnOK()
 {
   if (mPinCode[0] == '0')
   {
-    application().gotoServiceScreenScreenNoTransition();
+    application().gotoServiceScreenScreenSlideTransitionEast();
   }
   else
   {

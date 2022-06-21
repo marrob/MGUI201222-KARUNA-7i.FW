@@ -3,8 +3,8 @@
 /*********************************************************************************/
 #include <gui_generated/settingsscreen_screen/SettingsScreenViewBase.hpp>
 #include <touchgfx/Color.hpp>
-#include <texts/TextKeysAndLanguages.hpp>
 #include <BitmapDatabase.hpp>
+#include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 
@@ -28,6 +28,8 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     btnShowService.setText(TypedText(T___SINGLEUSE_YTJC));
     btnShowService.setTextPosition(-20, 20, 500, 90);
     btnShowService.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnShowService.setBitmaps(Bitmap(BITMAP_DARK_ICONS_INFO_48_ID), Bitmap(BITMAP_DARK_ICONS_INFO_48_ID));
+    btnShowService.setBitmapXY(30, 20);
     btnShowService.setPosition(519, 505, 500, 90);
     btnShowService.setAction(flexButtonCallback);
 
@@ -177,8 +179,8 @@ void SettingsScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractB
     {
         //ShowPassword
         //When btnShowService clicked change screen to PasswordScreen
-        //Go to PasswordScreen with no screen transition
-        application().gotoPasswordScreenScreenNoTransition();
+        //Go to PasswordScreen with screen transition towards East
+        application().gotoPasswordScreenScreenSlideTransitionEast();
     }
     else if (&src == &btnBack)
     {
@@ -191,8 +193,8 @@ void SettingsScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractB
     {
         //ShowClock
         //When btnClockSettings clicked change screen to ClockScreen
-        //Go to ClockScreen with no screen transition
-        application().gotoClockScreenScreenNoTransition();
+        //Go to ClockScreen with screen transition towards East
+        application().gotoClockScreenScreenSlideTransitionEast();
     }
 }
 

@@ -4,6 +4,8 @@
 #include "BitmapDatabase.hpp"
 #include <time.h>
 
+time_t saverDateTime;
+
 #ifdef SIMULATOR
 
 //Sumlated Time
@@ -101,6 +103,11 @@ void MainView::GuiItfGetRtc(time_t* dt)
 	*dt = simMainDateTime;
 }
 
+/*** Display ***/
+uint8_t MainView::GuiItfGetScreenSaverEnable()
+{
+	return true;
+}
 
 #else
 extern "C"
@@ -124,6 +131,9 @@ extern "C"
 
 	/*** Time ***/
 	void GuiItfGetRtc(time_t* dt);
+
+	/*** Display ***/
+	uint8_t GuiItfGetScreenSaverEnable();
 }
 #endif
 
@@ -170,6 +180,8 @@ MainView::MainView()
 
 	//Audio and Clocks temperature
 	RefreshKarunaAndClockInfo();
+
+	GuiItfGetRtc(&saverDateTime); 
 }
 
 
@@ -591,7 +603,12 @@ void MainView::handleTickEvent()
 	//Wait for 0.5sec
 	if (mTickCount % 10 == 0)
 	{
-		RequestCurrentTime();
+		time_t actualTime =	RequestCurrentTime();
+
+		if (GuiItfGetScreenSaverEnable() && (actualTime - saverDateTime > 60))
+		{
+			application().gotoSaverScreenScreenWipeTransitionEast();
+		}
 	}
 }
 
@@ -630,7 +647,7 @@ void MainView::RefreshKarunaAndClockInfo()
 	RefreshXLROutput();
 }
 
-void MainView::RequestCurrentTime()
+time_t MainView::RequestCurrentTime()
 {
 	time_t dtp;
 	GuiItfGetRtc(&dtp);
@@ -642,4 +659,6 @@ void MainView::RequestCurrentTime()
 	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
 	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
 	lblDateTime.invalidate();
+
+	return dtp;
 }

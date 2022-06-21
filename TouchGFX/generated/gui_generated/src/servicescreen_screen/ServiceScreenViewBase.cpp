@@ -79,14 +79,14 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
     {
         //ShowSettings
         //When btnBack clicked change screen to SettingsScreen
-        //Go to SettingsScreen with no screen transition
-        application().gotoSettingsScreenScreenNoTransition();
+        //Go to SettingsScreen with screen transition towards West
+        application().gotoSettingsScreenScreenSlideTransitionWest();
     }
     else if (&src == &btnLog)
     {
         //ShowLog
         //When btnLog clicked change screen to LogScreen
-        //Go to LogScreen with no screen transition
-        application().gotoLogScreenScreenNoTransition();
+        //Go to LogScreen with screen transition towards East
+        application().gotoLogScreenScreenSlideTransitionEast();
     }
 }

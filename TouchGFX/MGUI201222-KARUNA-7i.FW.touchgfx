@@ -680,6 +680,36 @@
               "UseBuffer": true,
               "BufferSize": 25
             }
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnShowSaver",
+            "X": 32,
+            "Y": 463,
+            "Width": 18,
+            "Height": 21,
+            "Visible": false,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 18,
+                "Height": 21,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
           }
         ],
         "Interactions": [
@@ -751,6 +781,19 @@
               "ScreenTransitionType": "ScreenTransitionSlide",
               "ScreenTransitionDirection": "East",
               "ActionComponent": "SettingsScreen"
+            }
+          },
+          {
+            "InteractionName": "ShowSaver",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnShowSaver"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "SaverScreen"
             }
           }
         ]
@@ -860,6 +903,13 @@
               "Type": "ClickButtonTrigger"
             },
             "ButtonStyles": [
+              {
+                "Type": "ImageButtonStyle",
+                "X": 30,
+                "Y": 20,
+                "ImageReleased": "__designer\\Dark_Icons_Info_48.png",
+                "ImagePressed": "__designer\\Dark_Icons_Info_48.png"
+              },
               {
                 "Type": "TextButtonStyle",
                 "X": -20,
@@ -1252,7 +1302,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
               "ActionComponent": "PasswordScreen"
             }
           },
@@ -1307,7 +1358,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
               "ActionComponent": "ClockScreen"
             }
           }
@@ -1773,6 +1825,32 @@
                   "UseBuffer": true,
                   "BufferSize": 10
                 }
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "chbxEnableScreenSaver",
+                "X": 547,
+                "Y": 13,
+                "Width": 44,
+                "Height": 44,
+                "InitialStatePressed": true,
+                "Pressed": "OFF_44x44.png",
+                "Released": "ON_44x44.png"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblScreenSaverEnable",
+                "X": 602,
+                "Y": 15,
+                "Width": 346,
+                "Height": 42,
+                "TextId": "__SingleUse_03EE",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 200,
+                  "Green": 200,
+                  "Blue": 200
+                }
               }
             ]
           },
@@ -1907,6 +1985,17 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "rbtnSelect120OffTmr"
+            }
+          },
+          {
+            "InteractionName": "EnableScreen",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "chbxEnableScreenSaver"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "chbxChangeEnableScreen"
             }
           }
         ]
@@ -2102,7 +2191,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
               "ActionComponent": "SettingsScreen"
             }
           },
@@ -2136,7 +2226,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
               "ActionComponent": "LogScreen"
             }
           }
@@ -3076,7 +3167,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
               "ActionComponent": "ServiceScreen"
             }
           }
@@ -3632,7 +3724,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
               "ActionComponent": "SettingsScreen"
             }
           },
@@ -4083,7 +4176,8 @@
             },
             "Action": {
               "Type": "ActionGotoScreen",
-              "ScreenTransitionType": "ScreenTransitionNone",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "West",
               "ActionComponent": "ServiceScreen"
             }
           },
@@ -4107,6 +4201,248 @@
             "Action": {
               "Type": "ActionCustom",
               "FunctionName": "OnClickPrevPage"
+            }
+          }
+        ]
+      },
+      {
+        "Name": "SplashScreen",
+        "CanvasBufferSize": 15360,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "box1",
+            "Width": 1024,
+            "Height": 600
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 5,
+            "Y": 100,
+            "Width": 1014,
+            "Height": 400,
+            "Visible": false,
+            "Color": {
+              "Red": 25,
+              "Green": 25,
+              "Blue": 25
+            },
+            "BorderColor": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "Line",
+            "Name": "lineMidle",
+            "X": 50,
+            "Y": 299,
+            "Height": 15,
+            "Color": {
+              "Red": 150,
+              "Green": 118,
+              "Blue": 73
+            },
+            "Alpha": 134,
+            "EndX": 960,
+            "EndY": 1,
+            "LineWidth": 2,
+            "LineEndingStyle": "Butt"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblCoreAudio",
+            "X": 76,
+            "Y": 219,
+            "Width": 411,
+            "Height": 74,
+            "TextId": "__SingleUse_PRBY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblDeviceName",
+            "X": 422,
+            "Y": 314,
+            "Width": 527,
+            "Height": 74,
+            "TextId": "__SingleUse_JVEY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnShowMain",
+            "X": 10,
+            "Y": 539,
+            "Width": 208,
+            "Height": 50,
+            "Visible": false,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 208,
+                "Height": 50,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 5,
+                "ColorBorderReleased": {
+                  "Green": 51,
+                  "Blue": 102
+                },
+                "ColorBorderPressed": {
+                  "Red": 51,
+                  "Green": 102,
+                  "Blue": 153
+                }
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "ShowMain",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnShowMain"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionSlide",
+              "ScreenTransitionDirection": "East",
+              "ActionComponent": "Main"
+            }
+          }
+        ],
+        "CustomActions": [
+          {
+            "Name": "action1"
+          }
+        ]
+      },
+      {
+        "Name": "SaverScreen",
+        "CanvasBufferSize": 15360,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "box1",
+            "Width": 1024,
+            "Height": 600
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnShowMain",
+            "Width": 1024,
+            "Height": 600,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 1024,
+                "Height": 600,
+                "LockToFlexButtonSize": true
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "containerInfo",
+            "X": 91,
+            "Y": 239,
+            "Width": 840,
+            "Height": 134,
+            "Components": [
+              {
+                "Type": "Line",
+                "Name": "lineMidle",
+                "X": 9,
+                "Y": 60,
+                "Width": 824,
+                "Height": 15,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "Alpha": 80,
+                "EndX": 960,
+                "LineWidth": 2,
+                "LineEndingStyle": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblAudioFormat",
+                "X": 9,
+                "Y": 7,
+                "Width": 473,
+                "Height": 46,
+                "TextId": "__SingleUse_ZBCN",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "Wildcard1": {
+                  "TextId": "__SingleUse_KJEE",
+                  "UseBuffer": true,
+                  "BufferSize": 35
+                }
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDateTime",
+                "X": 306,
+                "Y": 68,
+                "Width": 527,
+                "Height": 46,
+                "TextId": "__SingleUse_58MF",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "Wildcard1": {
+                  "TextId": "__SingleUse_KBUK",
+                  "UseBuffer": true,
+                  "BufferSize": 30
+                }
+              }
+            ]
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "ShowMain",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnShowMain"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionWipe",
+              "ScreenTransitionDirection": "West",
+              "ActionComponent": "Main"
             }
           }
         ]
@@ -5130,7 +5466,7 @@
       "Height": 600
     },
     "SelectedColorDepth": 16,
-    "StartupScreenName": "Main",
+    "StartupScreenName": "SplashScreen",
     "SelectedStartupLanguage": "GB",
     "Skin": "Blue",
     "TouchGfxPath": "../Middlewares/ST/touchgfx",

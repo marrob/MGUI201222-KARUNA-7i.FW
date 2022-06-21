@@ -53,6 +53,12 @@
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ScrollElmentBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\ServiceContainer.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\ServiceContainerBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\splashscreen_screen\SplashScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\splashscreen_screen\SplashScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\splashscreen_screen\SplashScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\saverscreen_screen\SaverScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\saverscreen_screen\SaverScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\saverscreen_screen\SaverScreenViewBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -235,6 +241,12 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ScrollElmentBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\ServiceContainer.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\ServiceContainerBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\splashscreen_screen\SplashScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\splashscreen_screen\SplashScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\splashscreen_screen\SplashScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\saverscreen_screen\SaverScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\saverscreen_screen\SaverScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\saverscreen_screen\SaverScreenViewBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

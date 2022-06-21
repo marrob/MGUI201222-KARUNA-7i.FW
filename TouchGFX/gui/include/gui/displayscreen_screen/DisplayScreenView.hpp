@@ -25,6 +25,7 @@ public:
     virtual void rbtnSelect30OffTmr();
     virtual void rbtnSelect60OffTmr();
     virtual void rbtnSelect120OffTmr();
+    virtual void chbxChangeEnableScreen();
 
     void GetOfTimerValue();
 
@@ -35,6 +36,9 @@ public:
     void GuiItfSetBackLightAutoOff(uint32_t sec);
     uint32_t GuiItfGetBacklightAutoOff(void);
     uint32_t GuiItfGetRemainingTimeToOff(void);
+
+    void GuiItfSetScreenSaverEnable(uint8_t isSet);
+    uint8_t GuiItfGetScreenSaverEnable();
 #endif
 
 private:

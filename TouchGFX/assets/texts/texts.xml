@@ -112,6 +112,27 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_03EE" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Enable Screensaver [1 min]</Translation>
+      </Text>
+      <Text Id="__SingleUse_KJEE" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">DSD - 1bit - 2.4MHz </Translation>
+      </Text>
+      <Text Id="__SingleUse_KBUK" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">21.06.2022 20:35</Translation>
+      </Text>
+      <Text Id="__SingleUse_58MF" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_ZBCN" Alignment="Left" TypographyId="Default">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_JVEY" Alignment="Right" TypographyId="Value">
+        <Translation Language="GB">Karuna Reference</Translation>
+      </Text>
+      <Text Id="__SingleUse_PRBY" Alignment="Left" TypographyId="Value">
+        <Translation Language="GB">CORE AUDIO</Translation>
+      </Text>
       <Text Id="__SingleUse_6BR6" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">0</Translation>
       </Text>
@@ -433,8 +454,8 @@
     </TextGroup>
   </Texts>
   <Typographies>
-    <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,)" WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,),@" WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,),@, " WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />

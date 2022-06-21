@@ -209,6 +209,13 @@ MainViewBase::MainViewBase() :
     lblDateTime.setWildcard(lblDateTimeBuffer);
     lblDateTime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HGJP));
 
+    btnShowSaver.setBoxWithBorderPosition(0, 0, 18, 21);
+    btnShowSaver.setBorderSize(5);
+    btnShowSaver.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(0, 51, 102), touchgfx::Color::getColorFromRGB(51, 102, 153));
+    btnShowSaver.setPosition(32, 463, 18, 21);
+    btnShowSaver.setVisible(false);
+    btnShowSaver.setAction(flexButtonCallback);
+
     add(__background);
     add(box1);
     add(btnHDMI);
@@ -233,6 +240,7 @@ MainViewBase::MainViewBase() :
     add(circTemp2);
     add(circTemp3);
     add(lblDateTime);
+    add(btnShowSaver);
 }
 
 void MainViewBase::setupScreen()
@@ -283,5 +291,12 @@ void MainViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonConta
         //When btnDisplay clicked change screen to DisplayScreen
         //Go to DisplayScreen with screen transition towards East
         application().gotoDisplayScreenScreenSlideTransitionEast();
+    }
+    else if (&src == &btnShowSaver)
+    {
+        //ShowSaver
+        //When btnShowSaver clicked change screen to SaverScreen
+        //Go to SaverScreen with screen transition towards East
+        application().gotoSaverScreenScreenWipeTransitionEast();
     }
 }

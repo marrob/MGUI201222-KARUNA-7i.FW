@@ -17,7 +17,7 @@ public:
 	virtual void handleTickEvent();
 
 	void RefreshKarunaAndClockInfo();
-	void RequestCurrentTime();
+	time_t RequestCurrentTime();
 
 	void RefreshBNCOutput();
 	void RefreshRCAOutput();
@@ -65,6 +65,9 @@ public:
 
   /*** Time ***/
   void GuiItfGetRtc(time_t* dt);
+
+  /*** Display ***/
+  uint8_t GuiItfGetScreenSaverEnable();
 
 #endif
 

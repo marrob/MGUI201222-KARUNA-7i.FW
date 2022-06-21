@@ -90,6 +90,7 @@ protected:
     touchgfx::Circle circTemp3;
     touchgfx::PainterRGB565 circTemp3Painter;
     touchgfx::TextAreaWithOneWildcard lblDateTime;
+    touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  btnShowSaver;
 
     /*
      * Wildcard Buffers
