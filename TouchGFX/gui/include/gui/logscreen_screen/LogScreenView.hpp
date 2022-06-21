@@ -4,17 +4,23 @@
 #include <gui_generated/logscreen_screen/LogScreenViewBase.hpp>
 #include <gui/logscreen_screen/LogScreenPresenter.hpp>
 
+
+
 class LogScreenView : public LogScreenViewBase
-{
+{ 
 public:
+
     LogScreenView();
     virtual ~LogScreenView() {}
     virtual void setupScreen();
     virtual void tearDownScreen();
 
-    virtual void OnClickNextPage(); 
+    virtual void OnClickNextPage();
     virtual void OnClickPrevPage();
 
+    void IncLogPointer();
+    void DecLogPointer();
+ 
 #ifdef SIMULATOR
      
     /*** Log ***/

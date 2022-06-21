@@ -10,11 +10,9 @@
 #include <touchgfx/widgets/Box.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
-#include <touchgfx/containers/ScrollableContainer.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
-#include <touchgfx/widgets/TextAreaWithWildcard.hpp>
-#include <touchgfx/widgets/canvas/Line.hpp>
-#include <touchgfx/widgets/canvas/PainterRGB565.hpp>
+#include <touchgfx/containers/ScrollableContainer.hpp>
+#include <gui/containers/ServiceContainer.hpp>
 
 class ServiceScreenViewBase : public touchgfx::View<ServiceScreenPresenter>
 {
@@ -49,106 +47,9 @@ protected:
     touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnBack;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnLog;
     touchgfx::BoxWithBorder boxWithBorder1;
-    touchgfx::ScrollableContainer scrlContainerService;
-    touchgfx::TextArea lblKarunaUptimeTitle;
-    touchgfx::TextAreaWithOneWildcard lblKarunaUptime;
-    touchgfx::TextArea lblDASClockUptimeTitle;
-    touchgfx::TextAreaWithOneWildcard lblClockUptime;
-    touchgfx::TextArea lblDASClockTempTitle_0;
-    touchgfx::TextAreaWithOneWildcard lblClocktemp_0;
-    touchgfx::TextArea lblDASClockTempTitle_1;
-    touchgfx::TextAreaWithOneWildcard lblClocktemp_1;
-    touchgfx::TextAreaWithOneWildcard lblClocktemp_2;
-    touchgfx::TextArea lblDASClockCurrentTitle_0;
-    touchgfx::TextAreaWithOneWildcard lblClockCurrent_0;
-    touchgfx::TextArea lblDASClockCurrentTitle_1;
-    touchgfx::TextAreaWithOneWildcard lblClockCurrent_1;
-    touchgfx::TextArea lblDASClockCurrentTitle_2;
-    touchgfx::TextArea lblDASClockTempTitle_2;
-    touchgfx::TextAreaWithOneWildcard lblClockCurrent_2;
-    touchgfx::TextArea lblKarunaTitle;
-    touchgfx::TextArea lblDASClockTitle;
-    touchgfx::TextArea lblDASClockSupplyVoltageTitle;
-    touchgfx::TextAreaWithOneWildcard lblDASClockSupplyVoltage;
-    touchgfx::Line line4;
-    touchgfx::PainterRGB565 line4Painter;
-    touchgfx::Line line3;
-    touchgfx::PainterRGB565 line3Painter;
-    touchgfx::Line line2;
-    touchgfx::PainterRGB565 line2Painter;
-    touchgfx::Line line1;
-    touchgfx::PainterRGB565 line1Painter;
-    touchgfx::TextArea lblGUITitle;
-    touchgfx::TextArea lblGUIFwVerTitle;
-    touchgfx::TextAreaWithOneWildcard lblGUIFwVersion;
-    touchgfx::Line line0;
-    touchgfx::PainterRGB565 line0Painter;
-    touchgfx::TextArea lblKarunaFwVerTitle;
-    touchgfx::TextArea lblDASFwVerTitle;
-    touchgfx::TextAreaWithOneWildcard lblKarunaFwVersion;
-    touchgfx::TextAreaWithOneWildcard lblDASClockFwVersion;
-    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnFactoryReset;
-    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnSoftReset;
-    touchgfx::Line line2_1;
-    touchgfx::PainterRGB565 line2_1Painter;
-    touchgfx::TextArea lblErrorCount1;
-    touchgfx::TextAreaWithOneWildcard lblError1;
-    touchgfx::TextArea lblErrorsTitle;
-    touchgfx::TextArea lblErrorCount4;
-    touchgfx::TextAreaWithOneWildcard lblError4;
-    touchgfx::TextArea lblErrorCount2;
-    touchgfx::TextAreaWithOneWildcard lblError2;
-    touchgfx::TextArea lblErrorCount5;
-    touchgfx::TextAreaWithOneWildcard lblError5;
-    touchgfx::TextArea lblErrorCount3;
-    touchgfx::TextAreaWithOneWildcard lblError3;
-    touchgfx::TextArea lblErrorCount6;
-    touchgfx::TextAreaWithOneWildcard lblError6;
-    touchgfx::Line line1_1;
-    touchgfx::PainterRGB565 line1_1Painter;
-    touchgfx::Line line1_1_1;
-    touchgfx::PainterRGB565 line1_1_1Painter;
-    touchgfx::TextArea textArea1;
-
-    /*
-     * Wildcard Buffers
-     */
-    static const uint16_t LBLKARUNAUPTIME_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblKarunaUptimeBuffer[LBLKARUNAUPTIME_SIZE];
-    static const uint16_t LBLCLOCKUPTIME_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClockUptimeBuffer[LBLCLOCKUPTIME_SIZE];
-    static const uint16_t LBLCLOCKTEMP_0_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClocktemp_0Buffer[LBLCLOCKTEMP_0_SIZE];
-    static const uint16_t LBLCLOCKTEMP_1_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClocktemp_1Buffer[LBLCLOCKTEMP_1_SIZE];
-    static const uint16_t LBLCLOCKTEMP_2_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClocktemp_2Buffer[LBLCLOCKTEMP_2_SIZE];
-    static const uint16_t LBLCLOCKCURRENT_0_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClockCurrent_0Buffer[LBLCLOCKCURRENT_0_SIZE];
-    static const uint16_t LBLCLOCKCURRENT_1_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClockCurrent_1Buffer[LBLCLOCKCURRENT_1_SIZE];
-    static const uint16_t LBLCLOCKCURRENT_2_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblClockCurrent_2Buffer[LBLCLOCKCURRENT_2_SIZE];
-    static const uint16_t LBLDASCLOCKSUPPLYVOLTAGE_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblDASClockSupplyVoltageBuffer[LBLDASCLOCKSUPPLYVOLTAGE_SIZE];
-    static const uint16_t LBLGUIFWVERSION_SIZE = 50;
-    touchgfx::Unicode::UnicodeChar lblGUIFwVersionBuffer[LBLGUIFWVERSION_SIZE];
-    static const uint16_t LBLKARUNAFWVERSION_SIZE = 50;
-    touchgfx::Unicode::UnicodeChar lblKarunaFwVersionBuffer[LBLKARUNAFWVERSION_SIZE];
-    static const uint16_t LBLDASCLOCKFWVERSION_SIZE = 50;
-    touchgfx::Unicode::UnicodeChar lblDASClockFwVersionBuffer[LBLDASCLOCKFWVERSION_SIZE];
-    static const uint16_t LBLERROR1_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblError1Buffer[LBLERROR1_SIZE];
-    static const uint16_t LBLERROR4_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblError4Buffer[LBLERROR4_SIZE];
-    static const uint16_t LBLERROR2_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblError2Buffer[LBLERROR2_SIZE];
-    static const uint16_t LBLERROR5_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblError5Buffer[LBLERROR5_SIZE];
-    static const uint16_t LBLERROR3_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblError3Buffer[LBLERROR3_SIZE];
-    static const uint16_t LBLERROR6_SIZE = 12;
-    touchgfx::Unicode::UnicodeChar lblError6Buffer[LBLERROR6_SIZE];
+    touchgfx::TextArea lblServiceTitle;
+    touchgfx::ScrollableContainer scrollContService;
+    ServiceContainer serviceControl;
 
 private:
 

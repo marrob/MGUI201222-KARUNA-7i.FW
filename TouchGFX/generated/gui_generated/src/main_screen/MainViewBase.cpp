@@ -202,12 +202,11 @@ MainViewBase::MainViewBase() :
     circTemp3Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     circTemp3.setPainter(circTemp3Painter);
 
-    lblDateTime.setXY(721, 463);
+    lblDateTime.setPosition(709, 463, 219, 28);
     lblDateTime.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     lblDateTime.setLinespacing(0);
     Unicode::snprintf(lblDateTimeBuffer, LBLDATETIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_GJVC).getText());
     lblDateTime.setWildcard(lblDateTimeBuffer);
-    lblDateTime.resizeToCurrentText();
     lblDateTime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HGJP));
 
     add(__background);

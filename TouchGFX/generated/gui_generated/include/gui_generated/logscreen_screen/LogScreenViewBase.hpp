@@ -11,11 +11,11 @@
 #include <touchgfx/containers/buttons/Buttons.hpp>
 #include <touchgfx/widgets/TextArea.hpp>
 #include <touchgfx/widgets/BoxWithBorder.hpp>
-#include <touchgfx/containers/scrollers/ScrollList.hpp>
-#include <gui/containers/ScrollElment.hpp>
 #include <touchgfx/widgets/TextAreaWithWildcard.hpp>
 #include <touchgfx/containers/Container.hpp>
 #include <touchgfx/widgets/ToggleButton.hpp>
+#include <touchgfx/containers/ScrollableContainer.hpp>
+#include <gui/containers/ScrollElment.hpp>
 
 class LogScreenViewBase : public touchgfx::View<LogScreenPresenter>
 {
@@ -23,11 +23,6 @@ public:
     LogScreenViewBase();
     virtual ~LogScreenViewBase() {}
     virtual void setupScreen();
-
-    virtual void scrollLogUpdateItem(ScrollElment& item, int16_t itemIndex)
-    {
-        // Override and implement this function in LogScreen
-    }
 
     /*
      * Virtual Action Handlers
@@ -57,9 +52,7 @@ protected:
     touchgfx::TextArea lblTitle;
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnNextPage;
-    touchgfx::ScrollList scrollLog;
-    touchgfx::DrawableListItems<ScrollElment, 5> scrollLogListItems;
-    touchgfx::TextAreaWithOneWildcard lblElement_1;
+    touchgfx::TextAreaWithOneWildcard lblDate;
     touchgfx::Container container1;
     touchgfx::ToggleButton chbxINFO;
     touchgfx::TextArea lblInfo;
@@ -67,12 +60,23 @@ protected:
     touchgfx::TextArea lblWARN;
     touchgfx::ToggleButton chbxError;
     touchgfx::TextArea lblERROR;
+    touchgfx::ScrollableContainer scrollableCont;
+    ScrollElment scrollElment_0;
+    ScrollElment scrollElment_1;
+    ScrollElment scrollElment_2;
+    ScrollElment scrollElment_3;
+    ScrollElment scrollElment_4;
+    ScrollElment scrollElment_5;
+    ScrollElment scrollElment_6;
+    ScrollElment scrollElment_7;
+    ScrollElment scrollElment_8;
+    ScrollElment scrollElment_9;
 
     /*
      * Wildcard Buffers
      */
-    static const uint16_t LBLELEMENT_1_SIZE = 70;
-    touchgfx::Unicode::UnicodeChar lblElement_1Buffer[LBLELEMENT_1_SIZE];
+    static const uint16_t LBLDATE_SIZE = 70;
+    touchgfx::Unicode::UnicodeChar lblDateBuffer[LBLDATE_SIZE];
 
 private:
 
@@ -81,14 +85,12 @@ private:
      */
     touchgfx::Callback<LogScreenViewBase, const touchgfx::AbstractButton&> buttonCallback;
     touchgfx::Callback<LogScreenViewBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
-    touchgfx::Callback<LogScreenViewBase, touchgfx::DrawableListItemsInterface*, int16_t, int16_t> updateItemCallback;
 
     /*
      * Callback Handler Declarations
      */
     void buttonCallbackHandler(const touchgfx::AbstractButton& src);
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
-    void updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex);
 
     /*
      * Canvas Buffer Size
