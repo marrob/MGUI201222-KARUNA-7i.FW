@@ -61,7 +61,7 @@ extern "C" {
 #define DEVICE_FAIL           1
 
 #define DEVICE_NAME           "MGUI201222-KARUNA-7i"
-#define DEVICE_FW             "220620_1759"
+#define DEVICE_FW             "220621_0859"
 #define DEVICE_PCB            "VA01"
 #define DEVICE_MNF            "KONVOLUCIO"
 #define DEVICE_MNF_SIZE       sizeof(DEVICE_MNF)
@@ -84,15 +84,12 @@ extern "C" {
 typedef struct _DiagTypeDef
 {
   uint32_t UsbUartErrorCnt;
-
   uint32_t RS485UartErrorCnt;
   uint32_t RS485RequestCnt;
   uint32_t RS485UnknownCnt;
   uint32_t RS485ResponseCnt;
   uint32_t RS485RdyCnt;
-
   uint32_t PowerLedTaskCounter;
-
 }Diag_t;
 
 typedef struct _AppTypeDef
@@ -105,6 +102,9 @@ typedef struct _AppTypeDef
     char PCB[DEVICE_PCB_SIZE];
     uint32_t BootUpCnt;
     uint64_t UpTimeSec;
+    float Temps[4];
+    uint32_t DO;
+    uint32_t DI;
   }Gui;
   struct _Karuna
   {
@@ -134,10 +134,7 @@ typedef struct _AppTypeDef
   }DasClock;
   struct
   {
-    double AnalogInputs[4];
-    double Temperatures[4];
-    uint32_t Outputs;
-    uint32_t Inputs;
+
   }Periph;
 
   struct _Log
@@ -177,9 +174,6 @@ void Error_Handler(void);
 /*** RTC ***/
 uint8_t DeviceRtcSet(time_t dt);
 uint8_t DeviceRtcGet(time_t *dt);
-
-/*** Log **/
-void DeviceLogWriteLine(char *line);
 
 /*** Backlight Off Timer ***/
 void DeviceBacklightOffTimerReset(void);

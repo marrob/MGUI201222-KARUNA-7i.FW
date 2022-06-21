@@ -73,7 +73,6 @@ uint8_t GuiItfLoad(void)
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
     Device.Log.LastAddress = value;
-
   }
   return GUIITF_OK;
 }
@@ -172,6 +171,210 @@ void GuiItfFacotryReset(void)
 uint32_t GuiItfGetBusUartErrorCnt(void)
 {
   return Device.Diag.RS485UartErrorCnt;
+}
+
+float GuiItfGetTempCh0(void)
+{
+  return Device.Gui.Temps[AI_CH0];
+}
+
+float GuiItfGetTempCh1(void)
+{
+  return Device.Gui.Temps[AI_CH1];
+}
+
+float GuiItfGetTempCh2(void)
+{
+  return Device.Gui.Temps[AI_CH2];
+}
+
+float GuiItfGetTempCh3(void)
+{
+  return Device.Gui.Temps[AI_CH3];
+}
+
+void GuiItfSetDo0(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_0;
+  else
+    Device.Gui.DO &= ~DO_0;
+}
+
+void GuiItfSetDo1(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_1;
+  else
+    Device.Gui.DO &= ~DO_1;
+}
+
+void GuiItfSetDo2(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_2;
+  else
+    Device.Gui.DO &= ~DO_2;
+}
+
+void GuiItfSetDo3(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_3;
+  else
+    Device.Gui.DO &= ~DO_3;
+}
+
+void GuiItfSetDo4(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_4;
+  else
+    Device.Gui.DO &= ~DO_4;
+}
+
+void GuiItfSetDo5(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_5;
+  else
+    Device.Gui.DO &= ~DO_5;
+}
+
+void GuiItfSetDo6(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_6;
+  else
+    Device.Gui.DO &= ~DO_6;
+}
+
+void GuiItfSetDo7(uint8_t onoff)
+{
+  if(onoff)
+    Device.Gui.DO |= DO_7;
+  else
+    Device.Gui.DO &= ~DO_7;
+}
+
+uint8_t GuiItfGetDo0(void)
+{
+  return (Device.Gui.DO & DO_0) == DO_0;
+}
+
+uint8_t GuiItfGetDo1(void)
+{
+  return (Device.Gui.DO & DO_1) == DO_1;
+}
+
+uint8_t GuiItfGetDo2(void)
+{
+  return (Device.Gui.DO & DO_2) == DO_2;
+}
+
+uint8_t GuiItfGetDo3(void)
+{
+  return (Device.Gui.DO & DO_3) == DO_3;
+}
+
+uint8_t GuiItfGetDo4(void)
+{
+  return (Device.Gui.DO & DO_4) == DO_4;
+}
+
+uint8_t GuiItfGetDo5(void)
+{
+  return (Device.Gui.DO & DO_5) == DO_5;
+}
+
+uint8_t GuiItfGetDo6(void)
+{
+  return (Device.Gui.DO & DO_6) == DO_6;
+}
+
+uint8_t GuiItfGetDo7(void)
+{
+  return (Device.Gui.DO & DO_7) == DO_7;
+}
+
+uint8_t GuiItfGetDi0(void)
+{
+  return (Device.Gui.DI & DI_0) == DI_0;
+}
+
+uint8_t GuiItfGetDi1(void)
+{
+  return (Device.Gui.DI & DI_1) == DI_1;
+}
+
+uint8_t GuiItfGetDi2(void)
+{
+  return (Device.Gui.DI & DI_2) == DI_2;
+}
+
+uint8_t GuiItfGetDi3(void)
+{
+  return (Device.Gui.DI & DI_3) == DI_3;
+}
+
+uint8_t GuiItfGetDi4(void)
+{
+  return (Device.Gui.DI & DI_4) == DI_4;
+}
+
+uint8_t GuiItfGetDi5(void)
+{
+  return (Device.Gui.DI & DI_5) == DI_5;
+}
+
+uint8_t GuiItfGetDi6(void)
+{
+  return (Device.Gui.DI & DI_6) == DI_6;
+}
+
+uint8_t GuiItfGetDi7(void)
+{
+  return (Device.Gui.DI & DI_7) == DI_7;
+}
+
+uint8_t GuiItfGetDi8(void)
+{
+  return (Device.Gui.DI & DI_8) == DI_8;
+}
+
+uint8_t GuiItfGetDi9(void)
+{
+  return (Device.Gui.DI & DI_9) == DI_9;
+}
+
+uint8_t GuiItfGetDi10(void)
+{
+  return (Device.Gui.DI & DI_10) == DI_10;
+}
+
+uint8_t GuiItfGetDi11(void)
+{
+  return (Device.Gui.DI & DI_11) == DI_11;
+}
+
+uint8_t GuiItfGetDi12(void)
+{
+  return (Device.Gui.DI & DI_12) == DI_12;
+}
+
+uint8_t GuiItfGetDi13(void)
+{
+  return (Device.Gui.DI & DI_13) == DI_13;
+}
+
+uint8_t GuiItfGetDi14(void)
+{
+  return (Device.Gui.DI & DI_14) == DI_14;
+}
+
+uint8_t GuiItfGetDi15(void)
+{
+  return (Device.Gui.DI & DI_15) == DI_15;
 }
 
 /* Karuna --------------------------------------------------------------------*/

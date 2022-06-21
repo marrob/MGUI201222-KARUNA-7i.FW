@@ -1,5 +1,5 @@
 /*
- * GuiItf.h
+ * Periph.h
  *
  *  Created on: 2022. máj. 14.
  *      Author: Margit Robert
@@ -13,31 +13,35 @@
 #define AI_CH2    2
 #define AI_CH3    3
 
+#define DO_0      ((uint8_t) 1<<0)
+#define DO_1      ((uint8_t) 1<<1)
+#define DO_2      ((uint8_t) 1<<2)
+#define DO_3      ((uint8_t) 1<<3)
+#define DO_4      ((uint8_t) 1<<4)
+#define DO_5      ((uint8_t) 1<<5)
+#define DO_6      ((uint8_t) 1<<6)
+#define DO_7      ((uint8_t) 1<<7)
 
-/*** MCP3208 ***/
-#define MCP320X_CH0          0
-#define MCP320X_CH1          1
-#define MCP320X_CH2          2
-#define MCP320X_CH3          3
-#define MCP320X_CON_SINGLE_END  (1<<3)
-
-
-#define PERIPH_OK           0
-#define PERIPH_FAIL         1
-#define PERIPH_ARG_ERROR    2
-#define PERIPH_OUT_OF_RNG   3
-
+#define DI_0      ((uint8_t) 1<<0)
+#define DI_1      ((uint8_t) 1<<1)
+#define DI_2      ((uint8_t) 1<<2)
+#define DI_3      ((uint8_t) 1<<3)
+#define DI_4      ((uint8_t) 1<<4)
+#define DI_5      ((uint8_t) 1<<5)
+#define DI_6      ((uint8_t) 1<<6)
+#define DI_7      ((uint8_t) 1<<7)
+#define DI_8      ((uint8_t) 1<<8)
+#define DI_9      ((uint8_t) 1<<9)
+#define DI_10     ((uint8_t) 1<<10)
+#define DI_11     ((uint8_t) 1<<11)
+#define DI_12     ((uint8_t) 1<<12)
+#define DI_13     ((uint8_t) 1<<13)
+#define DI_14     ((uint8_t) 1<<14)
+#define DI_15     ((uint8_t) 1<<15)
 
 /* Exported functions prototypes ---------------------------------------------*/
-void PeriInit(void);
-double PeriGetTemperature(uint8_t channel);
-uint16_t PeriGetInputs(void);
-void PeriSetOutputs(uint8_t data);
-
-/* LogFlash ------------------------------------------------------------------*/
-uint8_t LogFlashReadId (uint8_t *data, uint32_t size);
-uint8_t LogFlashErase(void);
-uint8_t LogFlashWrite(uint32_t addr, uint8_t *data, uint32_t size);
-uint8_t LogFlashRead(uint32_t line, uint8_t *data, uint32_t size);
+float PeriphReadTemp(uint8_t channel);
+uint16_t PeriphReadInputs(void);
+void PeriphWriteOutputs(uint8_t data);
 
 #endif /* _ANALOG_INPUTS_H_ */

@@ -169,8 +169,8 @@ const osMessageQueueAttr_t USBUartRxQueue_attributes = {
 Device_t Device;
 __IO unsigned long RTOSRunTimeStatTick;
 
-static char USB_UART_RxBuffer[RS485_BUFFER_SIZE] /*__attribute__ ((aligned (32)))*/;
-static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE] __attribute__ ((aligned (32)));
+static char USB_UART_RxBuffer[RS485_BUFFER_SIZE];
+static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE];
 
 RS485TxItem_t RS485TxCollection[] =
 {
@@ -181,7 +181,7 @@ RS485TxItem_t RS485TxCollection[] =
   {"#%02X FW?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4000 },
   {"#%02X UID?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4200 },
   {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4600 },
-  {"#%02X BE?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4800 },
+  {"#%02X UE?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4800 },
 
 
   /*** DasClock ***/
@@ -339,19 +339,18 @@ int main(void)
   DeviceTimeUpdate();
 
   /*** Falsh Playgorund ***/
+#ifdef OFF_LOG_UPLOAD
   char buf[256];
   for(uint32_t i = 0; i < GuiItfLogGetLastAddress(); i++)
   {
     GuitItfLogGetLine(i,buf, sizeof(buf));
     printf( "%s\n", buf);
   }
+#endif
 
-/*** Time Zone ***/
-setenv("TZ", "UTC", 0);
-//setenv("TZ", "PST8PST", 1);
-tzset();
-
-  //clock_settime();
+  /*** Time Zone ***/
+  setenv("TZ", "UTC", 0);
+  tzset();
 
   /* USER CODE END 2 */
 
@@ -1391,7 +1390,7 @@ void UsbParser(char *request)
 //        }
       else if(!strcmp(cmd, "DIG:INP:U16?"))
       {
-        sprintf(response, "%04X",PeriGetInputs());
+        sprintf(response, "%04X",PeriphReadInputs());
       }
       else if(!strcmp(cmd, "DIG:OUT:U8?"))
       {
@@ -1436,7 +1435,7 @@ void UsbParser(char *request)
       else if(!strcmp(cmd, "DIG:OUT:SET:U8"))
       {
         uint8_t value = strtol(arg1, NULL, 16);
-        PeriSetOutputs(value);
+        PeriphWriteOutputs(value);
         strcpy(response, "RDY");
       }
       else
@@ -1651,7 +1650,7 @@ void RS485Parser(char *response)
           Device.Karuna.DI = strtol(arg1, NULL, 16);
         else if(!strcmp(cmd, "DO"))
           Device.Karuna.DO = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "BE"))
+        else if(!strcmp(cmd, "UE"))
           Device.Karuna.UartErrorCnt = strtol(arg1, NULL, 16);
         else
           Device.Karuna.UnknownCnt++;
@@ -1698,7 +1697,7 @@ void RS485Parser(char *response)
           Device.DasClock.DI = strtol(arg1, NULL, 16);
         else if(!strcmp(cmd, "DO"))
           Device.DasClock.DO = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "BE"))
+        else if(!strcmp(cmd, "UE"))
           Device.DasClock.UartErrorCnt = strtol(arg1, NULL, 16);
         else
           Device.DasClock.UnknownCnt++;
@@ -1958,13 +1957,13 @@ void PeriTask(void *argument)
   /* Infinite loop */
   for(;;)
   {
-    Device.Periph.Inputs = PeriGetInputs();
-    PeriSetOutputs(Device.Periph.Outputs);
+    Device.Gui.DI = PeriphReadInputs();
+    PeriphWriteOutputs(Device.Gui.DO);
 
-    Device.Periph.Temperatures[AI_CH0] = PeriGetTemperature(MCP320X_CH0);
-    Device.Periph.Temperatures[AI_CH1] = PeriGetTemperature(MCP320X_CH1);
-    Device.Periph.Temperatures[AI_CH2] = PeriGetTemperature(MCP320X_CH2);
-    Device.Periph.Temperatures[AI_CH3] = PeriGetTemperature(MCP320X_CH3);
+    Device.Gui.Temps[AI_CH0] = PeriphReadTemp(AI_CH0);
+    Device.Gui.Temps[AI_CH1] = PeriphReadTemp(AI_CH1);
+    Device.Gui.Temps[AI_CH2] = PeriphReadTemp(AI_CH2);
+    Device.Gui.Temps[AI_CH3] = PeriphReadTemp(AI_CH3);
     osDelay(100);
   }
   /* USER CODE END PeriTask */
