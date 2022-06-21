@@ -308,7 +308,7 @@ void MainView::RefreshIntExt()
 
 void  MainView::SetTemp(int p_Temp)
 {
-	int offset = 45;
+	int offset = 40;
 
 	if (p_Temp < 0 + offset)
 	{
@@ -322,19 +322,19 @@ void  MainView::SetTemp(int p_Temp)
 	{
 		PaintDot(CORECOLOR, CORECOLOR, MIDGRAYCOLOR);
 	}
-	else if (p_Temp >= 10 + offset && p_Temp < 20 + offset)
+	else if (p_Temp >= 10 + offset && p_Temp < 30 + offset)
 	{
 		PaintDot(CORECOLOR, CORECOLOR, CORECOLOR);
 	}
-	else if (p_Temp >= 20 + offset && p_Temp < 25 + offset)
+	else if (p_Temp >= 30 + offset && p_Temp < 35 + offset)
 	{
 		PaintDot(REDCOLOR, CORECOLOR, CORECOLOR);
 	}
-	else if (p_Temp >= 25 + offset && p_Temp < 30 + offset)
+	else if (p_Temp >= 35 + offset && p_Temp < 40 + offset)
 	{
 		PaintDot(REDCOLOR, REDCOLOR, CORECOLOR);
 	}
-	else if (p_Temp >= 30 + offset)
+	else if (p_Temp >= 40 + offset)
 	{
 		PaintDot(REDCOLOR, REDCOLOR, REDCOLOR);
 	}

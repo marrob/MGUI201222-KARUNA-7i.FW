@@ -1,5 +1,6 @@
 #include <gui/splashscreen_screen/SplashScreenView.hpp>
 
+int splashCnt;
 int mSplashCount;
 int defWidth = 920;
 
@@ -25,6 +26,12 @@ void SplashScreenView::tearDownScreen()
 
 void SplashScreenView::handleTickEvent() 
 {
+    splashCnt++;
+    if (splashCnt < 100)
+    {
+        return;
+    }
+
     if (mSplashCount < defWidth)
     {
         lineMidle.setWidth(mSplashCount);
