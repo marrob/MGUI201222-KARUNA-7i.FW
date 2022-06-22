@@ -1,6 +1,7 @@
 #include <gui/saverscreen_screen/SaverScreenView.hpp>
 #include <time.h>
 #include <stdio.h>
+#include <string.h>
 
 int mTickSaverCount;
 char FormatStr[10];

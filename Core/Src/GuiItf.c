@@ -19,7 +19,8 @@
 #define EEP_RTC_IS_SET_ADDR                 0x0010
 #define EEP_LOG_LAST_PAGE_ADDR              0x0014
 #define EEP_KARUNA_SAVED_FLAGS_ADDR         0x0018
-#define EEP_BACKLIGHT_AUTO_OFF_ADDR         0x0030
+#define EEP_BACKLIGHT_OFFTIMER_ENABLED_ADDR 0x0030
+#define EEP_SCREENSAVER_ENABLED_ADDR        0x0034
 
 #define MAGIC_WORD                          0x55AA55AA
 
@@ -50,8 +51,8 @@ uint8_t GuiItfLoad(void)
     EepromU32Read(EEP_BACKLIGHT_ADDR, &value);
     BacklightSet(value);
 
-    EepromU32Read(EEP_BACKLIGHT_AUTO_OFF_ADDR, &value);
-    Device.Backlight.AutoOffSec = value;
+    EepromU32Read(EEP_BACKLIGHT_OFFTIMER_ENABLED_ADDR, &value);
+    Device.Backlight.OffTimerSec = value;
 
     /*** Karuna ***/
     EepromU32Read(EEP_KARUNA_SAVED_FLAGS_ADDR, &value);
@@ -73,6 +74,11 @@ uint8_t GuiItfLoad(void)
     /*** Log ***/
     EepromU32Read(EEP_LOG_LAST_PAGE_ADDR, &value);
     Device.Log.LastAddress = value;
+
+    /*** Screen Saver ***/
+    EepromU32Read(EEP_SCREENSAVER_ENABLED_ADDR, &value);
+    Device.Gui.ScreenSaverIsEnabled = value;
+
   }
   return GUIITF_OK;
 }
@@ -93,8 +99,8 @@ uint8_t GuiItfSetDefault(void)
   BacklightSet((uint8_t)value);
 
   value = 0;
-  EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, value);
-  Device.Backlight.AutoOffSec = value;
+  EepromU32Write(EEP_BACKLIGHT_OFFTIMER_ENABLED_ADDR, value);
+  Device.Backlight.OffTimerSec = value;
 
   /*** Karuna ***/
   value = KRN_DO_RCA_EN | KRN_DO_BNC_EN | KRN_DO_XLR_EN | KRN_DO_I2S_EN;
@@ -126,6 +132,10 @@ uint8_t GuiItfSetDefault(void)
 
   LogFlashErase(); //Here we have to wait for a long time....
 
+  /*** Screen Saver ***/
+  value = 0;
+  EepromU32Write(EEP_SCREENSAVER_ENABLED_ADDR, value);
+  Device.Gui.ScreenSaverIsEnabled = value;
 
   /*** Magic Word ***/
   value = MAGIC_WORD;
@@ -171,6 +181,23 @@ void GuiItfFacotryReset(void)
 uint32_t GuiItfGetBusUartErrorCnt(void)
 {
   return Device.Diag.RS485UartErrorCnt;
+}
+
+void GuiItfSetScreenSaverEnable(uint8_t onoff)
+{
+  Device.Gui.ScreenSaverIsEnabled = onoff;
+
+  EepromU32Write(EEP_SCREENSAVER_ENABLED_ADDR, Device.Gui.ScreenSaverIsEnabled);
+
+  if(onoff)
+    LogWriteLine("GuiItfSetScreenSaverEnable: On");
+  else
+    LogWriteLine("GuiItfSetScreenSaverEnable: Off");
+}
+
+uint8_t GuiItfGetScreenSaverEnable(void)
+{
+  return Device.Gui.ScreenSaverIsEnabled;
 }
 
 float GuiItfGetTempCh0(void)
@@ -634,21 +661,23 @@ void GuiItfSetBacklightEn(uint8_t onoff)
  */
 void GuiItfSetBackLightAutoOff(uint32_t sec)
 {
-  Device.Backlight.AutoOffSec = sec;
-  EepromU32Write(EEP_BACKLIGHT_AUTO_OFF_ADDR, sec);
+  Device.Backlight.OffTimerSec = sec;
+  EepromU32Write(EEP_BACKLIGHT_OFFTIMER_ENABLED_ADDR, sec);
   if(sec!= 0)
     DeviceBacklightOffTimerReset();
 }
 
 uint32_t GuiItfGetBacklightAutoOff(void)
 {
-  return Device.Backlight.AutoOffSec;
+  return Device.Backlight.OffTimerSec;
 }
 
 uint32_t GuiItfGetRemainingTimeToOff(void)
 {
   return Device.Backlight.RemainingTimeToOff;
 }
+
+
 
 /* RTC -----------------------------------------------------------------------*/
 /*
@@ -667,6 +696,7 @@ uint32_t GuiItfGetRemainingTimeToOff(void)
 void GuiItfSetRtc(time_t dt)
 {
   DeviceRtcSet(dt);
+  LogWriteLine("GuiItfSetRtc.......");
 }
 
 /*

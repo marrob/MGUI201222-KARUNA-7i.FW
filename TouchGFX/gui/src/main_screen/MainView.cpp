@@ -112,28 +112,28 @@ uint8_t MainView::GuiItfGetScreenSaverEnable()
 #else
 extern "C"
 {
-	/*** Karuna ***/
-	uint8_t GuiItfGetKarunaStatus();
-	void GuiItfSetKarunaHdmi(uint8_t onfoff);
-	uint8_t GuitIfGetKarunaIsHdmiSet(void);
-	void GuiItfSetKarunaRca(uint8_t onfoff);
-	uint8_t GuitIfGetKarunaIsRcaSet(void);
-	void GuiItfSetKarunaBnc(uint8_t onfoff);
-	uint8_t GuitIfGetKarunaIsBncSet(void);
-	void GuiItfSetKarunaXlr(uint8_t onfoff);
-	uint8_t GuitIfGetKarunaIsXlrSet(void);
+  /*** Karuna ***/
+  uint8_t GuiItfGetKarunaStatus();
+  void GuiItfSetKarunaHdmi(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsHdmiSet(void);
+  void GuiItfSetKarunaRca(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsRcaSet(void);
+  void GuiItfSetKarunaBnc(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsBncSet(void);
+  void GuiItfSetKarunaXlr(uint8_t onfoff);
+  uint8_t GuitIfGetKarunaIsXlrSet(void);
 
-	/*** DasClock***/
-	float GuiItfGetDasClockMV341Temp();
-	uint8_t GuiItfGetDasClockStatusLock1();
-	uint8_t GuiItfGetDasClockStatusLock2();
-	uint8_t GuiItfGetDasClockIsExt();
+  /*** DasClock***/
+  float GuiItfGetDasClockMV341Temp();
+  uint8_t GuiItfGetDasClockStatusLock1();
+  uint8_t GuiItfGetDasClockStatusLock2();
+  uint8_t GuiItfGetDasClockIsExt();
 
-	/*** Time ***/
-	void GuiItfGetRtc(time_t* dt);
+  /*** Time ***/
+  void GuiItfGetRtc(time_t* dt);
 
-	/*** Display ***/
-	uint8_t GuiItfGetScreenSaverEnable();
+  /*** Display ***/
+  uint8_t GuiItfGetScreenSaverEnable();
 }
 #endif
 

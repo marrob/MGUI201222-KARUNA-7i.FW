@@ -58,7 +58,7 @@ extern "C"
 	uint32_t GuiItfGetRemainingTimeToOff(void); 
 
 	//ScreenSaver
-	GuiItfSetScreenSaverEnable(uint8_t isSet);
+	void GuiItfSetScreenSaverEnable(uint8_t isSet);
 	uint8_t GuiItfGetScreenSaverEnable();
 }
 #endif

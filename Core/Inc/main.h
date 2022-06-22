@@ -105,6 +105,7 @@ typedef struct _AppTypeDef
     float Temps[4];
     uint32_t DO;
     uint32_t DI;
+    uint8_t ScreenSaverIsEnabled;
   }Gui;
   struct _Karuna
   {
@@ -151,7 +152,7 @@ typedef struct _AppTypeDef
 
   struct _Backlight
   {
-    uint32_t AutoOffSec;    //If it is not 0, then it is valid time
+    uint32_t OffTimerSec;    //If it is not 0, then it is valid time
     uint32_t RemainingTimeToOff;
     time_t TimestampToOff;
     uint8_t LightPercent;

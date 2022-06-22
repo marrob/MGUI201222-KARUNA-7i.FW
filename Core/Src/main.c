@@ -1538,7 +1538,7 @@ uint8_t DeviceTimeUpdate()
   strftime(Device.DateTime.Now, DEVICE_DT_STR_SIZE, "%Y-%m-%d %H:%M:%S", tm_info );
 
   /*** Display Backlight Auto Off Timer ***/
-  if(Device.Backlight.AutoOffSec != 0)
+  if(Device.Backlight.OffTimerSec != 0)
   {
     if(Device.Backlight.TimestampToOff == Device.DateTime.PosixTime)
     {
@@ -1558,13 +1558,13 @@ uint8_t DeviceTimeUpdate()
 
 void DeviceBacklightOffTimerReset(void)
 {
-  Device.Backlight.TimestampToOff = Device.Backlight.AutoOffSec + Device.DateTime.PosixTime;
+  Device.Backlight.TimestampToOff = Device.Backlight.OffTimerSec + Device.DateTime.PosixTime;
   BacklightEn(1);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
-  if(Device.Backlight.AutoOffSec)
+  if(Device.Backlight.OffTimerSec)
   {
     Device.Backlight.TouchInterrupt ++;
     DeviceBacklightOffTimerReset();
