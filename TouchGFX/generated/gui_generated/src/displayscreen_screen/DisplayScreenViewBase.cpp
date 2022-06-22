@@ -9,6 +9,7 @@
 
 
 DisplayScreenViewBase::DisplayScreenViewBase() :
+    buttonCallback(this, &DisplayScreenViewBase::buttonCallbackHandler),
     flexButtonCallback(this, &DisplayScreenViewBase::flexButtonCallbackHandler),
     sliderValueChangedCallback(this, &DisplayScreenViewBase::sliderValueChangedCallbackHandler),
     radioButtonSelectedCallback(this, &DisplayScreenViewBase::radioButtonSelectedCallbackHandler)
@@ -174,6 +175,18 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     lblTimeToOff.setTypedText(touchgfx::TypedText(T___SINGLEUSE_SC3P));
     container1.add(lblTimeToOff);
 
+    chbxEnableScreenSaver.setXY(547, 13);
+    chbxEnableScreenSaver.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
+    chbxEnableScreenSaver.forceState(true);
+    chbxEnableScreenSaver.setAction(buttonCallback);
+    container1.add(chbxEnableScreenSaver);
+
+    lblScreenSaverEnable.setPosition(602, 15, 346, 42);
+    lblScreenSaverEnable.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblScreenSaverEnable.setLinespacing(0);
+    lblScreenSaverEnable.setTypedText(touchgfx::TypedText(T___SINGLEUSE_03EE));
+    container1.add(lblScreenSaverEnable);
+
     line1.setPosition(60, 409, 920, 15);
     line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1.setPainter(line1Painter);
@@ -205,6 +218,17 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
 void DisplayScreenViewBase::setupScreen()
 {
 
+}
+
+void DisplayScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
+{
+    if (&src == &chbxEnableScreenSaver)
+    {
+        //EnableScreen
+        //When chbxEnableScreenSaver clicked call virtual function
+        //Call chbxChangeEnableScreen
+        chbxChangeEnableScreen();
+    }
 }
 
 void DisplayScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)

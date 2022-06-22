@@ -459,6 +459,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/ScrollElment.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/ServiceContainer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/ServiceContainer.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/TextContainerHigh.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/TextContainerHigh.cpp</locationURI>
@@ -524,6 +529,16 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/passwordscreen_screen/PasswordScreenView.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/SaverScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/saverscreen_screen/SaverScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/SaverScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/saverscreen_screen/SaverScreenView.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/ServiceScreenPresenter.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/servicescreen_screen/ServiceScreenPresenter.cpp</locationURI>
@@ -542,6 +557,16 @@
 			<name>Application/User/gui/SettingsScreenView.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/settingsscreen_screen/SettingsScreenView.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/SplashScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/splashscreen_screen/SplashScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/SplashScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/splashscreen_screen/SplashScreenView.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/ApplicationFontProvider.cpp</name>
@@ -689,6 +714,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/ScrollElmentBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/ServiceContainerBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/ServiceContainerBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/TextContainerHighBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/TextContainerHighBase.cpp</locationURI>
@@ -724,6 +754,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/passwordscreen_screen/PasswordScreenViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/SaverScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/saverscreen_screen/SaverScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/ServiceScreenViewBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/servicescreen_screen/ServiceScreenViewBase.cpp</locationURI>
@@ -734,9 +769,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/settingsscreen_screen/SettingsScreenViewBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/SplashScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/splashscreen_screen/SplashScreenViewBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/BitmapDatabase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Dark_Icons_Info_48.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Icons_Info_48.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_BNC_80x80_fb.cpp</name>

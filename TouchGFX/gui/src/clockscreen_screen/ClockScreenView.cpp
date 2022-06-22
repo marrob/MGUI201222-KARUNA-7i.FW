@@ -43,7 +43,7 @@ int mClockTickCount;
 
 ClockScreenView::ClockScreenView()
 {
-
+	
 }
 
 void ClockScreenView::setupScreen()

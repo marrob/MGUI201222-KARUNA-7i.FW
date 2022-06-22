@@ -10,8 +10,7 @@
 
 LogScreenViewBase::LogScreenViewBase() :
     buttonCallback(this, &LogScreenViewBase::buttonCallbackHandler),
-    flexButtonCallback(this, &LogScreenViewBase::flexButtonCallbackHandler),
-    updateItemCallback(this, &LogScreenViewBase::updateItemCallbackHandler)
+    flexButtonCallback(this, &LogScreenViewBase::flexButtonCallbackHandler)
 {
 
     touchgfx::CanvasWidgetRenderer::setupBuffer(canvasBuffer, CANVAS_BUFFER_SIZE);
@@ -61,26 +60,16 @@ LogScreenViewBase::LogScreenViewBase() :
     btnNextPage.setPosition(772, 505, 247, 90);
     btnNextPage.setAction(flexButtonCallback);
 
-    scrollLog.setPosition(0, 109, 1024, 325);
-    scrollLog.setHorizontal(false);
-    scrollLog.setCircular(false);
-    scrollLog.setEasingEquation(touchgfx::EasingEquations::backEaseOut);
-    scrollLog.setSwipeAcceleration(10);
-    scrollLog.setDragAcceleration(10);
-    scrollLog.setNumberOfItems(10);
-    scrollLog.setPadding(0, 0);
-    scrollLog.setSnapping(false);
-    scrollLog.setDrawableSize(101, 0);
-    scrollLog.setDrawables(scrollLogListItems, updateItemCallback);
-
-    lblElement_1.setPosition(16, 453, 489, 30);
-    lblElement_1.setColor(touchgfx::Color::getColorFromRGB(170, 170, 170));
-    lblElement_1.setLinespacing(0);
-    Unicode::snprintf(lblElement_1Buffer, LBLELEMENT_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_HXDW).getText());
-    lblElement_1.setWildcard(lblElement_1Buffer);
-    lblElement_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZK75));
+    lblDate.setPosition(16, 453, 489, 30);
+    lblDate.setVisible(false);
+    lblDate.setColor(touchgfx::Color::getColorFromRGB(170, 170, 170));
+    lblDate.setLinespacing(0);
+    Unicode::snprintf(lblDateBuffer, LBLDATE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_HXDW).getText());
+    lblDate.setWildcard(lblDateBuffer);
+    lblDate.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ZK75));
 
     container1.setPosition(552, 435, 467, 66);
+    container1.setVisible(false);
 
     chbxINFO.setXY(0, 11);
     chbxINFO.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
@@ -115,6 +104,42 @@ LogScreenViewBase::LogScreenViewBase() :
     lblERROR.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Y806));
     container1.add(lblERROR);
 
+    scrollableCont.setPosition(5, 101, 1014, 398);
+    scrollableCont.enableHorizontalScroll(false);
+    scrollableCont.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+
+    scrollElment_0.setXY(2, 2);
+    scrollableCont.add(scrollElment_0);
+
+    scrollElment_1.setXY(1, 103);
+    scrollableCont.add(scrollElment_1);
+
+    scrollElment_2.setXY(2, 204);
+    scrollableCont.add(scrollElment_2);
+
+    scrollElment_3.setXY(2, 305);
+    scrollableCont.add(scrollElment_3);
+
+    scrollElment_4.setXY(2, 406);
+    scrollableCont.add(scrollElment_4);
+
+    scrollElment_5.setXY(2, 507);
+    scrollableCont.add(scrollElment_5);
+
+    scrollElment_6.setXY(2, 608);
+    scrollableCont.add(scrollElment_6);
+
+    scrollElment_7.setXY(2, 709);
+    scrollableCont.add(scrollElment_7);
+
+    scrollElment_8.setXY(2, 810);
+    scrollableCont.add(scrollElment_8);
+
+    scrollElment_9.setXY(2, 911);
+    scrollableCont.add(scrollElment_9);
+    scrollableCont.setScrollbarsPermanentlyVisible();
+    scrollableCont.setScrollbarsVisible(false);
+
     add(__background);
     add(box1);
     add(btnPrevPage);
@@ -122,18 +147,23 @@ LogScreenViewBase::LogScreenViewBase() :
     add(lblTitle);
     add(boxWithBorder1);
     add(btnNextPage);
-    add(scrollLog);
-    add(lblElement_1);
+    add(lblDate);
     add(container1);
+    add(scrollableCont);
 }
 
 void LogScreenViewBase::setupScreen()
 {
-    scrollLog.initialize();
-    for (int i = 0; i < scrollLogListItems.getNumberOfDrawables(); i++)
-    {
-        scrollLogListItems[i].initialize();
-    }
+    scrollElment_0.initialize();
+    scrollElment_1.initialize();
+    scrollElment_2.initialize();
+    scrollElment_3.initialize();
+    scrollElment_4.initialize();
+    scrollElment_5.initialize();
+    scrollElment_6.initialize();
+    scrollElment_7.initialize();
+    scrollElment_8.initialize();
+    scrollElment_9.initialize();
 }
 
 void LogScreenViewBase::buttonCallbackHandler(const touchgfx::AbstractButton& src)
@@ -153,8 +183,8 @@ void LogScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButton
     {
         //ShowService
         //When btnBack clicked change screen to ServiceScreen
-        //Go to ServiceScreen with no screen transition
-        application().gotoServiceScreenScreenNoTransition();
+        //Go to ServiceScreen with screen transition towards West
+        application().gotoServiceScreenScreenSlideTransitionWest();
     }
     else if (&src == &btnNextPage)
     {
@@ -162,15 +192,5 @@ void LogScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButton
         //When btnNextPage clicked call virtual function
         //Call OnClickNextPage
         OnClickNextPage();
-    }
-}
-
-void LogScreenViewBase::updateItemCallbackHandler(touchgfx::DrawableListItemsInterface* items, int16_t containerIndex, int16_t itemIndex)
-{
-    if (items == &scrollLogListItems)
-    {
-        touchgfx::Drawable* d = items->getDrawable(containerIndex);
-        ScrollElment* cc = (ScrollElment*)d;
-        scrollLogUpdateItem(*cc, itemIndex);
     }
 }

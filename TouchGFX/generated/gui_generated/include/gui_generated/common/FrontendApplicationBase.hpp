@@ -17,13 +17,17 @@ public:
 
     virtual void changeToStartScreen()
     {
-        gotoMainScreenNoTransition();
+        gotoSplashScreenScreenNoTransition();
     }
 
     // Main
+    void gotoMainScreenSlideTransitionWest();
+
     void gotoMainScreenNoTransition();
 
-    void gotoMainScreenSlideTransitionWest();
+    void gotoMainScreenSlideTransitionEast();
+
+    void gotoMainScreenWipeTransitionWest();
 
     // OffScreen
     void gotoOffScreenScreenSlideTransitionWest();
@@ -31,22 +35,30 @@ public:
     // SettingsScreen
     void gotoSettingsScreenScreenSlideTransitionEast();
 
-    void gotoSettingsScreenScreenNoTransition();
+    void gotoSettingsScreenScreenSlideTransitionWest();
 
     // DisplayScreen
     void gotoDisplayScreenScreenSlideTransitionEast();
 
     // ServiceScreen
-    void gotoServiceScreenScreenNoTransition();
+    void gotoServiceScreenScreenSlideTransitionEast();
+
+    void gotoServiceScreenScreenSlideTransitionWest();
 
     // PasswordScreen
-    void gotoPasswordScreenScreenNoTransition();
+    void gotoPasswordScreenScreenSlideTransitionEast();
 
     // ClockScreen
-    void gotoClockScreenScreenNoTransition();
+    void gotoClockScreenScreenSlideTransitionEast();
 
     // LogScreen
-    void gotoLogScreenScreenNoTransition();
+    void gotoLogScreenScreenSlideTransitionEast();
+
+    // SplashScreen
+    void gotoSplashScreenScreenNoTransition();
+
+    // SaverScreen
+    void gotoSaverScreenScreenWipeTransitionEast();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -54,9 +66,13 @@ protected:
     Model& model;
 
     // Main
+    void gotoMainScreenSlideTransitionWestImpl();
+
     void gotoMainScreenNoTransitionImpl();
 
-    void gotoMainScreenSlideTransitionWestImpl();
+    void gotoMainScreenSlideTransitionEastImpl();
+
+    void gotoMainScreenWipeTransitionWestImpl();
 
     // OffScreen
     void gotoOffScreenScreenSlideTransitionWestImpl();
@@ -64,22 +80,30 @@ protected:
     // SettingsScreen
     void gotoSettingsScreenScreenSlideTransitionEastImpl();
 
-    void gotoSettingsScreenScreenNoTransitionImpl();
+    void gotoSettingsScreenScreenSlideTransitionWestImpl();
 
     // DisplayScreen
     void gotoDisplayScreenScreenSlideTransitionEastImpl();
 
     // ServiceScreen
-    void gotoServiceScreenScreenNoTransitionImpl();
+    void gotoServiceScreenScreenSlideTransitionEastImpl();
+
+    void gotoServiceScreenScreenSlideTransitionWestImpl();
 
     // PasswordScreen
-    void gotoPasswordScreenScreenNoTransitionImpl();
+    void gotoPasswordScreenScreenSlideTransitionEastImpl();
 
     // ClockScreen
-    void gotoClockScreenScreenNoTransitionImpl();
+    void gotoClockScreenScreenSlideTransitionEastImpl();
 
     // LogScreen
-    void gotoLogScreenScreenNoTransitionImpl();
+    void gotoLogScreenScreenSlideTransitionEastImpl();
+
+    // SplashScreen
+    void gotoSplashScreenScreenNoTransitionImpl();
+
+    // SaverScreen
+    void gotoSaverScreenScreenWipeTransitionEastImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP

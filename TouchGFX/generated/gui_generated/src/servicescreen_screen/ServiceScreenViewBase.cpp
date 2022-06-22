@@ -45,400 +45,32 @@ ServiceScreenViewBase::ServiceScreenViewBase() :
     boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     boxWithBorder1.setBorderSize(1);
 
-    scrlContainerService.setPosition(5, 100, 1014, 400);
-    scrlContainerService.enableHorizontalScroll(false);
-    scrlContainerService.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
+    lblServiceTitle.setPosition(0, 10, 1024, 80);
+    lblServiceTitle.setColor(touchgfx::Color::getColorFromRGB(128, 128, 128));
+    lblServiceTitle.setLinespacing(0);
+    lblServiceTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LJNE));
 
-    lblKarunaUptimeTitle.setPosition(27, 185, 295, 44);
-    lblKarunaUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblKarunaUptimeTitle.setLinespacing(0);
-    lblKarunaUptimeTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1O0C));
-    scrlContainerService.add(lblKarunaUptimeTitle);
+    scrollContService.setPosition(5, 100, 1014, 400);
+    scrollContService.enableHorizontalScroll(false);
+    scrollContService.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
-    lblKarunaUptime.setPosition(441, 185, 184, 44);
-    lblKarunaUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblKarunaUptime.setLinespacing(0);
-    Unicode::snprintf(lblKarunaUptimeBuffer, LBLKARUNAUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_N8QV).getText());
-    lblKarunaUptime.setWildcard(lblKarunaUptimeBuffer);
-    lblKarunaUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UULC));
-    scrlContainerService.add(lblKarunaUptime);
-
-    lblDASClockUptimeTitle.setPosition(27, 335, 326, 44);
-    lblDASClockUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockUptimeTitle.setLinespacing(0);
-    lblDASClockUptimeTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WW6U));
-    scrlContainerService.add(lblDASClockUptimeTitle);
-
-    lblClockUptime.setPosition(441, 335, 184, 44);
-    lblClockUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClockUptime.setLinespacing(0);
-    Unicode::snprintf(lblClockUptimeBuffer, LBLCLOCKUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ZZEL).getText());
-    lblClockUptime.setWildcard(lblClockUptimeBuffer);
-    lblClockUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_26LX));
-    scrlContainerService.add(lblClockUptime);
-
-    lblDASClockTempTitle_0.setPosition(27, 388, 399, 44);
-    lblDASClockTempTitle_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockTempTitle_0.setLinespacing(0);
-    lblDASClockTempTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LNP8));
-    scrlContainerService.add(lblDASClockTempTitle_0);
-
-    lblClocktemp_0.setPosition(441, 388, 184, 44);
-    lblClocktemp_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClocktemp_0.setLinespacing(0);
-    Unicode::snprintf(lblClocktemp_0Buffer, LBLCLOCKTEMP_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_OOXJ).getText());
-    lblClocktemp_0.setWildcard(lblClocktemp_0Buffer);
-    lblClocktemp_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3S8R));
-    scrlContainerService.add(lblClocktemp_0);
-
-    lblDASClockTempTitle_1.setPosition(27, 432, 399, 44);
-    lblDASClockTempTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockTempTitle_1.setLinespacing(0);
-    lblDASClockTempTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6D36));
-    scrlContainerService.add(lblDASClockTempTitle_1);
-
-    lblClocktemp_1.setPosition(441, 432, 184, 44);
-    lblClocktemp_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClocktemp_1.setLinespacing(0);
-    Unicode::snprintf(lblClocktemp_1Buffer, LBLCLOCKTEMP_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VO29).getText());
-    lblClocktemp_1.setWildcard(lblClocktemp_1Buffer);
-    lblClocktemp_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_MSR2));
-    scrlContainerService.add(lblClocktemp_1);
-
-    lblClocktemp_2.setPosition(441, 476, 184, 44);
-    lblClocktemp_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClocktemp_2.setLinespacing(0);
-    Unicode::snprintf(lblClocktemp_2Buffer, LBLCLOCKTEMP_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_4Y09).getText());
-    lblClocktemp_2.setWildcard(lblClocktemp_2Buffer);
-    lblClocktemp_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JPI8));
-    scrlContainerService.add(lblClocktemp_2);
-
-    lblDASClockCurrentTitle_0.setPosition(23, 533, 399, 44);
-    lblDASClockCurrentTitle_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockCurrentTitle_0.setLinespacing(0);
-    lblDASClockCurrentTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_SR1D));
-    scrlContainerService.add(lblDASClockCurrentTitle_0);
-
-    lblClockCurrent_0.setPosition(437, 533, 184, 44);
-    lblClockCurrent_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClockCurrent_0.setLinespacing(0);
-    Unicode::snprintf(lblClockCurrent_0Buffer, LBLCLOCKCURRENT_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_JC1W).getText());
-    lblClockCurrent_0.setWildcard(lblClockCurrent_0Buffer);
-    lblClockCurrent_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_XPFN));
-    scrlContainerService.add(lblClockCurrent_0);
-
-    lblDASClockCurrentTitle_1.setPosition(23, 577, 399, 44);
-    lblDASClockCurrentTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockCurrentTitle_1.setLinespacing(0);
-    lblDASClockCurrentTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5I8K));
-    scrlContainerService.add(lblDASClockCurrentTitle_1);
-
-    lblClockCurrent_1.setPosition(437, 577, 184, 44);
-    lblClockCurrent_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClockCurrent_1.setLinespacing(0);
-    Unicode::snprintf(lblClockCurrent_1Buffer, LBLCLOCKCURRENT_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VPCY).getText());
-    lblClockCurrent_1.setWildcard(lblClockCurrent_1Buffer);
-    lblClockCurrent_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D7C7));
-    scrlContainerService.add(lblClockCurrent_1);
-
-    lblDASClockCurrentTitle_2.setPosition(23, 621, 399, 44);
-    lblDASClockCurrentTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockCurrentTitle_2.setLinespacing(0);
-    lblDASClockCurrentTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_96H9));
-    scrlContainerService.add(lblDASClockCurrentTitle_2);
-
-    lblDASClockTempTitle_2.setPosition(27, 476, 399, 44);
-    lblDASClockTempTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockTempTitle_2.setLinespacing(0);
-    lblDASClockTempTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6FTC));
-    scrlContainerService.add(lblDASClockTempTitle_2);
-
-    lblClockCurrent_2.setPosition(437, 621, 184, 44);
-    lblClockCurrent_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblClockCurrent_2.setLinespacing(0);
-    Unicode::snprintf(lblClockCurrent_2Buffer, LBLCLOCKCURRENT_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_M3N5).getText());
-    lblClockCurrent_2.setWildcard(lblClockCurrent_2Buffer);
-    lblClockCurrent_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FZOH));
-    scrlContainerService.add(lblClockCurrent_2);
-
-    lblKarunaTitle.setPosition(10, 101, 294, 44);
-    lblKarunaTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblKarunaTitle.setLinespacing(0);
-    lblKarunaTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6I2J));
-    scrlContainerService.add(lblKarunaTitle);
-
-    lblDASClockTitle.setPosition(10, 241, 294, 44);
-    lblDASClockTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockTitle.setLinespacing(0);
-    lblDASClockTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3V0X));
-    scrlContainerService.add(lblDASClockTitle);
-
-    lblDASClockSupplyVoltageTitle.setPosition(23, 673, 399, 44);
-    lblDASClockSupplyVoltageTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockSupplyVoltageTitle.setLinespacing(0);
-    lblDASClockSupplyVoltageTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0OEF));
-    scrlContainerService.add(lblDASClockSupplyVoltageTitle);
-
-    lblDASClockSupplyVoltage.setPosition(437, 673, 184, 44);
-    lblDASClockSupplyVoltage.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockSupplyVoltage.setLinespacing(0);
-    Unicode::snprintf(lblDASClockSupplyVoltageBuffer, LBLDASCLOCKSUPPLYVOLTAGE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_O7GB).getText());
-    lblDASClockSupplyVoltage.setWildcard(lblDASClockSupplyVoltageBuffer);
-    lblDASClockSupplyVoltage.setTypedText(touchgfx::TypedText(T___SINGLEUSE_IO03));
-    scrlContainerService.add(lblDASClockSupplyVoltage);
-
-    line4.setPosition(40, 381, 920, 15);
-    line4Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
-    line4.setPainter(line4Painter);
-    line4.setStart(0, 0);
-    line4.setEnd(920, 1);
-    line4.setLineWidth(2);
-    line4.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line4);
-
-    line3.setPosition(40, 523, 920, 15);
-    line3Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
-    line3.setPainter(line3Painter);
-    line3.setStart(0, 0);
-    line3.setEnd(920, 1);
-    line3.setLineWidth(2);
-    line3.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line3);
-
-    line2.setPosition(40, 666, 920, 15);
-    line2Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
-    line2.setPainter(line2Painter);
-    line2.setStart(0, 0);
-    line2.setEnd(920, 1);
-    line2.setLineWidth(2);
-    line2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line2);
-
-    line1.setPosition(40, 235, 920, 15);
-    line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line1.setPainter(line1Painter);
-    line1.setStart(0, 0);
-    line1.setEnd(920, 1);
-    line1.setLineWidth(2);
-    line1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line1);
-
-    lblGUITitle.setPosition(10, 8, 294, 44);
-    lblGUITitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblGUITitle.setLinespacing(0);
-    lblGUITitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_F7DE));
-    scrlContainerService.add(lblGUITitle);
-
-    lblGUIFwVerTitle.setPosition(27, 52, 295, 44);
-    lblGUIFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblGUIFwVerTitle.setLinespacing(0);
-    lblGUIFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_HQS5));
-    scrlContainerService.add(lblGUIFwVerTitle);
-
-    lblGUIFwVersion.setPosition(382, 58, 596, 33);
-    lblGUIFwVersion.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblGUIFwVersion.setLinespacing(0);
-    lblGUIFwVersion.setAlpha(100);
-    lblGUIFwVersionBuffer[0] = 0;
-    lblGUIFwVersion.setWildcard(lblGUIFwVersionBuffer);
-    lblGUIFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_369R));
-    scrlContainerService.add(lblGUIFwVersion);
-
-    line0.setPosition(40, 97, 920, 15);
-    line0Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line0.setPainter(line0Painter);
-    line0.setStart(0, 0);
-    line0.setEnd(920, 1);
-    line0.setLineWidth(2);
-    line0.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line0);
-
-    lblKarunaFwVerTitle.setPosition(27, 145, 306, 44);
-    lblKarunaFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblKarunaFwVerTitle.setLinespacing(0);
-    lblKarunaFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_ALOO));
-    scrlContainerService.add(lblKarunaFwVerTitle);
-
-    lblDASFwVerTitle.setPosition(27, 289, 345, 44);
-    lblDASFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASFwVerTitle.setLinespacing(0);
-    lblDASFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LZC3));
-    scrlContainerService.add(lblDASFwVerTitle);
-
-    lblKarunaFwVersion.setPosition(382, 151, 596, 33);
-    lblKarunaFwVersion.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblKarunaFwVersion.setLinespacing(0);
-    lblKarunaFwVersion.setAlpha(100);
-    lblKarunaFwVersionBuffer[0] = 0;
-    lblKarunaFwVersion.setWildcard(lblKarunaFwVersionBuffer);
-    lblKarunaFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1IJL));
-    scrlContainerService.add(lblKarunaFwVersion);
-
-    lblDASClockFwVersion.setPosition(382, 295, 596, 33);
-    lblDASClockFwVersion.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblDASClockFwVersion.setLinespacing(0);
-    lblDASClockFwVersion.setAlpha(100);
-    lblDASClockFwVersionBuffer[0] = 0;
-    lblDASClockFwVersion.setWildcard(lblDASClockFwVersionBuffer);
-    lblDASClockFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5V6W));
-    scrlContainerService.add(lblDASClockFwVersion);
-
-    btnFactoryReset.setBoxWithBorderPosition(0, 0, 974, 90);
-    btnFactoryReset.setBorderSize(1);
-    btnFactoryReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
-    btnFactoryReset.setText(TypedText(T___SINGLEUSE_MABJ));
-    btnFactoryReset.setTextPosition(-20, 20, 974, 90);
-    btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnFactoryReset.setPosition(23, 1053, 974, 90);
-    btnFactoryReset.setAction(flexButtonCallback);
-    scrlContainerService.add(btnFactoryReset);
-
-    btnSoftReset.setBoxWithBorderPosition(0, 0, 974, 90);
-    btnSoftReset.setBorderSize(1);
-    btnSoftReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
-    btnSoftReset.setText(TypedText(T___SINGLEUSE_6ZDU));
-    btnSoftReset.setTextPosition(-20, 20, 974, 90);
-    btnSoftReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnSoftReset.setPosition(23, 949, 974, 90);
-    btnSoftReset.setAction(flexButtonCallback);
-    scrlContainerService.add(btnSoftReset);
-
-    line2_1.setPosition(40, 927, 920, 15);
-    line2_1Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
-    line2_1.setPainter(line2_1Painter);
-    line2_1.setStart(0, 0);
-    line2_1.setEnd(920, 1);
-    line2_1.setLineWidth(2);
-    line2_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line2_1);
-
-    lblErrorCount1.setXY(27, 788);
-    lblErrorCount1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorCount1.setLinespacing(0);
-    lblErrorCount1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CHHQ));
-    scrlContainerService.add(lblErrorCount1);
-
-    lblError1.setPosition(250, 788, 184, 44);
-    lblError1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblError1.setLinespacing(0);
-    Unicode::snprintf(lblError1Buffer, LBLERROR1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_PE5F).getText());
-    lblError1.setWildcard(lblError1Buffer);
-    lblError1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_NQJF));
-    scrlContainerService.add(lblError1);
-
-    lblErrorsTitle.setPosition(10, 734, 294, 44);
-    lblErrorsTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorsTitle.setLinespacing(0);
-    lblErrorsTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OA7N));
-    scrlContainerService.add(lblErrorsTitle);
-
-    lblErrorCount4.setXY(507, 788);
-    lblErrorCount4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorCount4.setLinespacing(0);
-    lblErrorCount4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_C0I2));
-    scrlContainerService.add(lblErrorCount4);
-
-    lblError4.setPosition(730, 788, 184, 44);
-    lblError4.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblError4.setLinespacing(0);
-    Unicode::snprintf(lblError4Buffer, LBLERROR4_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_5DU6).getText());
-    lblError4.setWildcard(lblError4Buffer);
-    lblError4.setTypedText(touchgfx::TypedText(T___SINGLEUSE_WZ7O));
-    scrlContainerService.add(lblError4);
-
-    lblErrorCount2.setXY(27, 832);
-    lblErrorCount2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorCount2.setLinespacing(0);
-    lblErrorCount2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_D6QB));
-    scrlContainerService.add(lblErrorCount2);
-
-    lblError2.setPosition(250, 832, 184, 44);
-    lblError2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblError2.setLinespacing(0);
-    Unicode::snprintf(lblError2Buffer, LBLERROR2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XHJD).getText());
-    lblError2.setWildcard(lblError2Buffer);
-    lblError2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4KV2));
-    scrlContainerService.add(lblError2);
-
-    lblErrorCount5.setXY(507, 832);
-    lblErrorCount5.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorCount5.setLinespacing(0);
-    lblErrorCount5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9RS0));
-    scrlContainerService.add(lblErrorCount5);
-
-    lblError5.setPosition(730, 832, 184, 44);
-    lblError5.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblError5.setLinespacing(0);
-    Unicode::snprintf(lblError5Buffer, LBLERROR5_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_R0CF).getText());
-    lblError5.setWildcard(lblError5Buffer);
-    lblError5.setTypedText(touchgfx::TypedText(T___SINGLEUSE_38ZB));
-    scrlContainerService.add(lblError5);
-
-    lblErrorCount3.setXY(27, 876);
-    lblErrorCount3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorCount3.setLinespacing(0);
-    lblErrorCount3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QK7M));
-    scrlContainerService.add(lblErrorCount3);
-
-    lblError3.setPosition(250, 876, 184, 44);
-    lblError3.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblError3.setLinespacing(0);
-    Unicode::snprintf(lblError3Buffer, LBLERROR3_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_5MBT).getText());
-    lblError3.setWildcard(lblError3Buffer);
-    lblError3.setTypedText(touchgfx::TypedText(T___SINGLEUSE_K2VK));
-    scrlContainerService.add(lblError3);
-
-    lblErrorCount6.setXY(507, 876);
-    lblErrorCount6.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblErrorCount6.setLinespacing(0);
-    lblErrorCount6.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Y3LD));
-    scrlContainerService.add(lblErrorCount6);
-
-    lblError6.setPosition(730, 876, 184, 44);
-    lblError6.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
-    lblError6.setLinespacing(0);
-    Unicode::snprintf(lblError6Buffer, LBLERROR6_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_RF2F).getText());
-    lblError6.setWildcard(lblError6Buffer);
-    lblError6.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OEZ5));
-    scrlContainerService.add(lblError6);
-
-    line1_1.setPosition(40, 725, 920, 15);
-    line1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line1_1.setPainter(line1_1Painter);
-    line1_1.setStart(0, 0);
-    line1_1.setEnd(920, 1);
-    line1_1.setLineWidth(2);
-    line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line1_1);
-
-    line1_1_1.setPosition(40, 1185, 920, 15);
-    line1_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line1_1_1.setPainter(line1_1_1Painter);
-    line1_1_1.setStart(0, 0);
-    line1_1_1.setEnd(920, 1);
-    line1_1_1.setLineWidth(2);
-    line1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrlContainerService.add(line1_1_1);
-    scrlContainerService.setScrollbarsPermanentlyVisible();
-    scrlContainerService.setScrollbarsVisible(false);
-
-    textArea1.setPosition(0, 10, 1024, 80);
-    textArea1.setColor(touchgfx::Color::getColorFromRGB(128, 128, 128));
-    textArea1.setLinespacing(0);
-    textArea1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_LJNE));
+    serviceControl.setXY(-5, 0);
+    scrollContService.add(serviceControl);
+    scrollContService.setScrollbarsPermanentlyVisible();
+    scrollContService.setScrollbarsVisible(false);
 
     add(__background);
     add(box1);
     add(btnBack);
     add(btnLog);
     add(boxWithBorder1);
-    add(scrlContainerService);
-    add(textArea1);
+    add(lblServiceTitle);
+    add(scrollContService);
 }
 
 void ServiceScreenViewBase::setupScreen()
 {
-
+    serviceControl.initialize();
 }
 
 void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)
@@ -447,28 +79,14 @@ void ServiceScreenViewBase::flexButtonCallbackHandler(const touchgfx::AbstractBu
     {
         //ShowSettings
         //When btnBack clicked change screen to SettingsScreen
-        //Go to SettingsScreen with no screen transition
-        application().gotoSettingsScreenScreenNoTransition();
+        //Go to SettingsScreen with screen transition towards West
+        application().gotoSettingsScreenScreenSlideTransitionWest();
     }
     else if (&src == &btnLog)
     {
         //ShowLog
         //When btnLog clicked change screen to LogScreen
-        //Go to LogScreen with no screen transition
-        application().gotoLogScreenScreenNoTransition();
-    }
-    else if (&src == &btnFactoryReset)
-    {
-        //FactoryReset
-        //When btnFactoryReset clicked call virtual function
-        //Call OnClickFactoryReset
-        OnClickFactoryReset();
-    }
-    else if (&src == &btnSoftReset)
-    {
-        //SoftReset
-        //When btnSoftReset clicked call virtual function
-        //Call OnClickSoftReset
-        OnClickSoftReset();
+        //Go to LogScreen with screen transition towards East
+        application().gotoLogScreenScreenSlideTransitionEast();
     }
 }

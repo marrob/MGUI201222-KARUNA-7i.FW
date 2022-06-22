@@ -6,6 +6,7 @@ int mDisplayTickCount;
 
 uint32_t simTimetoOff;
 static uint32_t simOffTimmer;
+static uint8_t simEnableScreenSaver;
 
 uint8_t DisplayScreenView::GuiItfSetBacklight(uint8_t percent)
 {
@@ -34,6 +35,15 @@ uint32_t DisplayScreenView::GuiItfGetRemainingTimeToOff(void)
 	return simTimetoOff;
 }
 
+void DisplayScreenView::GuiItfSetScreenSaverEnable(uint8_t isSet)
+{
+	simEnableScreenSaver = isSet;
+}
+uint8_t DisplayScreenView::GuiItfGetScreenSaverEnable( )
+{
+	return simEnableScreenSaver ;
+}
+
 #else
 extern "C"
 {
@@ -45,9 +55,11 @@ extern "C"
 	//Backlight off timer
 	void GuiItfSetBackLightAutoOff(uint32_t sec);
 	uint32_t GuiItfGetBacklightAutoOff(void);
-	uint32_t GuiItfGetRemainingTimeToOff(void);
+	uint32_t GuiItfGetRemainingTimeToOff(void); 
 
-
+	//ScreenSaver
+	GuiItfSetScreenSaverEnable(uint8_t isSet);
+	uint8_t GuiItfGetScreenSaverEnable();
 }
 #endif
 
@@ -64,6 +76,8 @@ void DisplayScreenView::setupScreen()
 	sldrBrightnes.setNewValueCallback(sliderValueChangedCallback);
 	sldrBrightnes.setValue(GuiItfGetBacklight());
 	GetOfTimerValue();
+
+	chbxEnableScreenSaver.forceState(GuiItfGetScreenSaverEnable());
 }
 
 void DisplayScreenView::tearDownScreen()
@@ -118,6 +132,11 @@ void DisplayScreenView::rbtnSelect60OffTmr()
 void DisplayScreenView::rbtnSelect120OffTmr()
 {
 	GuiItfSetBackLightAutoOff(120 * 60);
+}
+
+void DisplayScreenView::chbxChangeEnableScreen()
+{
+	GuiItfSetScreenSaverEnable(chbxEnableScreenSaver.getState());
 }
 
 void DisplayScreenView::GetOfTimerValue()
