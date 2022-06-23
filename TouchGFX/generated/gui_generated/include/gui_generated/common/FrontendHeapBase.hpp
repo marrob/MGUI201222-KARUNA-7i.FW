@@ -35,6 +35,8 @@
 #include <gui/splashscreen_screen/SplashScreenPresenter.hpp>
 #include <gui/saverscreen_screen/SaverScreenView.hpp>
 #include <gui/saverscreen_screen/SaverScreenPresenter.hpp>
+#include <gui/debugscreen_screen/DebugScreenView.hpp>
+#include <gui/debugscreen_screen/DebugScreenPresenter.hpp>
 
 
 /**
@@ -67,7 +69,8 @@ public:
             touchgfx::meta::TypeList< LogScreenView,
             touchgfx::meta::TypeList< SplashScreenView,
             touchgfx::meta::TypeList< SaverScreenView,
-            touchgfx::meta::Nil > > > > > > > > >
+            touchgfx::meta::TypeList< DebugScreenView,
+            touchgfx::meta::Nil > > > > > > > > > >
             > GeneratedViewTypes;
 
     /**
@@ -89,7 +92,8 @@ public:
             touchgfx::meta::TypeList< LogScreenPresenter,
             touchgfx::meta::TypeList< SplashScreenPresenter,
             touchgfx::meta::TypeList< SaverScreenPresenter,
-            touchgfx::meta::Nil > > > > > > > > >
+            touchgfx::meta::TypeList< DebugScreenPresenter,
+            touchgfx::meta::Nil > > > > > > > > > >
             > GeneratedPresenterTypes;
 
     /**

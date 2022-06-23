@@ -2176,7 +2176,7 @@
                 "Name": "serviceControl",
                 "X": -5,
                 "Width": 1024,
-                "Height": 1082,
+                "Height": 1195,
                 "CustomContainerDefinitionName": "ServiceContainer"
               }
             ]
@@ -4446,6 +4446,1178 @@
             }
           }
         ]
+      },
+      {
+        "Name": "DebugScreen",
+        "CanvasBufferSize": 15360,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "box1",
+            "Width": 1024,
+            "Height": 600
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnBack",
+            "X": 5,
+            "Y": 505,
+            "Width": 500,
+            "Height": 90,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "X": -20,
+                "Y": 20,
+                "TextId": "__SingleUse_830Q",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "ColorPressed": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                }
+              },
+              {
+                "Type": "ImageButtonStyle",
+                "X": 20,
+                "Y": 5,
+                "ImageReleased": "GoBack.png",
+                "ImagePressed": "GoBack.png"
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 500,
+                "Height": 90,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 1,
+                "ColorPressed": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "ColorBorderReleased": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "ColorBorderPressed": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                }
+              }
+            ]
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "X": 5,
+            "Y": 100,
+            "Width": 1019,
+            "Height": 400,
+            "Color": {
+              "Red": 25,
+              "Green": 25,
+              "Blue": 25
+            },
+            "BorderColor": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "BorderSize": 1
+          },
+          {
+            "Type": "Container",
+            "Name": "containerDO",
+            "X": 380,
+            "Y": 113,
+            "Width": 360,
+            "Height": 380,
+            "Components": [
+              {
+                "Type": "TextArea",
+                "Name": "lblDI_1",
+                "X": 20,
+                "Y": 7,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_SBEA",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDI1",
+                "X": 20,
+                "Y": 54,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_PW3D",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_2_3",
+                "X": 20,
+                "Y": 100,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_48NN",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_1_3",
+                "X": 20,
+                "Y": 147,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_QI35",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_2_2",
+                "X": 20,
+                "Y": 240,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_18PO",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_2_1_2",
+                "X": 20,
+                "Y": 286,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_IMDO",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_1_1_2",
+                "X": 20,
+                "Y": 333,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_GK7P",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_3_2",
+                "X": 20,
+                "Y": 193,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_TA5O",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut0",
+                "X": 146,
+                "Y": 6,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut1",
+                "X": 146,
+                "Y": 52,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut2",
+                "X": 146,
+                "Y": 99,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut3",
+                "X": 146,
+                "Y": 148,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut4",
+                "X": 146,
+                "Y": 194,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut5",
+                "X": 146,
+                "Y": 241,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut6",
+                "X": 146,
+                "Y": 287,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              },
+              {
+                "Type": "ToggleButton",
+                "Name": "tbOut7",
+                "X": 146,
+                "Y": 334,
+                "Width": 128,
+                "Height": 38,
+                "Pressed": "__designer\\Dark_Togglebars_Toggle_large_button_On.png",
+                "Released": "__designer\\Dark_Togglebars_Toggle_large_button_Off.png"
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "containerAI",
+            "X": 732,
+            "Y": 108,
+            "Width": 263,
+            "Height": 385,
+            "Components": [
+              {
+                "Type": "TextArea",
+                "Name": "lblDI_1_1",
+                "X": 8,
+                "Y": 65,
+                "Width": 72,
+                "Height": 40,
+                "TextId": "__SingleUse_OB5W",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDI_1_1_1",
+                "X": 8,
+                "Y": 138,
+                "Width": 72,
+                "Height": 40,
+                "TextId": "__SingleUse_RZ96",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDI_1_1_2",
+                "X": 8,
+                "Y": 210,
+                "Width": 72,
+                "Height": 40,
+                "TextId": "__SingleUse_VZ2D",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDI_1_1_3",
+                "X": 8,
+                "Y": 285,
+                "Width": 72,
+                "Height": 40,
+                "TextId": "__SingleUse_MGJ6",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              }
+            ]
+          },
+          {
+            "Type": "Container",
+            "Name": "containerDI",
+            "X": 17,
+            "Y": 113,
+            "Width": 361,
+            "Height": 371,
+            "Components": [
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0",
+                "X": 5,
+                "Y": 5,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_MKUD",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED0",
+                "X": 114,
+                "Y": 5,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1",
+                "X": 5,
+                "Y": 52,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_WVNP",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED1",
+                "X": 114,
+                "Y": 52,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_2",
+                "X": 5,
+                "Y": 98,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_X2HN",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED2",
+                "X": 114,
+                "Y": 98,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_1",
+                "X": 5,
+                "Y": 145,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_MH5A",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED3",
+                "X": 114,
+                "Y": 145,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_3",
+                "X": 5,
+                "Y": 191,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_ETIW",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED4",
+                "X": 114,
+                "Y": 191,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_2",
+                "X": 5,
+                "Y": 238,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_9PXR",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED5",
+                "X": 114,
+                "Y": 238,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_2_1",
+                "X": 5,
+                "Y": 284,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_VIJT",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED6",
+                "X": 114,
+                "Y": 284,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_1_1",
+                "X": 5,
+                "Y": 331,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_IZJG",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED7",
+                "X": 114,
+                "Y": 331,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_4",
+                "X": 168,
+                "Y": 5,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_JL2J",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED8",
+                "X": 281,
+                "Y": 5,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_3",
+                "X": 168,
+                "Y": 52,
+                "Width": 74,
+                "Height": 40,
+                "TextId": "__SingleUse_HBYJ",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED9",
+                "X": 281,
+                "Y": 52,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_2_2",
+                "X": 168,
+                "Y": 98,
+                "Width": 93,
+                "Height": 40,
+                "TextId": "__SingleUse_IV9O",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED10",
+                "X": 281,
+                "Y": 98,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_1_2",
+                "X": 168,
+                "Y": 145,
+                "Width": 91,
+                "Height": 40,
+                "TextId": "__SingleUse_XZYJ",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED11",
+                "X": 281,
+                "Y": 145,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_3_1",
+                "X": 168,
+                "Y": 191,
+                "Width": 93,
+                "Height": 40,
+                "TextId": "__SingleUse_Y37K",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED12",
+                "X": 281,
+                "Y": 191,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_2_1",
+                "X": 168,
+                "Y": 238,
+                "Width": 93,
+                "Height": 40,
+                "TextId": "__SingleUse_05DQ",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED13",
+                "X": 281,
+                "Y": 238,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_2_1_1",
+                "X": 168,
+                "Y": 284,
+                "Width": 93,
+                "Height": 40,
+                "TextId": "__SingleUse_F24O",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED14",
+                "X": 281,
+                "Y": 284,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              },
+              {
+                "Type": "TextArea",
+                "Name": "lblDO0_1_1_1_1",
+                "X": 168,
+                "Y": 331,
+                "Width": 93,
+                "Height": 40,
+                "TextId": "__SingleUse_M3H7",
+                "TextRotation": "0",
+                "Color": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "AutoSize": true
+              },
+              {
+                "Type": "Circle",
+                "Name": "circLED15",
+                "X": 281,
+                "Y": 331,
+                "Width": 40,
+                "Height": 40,
+                "Color": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
+                "CapPrecision": "Butt"
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblAI0",
+            "X": 887,
+            "Y": 171,
+            "Width": 117,
+            "Height": 50,
+            "TextId": "__SingleUse_VX4C",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_94Q1",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblAI1",
+            "X": 887,
+            "Y": 244,
+            "Width": 117,
+            "Height": 42,
+            "TextId": "__SingleUse_984M",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_82GT",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblAI2",
+            "X": 887,
+            "Y": 316,
+            "Width": 117,
+            "Height": 42,
+            "TextId": "__SingleUse_SP6U",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_B78P",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblAI3",
+            "X": 887,
+            "Y": 391,
+            "Width": 117,
+            "Height": 42,
+            "TextId": "__SingleUse_G3O6",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_SX6S",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          },
+          {
+            "Type": "Line",
+            "Name": "line1",
+            "X": 365,
+            "Y": 121,
+            "Width": 15,
+            "Height": 364,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 177,
+            "StartX": 1,
+            "StartY": 5,
+            "EndX": 1,
+            "EndY": 400,
+            "LineWidth": 1,
+            "LineEndingStyle": "Round"
+          },
+          {
+            "Type": "Line",
+            "Name": "line1_1",
+            "X": 699,
+            "Y": 120,
+            "Width": 15,
+            "Height": 364,
+            "Color": {
+              "Red": 255,
+              "Green": 255,
+              "Blue": 255
+            },
+            "Alpha": 177,
+            "StartX": 1,
+            "StartY": 5,
+            "EndX": 1,
+            "EndY": 400,
+            "LineWidth": 1,
+            "LineEndingStyle": "Round"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblServiceTitle",
+            "Y": 10,
+            "Width": 1024,
+            "Height": 80,
+            "TextId": "__SingleUse_MHPH",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 128,
+              "Green": 128,
+              "Blue": 128
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "ShowService",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnBack"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "ServiceScreen"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_0",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut0"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_0"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_1",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut1"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_1"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_2",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut2"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_2"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_3",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut3"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_3"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_4",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut4"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_4"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_5",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut5"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_5"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_6",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut6"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_6"
+            }
+          },
+          {
+            "InteractionName": "OnClickDO_7",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "tbOut7"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnClickDO_7"
+            }
+          }
+        ]
       }
     ],
     "CustomContainerDefinitions": [
@@ -4599,7 +5771,7 @@
       {
         "Name": "ServiceContainer",
         "Width": 1024,
-        "Height": 1082,
+        "Height": 1195,
         "Components": [
           {
             "Type": "TextArea",
@@ -5138,7 +6310,7 @@
             "Type": "FlexButton",
             "Name": "btnFactoryReset",
             "X": 28,
-            "Y": 933,
+            "Y": 1024,
             "Width": 974,
             "Height": 90,
             "ButtonTrigger": {
@@ -5190,7 +6362,7 @@
             "Type": "FlexButton",
             "Name": "btnSoftReset",
             "X": 28,
-            "Y": 829,
+            "Y": 920,
             "Width": 974,
             "Height": 90,
             "ButtonTrigger": {
@@ -5242,7 +6414,7 @@
             "Type": "Line",
             "Name": "line2_1",
             "X": 45,
-            "Y": 1049,
+            "Y": 1140,
             "Width": 920,
             "Height": 15,
             "Color": {
@@ -5432,6 +6604,58 @@
             "EndY": 1,
             "LineWidth": 2,
             "LineEndingStyle": "Butt"
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnDebug",
+            "X": 28,
+            "Y": 815,
+            "Width": 974,
+            "Height": 90,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "X": -20,
+                "Y": 20,
+                "TextId": "__SingleUse_PVRW",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "ColorPressed": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                }
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 974,
+                "Height": 90,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 1,
+                "ColorPressed": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "ColorBorderReleased": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "ColorBorderPressed": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                }
+              }
+            ]
           }
         ],
         "Interactions": [
@@ -5456,8 +6680,59 @@
               "Type": "ActionCustom",
               "FunctionName": "OnClickFactoryReset"
             }
+          },
+          {
+            "InteractionName": "ShowDebug",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnDebug"
+            },
+            "Action": {
+              "Type": "ActionGotoScreen",
+              "ScreenTransitionType": "ScreenTransitionNone",
+              "ActionComponent": "DebugScreen"
+            }
           }
         ]
+      },
+      {
+        "Name": "DIContainer",
+        "Width": 144,
+        "Height": 40,
+        "Components": [
+          {
+            "Type": "TextArea",
+            "Name": "lblDO",
+            "Width": 91,
+            "Height": 40,
+            "TextId": "__SingleUse_39RD",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "Circle",
+            "Name": "circLed",
+            "X": 98,
+            "Width": 40,
+            "Height": 40,
+            "Color": {
+              "Red": 150,
+              "Green": 118,
+              "Blue": 73
+            },
+            "CenterX": 20,
+            "CenterY": 20,
+            "Radius": 20,
+            "EndAngle": 360,
+            "CapPrecision": "Butt"
+          }
+        ],
+        "Interactions": []
       }
     ],
     "Name": "MGUI201222-KARUNA-7i.FW",

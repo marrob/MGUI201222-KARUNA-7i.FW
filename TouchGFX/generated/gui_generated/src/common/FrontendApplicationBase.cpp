@@ -29,6 +29,8 @@
 #include <gui/splashscreen_screen/SplashScreenPresenter.hpp>
 #include <gui/saverscreen_screen/SaverScreenView.hpp>
 #include <gui/saverscreen_screen/SaverScreenPresenter.hpp>
+#include <gui/debugscreen_screen/DebugScreenView.hpp>
+#include <gui/debugscreen_screen/DebugScreenPresenter.hpp>
 
 using namespace touchgfx;
 
@@ -167,6 +169,17 @@ void FrontendApplicationBase::gotoServiceScreenScreenSlideTransitionWestImpl()
     touchgfx::makeTransition<ServiceScreenView, ServiceScreenPresenter, touchgfx::SlideTransition<WEST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }
 
+void FrontendApplicationBase::gotoServiceScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoServiceScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoServiceScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<ServiceScreenView, ServiceScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
 // PasswordScreen
 
 void FrontendApplicationBase::gotoPasswordScreenScreenSlideTransitionEast()
@@ -230,4 +243,17 @@ void FrontendApplicationBase::gotoSaverScreenScreenWipeTransitionEast()
 void FrontendApplicationBase::gotoSaverScreenScreenWipeTransitionEastImpl()
 {
     touchgfx::makeTransition<SaverScreenView, SaverScreenPresenter, touchgfx::WipeTransition<EAST>, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
+}
+
+// DebugScreen
+
+void FrontendApplicationBase::gotoDebugScreenScreenNoTransition()
+{
+    transitionCallback = touchgfx::Callback<FrontendApplicationBase>(this, &FrontendApplication::gotoDebugScreenScreenNoTransitionImpl);
+    pendingScreenTransitionCallback = &transitionCallback;
+}
+
+void FrontendApplicationBase::gotoDebugScreenScreenNoTransitionImpl()
+{
+    touchgfx::makeTransition<DebugScreenView, DebugScreenPresenter, touchgfx::NoTransition, Model >(&currentScreen, &currentPresenter, frontendHeap, &currentTransition, &model);
 }

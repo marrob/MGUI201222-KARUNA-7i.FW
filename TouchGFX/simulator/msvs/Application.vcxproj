@@ -59,6 +59,11 @@
     <ClCompile Include="..\..\gui\src\saverscreen_screen\SaverScreenPresenter.cpp"/>
     <ClCompile Include="..\..\gui\src\saverscreen_screen\SaverScreenView.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\saverscreen_screen\SaverScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\debugscreen_screen\DebugScreenPresenter.cpp"/>
+    <ClCompile Include="..\..\gui\src\debugscreen_screen\DebugScreenView.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\debugscreen_screen\DebugScreenViewBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\DIContainer.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\DIContainerBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -247,6 +252,11 @@
     <ClInclude Include="..\..\gui\include\gui\saverscreen_screen\SaverScreenPresenter.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\saverscreen_screen\SaverScreenView.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\saverscreen_screen\SaverScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\debugscreen_screen\DebugScreenPresenter.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\debugscreen_screen\DebugScreenView.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\debugscreen_screen\DebugScreenViewBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\DIContainer.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\DIContainerBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

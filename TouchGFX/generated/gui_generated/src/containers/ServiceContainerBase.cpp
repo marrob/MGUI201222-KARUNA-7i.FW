@@ -9,7 +9,7 @@ ServiceContainerBase::ServiceContainerBase() :
     flexButtonCallback(this, &ServiceContainerBase::flexButtonCallbackHandler)
 {
     setWidth(1024);
-    setHeight(1082);
+    setHeight(1195);
     lblKarunaUptimeTitle.setPosition(32, 255, 295, 44);
     lblKarunaUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaUptimeTitle.setLinespacing(0);
@@ -210,7 +210,7 @@ ServiceContainerBase::ServiceContainerBase() :
     btnFactoryReset.setText(TypedText(T___SINGLEUSE_GKKS));
     btnFactoryReset.setTextPosition(-17, 20, 974, 90);
     btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnFactoryReset.setPosition(28, 933, 974, 90);
+    btnFactoryReset.setPosition(28, 1024, 974, 90);
     btnFactoryReset.setAction(flexButtonCallback);
 
     btnSoftReset.setBoxWithBorderPosition(0, 0, 974, 90);
@@ -219,10 +219,10 @@ ServiceContainerBase::ServiceContainerBase() :
     btnSoftReset.setText(TypedText(T___SINGLEUSE_T381));
     btnSoftReset.setTextPosition(-20, 20, 974, 90);
     btnSoftReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnSoftReset.setPosition(28, 829, 974, 90);
+    btnSoftReset.setPosition(28, 920, 974, 90);
     btnSoftReset.setAction(flexButtonCallback);
 
-    line2_1.setPosition(45, 1049, 920, 15);
+    line2_1.setPosition(45, 1140, 920, 15);
     line2_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line2_1.setPainter(line2_1Painter);
     line2_1.setStart(0, 0);
@@ -294,6 +294,15 @@ ServiceContainerBase::ServiceContainerBase() :
     line1_1_1.setLineWidth(2);
     line1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
+    btnDebug.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnDebug.setBorderSize(1);
+    btnDebug.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
+    btnDebug.setText(TypedText(T___SINGLEUSE_PVRW));
+    btnDebug.setTextPosition(-20, 20, 974, 90);
+    btnDebug.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnDebug.setPosition(28, 815, 974, 90);
+    btnDebug.setAction(flexButtonCallback);
+
     add(lblKarunaUptimeTitle);
     add(lblKarunaUptime);
     add(lblDASClockUptimeTitle);
@@ -338,6 +347,7 @@ ServiceContainerBase::ServiceContainerBase() :
     add(lblKarunaUartErrorCnt);
     add(line1_1);
     add(line1_1_1);
+    add(btnDebug);
 }
 
 void ServiceContainerBase::initialize()
@@ -360,6 +370,13 @@ void ServiceContainerBase::flexButtonCallbackHandler(const touchgfx::AbstractBut
         //When btnSoftReset clicked call virtual function
         //Call OnClickSoftReset
         OnClickSoftReset();
+    }
+    else if (&src == &btnDebug)
+    {
+        //ShowDebug
+        //When btnDebug clicked change screen to DebugScreen
+        //Go to DebugScreen with no screen transition
+        application().gotoDebugScreenScreenNoTransition();
     }
 }
 

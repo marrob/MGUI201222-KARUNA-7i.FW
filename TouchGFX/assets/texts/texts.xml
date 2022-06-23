@@ -112,6 +112,126 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_PVRW" Alignment="Center" TypographyId="Default">
+        <Translation Language="GB">Show Debug screen</Translation>
+      </Text>
+      <Text Id="__SingleUse_MHPH" Alignment="Center" TypographyId="Value">
+        <Translation Language="GB">Debug menu</Translation>
+      </Text>
+      <Text Id="__SingleUse_SX6S" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_G3O6" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_MGJ6" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">AI_3</Translation>
+      </Text>
+      <Text Id="__SingleUse_B78P" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_SP6U" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_VZ2D" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">AI_2</Translation>
+      </Text>
+      <Text Id="__SingleUse_82GT" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_984M" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_RZ96" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">AI_1</Translation>
+      </Text>
+      <Text Id="__SingleUse_94Q1" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_VX4C" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_OB5W" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">AI_0</Translation>
+      </Text>
+      <Text Id="__SingleUse_GK7P" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_7</Translation>
+      </Text>
+      <Text Id="__SingleUse_IMDO" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_6</Translation>
+      </Text>
+      <Text Id="__SingleUse_18PO" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_5</Translation>
+      </Text>
+      <Text Id="__SingleUse_TA5O" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_4</Translation>
+      </Text>
+      <Text Id="__SingleUse_QI35" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_3</Translation>
+      </Text>
+      <Text Id="__SingleUse_48NN" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_2</Translation>
+      </Text>
+      <Text Id="__SingleUse_PW3D" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_1</Translation>
+      </Text>
+      <Text Id="__SingleUse_SBEA" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_0</Translation>
+      </Text>
+      <Text Id="__SingleUse_M3H7" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_15</Translation>
+      </Text>
+      <Text Id="__SingleUse_F24O" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_14</Translation>
+      </Text>
+      <Text Id="__SingleUse_05DQ" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_13</Translation>
+      </Text>
+      <Text Id="__SingleUse_Y37K" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_12</Translation>
+      </Text>
+      <Text Id="__SingleUse_XZYJ" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_11</Translation>
+      </Text>
+      <Text Id="__SingleUse_IV9O" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_10</Translation>
+      </Text>
+      <Text Id="__SingleUse_HBYJ" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_9</Translation>
+      </Text>
+      <Text Id="__SingleUse_JL2J" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_8</Translation>
+      </Text>
+      <Text Id="__SingleUse_IZJG" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_7</Translation>
+      </Text>
+      <Text Id="__SingleUse_VIJT" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_6</Translation>
+      </Text>
+      <Text Id="__SingleUse_9PXR" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_5</Translation>
+      </Text>
+      <Text Id="__SingleUse_ETIW" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_4</Translation>
+      </Text>
+      <Text Id="__SingleUse_MH5A" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_3</Translation>
+      </Text>
+      <Text Id="__SingleUse_X2HN" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_2</Translation>
+      </Text>
+      <Text Id="__SingleUse_WVNP" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_1</Translation>
+      </Text>
+      <Text Id="__SingleUse_39RD" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DO_0</Translation>
+      </Text>
+      <Text Id="__SingleUse_MKUD" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">DI_0</Translation>
+      </Text>
+      <Text Id="__SingleUse_830Q" Alignment="Right" TypographyId="Default">
+        <Translation Language="GB">Back</Translation>
+      </Text>
       <Text Id="__SingleUse_03EE" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">Enable Screensaver [1 min]</Translation>
       </Text>

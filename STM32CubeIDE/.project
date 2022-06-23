@@ -454,6 +454,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/common/FrontendApplication.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/DIContainer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/DIContainer.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/ScrollElment.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/ScrollElment.cpp</locationURI>
@@ -472,6 +477,16 @@
 			<name>Application/User/gui/textContainer.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/textContainer.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DebugScreenPresenter.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/debugscreen_screen/DebugScreenPresenter.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/gui/DebugScreenView.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/debugscreen_screen/DebugScreenView.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/gui/DisplayScreenPresenter.cpp</name>
@@ -709,6 +724,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/common/FrontendApplicationBase.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/DIContainerBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/DIContainerBase.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/ScrollElmentBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/ScrollElmentBase.cpp</locationURI>
@@ -727,6 +747,11 @@
 			<name>Application/User/generated/textContainerBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/textContainerBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/DebugScreenViewBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/debugscreen_screen/DebugScreenViewBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/DisplayScreenViewBase.cpp</name>
@@ -782,6 +807,16 @@
 			<name>Application/User/generated/image_Dark_Icons_Info_48.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Icons_Info_48.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Dark_Togglebars_Toggle_large_button_Off.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Togglebars_Toggle_large_button_Off.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Dark_Togglebars_Toggle_large_button_On.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Togglebars_Toggle_large_button_On.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_BNC_80x80_fb.cpp</name>

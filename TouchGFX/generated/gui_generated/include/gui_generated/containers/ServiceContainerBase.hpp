@@ -91,6 +91,7 @@ protected:
     touchgfx::PainterRGB565 line1_1Painter;
     touchgfx::Line line1_1_1;
     touchgfx::PainterRGB565 line1_1_1Painter;
+    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnDebug;
 
     /*
      * Wildcard Buffers

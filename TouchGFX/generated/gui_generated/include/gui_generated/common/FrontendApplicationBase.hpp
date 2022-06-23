@@ -45,6 +45,8 @@ public:
 
     void gotoServiceScreenScreenSlideTransitionWest();
 
+    void gotoServiceScreenScreenNoTransition();
+
     // PasswordScreen
     void gotoPasswordScreenScreenSlideTransitionEast();
 
@@ -59,6 +61,9 @@ public:
 
     // SaverScreen
     void gotoSaverScreenScreenWipeTransitionEast();
+
+    // DebugScreen
+    void gotoDebugScreenScreenNoTransition();
 
 protected:
     touchgfx::Callback<FrontendApplicationBase> transitionCallback;
@@ -90,6 +95,8 @@ protected:
 
     void gotoServiceScreenScreenSlideTransitionWestImpl();
 
+    void gotoServiceScreenScreenNoTransitionImpl();
+
     // PasswordScreen
     void gotoPasswordScreenScreenSlideTransitionEastImpl();
 
@@ -104,6 +111,9 @@ protected:
 
     // SaverScreen
     void gotoSaverScreenScreenWipeTransitionEastImpl();
+
+    // DebugScreen
+    void gotoDebugScreenScreenNoTransitionImpl();
 };
 
 #endif // FRONTENDAPPLICATIONBASE_HPP
