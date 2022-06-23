@@ -1,21 +1,28 @@
 #include <gui/settingsscreen_screen/SettingsScreenView.hpp>
 
 int mTickGUICount;
+bool mSetupLoaded;
 
 #ifdef SIMULATOR
+
+static uint8_t simOutputState;
+static uint8_t simMCLKState;
+
 uint8_t SettingsScreenView::GuiItfGetKarunaOutputsAllEnabledAfterStart(void)
 {
-	return 0;
+	return simOutputState;
 }
 void SettingsScreenView::GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff)
 {
+	simOutputState = onoff;
 }
 void SettingsScreenView::GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff)
 {
+	simMCLKState = onoff;
 }
 uint8_t SettingsScreenView::GuiItfGetKarunaMasterClkOnI2SIsEnabled(void)
 {
-	return 1;
+	return simMCLKState;
 }
 #else
 extern "C"
@@ -30,6 +37,7 @@ extern "C"
 
 SettingsScreenView::SettingsScreenView()
 {
+	mSetupLoaded = false;
 	if (GuiItfGetKarunaOutputsAllEnabledAfterStart())
 		radioButtonGroup1.setSelected(rdbtnEnableAll);
 	else
@@ -39,6 +47,9 @@ SettingsScreenView::SettingsScreenView()
 		chbxMCLKON.forceState(true);
 	else
 		chbxMCLKON.forceState(false);
+
+	mSetupLoaded = true;
+
 }
 
 void SettingsScreenView::setupScreen()
@@ -55,12 +66,18 @@ void SettingsScreenView::tearDownScreen()
 
 void SettingsScreenView::RdbBtnSelectEnableAllOutputAtStartUp()
 {
-	GuiItfSetKarunaOutputsAllEnabledAfterStart(1);
+	if (mSetupLoaded)
+	{
+		GuiItfSetKarunaOutputsAllEnabledAfterStart(1);
+	}
 }
 
 void SettingsScreenView::RdbBtnSelectLastOutputStatAtStartUp()
 {
-	GuiItfSetKarunaOutputsAllEnabledAfterStart(0);
+	if (mSetupLoaded)
+	{
+		GuiItfSetKarunaOutputsAllEnabledAfterStart(0);
+	}
 }
 
 void SettingsScreenView::ClickMasterClkOnI2S()
