@@ -1,8 +1,6 @@
 #include <gui/debugscreen_screen/DebugScreenView.hpp>
 #include <touchgfx/Color.hpp>
 
-int mTickCountDebug;
-
 #ifdef SIMULATOR
 
 float DebugScreenView::GuiItfGetTempCh0(void)
@@ -107,53 +105,52 @@ uint8_t DebugScreenView::GuiItfGetDi15(void) {
 #else
 extern "C"
 {
-
-
-	float GuiItfGetTempCh0(void);
-	float GuiItfGetTempCh1(void);
-	float GuiItfGetTempCh2(void);
-	float GuiItfGetTempCh3(void);
-	void GuiItfSetDo0(uint8_t onoff);
-	void GuiItfSetDo1(uint8_t onoff);
-	void GuiItfSetDo2(uint8_t onoff);
-	void GuiItfSetDo3(uint8_t onoff);
-	void GuiItfSetDo4(uint8_t onoff);
-	void GuiItfSetDo5(uint8_t onoff);
-	void GuiItfSetDo6(uint8_t onoff);
-	void GuiItfSetDo7(uint8_t onoff);
-	uint8_t GuiItfGetDo0(void);
-	uint8_t GuiItfGetDo1(void);
-	uint8_t GuiItfGetDo2(void);
-	uint8_t GuiItfGetDo3(void);
-	uint8_t GuiItfGetDo4(void);
-	uint8_t GuiItfGetDo5(void);
-	uint8_t GuiItfGetDo6(void);
-	uint8_t GuiItfGetDo7(void);
-	uint8_t GuiItfGetDi0(void);
-	uint8_t GuiItfGetDi1(void);
-	uint8_t GuiItfGetDi2(void);
-	uint8_t GuiItfGetDi3(void);
-	uint8_t GuiItfGetDi4(void);
-	uint8_t GuiItfGetDi5(void);
-	uint8_t GuiItfGetDi6(void);
-	uint8_t GuiItfGetDi7(void);
-	uint8_t GuiItfGetDi8(void);
-	uint8_t GuiItfGetDi9(void);
-	uint8_t GuiItfGetDi10(void);
-	uint8_t GuiItfGetDi11(void);
-	uint8_t GuiItfGetDi12(void);
-	uint8_t GuiItfGetDi13(void);
-	uint8_t GuiItfGetDi14(void);
-	uint8_t GuiItfGetDi15(void);
-
-
+  float GuiItfGetTempCh0(void);
+  float GuiItfGetTempCh1(void);
+  float GuiItfGetTempCh2(void);
+  float GuiItfGetTempCh3(void);
+  void GuiItfSetDo0(uint8_t onoff);
+  void GuiItfSetDo1(uint8_t onoff);
+  void GuiItfSetDo2(uint8_t onoff);
+  void GuiItfSetDo3(uint8_t onoff);
+  void GuiItfSetDo4(uint8_t onoff);
+  void GuiItfSetDo5(uint8_t onoff);
+  void GuiItfSetDo6(uint8_t onoff);
+  void GuiItfSetDo7(uint8_t onoff);
+  uint8_t GuiItfGetDo0(void);
+  uint8_t GuiItfGetDo1(void);
+  uint8_t GuiItfGetDo2(void);
+  uint8_t GuiItfGetDo3(void);
+  uint8_t GuiItfGetDo4(void);
+  uint8_t GuiItfGetDo5(void);
+  uint8_t GuiItfGetDo6(void);
+  uint8_t GuiItfGetDo7(void);
+  uint8_t GuiItfGetDi0(void);
+  uint8_t GuiItfGetDi1(void);
+  uint8_t GuiItfGetDi2(void);
+  uint8_t GuiItfGetDi3(void);
+  uint8_t GuiItfGetDi4(void);
+  uint8_t GuiItfGetDi5(void);
+  uint8_t GuiItfGetDi6(void);
+  uint8_t GuiItfGetDi7(void);
+  uint8_t GuiItfGetDi8(void);
+  uint8_t GuiItfGetDi9(void);
+  uint8_t GuiItfGetDi10(void);
+  uint8_t GuiItfGetDi11(void);
+  uint8_t GuiItfGetDi12(void);
+  uint8_t GuiItfGetDi13(void);
+  uint8_t GuiItfGetDi14(void);
+  uint8_t GuiItfGetDi15(void);
 }
 #endif
  
+bool EventSuppress = false;
 
 DebugScreenView::DebugScreenView()
 {
- 
+  EventSuppress = true;
+  DebugScreenView::RefreshInterface();
+  EventSuppress = false;
 }
 
 void DebugScreenView::setupScreen()
@@ -168,49 +165,54 @@ void DebugScreenView::tearDownScreen()
 
 void DebugScreenView::OnClickDO_0()
 {
-	GuiItfSetDo0(tbOut0.getState());
+  if(!EventSuppress)
+    GuiItfSetDo0(tbOut0.getState());
 }
 
 void DebugScreenView::OnClickDO_1()
 {
-	GuiItfSetDo0(tbOut1.getState());
+  if(!EventSuppress)
+    GuiItfSetDo1(tbOut1.getState());
 }
 
 void DebugScreenView::OnClickDO_2()
 {
-	GuiItfSetDo0(tbOut2.getState());
+  if(!EventSuppress)
+    GuiItfSetDo2(tbOut2.getState());
 }
 
 void DebugScreenView::OnClickDO_3()
 {
-	GuiItfSetDo0(tbOut3.getState());
+  if(!EventSuppress)
+    GuiItfSetDo3(tbOut3.getState());
 }
 
 void DebugScreenView::OnClickDO_4()
 {
-	GuiItfSetDo0(tbOut4.getState());
+  if(!EventSuppress)
+    GuiItfSetDo4(tbOut4.getState());
 }
 
 void DebugScreenView::OnClickDO_5()
 {
-	GuiItfSetDo0(tbOut5.getState());
+  if(!EventSuppress)
+    GuiItfSetDo5(tbOut5.getState());
 }
 
 void DebugScreenView::OnClickDO_6()
 {
-	GuiItfSetDo0(tbOut6.getState());
+  if(!EventSuppress)
+    GuiItfSetDo6(tbOut6.getState());
 }
 
 void DebugScreenView::OnClickDO_7()
 {
-	GuiItfSetDo0(tbOut7.getState());
+  if(!EventSuppress)
+    GuiItfSetDo7(tbOut7.getState());
 }
 
 void DebugScreenView::RefreshInterface()
 {
-	//circLED0.set GuiItfGetDo0(void) > 
-
-
 	circLED0Painter.setColor(GetOutputColor(GuiItfGetDi0()));
 	circLED0.invalidate();
 	circLED1Painter.setColor(GetOutputColor(GuiItfGetDi1()));
@@ -260,19 +262,14 @@ void DebugScreenView::RefreshInterface()
 	Unicode::snprintfFloat(lblAI3Buffer, 11, "%0.2f", ai_3);
 	lblAI3.invalidate();
 
-	//lblAI0
-/*
-*	Meghívja a click eseményt a rohadék
-* 
-	tbOut0.forceState(GuiItfGetDo0());
-	tbOut1.forceState(GuiItfGetDo1());
-	tbOut2.forceState(GuiItfGetDo2());
-	tbOut3.forceState(GuiItfGetDo3());
-	tbOut4.forceState(GuiItfGetDo4());
-	tbOut5.forceState(GuiItfGetDo5());
-	tbOut6.forceState(GuiItfGetDo6());
-	tbOut7.forceState(GuiItfGetDo7());*/ 
-	 
+  tbOut0.forceState(GuiItfGetDo0());
+  tbOut1.forceState(GuiItfGetDo1());
+  tbOut2.forceState(GuiItfGetDo2());
+  tbOut3.forceState(GuiItfGetDo3());
+  tbOut4.forceState(GuiItfGetDo4());
+  tbOut5.forceState(GuiItfGetDo5());
+  tbOut6.forceState(GuiItfGetDo6());
+  tbOut7.forceState(GuiItfGetDo7());
 }
 
 colortype DebugScreenView::GetOutputColor(uint8_t p_State)
@@ -287,12 +284,9 @@ colortype DebugScreenView::GetOutputColor(uint8_t p_State)
 	}
 }
 
-void DebugScreenView::handleTickEvent() 
+void DebugScreenView::handleTickEvent()
 {
-	mTickCountDebug++;
-	//Wait for 0.5sec
-	if (mTickCountDebug % 30 == 0)
-	{
-		RefreshInterface(); 
-	}
+  EventSuppress = true;
+  RefreshInterface();
+  EventSuppress = false;
 }
