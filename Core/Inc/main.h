@@ -61,7 +61,7 @@ extern "C" {
 #define DEVICE_FAIL           1
 
 #define DEVICE_NAME           "MGUI201222-KARUNA-7i"
-#define DEVICE_FW             "220621_0859"
+#define DEVICE_FW             "220624_0943"
 #define DEVICE_PCB            "VA01"
 #define DEVICE_MNF            "KONVOLUCIO"
 #define DEVICE_MNF_SIZE       sizeof(DEVICE_MNF)
