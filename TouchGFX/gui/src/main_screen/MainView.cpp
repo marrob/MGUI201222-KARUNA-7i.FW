@@ -111,7 +111,7 @@ void MainView::GuiItfGetRtc(time_t* dt)
 /*** Display ***/
 uint8_t MainView::GuiItfGetScreenSaverEnable()
 {
-	return true;
+	return false;
 }
 
 #else
@@ -186,8 +186,8 @@ MainView::MainView()
 
 	//Audio and Clocks temperature
 	RefreshKarunaAndClockInfo();
-
 	GuiItfGetRtc(&saverDateTime); 
+	RequestCurrentTime();
 }
 
 
@@ -228,9 +228,7 @@ void MainView::RefreshHDMIOutput()
 	else
 	{
 		btnHDMI.setBitmaps(Bitmap(BITMAP_HDMI_80X80_S_ID), Bitmap(BITMAP_HDMI_80X80_S_ID));
-	}
-	lblMCLKON.setVisible(mIsHdmiON);
-	lblMCLKON.invalidate();
+	} 
 	btnHDMI.invalidate();
 }
 
@@ -611,7 +609,7 @@ void MainView::handleTickEvent()
 	{
 		time_t actualTime =	RequestCurrentTime();
 
-		if (GuiItfGetScreenSaverEnable() && (actualTime - saverDateTime > 60))
+		if (!GuiItfGetScreenSaverEnable() && (actualTime - saverDateTime > 60))
 		{
 			application().gotoSaverScreenScreenWipeTransitionEast();
 		}
@@ -651,6 +649,9 @@ void MainView::RefreshKarunaAndClockInfo()
 	RefreshRCAOutput();
 	RefreshBNCOutput();
 	RefreshXLROutput();
+
+	lblMCLKON.setVisible(GuiItfGetKarunaMclkOutIsEanbled() > 0);
+	lblMCLKON.invalidate();
 }
 
 time_t MainView::RequestCurrentTime()

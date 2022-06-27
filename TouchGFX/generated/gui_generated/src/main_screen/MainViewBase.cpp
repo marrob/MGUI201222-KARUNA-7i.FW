@@ -33,7 +33,7 @@ MainViewBase::MainViewBase() :
     btnRCA.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnRCA.setBitmaps(Bitmap(BITMAP_RCA_80X80_S_ID), Bitmap(BITMAP_RCA_80X80_S_ID));
     btnRCA.setBitmapXY(0, 0);
-    btnRCA.setPosition(100, 10, 80, 80);
+    btnRCA.setPosition(190, 10, 80, 80);
     btnRCA.setAction(flexButtonCallback);
 
     btnBNC.setBoxWithBorderPosition(0, 0, 80, 80);
@@ -41,7 +41,7 @@ MainViewBase::MainViewBase() :
     btnBNC.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnBNC.setBitmaps(Bitmap(BITMAP_BNC_80X80_FB_ID), Bitmap(BITMAP_BNC_80X80_FB_ID));
     btnBNC.setBitmapXY(0, 0);
-    btnBNC.setPosition(190, 10, 80, 80);
+    btnBNC.setPosition(100, 10, 80, 80);
     btnBNC.setAction(flexButtonCallback);
 
     btnXLR.setBoxWithBorderPosition(0, 0, 80, 80);

@@ -54,56 +54,56 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     boxWithBorder1.setBorderSize(1);
 
-    scrollableContainerSettings.setPosition(10, 100, 1014, 400);
+    scrollableContainerSettings.setPosition(5, 100, 1014, 400);
     scrollableContainerSettings.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
-    btnClockSettings.setBoxWithBorderPosition(0, 0, 944, 90);
+    btnClockSettings.setBoxWithBorderPosition(0, 0, 995, 90);
     btnClockSettings.setBorderSize(1);
     btnClockSettings.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnClockSettings.setText(TypedText(T___SINGLEUSE_37JV));
-    btnClockSettings.setTextPosition(-20, 20, 944, 90);
+    btnClockSettings.setTextPosition(-20, 20, 995, 90);
     btnClockSettings.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnClockSettings.setPosition(35, 352, 944, 90);
+    btnClockSettings.setPosition(10, 301, 995, 90);
     btnClockSettings.setAction(flexButtonCallback);
     scrollableContainerSettings.add(btnClockSettings);
 
-    rdbtnEnableAll.setXY(28, 60);
+    rdbtnEnableAll.setXY(28, 54);
     rdbtnEnableAll.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
     rdbtnEnableAll.setSelected(true);
     rdbtnEnableAll.setDeselectionEnabled(false);
     scrollableContainerSettings.add(rdbtnEnableAll);
 
-    lblAllOutput.setPosition(83, 62, 931, 40);
+    lblAllOutput.setPosition(83, 56, 931, 40);
     lblAllOutput.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblAllOutput.setLinespacing(0);
     lblAllOutput.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AGOP));
     scrollableContainerSettings.add(lblAllOutput);
 
-    lblLastState.setPosition(83, 124, 931, 40);
+    lblLastState.setPosition(83, 116, 931, 40);
     lblLastState.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblLastState.setLinespacing(0);
     lblLastState.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9IH2));
     scrollableContainerSettings.add(lblLastState);
 
-    chbxMCLKON.setXY(28, 220);
+    chbxMCLKON.setXY(28, 181);
     chbxMCLKON.setBitmaps(touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
     chbxMCLKON.forceState(true);
     chbxMCLKON.setAction(buttonCallback);
     scrollableContainerSettings.add(chbxMCLKON);
 
-    rdbtnLastState.setXY(28, 122);
+    rdbtnLastState.setXY(28, 114);
     rdbtnLastState.setBitmaps(touchgfx::Bitmap(BITMAP_OFF_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_ON_44X44_ID), touchgfx::Bitmap(BITMAP_OFF_44X44_ID));
     rdbtnLastState.setSelected(false);
     rdbtnLastState.setDeselectionEnabled(false);
     scrollableContainerSettings.add(rdbtnLastState);
 
-    lblMasterClkEnable.setPosition(83, 221, 931, 40);
+    lblMasterClkEnable.setPosition(83, 182, 931, 40);
     lblMasterClkEnable.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblMasterClkEnable.setLinespacing(0);
     lblMasterClkEnable.setTypedText(touchgfx::TypedText(T___SINGLEUSE_4E2A));
     scrollableContainerSettings.add(lblMasterClkEnable);
 
-    line1.setPosition(55, 191, 920, 15);
+    line1.setPosition(55, 172, 920, 15);
     line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1.setPainter(line1Painter);
     line1.setStart(0, 0);
@@ -113,13 +113,13 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     line1.setAlpha(128);
     scrollableContainerSettings.add(line1);
 
-    lblGUITitle.setPosition(10, 5, 294, 44);
+    lblGUITitle.setPosition(10, 2, 294, 44);
     lblGUITitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblGUITitle.setLinespacing(0);
     lblGUITitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_VP13));
     scrollableContainerSettings.add(lblGUITitle);
 
-    line2.setPosition(55, 280, 920, 15);
+    line2.setPosition(55, 237, 920, 15);
     line2Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line2.setPainter(line2Painter);
     line2.setStart(0, 0);
@@ -137,7 +137,7 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     line3.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     scrollableContainerSettings.add(line3);
 
-    lblClockTitle.setPosition(10, 295, 294, 44);
+    lblClockTitle.setPosition(10, 244, 294, 44);
     lblClockTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockTitle.setLinespacing(0);
     lblClockTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_23R7));
