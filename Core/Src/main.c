@@ -32,8 +32,8 @@
 #include "GuiItf.h"
 #include "LiveLed.h"
 #include <time.h>
-
 #include "Log.h"
+
 
 /* USER CODE END Includes */
 
@@ -171,6 +171,7 @@ __IO unsigned long RTOSRunTimeStatTick;
 
 static char USB_UART_RxBuffer[RS485_BUFFER_SIZE];
 static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE];
+
 
 RS485TxItem_t RS485TxCollection[] =
 {

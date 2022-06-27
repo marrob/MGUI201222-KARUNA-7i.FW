@@ -40,6 +40,8 @@ extern "C" {
 #include "Periph.h"
 #include "eeprom.h"
 #include <time.h>
+
+#include "cmsis_os.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -61,7 +63,7 @@ extern "C" {
 #define DEVICE_FAIL           1
 
 #define DEVICE_NAME           "MGUI201222-KARUNA-7i"
-#define DEVICE_FW             "220624_0943"
+#define DEVICE_FW             "220627_1122"
 #define DEVICE_PCB            "VA01"
 #define DEVICE_MNF            "KONVOLUCIO"
 #define DEVICE_MNF_SIZE       sizeof(DEVICE_MNF)
@@ -163,6 +165,9 @@ typedef struct _AppTypeDef
 }Device_t;
 
 extern Device_t Device;
+
+extern osMutexId_t myMutex01Handle;
+
 /* USER CODE END EM */
 
 void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);

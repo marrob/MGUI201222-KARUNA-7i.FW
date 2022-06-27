@@ -56,6 +56,7 @@ public:
   uint8_t GuitIfGetKarunaIsBncSet(void);
   void GuiItfSetKarunaXlr(uint8_t onfoff);
   uint8_t GuitIfGetKarunaIsXlrSet(void);
+  uint8_t GuiItfGetKarunaMclkOutIsEanbled(void);
 
   /*** Clock ***/
   float GuiItfGetDasClockMV341Temp();

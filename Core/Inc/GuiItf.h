@@ -30,6 +30,7 @@
 #define KRN_DI_XLR            ((uint32_t)1<<9)
 #define KRN_DI_I2S            ((uint32_t)1<<10)
 #define KRN_DI_MCLK_I2S       ((uint32_t)1<<11)
+#define KRN_DI_MCLK_OUT       ((uint32_t)1<<12)
 
 #define KRN_DO_RCA_EN         ((uint32_t)1<<0)
 #define KRN_DO_BNC_EN         ((uint32_t)1<<1)
@@ -128,6 +129,7 @@ void GuiItfSetKarunaOutputsAllEnabledAfterStart(uint8_t onoff);
 void GuiItfSetKarunaMasterClkOnI2S(uint8_t onoff);
 uint8_t GuiItfGetKarunaMasterClkOnI2SIsEnabled(void);
 uint32_t GuiItfGetKarunaUartErrorCnt(void);
+uint8_t GuiItfGetKarunaMclkOutIsEanbled(void);
 
 /* DasClock-------------------------------------------------------------------*/
 uint8_t GuiItfGetDasClockVersion(char **fw, char **uid, char **pcb);

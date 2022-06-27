@@ -63,6 +63,11 @@ uint8_t MainView::GuitIfGetKarunaIsXlrSet(void)
 	return SimIsXlrON;
 }
 
+uint8_t MainView::GuiItfGetKarunaMclkOutIsEanbled(void)
+{
+  return 1;
+}
+
 /*** Das Clock ***/
 
 float MainView::GuiItfGetDasClockMV341Temp(void)
@@ -122,6 +127,7 @@ extern "C"
   uint8_t GuitIfGetKarunaIsBncSet(void);
   void GuiItfSetKarunaXlr(uint8_t onfoff);
   uint8_t GuitIfGetKarunaIsXlrSet(void);
+  uint8_t GuiItfGetKarunaMclkOutIsEanbled(void);
 
   /*** DasClock***/
   float GuiItfGetDasClockMV341Temp();

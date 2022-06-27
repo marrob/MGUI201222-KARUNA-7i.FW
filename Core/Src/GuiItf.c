@@ -562,6 +562,11 @@ uint8_t GuiItfGetBacklightIsEnabled(void)
   return BacklightIsEnabled();
 }
 
+uint8_t GuiItfGetKarunaMclkOutIsEanbled(void)
+{
+  return Device.Karuna.DI & KRN_DI_MCLK_OUT;
+}
+
 /* DasClock -----------------------------------------------------------------*/
 /*
  * fw:  220510_2157               size: DEVICE_FW_SIZE
