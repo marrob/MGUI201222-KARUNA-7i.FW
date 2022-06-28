@@ -106,11 +106,11 @@ void SaverScreenView::RequestCurrentTime()
 	time_t dtp;
 	GuiItfGetRtc(&dtp);
 	struct tm* tm_info = gmtime(&dtp);
-	char strDateTime[25];
-	strftime(strDateTime, 25, "%d.%m.%Y %H:%M:%S", tm_info);
+	char strDateTime[LBLDATETIME_SIZE];
+	strftime(strDateTime, LBLDATETIME_SIZE, "%d.%m.%Y %H:%M:%S", tm_info);
 
 	Unicode::UnicodeChar uni_DateTime[25];
-	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
+	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, LBLDATETIME_SIZE);
 	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
 	lblDateTime.invalidate();
 }
@@ -119,18 +119,18 @@ void SaverScreenView::RefreshCurrentAudio()
 {
 	uint8_t  KRN_STAT = GuiItfGetKarunaStatus();
 
-	char audioFormat[35];
-	snprintf(audioFormat, 35, "%s - %s - %s", SetDSDPCM(KRN_STAT), SetBitDepth(KRN_STAT), SetFreq(KRN_STAT));
+	char audioFormat[LBLAUDIOFORMAT_SIZE];
+	snprintf(audioFormat, LBLAUDIOFORMAT_SIZE, "%s - %s - %s", SetDSDPCM(KRN_STAT), SetBitDepth(KRN_STAT), SetFreq(KRN_STAT));
 
-	Unicode::UnicodeChar uniText[35];
-	Unicode::fromUTF8((const uint8_t*)audioFormat, uniText, sizeof(uniText));
+	Unicode::UnicodeChar uniText[LBLAUDIOFORMAT_SIZE];
+	Unicode::fromUTF8((const uint8_t*)audioFormat, uniText, LBLAUDIOFORMAT_SIZE);
 	Unicode::snprintf(lblAudioFormatBuffer, sizeof(lblAudioFormatBuffer), "%s", uniText);
 }
  
 char* SaverScreenView::SetDSDPCM(uint8_t p_AudiFormat)
 { 
-	char Format[5];
-	char Freq[5];
+	static char format[5];
+	static char freq[5];
 
 	bool isDsd = ToBinary(p_AudiFormat, 4);
 
@@ -139,11 +139,11 @@ char* SaverScreenView::SetDSDPCM(uint8_t p_AudiFormat)
 		bool isDoP = !ToBinary(p_AudiFormat, 3);
 		if (isDoP)
 		{
-			strcpy(Format, "DoP");
+			strcpy(format, "DoP");
 		}
 		else
 		{
-			strcpy(Format, "DSD");
+			strcpy(format, "DSD");
 		}
 
 		int dsdFormat = p_AudiFormat >> 1;
@@ -153,19 +153,19 @@ char* SaverScreenView::SetDSDPCM(uint8_t p_AudiFormat)
 		{
 		case 0b10:
 		{
-			strcpy(Freq, "64");
+			strcpy(freq, "64");
 		}break;
 		case 0b11:
 		{
-			strcpy(Freq, "128");
+			strcpy(freq, "128");
 		}break;
 		case 0b01:
 		{
-			strcpy(Freq, "256");
+			strcpy(freq, "256");
 		}break;
 		case 0b00:
 		{
-			strcpy(Freq, "512");
+			strcpy(freq, "512");
 		}break;
 
 		default:
@@ -174,11 +174,11 @@ char* SaverScreenView::SetDSDPCM(uint8_t p_AudiFormat)
 	}
 	else
 	{
-		strcpy(Format, "PCM");
+		strcpy(format, "PCM");
 	}
 
 
-	snprintf(FormatStr, 10, "%s%s", Format, Freq);
+	snprintf(FormatStr, 10, "%s%s", format, freq);
 
 	return FormatStr;
 }
