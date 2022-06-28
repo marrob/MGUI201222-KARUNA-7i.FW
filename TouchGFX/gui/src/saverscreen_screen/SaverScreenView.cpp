@@ -107,11 +107,11 @@ void SaverScreenView::RequestCurrentTime()
 	GuiItfGetRtc(&dtp);
 	struct tm* tm_info = gmtime(&dtp);
 	char strDateTime[LBLDATETIME_SIZE];
-	strftime(strDateTime, LBLDATETIME_SIZE, "%d.%m.%Y %H:%M:%S", tm_info);
+	strftime(strDateTime, LBLDATETIME_SIZE, "%d.%m.%Y  %H:%M", tm_info);
 
 	Unicode::UnicodeChar uni_DateTime[25];
 	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, LBLDATETIME_SIZE);
-	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
+	Unicode::snprintf(lblDateTimeBuffer, LBLDATETIME_SIZE, "%s", uni_DateTime);
 	lblDateTime.invalidate();
 }
 
@@ -124,7 +124,7 @@ void SaverScreenView::RefreshCurrentAudio()
 
 	Unicode::UnicodeChar uniText[LBLAUDIOFORMAT_SIZE];
 	Unicode::fromUTF8((const uint8_t*)audioFormat, uniText, LBLAUDIOFORMAT_SIZE);
-	Unicode::snprintf(lblAudioFormatBuffer, sizeof(lblAudioFormatBuffer), "%s", uniText);
+	Unicode::snprintf(lblAudioFormatBuffer, LBLAUDIOFORMAT_SIZE, "%s", uniText);
 }
  
 char* SaverScreenView::SetDSDPCM(uint8_t p_AudiFormat)

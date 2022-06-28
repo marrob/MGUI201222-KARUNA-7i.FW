@@ -92,7 +92,7 @@ void DisplayScreenView::sliderValueChangedCallbackHandler(const touchgfx::Slider
 	{
 		//execute code whenever the value of the slider changes. 
 
-		Unicode::snprintf(lblBrightnessBuffer, 8, "%d", value);
+		Unicode::snprintf(lblBrightnessBuffer, LBLBRIGHTNESS_SIZE, "%d", value);
 		lblBrightness.invalidate();
 		GuiItfSetBacklight((uint8_t)value);
 	}
@@ -192,7 +192,7 @@ void DisplayScreenView::handleTickEvent()
 			int RemainMinute = remainSec / 60;
 			int RemainSecond = remainSec % 60;
 
-			Unicode::snprintf(lblTimeToOffBuffer, sizeof(lblTimeToOffBuffer), "%02d:%02d", RemainMinute, RemainSecond);
+			Unicode::snprintf(lblTimeToOffBuffer, LBLTIMETOOFF_SIZE, "%02d:%02d", RemainMinute, RemainSecond);
 			lblTimeToOff.invalidate();
 		}
 		

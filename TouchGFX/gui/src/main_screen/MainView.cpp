@@ -371,36 +371,36 @@ void  MainView::SetDSDPCM(int p_AudiFormat)
 		bool isDoP = !ToBinary(p_AudiFormat, 3);
 		if (isDoP)
 		{
-			Unicode::strncpy(lblValueFormatBuffer, "DoP", 4);
+			Unicode::strncpy(lblValueFormatBuffer, "DoP", LBLVALUEFORMAT_SIZE);
 		}
 		else
 		{
-			Unicode::strncpy(lblValueFormatBuffer, "DSD", 4);
+			Unicode::strncpy(lblValueFormatBuffer, "DSD", LBLVALUEFORMAT_SIZE);
 		}
 		//Unicode::snprintf(lblValueFormatBuffer, 3, "%s", "DSD");
 		int dsdFormat = p_AudiFormat >> 1;
 		dsdFormat = dsdFormat & 0b00000011;
 
-		Unicode::strncpy(lblDSDValueBuffer, "N.A.", 5);
+		Unicode::strncpy(lblDSDValueBuffer, "N.A.", LBLDSDVALUE_SIZE);
 
 
 		switch (dsdFormat)
 		{
 		case 0b10:
 		{
-			Unicode::strncpy(lblDSDValueBuffer, "64", 3);
+			Unicode::strncpy(lblDSDValueBuffer, "64", LBLDSDVALUE_SIZE);
 		}break;
 		case 0b11:
 		{
-			Unicode::strncpy(lblDSDValueBuffer, "128", 4);
+			Unicode::strncpy(lblDSDValueBuffer, "128", LBLDSDVALUE_SIZE);
 		}break;
 		case 0b01:
 		{
-			Unicode::strncpy(lblDSDValueBuffer, "256", 4);
+			Unicode::strncpy(lblDSDValueBuffer, "256", LBLDSDVALUE_SIZE);
 		}break;
 		case 0b00:
 		{
-			Unicode::strncpy(lblDSDValueBuffer, "512", 4);
+			Unicode::strncpy(lblDSDValueBuffer, "512", LBLDSDVALUE_SIZE);
 		}break;
 
 		default:
@@ -409,7 +409,7 @@ void  MainView::SetDSDPCM(int p_AudiFormat)
 	}
 	else
 	{
-		Unicode::strncpy(lblValueFormatBuffer, "PCM", 4);
+		Unicode::strncpy(lblValueFormatBuffer, "PCM", LBLVALUEFORMAT_SIZE);
 	}
 
 	lblDSDValue.setVisible(isDsd);
@@ -423,11 +423,11 @@ void  MainView::SetBitDepth(int p_AudiFormat)
 
 	if (isDsd)
 	{
-		Unicode::strncpy(lblValueBitDepthBuffer, "1 bit", 6);
+		Unicode::strncpy(lblValueBitDepthBuffer, "1 bit", LBLVALUEBITDEPTH_SIZE);
 	}
 	else
 	{
-		Unicode::strncpy(lblValueBitDepthBuffer, "24 bit", 7);
+		Unicode::strncpy(lblValueBitDepthBuffer, "24 bit", LBLVALUEBITDEPTH_SIZE);
 	}
 
 	//Ezt kell majd meghivni ha Lyuben kijavította a hibát de addig hazudunk
@@ -466,7 +466,7 @@ void  MainView::SetFreq(int p_AudiFormat)
 {
 	bool isDsd = ToBinary(p_AudiFormat, 4);
 
-	Unicode::strncpy(lblValueFreqBuffer, "N.A.", 5);
+	Unicode::strncpy(lblValueFreqBuffer, "N.A.", LBLVALUEFREQ_SIZE);
 
 	if (!isDsd)
 	{
@@ -478,43 +478,43 @@ void  MainView::SetFreq(int p_AudiFormat)
 		{
 		case 0b0000:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "44.1 kHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "44.1 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0001:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "48 kHz", 8);
+			Unicode::strncpy(lblValueFreqBuffer, "48 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0010:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "88.2 kHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "88.2 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0011:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "96 kHz", 8);
+			Unicode::strncpy(lblValueFreqBuffer, "96 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0100:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "176.4 kHz", 10);
+			Unicode::strncpy(lblValueFreqBuffer, "176.4 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0101:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "192 kHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "192 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0110:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "352.8 kHz", 10);
+			Unicode::strncpy(lblValueFreqBuffer, "352.8 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b0111:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "384 kHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "384 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b1000:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "705.6 kHz", 10);
+			Unicode::strncpy(lblValueFreqBuffer, "705.6 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b1001:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "768 kHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "768 kHz", LBLVALUEFREQ_SIZE);
 		}break;
 
 
@@ -533,19 +533,19 @@ void  MainView::SetFreq(int p_AudiFormat)
 		{
 		case 0b10:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "2.8 MHz", 8);
+			Unicode::strncpy(lblValueFreqBuffer, "2.8 MHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b11:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "5.8 MHz", 8);
+			Unicode::strncpy(lblValueFreqBuffer, "5.8 MHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b01:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "11.2 MHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "11.2 MHz", LBLVALUEFREQ_SIZE);
 		}break;
 		case 0b00:
 		{
-			Unicode::strncpy(lblValueFreqBuffer, "22.6 MHz", 9);
+			Unicode::strncpy(lblValueFreqBuffer, "22.6 MHz", LBLVALUEFREQ_SIZE);
 		}break;
 
 		default:
@@ -660,11 +660,11 @@ time_t MainView::RequestCurrentTime()
 	GuiItfGetRtc(&dtp);
 	struct tm* tm_info = gmtime(&dtp);
 	char strDateTime[25];
-	strftime(strDateTime, 25, "%d.%m.%Y %H:%M", tm_info);
+	strftime(strDateTime, 25, "%d.%m.%Y  %H:%M", tm_info);
 
-	Unicode::UnicodeChar uni_DateTime[25];
-	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
-	Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
+	Unicode::UnicodeChar uni_DateTime[LBLDATETIME_SIZE];
+	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, LBLDATETIME_SIZE);
+	Unicode::snprintf(lblDateTimeBuffer, LBLDATETIME_SIZE, "%s", uni_DateTime);
 	lblDateTime.invalidate();
 
 	return dtp;

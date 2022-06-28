@@ -247,19 +247,19 @@ void DebugScreenView::RefreshInterface()
 	circLED15.invalidate();
 
 	float ai_0 = GuiItfGetTempCh0();
-	Unicode::snprintfFloat(lblAI0Buffer, 11, "%0.2f", ai_0);
+	Unicode::snprintfFloat(lblAI0Buffer, LBLAI0_SIZE, "%0.2f", ai_0);
 	lblAI0.invalidate();
 
 	float ai_1 = GuiItfGetTempCh1();
-	Unicode::snprintfFloat(lblAI1Buffer, 11, "%0.2f", ai_1);
+	Unicode::snprintfFloat(lblAI1Buffer, LBLAI1_SIZE, "%0.2f", ai_1);
 	lblAI1.invalidate();
 
 	float ai_2 = GuiItfGetTempCh2();
-	Unicode::snprintfFloat(lblAI2Buffer, 11, "%0.2f", ai_2);
+	Unicode::snprintfFloat(lblAI2Buffer, LBLAI2_SIZE, "%0.2f", ai_2);
 	lblAI2.invalidate();
 
 	float ai_3 = GuiItfGetTempCh3();
-	Unicode::snprintfFloat(lblAI3Buffer, 11, "%0.2f", ai_3);
+	Unicode::snprintfFloat(lblAI3Buffer, LBLAI3_SIZE, "%0.2f", ai_3);
 	lblAI3.invalidate();
 
   tbOut0.forceState(GuiItfGetDo0());
