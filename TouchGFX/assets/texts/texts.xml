@@ -112,6 +112,30 @@
       </Text>
     </TextGroup>
     <TextGroup Id="Unsorted">
+      <Text Id="__SingleUse_QHRN" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB" />
+      </Text>
+      <Text Id="__SingleUse_BMC7" Alignment="Left" TypographyId="Desc">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_AFXB" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Clock Temperature ranges : </Translation>
+      </Text>
+      <Text Id="__SingleUse_DSCM" Alignment="Left" TypographyId="Settings">
+        <Translation Language="GB">Clock heated temperature :  </Translation>
+      </Text>
+      <Text Id="__SingleUse_MVNG" Alignment="Left" TypographyId="SWText">
+        <Translation Language="GB">0</Translation>
+      </Text>
+      <Text Id="__SingleUse_KMGP" Alignment="Center" TypographyId="SWText">
+        <Translation Language="GB">&lt;value&gt;</Translation>
+      </Text>
+      <Text Id="__SingleUse_IX9B" Alignment="Center" TypographyId="SWText_high">
+        <Translation Language="GB">+</Translation>
+      </Text>
+      <Text Id="__SingleUse_BWV6" Alignment="Center" TypographyId="SWText_high">
+        <Translation Language="GB">-&#10;</Translation>
+      </Text>
       <Text Id="__SingleUse_PVRW" Alignment="Center" TypographyId="Default">
         <Translation Language="GB">Show Debug screen</Translation>
       </Text>
@@ -341,7 +365,7 @@
         <Translation Language="GB">DAS clock OCXO 2  temperature :</Translation>
       </Text>
       <Text Id="__SingleUse_3OH6" Alignment="Left" TypographyId="Settings">
-        <Translation Language="GB">DAS clock OCXO2  heat current: </Translation>
+        <Translation Language="GB">DAS clock OCXO2  heat current : </Translation>
       </Text>
       <Text Id="__SingleUse_LWCL" Alignment="Left" TypographyId="Settings">
         <Translation Language="GB">0</Translation>
@@ -575,11 +599,11 @@
   </Texts>
   <Typographies>
     <Typography Id="Default" Font="Asap-Regular.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,),@" WildcardCharacterRanges="0-9,a-z,A-Z" />
-    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,),@, " WildcardCharacterRanges="0-9,a-z,A-Z" />
+    <Typography Id="Desc" Font="micross.ttf" Size="25" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters="-,_,:,.,[,],(,),@, &lt;,&gt;," WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Value" Font="micross.ttf" Size="65" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Settings" Font="corbell.ttf" Size="30" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":" WildcardCharacterRanges="0-9,a-z,A-Z" />
     <Typography Id="Typography_00" Font="consola.ttf" Size="70" Bpp="4" Direction="LTR" FallbackCharacter="?" />
     <Typography Id="SWText_high" Font="arialbd.ttf" Size="40" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0-9" />
-    <Typography Id="SWText" Font="arial.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,." WildcardCharacterRanges="0-9" />
+    <Typography Id="SWText" Font="arial.ttf" Size="35" Bpp="4" Direction="LTR" FallbackCharacter="?" WildcardCharacters=":,.,-" WildcardCharacterRanges="0-9" />
   </Typographies>
 </TextDatabase>

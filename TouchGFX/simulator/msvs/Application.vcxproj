@@ -64,6 +64,8 @@
     <ClCompile Include="..\..\generated\gui_generated\src\debugscreen_screen\DebugScreenViewBase.cpp"/>
     <ClCompile Include="..\..\gui\src\containers\DIContainer.cpp"/>
     <ClCompile Include="..\..\generated\gui_generated\src\containers\DIContainerBase.cpp"/>
+    <ClCompile Include="..\..\gui\src\containers\UpDownContainer.cpp"/>
+    <ClCompile Include="..\..\generated\gui_generated\src\containers\UpDownContainerBase.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <None Include="$(ApplicationRoot)\assets\texts\texts.xlsx"/>
@@ -257,6 +259,8 @@
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\debugscreen_screen\DebugScreenViewBase.hpp"/>
     <ClInclude Include="..\..\gui\include\gui\containers\DIContainer.hpp"/>
     <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\DIContainerBase.hpp"/>
+    <ClInclude Include="..\..\gui\include\gui\containers\UpDownContainer.hpp"/>
+    <ClInclude Include="..\..\generated\gui_generated\include\gui_generated\containers\UpDownContainerBase.hpp"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="$(ApplicationRoot)\generated\simulator\touchgfx.rc"/>

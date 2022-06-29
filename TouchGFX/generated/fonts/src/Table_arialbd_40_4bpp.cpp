@@ -4,17 +4,19 @@
 
 FONT_TABLE_LOCATION_FLASH_PRAGMA
 KEEP extern const touchgfx::GlyphNode glyphs_arialbd_40_4bpp[] FONT_TABLE_LOCATION_FLASH_ATTRIBUTE = {
-    {     0, 0x0030,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {   280, 0x0031,  13,  28,  28,   3,  22,   0,   1, 0x00 },
-    {   476, 0x0032,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {   756, 0x0033,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {  1036, 0x0034,  22,  28,  28,   0,  22,   0,   0, 0x00 },
-    {  1344, 0x0035,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {  1624, 0x0036,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {  1904, 0x0037,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {  2184, 0x0038,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {  2464, 0x0039,  20,  28,  28,   1,  22,   0,   0, 0x00 },
-    {  2744, 0x003F,  21,  28,  28,   2,  24,   0,   0, 0x00 }
+    {     0, 0x002B,  21,  20,  24,   1,  23,   0,   0, 0x00 },
+    {   220, 0x002D,  11,   6,  14,   2,  13,   0,   0, 0x00 },
+    {   256, 0x0030,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {   536, 0x0031,  13,  28,  28,   3,  22,   0,   1, 0x00 },
+    {   732, 0x0032,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  1012, 0x0033,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  1292, 0x0034,  22,  28,  28,   0,  22,   0,   0, 0x00 },
+    {  1600, 0x0035,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  1880, 0x0036,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  2160, 0x0037,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  2440, 0x0038,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  2720, 0x0039,  20,  28,  28,   1,  22,   0,   0, 0x00 },
+    {  3000, 0x003F,  21,  28,  28,   2,  24,   0,   0, 0x00 }
 };
 
 // arialbd_40_4bpp
@@ -188,6 +190,6 @@ touchgfx::GeneratedFont& getFont_arialbd_40_4bpp();
 
 touchgfx::GeneratedFont& getFont_arialbd_40_4bpp()
 {
-    static touchgfx::GeneratedFont arialbd_40_4bpp(glyphs_arialbd_40_4bpp, 11, 40, 0, 4, 1, 0, 0, unicodes_arialbd_40_4bpp, kerning_arialbd_40_4bpp, 63, 0, 0, &arialbd_contextualFormsTable);
+    static touchgfx::GeneratedFont arialbd_40_4bpp(glyphs_arialbd_40_4bpp, 13, 40, 0, 4, 1, 0, 0, unicodes_arialbd_40_4bpp, kerning_arialbd_40_4bpp, 63, 0, 0, &arialbd_contextualFormsTable);
     return arialbd_40_4bpp;
 }

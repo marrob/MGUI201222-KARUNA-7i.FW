@@ -70,6 +70,10 @@ public:
   /*** Display ***/
   uint8_t GuiItfGetScreenSaverEnable();
 
+  /*** Clock Temp ***/
+  uint32_t GuiItfGetClockHeatedTemperature();
+  void GuiItfSetClockHeatedTemperature(uint32_t temp);
+
 #endif
 
 

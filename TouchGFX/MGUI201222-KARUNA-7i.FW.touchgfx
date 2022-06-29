@@ -2176,7 +2176,7 @@
                 "Name": "serviceControl",
                 "X": -5,
                 "Width": 1024,
-                "Height": 1195,
+                "Height": 1278,
                 "CustomContainerDefinitionName": "ServiceContainer"
               }
             ]
@@ -4255,7 +4255,7 @@
           {
             "Type": "TextArea",
             "Name": "lblCoreAudio",
-            "X": 76,
+            "X": 80,
             "Y": 219,
             "Width": 411,
             "Height": 74,
@@ -4271,7 +4271,7 @@
           {
             "Type": "TextArea",
             "Name": "lblDeviceName",
-            "X": 422,
+            "X": 406,
             "Y": 314,
             "Width": 527,
             "Height": 74,
@@ -5771,7 +5771,7 @@
       {
         "Name": "ServiceContainer",
         "Width": 1024,
-        "Height": 1195,
+        "Height": 1278,
         "Components": [
           {
             "Type": "TextArea",
@@ -5861,7 +5861,7 @@
           {
             "Type": "TextArea",
             "Name": "lblClocktemp_0",
-            "X": 446,
+            "X": 476,
             "Y": 458,
             "Width": 184,
             "Height": 44,
@@ -5896,7 +5896,7 @@
           {
             "Type": "TextArea",
             "Name": "lblClocktemp_1",
-            "X": 446,
+            "X": 476,
             "Y": 502,
             "Width": 184,
             "Height": 44,
@@ -5916,7 +5916,7 @@
           {
             "Type": "TextArea",
             "Name": "lblClocktemp_2",
-            "X": 446,
+            "X": 476,
             "Y": 546,
             "Width": 184,
             "Height": 44,
@@ -5951,7 +5951,7 @@
           {
             "Type": "TextArea",
             "Name": "lblClockCurrent_0",
-            "X": 442,
+            "X": 472,
             "Y": 603,
             "Width": 184,
             "Height": 44,
@@ -5986,7 +5986,7 @@
           {
             "Type": "TextArea",
             "Name": "lblClockCurrent_1",
-            "X": 442,
+            "X": 472,
             "Y": 647,
             "Width": 184,
             "Height": 44,
@@ -6036,7 +6036,7 @@
           {
             "Type": "TextArea",
             "Name": "lblClockCurrent_2",
-            "X": 442,
+            "X": 472,
             "Y": 691,
             "Width": 184,
             "Height": 44,
@@ -6087,7 +6087,7 @@
             "Type": "TextArea",
             "Name": "lblDASClockSupplyVoltageTitle",
             "X": 28,
-            "Y": 743,
+            "Y": 734,
             "Width": 399,
             "Height": 44,
             "TextId": "__SingleUse_AB6H",
@@ -6101,8 +6101,8 @@
           {
             "Type": "TextArea",
             "Name": "lblDASClockSupplyVoltage",
-            "X": 442,
-            "Y": 743,
+            "X": 472,
+            "Y": 734,
             "Width": 184,
             "Height": 44,
             "TextId": "__SingleUse_OEE2",
@@ -6310,7 +6310,7 @@
             "Type": "FlexButton",
             "Name": "btnFactoryReset",
             "X": 28,
-            "Y": 1024,
+            "Y": 1124,
             "Width": 974,
             "Height": 90,
             "ButtonTrigger": {
@@ -6362,7 +6362,7 @@
             "Type": "FlexButton",
             "Name": "btnSoftReset",
             "X": 28,
-            "Y": 920,
+            "Y": 1020,
             "Width": 974,
             "Height": 90,
             "ButtonTrigger": {
@@ -6414,7 +6414,7 @@
             "Type": "Line",
             "Name": "line2_1",
             "X": 45,
-            "Y": 1140,
+            "Y": 1231,
             "Width": 920,
             "Height": 15,
             "Color": {
@@ -6575,7 +6575,7 @@
             "Type": "Line",
             "Name": "line1_1",
             "X": 45,
-            "Y": 798,
+            "Y": 898,
             "Width": 920,
             "Height": 15,
             "Color": {
@@ -6609,7 +6609,7 @@
             "Type": "FlexButton",
             "Name": "btnDebug",
             "X": 28,
-            "Y": 815,
+            "Y": 915,
             "Width": 974,
             "Height": 90,
             "ButtonTrigger": {
@@ -6656,6 +6656,65 @@
                 }
               }
             ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblDASClockSupplyVoltageTitle_1",
+            "X": 28,
+            "Y": 787,
+            "Width": 399,
+            "Height": 44,
+            "TextId": "__SingleUse_DSCM",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            }
+          },
+          {
+            "Type": "CustomContainerInstance",
+            "Name": "OffsetUpDownContainer",
+            "X": 472,
+            "Y": 784,
+            "Width": 250,
+            "Height": 50,
+            "CustomContainerDefinitionName": "UpDownContainer"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblDASClockSupplyVoltageTitle_1_1",
+            "X": 28,
+            "Y": 834,
+            "Width": 399,
+            "Height": 44,
+            "TextId": "__SingleUse_AFXB",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblTempOffsetRanges",
+            "X": 358,
+            "Y": 838,
+            "Width": 651,
+            "Height": 36,
+            "TextId": "__SingleUse_BMC7",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 200,
+              "Green": 200,
+              "Blue": 200
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_QHRN",
+              "UseBuffer": true,
+              "BufferSize": 100
+            }
           }
         ],
         "Interactions": [
@@ -6691,6 +6750,18 @@
               "Type": "ActionGotoScreen",
               "ScreenTransitionType": "ScreenTransitionNone",
               "ActionComponent": "DebugScreen"
+            }
+          },
+          {
+            "InteractionName": "OffsetValueChanged",
+            "Trigger": {
+              "Type": "TriggerCustom",
+              "TriggerCustomTypeName": "UpDownContainer ValueChangedTrigger happens",
+              "TriggerComponent": "OffsetUpDownContainer"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnOffsetValueChanged"
             }
           }
         ]
@@ -6733,6 +6804,196 @@
           }
         ],
         "Interactions": []
+      },
+      {
+        "Name": "UpDownContainer",
+        "Width": 250,
+        "Height": 50,
+        "Components": [
+          {
+            "Type": "Box",
+            "Name": "bacdround",
+            "Width": 250,
+            "Height": 50,
+            "Color": {
+              "Red": 16,
+              "Green": 16,
+              "Blue": 16
+            }
+          },
+          {
+            "Type": "BoxWithBorder",
+            "Name": "boxWithBorder1",
+            "Width": 250,
+            "Height": 50,
+            "Color": {
+              "Red": 32,
+              "Green": 32,
+              "Blue": 32
+            },
+            "BorderColor": {
+              "Red": 100,
+              "Green": 100,
+              "Blue": 100
+            },
+            "BorderSize": 2
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnDown",
+            "X": 6,
+            "Y": 5,
+            "Width": 60,
+            "Height": 40,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "Y": -6,
+                "TextId": "__SingleUse_BWV6",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "ColorPressed": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                }
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 60,
+                "Height": 40,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 1,
+                "ColorPressed": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "ColorBorderReleased": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "ColorBorderPressed": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                }
+              }
+            ]
+          },
+          {
+            "Type": "FlexButton",
+            "Name": "btnUp",
+            "X": 185,
+            "Y": 5,
+            "Width": 60,
+            "Height": 40,
+            "ButtonTrigger": {
+              "Type": "ClickButtonTrigger"
+            },
+            "ButtonStyles": [
+              {
+                "Type": "TextButtonStyle",
+                "Y": -4,
+                "TextId": "__SingleUse_IX9B",
+                "TextRotation": "0",
+                "ColorReleased": {
+                  "Red": 150,
+                  "Green": 118,
+                  "Blue": 73
+                },
+                "ColorPressed": {
+                  "Red": 64,
+                  "Green": 64,
+                  "Blue": 64
+                }
+              },
+              {
+                "Type": "BoxWithBorderButtonStyle",
+                "Width": 60,
+                "Height": 40,
+                "LockToFlexButtonSize": true,
+                "BorderSize": 1,
+                "ColorPressed": {
+                  "Red": 32,
+                  "Green": 32,
+                  "Blue": 32
+                },
+                "ColorBorderReleased": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                },
+                "ColorBorderPressed": {
+                  "Red": 100,
+                  "Green": 100,
+                  "Blue": 100
+                }
+              }
+            ]
+          },
+          {
+            "Type": "TextArea",
+            "Name": "lblValue",
+            "X": 57,
+            "Y": 5,
+            "Width": 136,
+            "Height": 48,
+            "TextId": "__SingleUse_KMGP",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 128,
+              "Green": 128,
+              "Blue": 128
+            },
+            "Wildcard1": {
+              "TextId": "__SingleUse_MVNG",
+              "UseBuffer": true,
+              "BufferSize": 10
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "BtnUpClick",
+            "HasCompletedTrigger": true,
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnUp"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnBtnUpClick"
+            }
+          },
+          {
+            "InteractionName": "BtnDownClick",
+            "Trigger": {
+              "Type": "TriggerClicked",
+              "TriggerComponent": "btnDown"
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "OnBtnDownClick"
+            }
+          }
+        ],
+        "CustomTriggers": [
+          {
+            "Name": "ValueChangedTrigger",
+            "Description": "Up Down value Changing",
+            "HasValue": true,
+            "ValueType": "uint32_t"
+          }
+        ]
       }
     ],
     "Name": "MGUI201222-KARUNA-7i.FW",

@@ -474,6 +474,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/TextContainerHigh.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/gui/UpDownContainer.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/UpDownContainer.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/gui/textContainer.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/textContainer.cpp</locationURI>
@@ -742,6 +747,11 @@
 			<name>Application/User/generated/TextContainerHighBase.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/TextContainerHighBase.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/UpDownContainerBase.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/gui_generated/src/containers/UpDownContainerBase.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/textContainerBase.cpp</name>

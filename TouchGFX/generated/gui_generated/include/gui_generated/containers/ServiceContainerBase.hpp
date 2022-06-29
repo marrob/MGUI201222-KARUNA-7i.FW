@@ -11,6 +11,7 @@
 #include <touchgfx/widgets/canvas/Line.hpp>
 #include <touchgfx/widgets/canvas/PainterRGB565.hpp>
 #include <touchgfx/containers/buttons/Buttons.hpp>
+#include <gui/containers/UpDownContainer.hpp>
 
 class ServiceContainerBase : public touchgfx::Container
 {
@@ -28,6 +29,11 @@ public:
     }
 
     virtual void OnClickFactoryReset()
+    {
+        // Override and implement this function in ServiceContainer
+    }
+
+    virtual void OnOffsetValueChanged(uint32_t value)
     {
         // Override and implement this function in ServiceContainer
     }
@@ -92,6 +98,10 @@ protected:
     touchgfx::Line line1_1_1;
     touchgfx::PainterRGB565 line1_1_1Painter;
     touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnDebug;
+    touchgfx::TextArea lblDASClockSupplyVoltageTitle_1;
+    UpDownContainer OffsetUpDownContainer;
+    touchgfx::TextArea lblDASClockSupplyVoltageTitle_1_1;
+    touchgfx::TextAreaWithOneWildcard lblTempOffsetRanges;
 
     /*
      * Wildcard Buffers
@@ -128,6 +138,8 @@ protected:
     touchgfx::Unicode::UnicodeChar lblBusUartErrorCntBuffer[LBLBUSUARTERRORCNT_SIZE];
     static const uint16_t LBLKARUNAUARTERRORCNT_SIZE = 12;
     touchgfx::Unicode::UnicodeChar lblKarunaUartErrorCntBuffer[LBLKARUNAUARTERRORCNT_SIZE];
+    static const uint16_t LBLTEMPOFFSETRANGES_SIZE = 100;
+    touchgfx::Unicode::UnicodeChar lblTempOffsetRangesBuffer[LBLTEMPOFFSETRANGES_SIZE];
 
 private:
 
@@ -135,11 +147,13 @@ private:
      * Callback Declarations
      */
     touchgfx::Callback<ServiceContainerBase, const touchgfx::AbstractButtonContainer&> flexButtonCallback;
+    touchgfx::Callback<ServiceContainerBase, uint32_t> OffsetUpDownContainerValueChangedTriggerCallback;
 
     /*
      * Callback Handler Declarations
      */
     void flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src);
+    void OffsetUpDownContainerValueChangedTriggerCallbackHandler(uint32_t value);
 
 };
 

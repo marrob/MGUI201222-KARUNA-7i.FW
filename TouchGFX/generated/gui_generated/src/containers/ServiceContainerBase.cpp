@@ -6,10 +6,11 @@
 #include <touchgfx/Color.hpp>
 
 ServiceContainerBase::ServiceContainerBase() :
-    flexButtonCallback(this, &ServiceContainerBase::flexButtonCallbackHandler)
+    flexButtonCallback(this, &ServiceContainerBase::flexButtonCallbackHandler),
+    OffsetUpDownContainerValueChangedTriggerCallback(this, &ServiceContainerBase::OffsetUpDownContainerValueChangedTriggerCallbackHandler)
 {
     setWidth(1024);
-    setHeight(1195);
+    setHeight(1278);
     lblKarunaUptimeTitle.setPosition(32, 255, 295, 44);
     lblKarunaUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaUptimeTitle.setLinespacing(0);
@@ -39,7 +40,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockTempTitle_0.setLinespacing(0);
     lblDASClockTempTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AR9N));
 
-    lblClocktemp_0.setPosition(446, 458, 184, 44);
+    lblClocktemp_0.setPosition(476, 458, 184, 44);
     lblClocktemp_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_0.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_0Buffer, LBLCLOCKTEMP_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1E1R).getText());
@@ -51,14 +52,14 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockTempTitle_1.setLinespacing(0);
     lblDASClockTempTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A8ML));
 
-    lblClocktemp_1.setPosition(446, 502, 184, 44);
+    lblClocktemp_1.setPosition(476, 502, 184, 44);
     lblClocktemp_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_1.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_1Buffer, LBLCLOCKTEMP_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_9ZXU).getText());
     lblClocktemp_1.setWildcard(lblClocktemp_1Buffer);
     lblClocktemp_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JVYW));
 
-    lblClocktemp_2.setPosition(446, 546, 184, 44);
+    lblClocktemp_2.setPosition(476, 546, 184, 44);
     lblClocktemp_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_2.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_2Buffer, LBLCLOCKTEMP_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1FFP).getText());
@@ -70,7 +71,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockCurrentTitle_0.setLinespacing(0);
     lblDASClockCurrentTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PNNL));
 
-    lblClockCurrent_0.setPosition(442, 603, 184, 44);
+    lblClockCurrent_0.setPosition(472, 603, 184, 44);
     lblClockCurrent_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_0.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_0Buffer, LBLCLOCKCURRENT_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_S5AG).getText());
@@ -82,7 +83,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockCurrentTitle_1.setLinespacing(0);
     lblDASClockCurrentTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FST6));
 
-    lblClockCurrent_1.setPosition(442, 647, 184, 44);
+    lblClockCurrent_1.setPosition(472, 647, 184, 44);
     lblClockCurrent_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_1.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_1Buffer, LBLCLOCKCURRENT_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_LWCL).getText());
@@ -99,7 +100,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockTempTitle_2.setLinespacing(0);
     lblDASClockTempTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6WEV));
 
-    lblClockCurrent_2.setPosition(442, 691, 184, 44);
+    lblClockCurrent_2.setPosition(472, 691, 184, 44);
     lblClockCurrent_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_2.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_2Buffer, LBLCLOCKCURRENT_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VBNA).getText());
@@ -116,12 +117,12 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockTitle.setLinespacing(0);
     lblDASClockTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YROX));
 
-    lblDASClockSupplyVoltageTitle.setPosition(28, 743, 399, 44);
+    lblDASClockSupplyVoltageTitle.setPosition(28, 734, 399, 44);
     lblDASClockSupplyVoltageTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltageTitle.setLinespacing(0);
     lblDASClockSupplyVoltageTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AB6H));
 
-    lblDASClockSupplyVoltage.setPosition(442, 743, 184, 44);
+    lblDASClockSupplyVoltage.setPosition(472, 734, 184, 44);
     lblDASClockSupplyVoltage.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltage.setLinespacing(0);
     Unicode::snprintf(lblDASClockSupplyVoltageBuffer, LBLDASCLOCKSUPPLYVOLTAGE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_LCRT).getText());
@@ -210,7 +211,7 @@ ServiceContainerBase::ServiceContainerBase() :
     btnFactoryReset.setText(TypedText(T___SINGLEUSE_GKKS));
     btnFactoryReset.setTextPosition(-17, 20, 974, 90);
     btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnFactoryReset.setPosition(28, 1024, 974, 90);
+    btnFactoryReset.setPosition(28, 1124, 974, 90);
     btnFactoryReset.setAction(flexButtonCallback);
 
     btnSoftReset.setBoxWithBorderPosition(0, 0, 974, 90);
@@ -219,10 +220,10 @@ ServiceContainerBase::ServiceContainerBase() :
     btnSoftReset.setText(TypedText(T___SINGLEUSE_T381));
     btnSoftReset.setTextPosition(-20, 20, 974, 90);
     btnSoftReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnSoftReset.setPosition(28, 920, 974, 90);
+    btnSoftReset.setPosition(28, 1020, 974, 90);
     btnSoftReset.setAction(flexButtonCallback);
 
-    line2_1.setPosition(45, 1140, 920, 15);
+    line2_1.setPosition(45, 1231, 920, 15);
     line2_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line2_1.setPainter(line2_1Painter);
     line2_1.setStart(0, 0);
@@ -278,7 +279,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblKarunaUartErrorCnt.setWildcard(lblKarunaUartErrorCntBuffer);
     lblKarunaUartErrorCnt.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9QB9));
 
-    line1_1.setPosition(45, 798, 920, 15);
+    line1_1.setPosition(45, 898, 920, 15);
     line1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1_1.setPainter(line1_1Painter);
     line1_1.setStart(0, 0);
@@ -300,8 +301,28 @@ ServiceContainerBase::ServiceContainerBase() :
     btnDebug.setText(TypedText(T___SINGLEUSE_PVRW));
     btnDebug.setTextPosition(-20, 20, 974, 90);
     btnDebug.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnDebug.setPosition(28, 815, 974, 90);
+    btnDebug.setPosition(28, 915, 974, 90);
     btnDebug.setAction(flexButtonCallback);
+
+    lblDASClockSupplyVoltageTitle_1.setPosition(28, 787, 399, 44);
+    lblDASClockSupplyVoltageTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblDASClockSupplyVoltageTitle_1.setLinespacing(0);
+    lblDASClockSupplyVoltageTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DSCM));
+
+    OffsetUpDownContainer.setXY(472, 784);
+    OffsetUpDownContainer.setValueChangedTriggerCallback(OffsetUpDownContainerValueChangedTriggerCallback);
+
+    lblDASClockSupplyVoltageTitle_1_1.setPosition(28, 834, 399, 44);
+    lblDASClockSupplyVoltageTitle_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblDASClockSupplyVoltageTitle_1_1.setLinespacing(0);
+    lblDASClockSupplyVoltageTitle_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AFXB));
+
+    lblTempOffsetRanges.setPosition(358, 838, 651, 36);
+    lblTempOffsetRanges.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
+    lblTempOffsetRanges.setLinespacing(0);
+    Unicode::snprintf(lblTempOffsetRangesBuffer, LBLTEMPOFFSETRANGES_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_QHRN).getText());
+    lblTempOffsetRanges.setWildcard(lblTempOffsetRangesBuffer);
+    lblTempOffsetRanges.setTypedText(touchgfx::TypedText(T___SINGLEUSE_BMC7));
 
     add(lblKarunaUptimeTitle);
     add(lblKarunaUptime);
@@ -348,11 +369,23 @@ ServiceContainerBase::ServiceContainerBase() :
     add(line1_1);
     add(line1_1_1);
     add(btnDebug);
+    add(lblDASClockSupplyVoltageTitle_1);
+    add(OffsetUpDownContainer);
+    add(lblDASClockSupplyVoltageTitle_1_1);
+    add(lblTempOffsetRanges);
 }
 
 void ServiceContainerBase::initialize()
 {
+    OffsetUpDownContainer.initialize();
+}
 
+void ServiceContainerBase::OffsetUpDownContainerValueChangedTriggerCallbackHandler(uint32_t value)
+{
+    //OffsetValueChanged
+    //When OffsetUpDownContainer ValueChangedTrigger call virtual function
+    //Call OnOffsetValueChanged
+    OnOffsetValueChanged(value);
 }
 
 void ServiceContainerBase::flexButtonCallbackHandler(const touchgfx::AbstractButtonContainer& src)

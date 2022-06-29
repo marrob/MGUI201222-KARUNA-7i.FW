@@ -2,7 +2,7 @@
 #include <touchgfx/Color.hpp>
 #include <touchgfx/containers/buttons/ImageButtonStyle.hpp>
 #include "BitmapDatabase.hpp"
-#include <time.h>
+#include <time.h> 
 
 time_t saverDateTime;
 
@@ -65,7 +65,7 @@ uint8_t MainView::GuitIfGetKarunaIsXlrSet(void)
 
 uint8_t MainView::GuiItfGetKarunaMclkOutIsEanbled(void)
 {
-  return 1;
+	return 1;
 }
 
 /*** Das Clock ***/
@@ -114,32 +114,48 @@ uint8_t MainView::GuiItfGetScreenSaverEnable()
 	return false;
 }
 
+
+/*** Clock Temp ***/
+uint32_t  MainView::GuiItfGetClockHeatedTemperature()
+{
+	return 55;
+}
+
+void MainView::GuiItfSetClockHeatedTemperature(uint32_t temp)
+{
+
+}
+
 #else
 extern "C"
 {
-  /*** Karuna ***/
-  uint8_t GuiItfGetKarunaStatus();
-  void GuiItfSetKarunaHdmi(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsHdmiSet(void);
-  void GuiItfSetKarunaRca(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsRcaSet(void);
-  void GuiItfSetKarunaBnc(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsBncSet(void);
-  void GuiItfSetKarunaXlr(uint8_t onfoff);
-  uint8_t GuitIfGetKarunaIsXlrSet(void);
-  uint8_t GuiItfGetKarunaMclkOutIsEanbled(void);
+	/*** Karuna ***/
+	uint8_t GuiItfGetKarunaStatus();
+	void GuiItfSetKarunaHdmi(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsHdmiSet(void);
+	void GuiItfSetKarunaRca(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsRcaSet(void);
+	void GuiItfSetKarunaBnc(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsBncSet(void);
+	void GuiItfSetKarunaXlr(uint8_t onfoff);
+	uint8_t GuitIfGetKarunaIsXlrSet(void);
+	uint8_t GuiItfGetKarunaMclkOutIsEanbled(void);
 
-  /*** DasClock***/
-  float GuiItfGetDasClockMV341Temp();
-  uint8_t GuiItfGetDasClockStatusLock1();
-  uint8_t GuiItfGetDasClockStatusLock2();
-  uint8_t GuiItfGetDasClockIsExt();
+	/*** DasClock***/
+	float GuiItfGetDasClockMV341Temp();
+	uint8_t GuiItfGetDasClockStatusLock1();
+	uint8_t GuiItfGetDasClockStatusLock2();
+	uint8_t GuiItfGetDasClockIsExt();
 
-  /*** Time ***/
-  void GuiItfGetRtc(time_t* dt);
+	/*** Time ***/
+	void GuiItfGetRtc(time_t* dt);
 
-  /*** Display ***/
-  uint8_t GuiItfGetScreenSaverEnable();
+	/*** Display ***/
+	uint8_t GuiItfGetScreenSaverEnable();
+
+	/*** Clock Temp ***/
+	uint32_t GuiItfGetClockHeatedTemperature();
+	void GuiItfSetClockHeatedTemperature(uint32_t temp);
 }
 #endif
 
@@ -186,7 +202,7 @@ MainView::MainView()
 
 	//Audio and Clocks temperature
 	RefreshKarunaAndClockInfo();
-	GuiItfGetRtc(&saverDateTime); 
+	GuiItfGetRtc(&saverDateTime);
 	RequestCurrentTime();
 }
 
@@ -228,7 +244,7 @@ void MainView::RefreshHDMIOutput()
 	else
 	{
 		btnHDMI.setBitmaps(Bitmap(BITMAP_HDMI_80X80_S_ID), Bitmap(BITMAP_HDMI_80X80_S_ID));
-	} 
+	}
 	btnHDMI.invalidate();
 }
 
@@ -312,33 +328,33 @@ void MainView::RefreshIntExt()
 
 void  MainView::SetTemp(int p_Temp)
 {
-	int offset = 40;
+	int heatedTemp = GuiItfGetClockHeatedTemperature();
 
-	if (p_Temp < 0 + offset)
+	if (p_Temp < heatedTemp - 30)
 	{
 		PaintDot(MIDGRAYCOLOR, MIDGRAYCOLOR, MIDGRAYCOLOR);
 	}
-	else if (p_Temp >= 0 + offset && p_Temp < 5 + offset)
+	else if (p_Temp >= heatedTemp - 30 && p_Temp < heatedTemp - 20)
 	{
 		PaintDot(CORECOLOR, MIDGRAYCOLOR, MIDGRAYCOLOR);
 	}
-	else if (p_Temp >= 5 + offset && p_Temp < 10 + offset)
+	else if (p_Temp >= heatedTemp - 20 && p_Temp < heatedTemp - 10)
 	{
 		PaintDot(CORECOLOR, CORECOLOR, MIDGRAYCOLOR);
 	}
-	else if (p_Temp >= 10 + offset && p_Temp < 30 + offset)
+	else if (p_Temp >= heatedTemp - 10 && p_Temp < heatedTemp + 10)
 	{
 		PaintDot(CORECOLOR, CORECOLOR, CORECOLOR);
 	}
-	else if (p_Temp >= 30 + offset && p_Temp < 35 + offset)
+	else if (p_Temp >= heatedTemp +  10 && p_Temp < heatedTemp + 15)
 	{
 		PaintDot(REDCOLOR, CORECOLOR, CORECOLOR);
 	}
-	else if (p_Temp >= 35 + offset && p_Temp < 40 + offset)
+	else if (p_Temp >= heatedTemp + 15 && p_Temp < heatedTemp + 20)
 	{
 		PaintDot(REDCOLOR, REDCOLOR, CORECOLOR);
 	}
-	else if (p_Temp >= 40 + offset)
+	else if (p_Temp >= heatedTemp + 20)
 	{
 		PaintDot(REDCOLOR, REDCOLOR, REDCOLOR);
 	}
@@ -607,7 +623,7 @@ void MainView::handleTickEvent()
 	//Wait for 0.5sec
 	if (mTickCount % 10 == 0)
 	{
-		time_t actualTime =	RequestCurrentTime();
+		time_t actualTime = RequestCurrentTime();
 
 		if (!GuiItfGetScreenSaverEnable() && (actualTime - saverDateTime > 60))
 		{

@@ -14,7 +14,8 @@ public:
     virtual void OnClickFactoryReset();
     virtual void OnClickSoftReset();
     void RefreshServiceInfo();
-    void GetVersionInfo();
+    void GetVersionInfo(); 
+
 
 #ifdef SIMULATOR
 
@@ -43,11 +44,24 @@ public:
     float GuiItfGetDasClockMainVoltage();
 
     uint32_t GuiItfGetDasClocUartErrorCnt(void);
+    uint32_t GuiItfGetClockHeatedTemperature();
+    void GuiItfSetClockHeatedTemperature(uint32_t temp);
 
 #endif
 
 
 protected:
+
+private:
+    /*
+     * Callback Declarations
+     */
+    touchgfx::Callback<ServiceContainer,uint32_t> ValueChangedTriggerCallback;
+    /*
+     * Callback Handler Declarations
+     */
+    void OffsetValueChangedCallbackHandler(uint32_t Value);
+    void RefresTempRanges(uint32_t heatedTemp);
 };
 
 #endif // SERVICECONTAINER_HPP

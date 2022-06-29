@@ -34,12 +34,12 @@ SplashScreenViewBase::SplashScreenViewBase() :
     lineMidle.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     lineMidle.setAlpha(134);
 
-    lblCoreAudio.setXY(76, 219);
+    lblCoreAudio.setXY(80, 219);
     lblCoreAudio.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     lblCoreAudio.setLinespacing(0);
     lblCoreAudio.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PRBY));
 
-    lblDeviceName.setXY(422, 314);
+    lblDeviceName.setXY(406, 314);
     lblDeviceName.setColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     lblDeviceName.setLinespacing(0);
     lblDeviceName.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JVEY));
