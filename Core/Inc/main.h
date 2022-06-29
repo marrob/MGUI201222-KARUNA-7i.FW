@@ -63,7 +63,7 @@ extern "C" {
 #define DEVICE_FAIL           1
 
 #define DEVICE_NAME           "MGUI201222-KARUNA-7i"
-#define DEVICE_FW             "220628_2230"
+#define DEVICE_FW             "220629_1717"
 #define DEVICE_PCB            "VA01"
 #define DEVICE_MNF            "KONVOLUCIO"
 #define DEVICE_MNF_SIZE       sizeof(DEVICE_MNF)
@@ -127,6 +127,7 @@ typedef struct _AppTypeDef
     char FW[DEVICE_FW_SIZE];
     char UID[DEVICE_UID_SIZE];
     char PCB[DEVICE_PCB_SIZE];
+    uint32_t HeatedTemp;
     uint32_t OkCnt;
     uint32_t UnknownCnt;
     uint32_t DO;

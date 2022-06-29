@@ -112,12 +112,12 @@ uint32_t ServiceContainer::GuiItfGetDasClocUartErrorCnt(void)
 }
 
 
-uint32_t  ServiceContainer::GuiItfGetClockHeatedTemperature()
+uint32_t  ServiceContainer::GuiItfGetDasClockHeatedTemperature()
 {
 	return mHeatedTemp;
 }
 
-void ServiceContainer::GuiItfSetClockHeatedTemperature(uint32_t temp)
+void ServiceContainer::GuiItfSetDasClockHeatedTemperature(uint32_t temp)
 {
 	mHeatedTemp = temp;
 }
@@ -151,8 +151,8 @@ extern "C"
 
 	uint32_t GuiItfGetDasClocUartErrorCnt(void);
 
-	uint32_t GuiItfGetClockHeatedTemperature();
-	void GuiItfSetClockHeatedTemperature(uint32_t temp);
+	uint32_t GuiItfGetDasClockHeatedTemperature();
+	void GuiItfSetDasClockHeatedTemperature(uint32_t temp);
 }
 #endif
 
@@ -162,19 +162,19 @@ ServiceContainer::ServiceContainer() :
 {
 	OffsetUpDownContainer.setValueChangedTriggerCallback(ValueChangedTriggerCallback);
 
-	uint32_t heatedTemp = GuiItfGetClockHeatedTemperature();
+	uint32_t heatedTemp = GuiItfGetDasClockHeatedTemperature();
 	OffsetUpDownContainer.SetValue(heatedTemp);
 	RefresTempRanges(heatedTemp);
 
 }
 
-void ServiceContainer::OffsetValueChangedCallbackHandler(uint32_t Value)
+void ServiceContainer::OffsetValueChangedCallbackHandler(uint32_t value)
 {
-	GuiItfSetClockHeatedTemperature(Value);
+	GuiItfSetDasClockHeatedTemperature(value);
 	//0-30 < 30-40 < 40-50 <<< 50-70 >>> 70-75 > 75-80 > 80
-	int heatedTemp = Value; 
+	int heatedTemp = value; 
 
-	RefresTempRanges(heatedTemp);	 
+	RefresTempRanges(heatedTemp);
 }
 
 void ServiceContainer::RefresTempRanges(uint32_t heatedTemp)
@@ -258,9 +258,9 @@ void ServiceContainer::GetVersionInfo()
 	char* fw = nullptr;
 	char* uid = nullptr;
 	char* pcb = nullptr;
-	Unicode::UnicodeChar uni_fw[25];
-	Unicode::UnicodeChar uni_uid[25];
-	Unicode::UnicodeChar uni_pcb[25];
+	Unicode::UnicodeChar uni_fw[LBLGUIFWVERSION_SIZE];
+	Unicode::UnicodeChar uni_uid[LBLGUIFWVERSION_SIZE];
+	Unicode::UnicodeChar uni_pcb[LBLGUIFWVERSION_SIZE];
 
 	GuiItfGetVersion(&fw, &uid, &pcb);
 	Unicode::fromUTF8((const uint8_t*)fw, uni_fw, sizeof(uni_fw));

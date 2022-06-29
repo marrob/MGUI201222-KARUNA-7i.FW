@@ -154,6 +154,8 @@ void GuiItfSetBackLightAutoOff(uint32_t sec);
 uint32_t GuiItfGetBacklightAutoOff(void);
 uint32_t GuiItfGetRemainingTimeToOff(void);
 uint8_t GuiItfGetBacklightIsEnabled(void);
+uint32_t GuiItfGetDasClockHeatedTemperature();
+void GuiItfSetDasClockHeatedTemperature(uint32_t temp);
 
 /* RTC -----------------------------------------------------------------------*/
 void GuiItfSetRtc(time_t dt);

@@ -116,12 +116,12 @@ uint8_t MainView::GuiItfGetScreenSaverEnable()
 
 
 /*** Clock Temp ***/
-uint32_t  MainView::GuiItfGetClockHeatedTemperature()
+uint32_t  MainView::GuiItfGetDasClockHeatedTemperature()
 {
 	return 55;
 }
 
-void MainView::GuiItfSetClockHeatedTemperature(uint32_t temp)
+void MainView::GuiItfSetDasClockHeatedTemperature(uint32_t temp)
 {
 
 }
@@ -154,8 +154,8 @@ extern "C"
 	uint8_t GuiItfGetScreenSaverEnable();
 
 	/*** Clock Temp ***/
-	uint32_t GuiItfGetClockHeatedTemperature();
-	void GuiItfSetClockHeatedTemperature(uint32_t temp);
+	uint32_t GuiItfGetDasClockHeatedTemperature();
+	void GuiItfSetDasClockHeatedTemperature(uint32_t temp);
 }
 #endif
 
@@ -328,7 +328,7 @@ void MainView::RefreshIntExt()
 
 void  MainView::SetTemp(int p_Temp)
 {
-	int heatedTemp = GuiItfGetClockHeatedTemperature();
+	int heatedTemp = GuiItfGetDasClockHeatedTemperature();
 
 	if (p_Temp < heatedTemp - 30)
 	{
@@ -675,8 +675,8 @@ time_t MainView::RequestCurrentTime()
 	time_t dtp;
 	GuiItfGetRtc(&dtp);
 	struct tm* tm_info = gmtime(&dtp);
-	char strDateTime[25];
-	strftime(strDateTime, 25, "%d.%m.%Y  %H:%M", tm_info);
+	char strDateTime[LBLDATETIME_SIZE];
+	strftime(strDateTime, LBLDATETIME_SIZE, "%d.%m.%Y  %H:%M", tm_info);
 
 	Unicode::UnicodeChar uni_DateTime[LBLDATETIME_SIZE];
 	Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, LBLDATETIME_SIZE);

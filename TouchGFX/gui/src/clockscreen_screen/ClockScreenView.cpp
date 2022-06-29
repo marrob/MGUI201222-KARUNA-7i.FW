@@ -141,12 +141,13 @@ void ClockScreenView::RequestCurrentTime()
   time_t dtp;
   GuiItfGetRtc(&dtp);
   struct tm* tm_info = gmtime(&dtp);
-  char strDateTime[25];
-  strftime(strDateTime, 25, "%d.%m.%Y %H:%M:%S", tm_info);
+  char strDateTime[LBLDATETIME_SIZE];
+  //06.29.2022 17:08:01
+  strftime(strDateTime, LBLDATETIME_SIZE, "%d.%m.%Y %H:%M:%S", tm_info);
 
-  Unicode::UnicodeChar uni_DateTime[25];
-  Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, sizeof(uni_DateTime));
-  Unicode::snprintf(lblDateTimeBuffer, sizeof(lblDateTimeBuffer), "%s", uni_DateTime);
+  Unicode::UnicodeChar uni_DateTime[LBLDATETIME_SIZE];
+  Unicode::fromUTF8((const uint8_t*)strDateTime, uni_DateTime, LBLDATETIME_SIZE);
+  Unicode::snprintf(lblDateTimeBuffer, LBLDATETIME_SIZE, "%s", uni_DateTime);
   lblDateTime.invalidate();
 }
 

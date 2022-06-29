@@ -21,6 +21,7 @@
 #define EEP_KARUNA_SAVED_FLAGS_ADDR         0x0018
 #define EEP_BACKLIGHT_OFFTIMER_ENABLED_ADDR 0x0030
 #define EEP_SCREENSAVER_ENABLED_ADDR        0x0034
+#define EEP_DASCLOCK_HEATED_TEMP            0x0038
 
 #define MAGIC_WORD                          0x55AA55AA
 
@@ -78,6 +79,11 @@ uint8_t GuiItfLoad(void)
     /*** Screen Saver ***/
     EepromU32Read(EEP_SCREENSAVER_ENABLED_ADDR, &value);
     Device.Gui.ScreenSaverIsEnabled = value;
+
+
+    /*** DasClock Heated Clock ***/
+    EepromU32Read(EEP_DASCLOCK_HEATED_TEMP, &value);
+    Device.DasClock.HeatedTemp = value;
 
   }
   return GUIITF_OK;
@@ -140,6 +146,13 @@ uint8_t GuiItfSetDefault(void)
   /*** Magic Word ***/
   value = MAGIC_WORD;
   EepromU32Write(EEP_MAGICWORD_ADDR, value);
+
+
+  /*** DasClock Heated Clock ***/
+  value = 55;
+  EepromU32Write(EEP_DASCLOCK_HEATED_TEMP, value);
+  Device.DasClock.HeatedTemp = value;
+
   return GUIITF_OK;
 }
 
@@ -640,6 +653,17 @@ uint32_t GuiItfGetDasClocUartErrorCnt(void)
   return Device.DasClock.UartErrorCnt;
 }
 
+uint32_t GuiItfGetDasClockHeatedTemperature()
+{
+  return Device.DasClock.HeatedTemp;
+}
+
+void GuiItfSetDasClockHeatedTemperature(uint32_t temp)
+{
+  Device.DasClock.HeatedTemp = temp;
+  EepromU32Write(EEP_DASCLOCK_HEATED_TEMP, Device.DasClock.HeatedTemp);
+}
+
 /* Backlight -----------------------------------------------------------------*/
 uint8_t GuiItfSetBacklight(uint8_t percent)
 {
@@ -681,8 +705,6 @@ uint32_t GuiItfGetRemainingTimeToOff(void)
 {
   return Device.Backlight.RemainingTimeToOff;
 }
-
-
 
 /* RTC -----------------------------------------------------------------------*/
 /*
