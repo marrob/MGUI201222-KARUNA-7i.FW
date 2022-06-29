@@ -44,8 +44,8 @@ public:
     float GuiItfGetDasClockMainVoltage();
 
     uint32_t GuiItfGetDasClocUartErrorCnt(void);
-    uint32_t GuiItfGetClockHeatedTemperature();
-    void GuiItfSetClockHeatedTemperature(uint32_t temp);
+    uint32_t GuiItfGetDasClockHeatedTemperature();
+    void GuiItfSetDasClockHeatedTemperature(uint32_t temp);
 
 #endif
 

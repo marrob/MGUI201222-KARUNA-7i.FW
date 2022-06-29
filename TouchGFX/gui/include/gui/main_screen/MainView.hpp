@@ -71,8 +71,8 @@ public:
   uint8_t GuiItfGetScreenSaverEnable();
 
   /*** Clock Temp ***/
-  uint32_t GuiItfGetClockHeatedTemperature();
-  void GuiItfSetClockHeatedTemperature(uint32_t temp);
+  uint32_t GuiItfGetDasClockHeatedTemperature();
+  void GuiItfSetDasClockHeatedTemperature(uint32_t temp);
 
 #endif
 
