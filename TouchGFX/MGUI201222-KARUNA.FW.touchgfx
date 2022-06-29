@@ -6996,7 +6996,7 @@
         ]
       }
     ],
-    "Name": "MGUI201222-KARUNA-7i.FW",
+    "Name": "MGUI201222-KARUNA.FW",
     "Resolution": {
       "Width": 1024,
       "Height": 600
@@ -7044,7 +7044,7 @@
     "DisplayOrientation": "Landscape",
     "Family": "STM32F7",
     "Platform": "m7",
-    "ProjectFile": "../MGUI201222-KARUNA-7i.FW.ioc",
+    "ProjectFile": "../MGUI201222-KARUNA.FW.ioc",
     "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
     "OptionalComponents": []
   },
