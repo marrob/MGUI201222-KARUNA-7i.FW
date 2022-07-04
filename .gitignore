@@ -1,4 +1,4 @@
-﻿Debug/*
+Debug/*
 Release/*
 STM32CubeIDE/Debug/*
 TouchGFX/build/*
@@ -16,3 +16,5 @@ TouchGFX/build/*
 
 /IMAGES
 TouchGFX/simulator/msvs/.vs/*
+stm32cubeide.project.prefs
+language.settings.xml
