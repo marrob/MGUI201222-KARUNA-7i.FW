@@ -90,7 +90,7 @@ os_source_files := \
     $(cubemx_os_path)/Source/queue.c \
     $(cubemx_os_path)/Source/tasks.c \
     $(cubemx_os_path)/Source/timers.c \
-    $(cubemx_os_path)/Source/CMSIS_RTOS/cmsis_os.c
+    $(cubemx_os_path)/Source/CMSIS_RTOS_V2/cmsis_os2.c
 
 os_include_paths := \
     $(cubemx_os_path)/Source/include \
@@ -234,18 +234,20 @@ board_c_files :=
 board_c_files := \
 	$(Drivers_path)/gt911/gt911_tgfx.c \
   $(Drivers_path)/LED/LiveLed.c \
-  $(Drivers_path)/MX25/mx25.c
-
+  $(Drivers_path)/MX25/mx25.c \
+  $(Drivers_path)/Common/Src/common.c
+  
 board_cpp_files :=
 
 board_include_paths := \
     Drivers/CMSIS/Device/ST/STM32F7xx/Include \
     Drivers/CMSIS/Include \
     $(cubemx_middlewares_path)/Third_Party/FreeRTOS/Source/CMSIS_RTOS \
+    $(cubemx_middlewares_path)/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 \
     Drivers/gt911 \
     Drivers/LED \
     Drivers/MX25 \
-    Drivers/Common
+    Drivers/Common/Inc
     
 asm_source_files := $(makefile_path_relative)/startup_stm32f746nghx.s
 

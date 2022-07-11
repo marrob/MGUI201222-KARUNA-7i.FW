@@ -324,11 +324,6 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Core/Src/stm32f7xx_it.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/Common/Inc/StringPlus.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/StringPlus.h</locationURI>
-		</link>
-		<link>
 			<name>Drivers/Common/Inc/common.h</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/common.h</locationURI>
