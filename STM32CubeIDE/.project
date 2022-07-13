@@ -789,11 +789,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/common.h</locationURI>
 		</link>
 		<link>
-			<name>Drivers/Common/Inc/vt100.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/vt100.h</locationURI>
-		</link>
-		<link>
 			<name>Drivers/Common/Src/common.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Src/common.c</locationURI>
@@ -902,6 +897,11 @@
 			<name>Application/User/Core/Src/stm32f7xx_it.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Core/Src/stm32f7xx_it.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/Src/system_stm32f7xx.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/Core/Src/system_stm32f7xx.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/TouchGFX/App/app_touchgfx.c</name>
