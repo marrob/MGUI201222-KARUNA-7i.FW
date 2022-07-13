@@ -1,6 +1,7 @@
 Debug/*
 Release/*
 STM32CubeIDE/Debug/*
+STM32CubeIDE/Release/*
 TouchGFX/build/*
 *.bat
 *.Margit Róbert
