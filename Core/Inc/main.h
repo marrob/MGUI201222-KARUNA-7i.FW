@@ -79,6 +79,8 @@ extern "C" {
 #define RS485_ARG1_LENGTH     35
 #define RS485_ARG2_LENGTH     35
 
+#define USB_BUFFER_SIZE       40
+
 /*** YYMMDD-HHmmss ***/
 #define DEVICE_DT_STR_SIZE    20
 
