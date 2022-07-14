@@ -48,7 +48,6 @@
 									<listOptionValue builtIn="false" value="../../Drivers/Common"/>
 									<listOptionValue builtIn="false" value="../../Core/Inc"/>
 									<listOptionValue builtIn="false" value="../../Drivers/mx25"/>
-									<listOptionValue builtIn="false" value="../../Drivers/LED"/>
 									<listOptionValue builtIn="false" value="../../Drivers/gt911"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/App"/>
 									<listOptionValue builtIn="false" value="../../Drivers/Common/Inc"/>
@@ -185,7 +184,6 @@
 									<listOptionValue builtIn="false" value="../../Core/Inc"/>
 									<listOptionValue builtIn="false" value="../../Drivers/mx25"/>
 									<listOptionValue builtIn="false" value="../../Drivers/gt911"/>
-									<listOptionValue builtIn="false" value="../../Drivers/LED"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/App"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/target/generated"/>
 									<listOptionValue builtIn="false" value="../../TouchGFX/target"/>

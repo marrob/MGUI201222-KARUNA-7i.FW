@@ -32,7 +32,6 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "common.h"
 #include "DisplayLight.h"
 #include "PowerLed.h"
 #include "GuiItf.h"

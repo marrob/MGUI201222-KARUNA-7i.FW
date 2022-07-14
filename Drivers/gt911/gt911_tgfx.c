@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "main.h"
-#include "vt100.h"
 
 /* Private typedef -----------------------------------------------------------*/
 TS_DrvTypeDef GT911_ts_drv =
@@ -106,9 +105,7 @@ uint8_t GT911_WriteRegister(I2C_HandleTypeDef *i2c, uint16_t reg, uint8_t *value
     status = HAL_I2C_Mem_Write(i2c, GT911_I2C_DEV_ADDR, reg, sizeof(reg), value, length, GT911_I2C_TIMEOUT_MS);
     if(status != HAL_OK )
     {
-        printf(VT100_ATTR_RED);
-        printf("HAL_I2C_Mem_Write %x\r\n", status);
-        printf(VT100_ATTR_RESET);
+      printf("HAL_I2C_Mem_Write %x\r\n", status);
     }
     return status;
 }
@@ -119,9 +116,7 @@ uint8_t GT911_ReadRegister(I2C_HandleTypeDef *i2c, uint16_t reg, uint8_t *value,
     HAL_I2C_Mem_Read(i2c, GT911_I2C_DEV_ADDR, reg, sizeof(reg), value, length, GT911_I2C_TIMEOUT_MS);
     if(status != HAL_OK )
     {
-        printf(VT100_ATTR_RED);
-        printf("HAL_I2C_Mem_Read %x\r\n", status);
-        printf(VT100_ATTR_RESET);
+      printf("HAL_I2C_Mem_Read %x\r\n", status);
     }
     return status;
 }

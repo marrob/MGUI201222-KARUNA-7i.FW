@@ -30,7 +30,6 @@
 #include <queue.h>
 #include <stdlib.h>
 #include "GuiItf.h"
-#include "LiveLed.h"
 #include <time.h>
 #include "Log.h"
 
@@ -204,7 +203,6 @@ RS485TxItem_t RS485TxCollection[] =
   {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
 };
 
-LiveLED_HnadleTypeDef hLiveLed;
 
 /* USER CODE END PV */
 
@@ -331,12 +329,6 @@ int main(void)
   /*** EEPROM ***/
   EepromInit(&hi2c1);
   GuiItfLoad();
-
-  /*** LiveLed ***/
-  hLiveLed.LedOffFnPtr = &LiveLedOff;
-  hLiveLed.LedOnFnPtr = &LiveLedOn;
-  hLiveLed.HalfPeriodTimeMs = 500;
-  LiveLedInit(&hLiveLed);
 
   /*** Versions ***/
   sprintf(Device.Gui.FW, "%s",DEVICE_FW);
@@ -1533,7 +1525,7 @@ void RS485DirRx(void)
 void RS485UartTx(char *str)
 {
   RS485DirTx();
-  DelayMs(RS485_TX_HOLD_MS);
+  HAL_Delay(RS485_TX_HOLD_MS);
   strcat(str,"\n");
   HAL_UART_Transmit(&hRs485, (uint8_t*)str, strlen(str), 100);
   RS485DirRx();
