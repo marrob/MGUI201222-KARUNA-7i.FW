@@ -34,11 +34,11 @@ void GT911_Init(I2C_HandleTypeDef *i2c)
 
     //RST pin set HIGH
     HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_RESET);
-    HAL_Delay(100);
+   // HAL_Delay(100);
     HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_RESET);
-    HAL_Delay(100);
+  //  HAL_Delay(100);
     HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_SET);
-    HAL_Delay(200);
+  //  HAL_Delay(200);
 
     //INT pin dir INPUT & set PULLUP & interrupt
     GPIO_InitStruct.Pin = TS_INT_Pin;

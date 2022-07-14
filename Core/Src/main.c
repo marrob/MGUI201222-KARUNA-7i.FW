@@ -303,6 +303,8 @@ int main(void)
   MX_I2C1_Init();
   MX_RTC_Init();
   MX_TouchGFX_Init();
+  /* Call PreOsInit function */
+  MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
 
   /*** Display ***/

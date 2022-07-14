@@ -39,6 +39,6 @@ HAL_StatusTypeDef EepromU32Write(uint8_t address, uint32_t data)
                                 EEP_DEV_PAGE_SIZE,
                                 EEP_DEV_TIMEOUT_MS);
 
-  HAL_Delay(5);
+//  HAL_Delay(5);
   return status;
 }
