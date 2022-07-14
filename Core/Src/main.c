@@ -81,8 +81,6 @@ typedef struct _RS485TxItem
 #define SDRAM_BUFFER_SIZE                        ((uint32_t)0x1000)
 
 
-#define WITHOUT_RTOS
-
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -306,9 +304,6 @@ int main(void)
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
-
-  //HAL_Delay(1000);
-  //HAL_GPIO_WritePin(LIVE_LED_GPIO_Port, LIVE_LED_Pin, GPIO_PIN_SET);
 
   /*** Display ***/
   BacklightEn(0);
@@ -933,7 +928,7 @@ static void MX_UART7_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN UART7_Init 2 */
-  HAL_UART_Receive_DMA (&huart7, (uint8_t*)RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
+  HAL_UART_Receive_DMA (&hRs485, (uint8_t*)RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
   /* USER CODE END UART7_Init 2 */
 
 }
@@ -1709,7 +1704,7 @@ void UsbRxTask(void *argument)
         timestamp = HAL_GetTick();
         startFlag = 1;
       }
-      for(uint8_t i=0; i < RS485_BUFFER_SIZE; i++)
+      for(uint8_t i=0; i < USB_BUFFER_SIZE; i++)
       {
         if(USB_UART_RxBuffer[i]=='\n')
         {
@@ -1725,12 +1720,12 @@ void UsbRxTask(void *argument)
       {
         if(HAL_GetTick() - timestamp > 500)
         {
-          if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE))
-            __HAL_UART_CLEAR_FLAG(&huart1,UART_CLEAR_OREF);
-          if(__HAL_UART_GET_FLAG(&huart1, USART_ISR_NE))
-            __HAL_UART_CLEAR_FLAG(&huart1,USART_ISR_NE);
-          if(__HAL_UART_GET_FLAG(&huart1, USART_ISR_FE))
-            __HAL_UART_CLEAR_FLAG(&huart1,USART_ISR_FE);
+          if(__HAL_UART_GET_FLAG(&husb, UART_FLAG_ORE))
+            __HAL_UART_CLEAR_FLAG(&husb,UART_CLEAR_OREF);
+          if(__HAL_UART_GET_FLAG(&husb, USART_ISR_NE))
+            __HAL_UART_CLEAR_FLAG(&husb,USART_ISR_NE);
+          if(__HAL_UART_GET_FLAG(&husb, USART_ISR_FE))
+            __HAL_UART_CLEAR_FLAG(&husb,USART_ISR_FE);
           startFlag = 0;
           HAL_UART_DMAStop(&husb);
           memset(USB_UART_RxBuffer, 0x00, USB_BUFFER_SIZE);
@@ -1824,12 +1819,12 @@ void RS485RxTask(void *argument)
       {
         if(HAL_GetTick() - timestamp > 500)
         {
-          if(__HAL_UART_GET_FLAG(&huart7, UART_FLAG_ORE))
-            __HAL_UART_CLEAR_FLAG(&huart7,UART_CLEAR_OREF);
-          if(__HAL_UART_GET_FLAG(&huart7, USART_ISR_NE))
-            __HAL_UART_CLEAR_FLAG(&huart7,USART_ISR_NE);
-          if(__HAL_UART_GET_FLAG(&huart7, USART_ISR_FE))
-            __HAL_UART_CLEAR_FLAG(&huart7,USART_ISR_FE);
+          if(__HAL_UART_GET_FLAG(&hRs485, UART_FLAG_ORE))
+            __HAL_UART_CLEAR_FLAG(&hRs485,UART_CLEAR_OREF);
+          if(__HAL_UART_GET_FLAG(&hRs485, USART_ISR_NE))
+            __HAL_UART_CLEAR_FLAG(&hRs485,USART_ISR_NE);
+          if(__HAL_UART_GET_FLAG(&hRs485, USART_ISR_FE))
+            __HAL_UART_CLEAR_FLAG(&hRs485,USART_ISR_FE);
           startFlag = 0;
           HAL_UART_DMAStop(&hRs485);
           memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
