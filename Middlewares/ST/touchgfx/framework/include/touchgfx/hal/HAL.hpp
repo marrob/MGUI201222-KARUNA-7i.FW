@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -215,8 +215,9 @@ public:
     virtual void flushDMA();
 
     /**
-     * Waits for the framebuffer to become available for use (i.e. not used by DMA
-     * transfers).
+     * Waits for the framebuffer to become available for use (i.e. not
+     * used by DMA transfers). Calls the InvalidateCache virtual if
+     * previous operation was hardware based.
      *
      * @return A pointer to the beginning of the currently used framebuffer.
      *
@@ -224,6 +225,27 @@ public:
      *       unlockFrameBuffer() when framebuffer operation has completed.
      */
     virtual uint16_t* lockFrameBuffer();
+
+    /**
+     * A list of rendering methods.
+     *
+     * @see setRenderingMethod
+     */
+    enum RenderingMethod
+    {
+        SOFTWARE, ///< Transition to this method will invalidate the D-Cache, if enabled
+        HARDWARE  ///< Transition to this method will flush the D-Cache, if enabled
+    };
+
+    /**
+     * Locks the framebuffer and sets rendering method for correct
+     * cache management.
+     *
+     * @param method The rendering method to be used.
+     *
+     * @return A pointer to the beginning of the currently used framebuffer.
+     */
+    uint16_t* lockFrameBufferForRenderingMethod(RenderingMethod method);
 
     /**
      * Unlocks the framebuffer (MUST be called exactly once for each call to
@@ -647,6 +669,7 @@ public:
      */
     virtual bool sampleKey(uint8_t& key)
     {
+        (void)key; // Unused variable
         return false;
     }
 
@@ -1079,17 +1102,6 @@ public:
     {
         return auxiliaryLCD;
     }
-
-    /**
-     * A list of rendering methods.
-     *
-     * @see setRenderingMethod
-     */
-    enum RenderingMethod
-    {
-        SOFTWARE,
-        HARDWARE
-    };
 
     /**
      * Set current rendering method for cache maintenance.

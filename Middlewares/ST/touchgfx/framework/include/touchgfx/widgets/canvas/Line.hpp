@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -44,7 +44,7 @@ namespace touchgfx
  *            Line line;
  *            line.setStart(1.1f, 1.1f); // Will use (35/32, 35/32) = (1.09375f, 1.09375f)
  *            int x, y;
- *            line.getStart(&amp;x, &amp;y); // Will return (1, 1)
+ *            line.getStart(&x, &y); // Will return (1, 1)
  *       @endcode.
  */
 class Line : public CanvasWidget
@@ -152,8 +152,8 @@ public:
     template <typename T>
     void getStart(T& x, T& y) const
     {
-        x = startX.to<T>();
-        y = startY.to<T>();
+        x = startXQ5.to<T>();
+        y = startYQ5.to<T>();
     }
 
     /**
@@ -230,8 +230,8 @@ public:
     template <typename T>
     void getEnd(T& x, T& y) const
     {
-        x = endX.to<T>();
-        y = endY.to<T>();
+        x = endXQ5.to<T>();
+        y = endYQ5.to<T>();
     }
 
     /**
@@ -261,12 +261,12 @@ public:
      */
     void setLineWidth(CWRUtil::Q5 widthQ5)
     {
-        if (lineWidth == widthQ5)
+        if (lineWidthQ5 == widthQ5)
         {
             return;
         }
 
-        lineWidth = widthQ5;
+        lineWidthQ5 = widthQ5;
 
         updateCachedShape();
     }
@@ -302,7 +302,7 @@ public:
      */
     void updateLineWidth(CWRUtil::Q5 widthQ5)
     {
-        if (lineWidth == widthQ5)
+        if (lineWidthQ5 == widthQ5)
         {
             return;
         }
@@ -310,7 +310,7 @@ public:
         Rect rectBefore = getMinimalRect();
         invalidateRect(rectBefore);
 
-        lineWidth = widthQ5;
+        lineWidthQ5 = widthQ5;
 
         updateCachedShape();
 
@@ -329,7 +329,7 @@ public:
     template <typename T>
     void getLineWidth(T& width) const
     {
-        width = lineWidth.to<T>();
+        width = lineWidthQ5.to<T>();
     }
 
     /**
@@ -344,7 +344,7 @@ public:
     template <typename T>
     T getLineWidth() const
     {
-        return lineWidth.to<T>();
+        return lineWidthQ5.to<T>();
     }
 
     /**
@@ -403,14 +403,14 @@ public:
     virtual void invalidateContent() const;
 
 private:
-    CWRUtil::Q5 startX;
-    CWRUtil::Q5 startY;
-    CWRUtil::Q5 endX;
-    CWRUtil::Q5 endY;
-    CWRUtil::Q5 lineWidth;
+    CWRUtil::Q5 startXQ5;
+    CWRUtil::Q5 startYQ5;
+    CWRUtil::Q5 endXQ5;
+    CWRUtil::Q5 endYQ5;
+    CWRUtil::Q5 lineWidthQ5;
     LINE_ENDING_STYLE lineEnding;
-    CWRUtil::Q5 xCorner[4];
-    CWRUtil::Q5 yCorner[4];
+    CWRUtil::Q5 cornerXQ5[4];
+    CWRUtil::Q5 cornerYQ5[4];
     Rect minimalRect;
     int lineCapArcIncrement;
 

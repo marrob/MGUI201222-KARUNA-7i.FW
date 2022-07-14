@@ -193,12 +193,14 @@ int mTickCount;
 
 MainView::MainView()
 {
+  /*
 	GRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
 	CORECOLOR = touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
 	BLACKCOLOR = touchgfx::Color::getColorFrom24BitRGB(0, 0, 0);
 	DARKGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(32, 32, 32);
 	MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
 	REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
+	*/
 
 	//Audio and Clocks temperature
 	RefreshKarunaAndClockInfo();

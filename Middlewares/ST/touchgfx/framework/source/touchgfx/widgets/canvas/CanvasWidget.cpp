@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -20,103 +20,92 @@ namespace touchgfx
 CanvasWidget::CanvasWidget()
     : Widget(),
       alpha(255),
-      canvasPainter(0),
-      maxRenderLines(0x7FFF)
+      canvasPainter(0)
 {
 }
-
-void CanvasWidget::setPainter(AbstractPainter& painter)
-{
-    canvasPainter = &painter;
-}
-
-AbstractPainter& CanvasWidget::getPainter() const
-{
-    assert(canvasPainter != 0 && "No painter set");
-    return *canvasPainter;
-} //lint !e1763
 
 void CanvasWidget::draw(const Rect& invalidatedArea) const
 {
-    Rect area = invalidatedArea;
-
-    int16_t* offset;
-    int16_t* lines;
-    int16_t* width;
-    int16_t* height;
-
-    int16_t wantedRenderLines;
+    Rect area = invalidatedArea & getMinimalRect();
+    if (!canvasPainter || !canvasPainter->setup(getRect()) || area.isEmpty())
+    {
+        // Painter not ready to paint or nothing to paint => done
+        return;
+    }
 
     switch (HAL::DISPLAY_ROTATION)
     {
-    default:
     case rotate0:
-        offset = &area.y;
-        lines = &area.height;
-        width = &area.width;
-        height = &wantedRenderLines;
+        {
+            const int16_t bottom = area.bottom();
+            while (area.y < bottom)
+            {
+                while (!drawCanvasWidget(area))
+                {
+                    if (area.height == 1)
+                    {
+                        // Failed on a single line
+                        break;
+                    }
+                    area.height = (area.height + 1) >> 1; // Cannot become 0 as (2+1)>>1=1
+#ifdef SIMULATOR
+                    if (CanvasWidgetRenderer::getWriteMemoryUsageReport())
+                    {
+                        if (area.height > 1)
+                        {
+                            touchgfx_printf("CWR will split draw into multiple draws due to limited memory.\n");
+                        }
+                        else
+                        {
+                            touchgfx_printf("CWR was unable to complete a draw operation due to limited memory.\n");
+                        }
+                    }
+#endif
+                }
+                area.y += area.height;
+                if (area.bottom() > bottom)
+                {
+                    area.height = bottom - area.y;
+                }
+            }
+        }
         break;
     case rotate90:
-        offset = &area.x;
-        lines = &area.width;
-        width = &wantedRenderLines;
-        height = &area.height;
+        {
+            const int16_t right = area.right();
+            while (area.x < right)
+            {
+                while (!drawCanvasWidget(area))
+                {
+                    if (area.width == 1)
+                    {
+                        break;
+                    }
+                    area.width = (area.width + 1) >> 1;
+#ifdef SIMULATOR
+                    if (CanvasWidgetRenderer::getWriteMemoryUsageReport())
+                    {
+                        if (area.width > 1)
+                        {
+                            touchgfx_printf("CWR will split draw into multiple draws due to limited memory.\n");
+                        }
+                        else
+                        {
+                            touchgfx_printf("CWR was unable to complete a draw operation due to limited memory.\n");
+                        }
+                    }
+#endif
+                }
+                area.x += area.width;
+                if (area.right() > right)
+                {
+                    area.width = right - area.x;
+                }
+            }
+        }
         break;
     }
-
-    Rect minimalRect = getMinimalRect();
-
-    bool failedAtLeastOnce = false;
-    while (*lines)
-    {
-        wantedRenderLines = MIN(maxRenderLines, *lines);
-
-        while (wantedRenderLines > 0)
-        {
-            Rect smallArea(area.x, area.y, *width, *height);
-            if (!smallArea.intersect(minimalRect))
-            {
-                break;
-            }
-            if (drawCanvasWidget(smallArea))
-            {
-                break;
-            }
-#ifdef SIMULATOR
-            if (CanvasWidgetRenderer::getWriteMemoryUsageReport())
-            {
-                if (wantedRenderLines > 1)
-                {
-                    touchgfx_printf("CWR will split draw into multiple draws due to limited memory.\n");
-                }
-                else
-                {
-                    touchgfx_printf("CWR was unable to complete a draw operation due to limited memory.\n");
-                }
-            }
-#endif
-            wantedRenderLines >>= 1;
-            failedAtLeastOnce = true;
-        }
-        if (wantedRenderLines == 0)
-        {
-            // We did not manage to draw anything. Set wantedHeight to
-            // one to skip a single raster line and try to render the
-            // rest of the CanvasWidget.
-            wantedRenderLines = 1;
-        }
-        else if (failedAtLeastOnce && maxRenderLines == 0x7FFF)
-        {
-            // Only adjust maxRenderLines if it is the first draw for the CanvasWidget
-            maxRenderLines = wantedRenderLines;
-        }
-        *offset += wantedRenderLines;
-        *lines -= wantedRenderLines;
-    }
-    if (maxRenderLines == 0x7FFF)
-    {
-        maxRenderLines--; // 0x7FFF means first draw
-    }
+    canvasPainter->tearDown();
 }
 
 void CanvasWidget::invalidate() const
@@ -126,18 +115,4 @@ void CanvasWidget::invalidate() const
     invalidateRect(minimalRect);
 }
 
-Rect CanvasWidget::getMinimalRect() const
-{
-    return Rect(0, 0, getWidth(), getHeight());
-}
-
-Rect CanvasWidget::getSolidRect() const
-{
-    return Rect();
-}
-
-void CanvasWidget::resetMaxRenderLines()
-{
-    maxRenderLines = 0x7FFF;
-}
 } // namespace touchgfx

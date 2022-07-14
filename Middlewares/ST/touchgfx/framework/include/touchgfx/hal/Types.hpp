@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -82,11 +82,11 @@ struct colortype
 
     /**
      * Constructor which creates a colortype with the given color. Use
-     * Color::getColorFrom24BitRGB() to create a color that will work on your selected LCD type.
+     * Color::getColorFromRGB() to create a color that will work on your selected LCD type.
      *
      * @param  col The color.
      *
-     * @see Color::getColorFrom24BitRGB
+     * @see Color::getColorFromRGB
      */
     colortype(uint32_t col)
         : color(col)
@@ -132,13 +132,13 @@ public:
     /**
      * Initializes a new instance of the Rect class.
      *
-     * @param  x      The x coordinate.
-     * @param  y      The y coordinate.
-     * @param  width  The width.
-     * @param  height The height.
+     * @param  rectX      The x coordinate.
+     * @param  rectY      The y coordinate.
+     * @param  rectWidth  The width.
+     * @param  rectHeight The height.
      */
-    Rect(int16_t x, int16_t y, int16_t width, int16_t height)
-        : x(x), y(y), width(width), height(height)
+    Rect(int16_t rectX, int16_t rectY, int16_t rectWidth, int16_t rectHeight)
+        : x(rectX), y(rectY), width(rectWidth), height(rectHeight)
     {
     }
 
@@ -353,7 +353,7 @@ public:
      *
      * @return area of the rectangle.
      */
-    uint32_t area() const
+    int32_t area() const
     {
         return isEmpty() ? 0 : width * height;
     }
@@ -578,7 +578,7 @@ struct Point
      *
      * @return The squared distance.
      */
-    unsigned dist_sqr(struct Point& o)
+    int32_t dist_sqr(struct Point& o)
     {
         return (x - o.x) * (x - o.x) + (y - o.y) * (y - o.y);
     }

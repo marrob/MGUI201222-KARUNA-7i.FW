@@ -1,7 +1,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.19.1 distribution.
+# This file is part of the TouchGFX 4.20.0 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -74,7 +74,7 @@ UPGRADE
     $calling_path = ARGV.shift
 
     #optional arguments
-    remap_identical_texts = ARGV.include?("yes") || ARGV.include?("remap") ? "yes" : "no"
+    remap_global = ARGV.include?("yes") || ARGV.include?("remap") ? "yes" : "no"
     autohint_setting = "default"
 
     data_format_a1 = ARGV.include?("A1") ? "A1" : ""
@@ -102,7 +102,7 @@ UPGRADE
 
       remap = text_conf["remap"]
       if !remap.nil?
-        remap_identical_texts = remap == "yes" ? "yes" : "no"
+        remap_global = remap == "yes" ? "yes" : "no"
       end
 
       autohint = text_conf["autohint"]
@@ -153,10 +153,12 @@ UPGRADE
       end
     end
 
+    remap_global ||= "no"
+
     data_format = "#{data_format_a1}#{data_format_a2}#{data_format_a4}#{data_format_a8}"
-    if generate_binary_translations == "yes" && remap_identical_texts == "yes"
-      puts "Disabling remapping of identical texts, because binary language files are generated"
-      remap_identical_texts = "no"
+    if generate_binary_translations == "yes" && remap_global == "yes"
+      puts "Disabling global remapping of identical texts, because binary language files are generated"
+      remap_global = "no"
     end
 
     begin
@@ -207,7 +209,7 @@ UPGRADE
       options_file = "#{@localization_output_path}/cache/options.cache"
       options = File.exists?(options_file) && File.read(options_file)
 
-      new_options = { :remap => remap_identical_texts,
+      new_options = { :remap => remap_global,
                       :autohint => autohint_setting,
                       :data_format => data_format,
                       :binary_translations => generate_binary_translations,
@@ -244,7 +246,7 @@ UPGRADE
       require 'lib/emitters/fonts_cpp'
       require 'lib/generator'
       FontsCpp.font_convert = font_convert_path
-      Generator.new.run(file_name, @fonts_output_path, @localization_output_path, font_asset_path, data_format, remap_identical_texts, autohint_setting, generate_binary_translations, generate_binary_fonts, framebuffer_bpp, generate_font_format)
+      Generator.new.run(file_name, @fonts_output_path, @localization_output_path, font_asset_path, data_format, remap_global, autohint_setting, generate_binary_translations, generate_binary_fonts, framebuffer_bpp, generate_font_format)
       #touch the cache compile time that we rely on in the makefile
       FileUtils.touch "#{@localization_output_path}/cache/compile_time.cache"
 
@@ -252,6 +254,7 @@ UPGRADE
 
     rescue Exception => e
       STDERR.puts e
+      STDERR.puts e.backtrace if ENV['DEBUG']
       abort "An error occurred during text convertion"
     end
   end

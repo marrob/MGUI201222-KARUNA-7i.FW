@@ -276,11 +276,11 @@ colortype DebugScreenView::GetOutputColor(uint8_t p_State)
 { 
 	if (p_State)
 	{
-		return touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
+	//	return touchgfx::Color::getColorFrom24BitRGB(150, 118, 73);
 	}
 	else
 	{
-		return touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
+	//	return touchgfx::Color::getColorFrom24BitRGB(128, 128, 128);
 	}
 }
 

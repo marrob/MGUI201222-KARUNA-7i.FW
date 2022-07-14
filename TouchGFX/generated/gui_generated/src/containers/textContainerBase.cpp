@@ -19,6 +19,11 @@ textContainerBase::textContainerBase()
     add(text);
 }
 
+textContainerBase::~textContainerBase()
+{
+
+}
+
 void textContainerBase::initialize()
 {
 

@@ -39,6 +39,11 @@ TextContainerHighBase::TextContainerHighBase()
     add(line1);
 }
 
+TextContainerHighBase::~TextContainerHighBase()
+{
+
+}
+
 void TextContainerHighBase::initialize()
 {
 

@@ -15,7 +15,7 @@ class ScrollElmentBase : public touchgfx::Container
 {
 public:
     ScrollElmentBase();
-    virtual ~ScrollElmentBase() {}
+    virtual ~ScrollElmentBase();
     virtual void initialize();
 
 protected:

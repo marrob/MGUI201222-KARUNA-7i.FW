@@ -20,8 +20,6 @@ static uint8_t GT911_WriteRegister(I2C_HandleTypeDef *i2c, uint16_t reg, uint8_t
 
 void GT911_Init(I2C_HandleTypeDef *i2c)
 {
-    printf(VT100_ATTR_RESET);
-
     GPIO_InitTypeDef GPIO_InitStruct;
 
     //INT pin dir OUT & set LOW
@@ -34,11 +32,11 @@ void GT911_Init(I2C_HandleTypeDef *i2c)
 
     //RST pin set HIGH
     HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_RESET);
-   // HAL_Delay(100);
+    HAL_Delay(100);
     HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_RESET);
-  //  HAL_Delay(100);
+    HAL_Delay(100);
     HAL_GPIO_WritePin(TS_RST_GPIO_Port, TS_RST_Pin, GPIO_PIN_SET);
-  //  HAL_Delay(200);
+    HAL_Delay(200);
 
     //INT pin dir INPUT & set PULLUP & interrupt
     GPIO_InitStruct.Pin = TS_INT_Pin;
@@ -98,7 +96,7 @@ uint8_t GT911_DetectTouch(I2C_HandleTypeDef *i2c)
         }
         GT911_WriteRegister(i2c, GT911_READ_COORD_ADDR, &clrarbyte, sizeof(clrarbyte));
     }
-    //HAL_Delay(10);
+    HAL_Delay(10);
     return(touchCount);
 }
 

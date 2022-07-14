@@ -1,9 +1,8 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file
-  * @author  MCD Application Team
-  * @version V2.0.0
+  * File Name          :
+  * Description        :
   ******************************************************************************
   * @attention
   *
@@ -17,12 +16,11 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-  /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef  __RTE_COMPONENTS_H__
-#define  __RTE_COMPONENTS_H__
 
-/* Defines ------------------------------------------------------------------*/
-/* STMicroelectronics.X-CUBE-TOUCHGFX.4.19.1 */
-#define TOUCHGFX_APP
+/**
+  * @}
+  */
 
-#endif /* __RTE_COMPONENTS_H__ */
+/**
+  * @}
+  */

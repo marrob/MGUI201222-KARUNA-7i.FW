@@ -51,6 +51,11 @@ UpDownContainerBase::UpDownContainerBase() :
     add(lblValue);
 }
 
+UpDownContainerBase::~UpDownContainerBase()
+{
+
+}
+
 void UpDownContainerBase::initialize()
 {
 

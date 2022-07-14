@@ -302,14 +302,13 @@ int main(void)
   MX_TIM2_Init();
   MX_I2C1_Init();
   MX_RTC_Init();
-  HAL_Delay(1000);
   MX_TouchGFX_Init();
   /* Call PreOsInit function */
   MX_TouchGFX_PreOSInit();
   /* USER CODE BEGIN 2 */
 
-  HAL_Delay(1000);
-  HAL_GPIO_WritePin(LIVE_LED_GPIO_Port, LIVE_LED_Pin, GPIO_PIN_SET);
+  //HAL_Delay(1000);
+  //HAL_GPIO_WritePin(LIVE_LED_GPIO_Port, LIVE_LED_Pin, GPIO_PIN_SET);
 
   /*** Display ***/
   BacklightEn(0);
@@ -1092,7 +1091,7 @@ static void MX_FMC_Init(void)
 
   /* Step 2: Insert 100 us minimum delay */
   /* Inserted delay is equal to 1 ms due to systick time base unit (ms) */
-  //HAL_Delay(1);
+  HAL_Delay(1);
 
   /* Step 3: Configure a PALL (precharge all) command */
   Command.CommandMode            = FMC_SDRAM_CMD_PALL;

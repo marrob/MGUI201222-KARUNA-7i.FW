@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -38,6 +38,10 @@ bool AbstractShape::drawCanvasWidget(const Rect& invalidatedArea) const
     for (int i = 1; i < numPoints; i++)
     {
         canvas.lineTo(getCacheX(i), getCacheY(i));
+        if (canvas.wasOutlineTooComplex())
+        {
+            return false;
+        }
     }
     return canvas.render();
 }

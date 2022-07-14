@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -24,7 +24,7 @@ ScrollableContainer::ScrollableContainer()
       scrollbarPadding(0),
       scrollbarWidth(2),
       scrollbarAlpha(120),
-      scrollbarColor(Color::getColorFrom24BitRGB(0xFF, 0xFF, 0xFF)),
+      scrollbarColor(Color::getColorFromRGB(0xFF, 0xFF, 0xFF)),
       maxVelocity(SCROLLBAR_MAX_VELOCITY),
       accelDirection(GestureEvent::SWIPE_HORIZONTAL),
       xSlider(0, 0, scrollbarColor, scrollbarAlpha),

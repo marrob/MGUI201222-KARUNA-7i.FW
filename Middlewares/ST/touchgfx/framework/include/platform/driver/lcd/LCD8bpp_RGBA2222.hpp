@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -294,9 +294,7 @@ private:
     DrawTextureMapScanLineBase* textureMapper_RGBA2222_NonOpaque_BilinearInterpolation_GA;
     DrawTextureMapScanLineBase* textureMapper_RGBA2222_Opaque_BilinearInterpolation_GA;
     DrawTextureMapScanLineBase* textureMapper_ARGB8888_NonOpaque_NearestNeighbor_GA;
-    DrawTextureMapScanLineBase* textureMapper_ARGB8888_Opaque_NearestNeighbor_GA;
     DrawTextureMapScanLineBase* textureMapper_ARGB8888_NonOpaque_BilinearInterpolation_GA;
-    DrawTextureMapScanLineBase* textureMapper_ARGB8888_Opaque_BilinearInterpolation_GA;
     DrawTextureMapScanLineBase* textureMapper_A4_NearestNeighbor_GA;
     DrawTextureMapScanLineBase* textureMapper_A4_BilinearInterpolation_GA;
 

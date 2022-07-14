@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -257,21 +257,21 @@ public:
         /**
          * Construct a StringVisual object for rendering text.
          *
-         * @param  font           The Font with which to draw the text.
-         * @param  color          The color with which to draw the text.
-         * @param  alpha          Alpha blending. Default value is 255 (solid)
-         * @param  alignment      How to align the text.
-         * @param  linespace      Line space in pixels between each line, in case the text
-         *                        contains newline characters.
-         * @param  rotation       How to rotate the text.
-         * @param  textDirection  The text direction.
-         * @param  indentation    The indentation of the text from the left and right of the
-         *                        text area rectangle.
-         * @param  wideTextAction (Optional) What to do with lines longer than the width of the
-         *                        TextArea.
+         * @param  svFont           The Font with which to draw the text.
+         * @param  svColor          The color with which to draw the text.
+         * @param  svAlpha          Alpha blending. Default value is 255 (solid)
+         * @param  svAlignment      How to align the text.
+         * @param  svLinespace      Line space in pixels between each line, in case the text contains
+         *                          newline characters.
+         * @param  svRotation       How to rotate the text.
+         * @param  svTextDirection  The text direction.
+         * @param  svIndentation    The indentation of the text from the left and right of the text area
+         *                          rectangle.
+         * @param  svWideTextAction (Optional) What to do with lines longer than the width of the
+         *                          TextArea.
          */
-        StringVisuals(const Font* font, colortype color, uint8_t alpha, Alignment alignment, int16_t linespace, TextRotation rotation, TextDirection textDirection, uint8_t indentation, WideTextAction wideTextAction = WIDE_TEXT_NONE)
-            : font(font), alignment(alignment), textDirection(textDirection), rotation(rotation), color(color), linespace(linespace), alpha(alpha), indentation(indentation), wideTextAction(wideTextAction)
+        StringVisuals(const Font* svFont, colortype svColor, uint8_t svAlpha, Alignment svAlignment, int16_t svLinespace, TextRotation svRotation, TextDirection svTextDirection, uint8_t svIndentation, WideTextAction svWideTextAction = WIDE_TEXT_NONE)
+            : font(svFont), alignment(svAlignment), textDirection(svTextDirection), rotation(svRotation), color(svColor), linespace(svLinespace), alpha(svAlpha), indentation(svIndentation), wideTextAction(svWideTextAction)
         {
         }
     };

@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.19.1 distribution.
+* This file is part of the TouchGFX 4.20.0 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -71,7 +71,7 @@ public:
         return getFramebufferStride();
     }
 
-    virtual bool supportDynamicBitmapDrawing(const Bitmap::BitmapFormat format)
+    virtual bool supportDynamicBitmapDrawing(const Bitmap::BitmapFormat /*format*/)
     {
         // DynamicBitmap drawing is not supported by LCD32XRGB
         return false;
@@ -88,66 +88,6 @@ public:
         assert(HAL::FRAME_BUFFER_WIDTH > 0 && "HAL has not been initialized yet");
         return HAL::FRAME_BUFFER_WIDTH * 4;
     }
-
-#if 0
-    virtual colortype getColorFrom24BitRGB(uint8_t red, uint8_t green, uint8_t blue) const
-    {
-        return getColorFromRGB(red, green, blue);
-    }
-
-    /**
-     * Generates a color representation to be used on the LCD, based on 24 bit RGB values.
-     *
-     * @param  red   Value of the red part (0-255).
-     * @param  green Value of the green part (0-255).
-     * @param  blue  Value of the blue part (0-255).
-     *
-     * @return The color from RGB.
-     */
-    FORCE_INLINE_FUNCTION static colortype getColorFromRGB(uint8_t red, uint8_t green, uint8_t blue)
-    {
-        return 0xFF000000 | (red << 16) | (green << 8) | (blue);
-    }
-
-    virtual uint8_t getRedColor(colortype color) const
-    {
-        return getRedFromColor(color);
-    }
-
-    /**
-     * Gets red from color.
-     *
-     * @param  color The color.
-     *
-     * @return The red from color.
-     */
-    FORCE_INLINE_FUNCTION static uint8_t getRedFromColor(colortype color)
-    {
-        return (color >> 16) & 0xFF;
-    }
-
-    virtual uint8_t getGreenColor(colortype color) const
-    {
-        return getGreenFromColor(color);
-    }
-
-    /**
-     * Gets green from color.
-     *
-     * @param  color The color.
-     *
-     * @return The green from color.
-     */
-    FORCE_INLINE_FUNCTION static uint8_t getGreenFromColor(colortype color)
-    {
-        return (color >> 8) & 0xFF;
-    }
-
-    virtual uint8_t getBlueColor(colortype color) const
-    {
-        return getBlueFromColor(color);
-    }
-#endif
 
     /**
      * Gets blue from color.
