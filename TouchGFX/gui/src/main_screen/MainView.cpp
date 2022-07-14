@@ -201,6 +201,12 @@ MainView::MainView()
 	MIDGRAYCOLOR = touchgfx::Color::getColorFrom24BitRGB(64, 64, 64);
 	REDCOLOR = touchgfx::Color::getColorFrom24BitRGB(0x8B, 0, 0);
 	*/
+  GRAYCOLOR = touchgfx::Color::getColorFromRGB(128, 128, 128);//marrob 220714
+  CORECOLOR = touchgfx::Color::getColorFromRGB(150, 118, 73);//marrob 220714
+  BLACKCOLOR = touchgfx::Color::getColorFromRGB(0, 0, 0);//marrob 220714
+  DARKGRAYCOLOR = touchgfx::Color::getColorFromRGB(32, 32, 32);//marrob 220714
+  MIDGRAYCOLOR = touchgfx::Color::getColorFromRGB(64, 64, 64);//marrob 220714
+  REDCOLOR = touchgfx::Color::getColorFromRGB(0x8B, 0, 0);//marrob 220714
 
 	//Audio and Clocks temperature
 	RefreshKarunaAndClockInfo();
