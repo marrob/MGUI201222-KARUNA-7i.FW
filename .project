@@ -164,11 +164,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rtc.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_rtc_ex.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_rtc_ex.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/STM32F7xx_HAL_Driver/stm32f7xx_hal_sdram.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_sdram.c</locationURI>
@@ -267,6 +262,11 @@
 			<name>Middlewares/FreeRTOS/timers.c</name>
 			<type>1</type>
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Middlewares/Third_Party/FreeRTOS/Source/timers.c</locationURI>
+		</link>
+		<link>
+			<name>Application/User/Core/main.c</name>
+			<type>1</type>
+			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Core/Src/main.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/ApplicationFontProvider.cpp</name>

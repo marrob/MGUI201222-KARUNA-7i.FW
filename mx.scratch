@@ -57,8 +57,6 @@
             <include>Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1</include>
             <include>Drivers\CMSIS\Device\ST\STM32F7xx\Include</include>
             <include>Drivers\CMSIS\Include</include>
-            <include>..\Drivers\Components\ft5336</include>
-            <include>..\Drivers\BSP</include>
           </Cincludes>
           <definestoremove>
             <Adefines/>
@@ -73,7 +71,10 @@
             <Aincludes>
               <include/>
             </Aincludes>
-            <Cincludes/>
+            <Cincludes>
+              <include>..\Drivers\Components\ft5336</include>
+              <include>..\Drivers\BSP</include>
+            </Cincludes>
           </inctoremove>
         </config>
       </configs>
@@ -112,39 +113,6 @@
             </file>
             <file>
               <name>Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\port.c</name>
-            </file>
-          </group>
-        </group>
-        <group>
-          <name>Application</name>
-          <group>
-            <name>User</name>
-            <group>
-              <name>TouchGFX</name>
-              <group>
-                <name>target</name>
-                <file>
-                  <name>TouchGFX/target/CortexMMCUInstrumentation.cpp</name>
-                </file>
-              </group>
-            </group>
-          </group>
-        </group>
-        <group>
-          <name>Drivers</name>
-          <group>
-            <name>Components</name>
-            <file>
-              <name>../Drivers/Components/ft5336/ft5336.c</name>
-            </file>
-          </group>
-        </group>
-        <group>
-          <name>Drivers</name>
-          <group>
-            <name>BSP</name>
-            <file>
-              <name>../Drivers/BSP/stm32746g_discovery_qspi.c</name>
             </file>
           </group>
         </group>
