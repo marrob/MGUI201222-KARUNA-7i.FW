@@ -21,7 +21,6 @@ void ServiceScreenView::tearDownScreen()
 void ServiceScreenView::handleTickEvent()
 {
 	mTickCountService++;
-	//Wait for 0.5sec
 	if (mTickCountService % 30 == 0)
 	{
 		serviceControl.RefreshServiceInfo();
