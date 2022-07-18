@@ -157,10 +157,10 @@ void SystemInit(void)
   RCC->CIR = 0x00000000;
 
   /* Configure the Vector Table location add offset address ------------------*/
-#ifdef VECT_TAB_SRAM
-  SCB->VTOR = RAMDTCM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM */
+#ifndef DEBUG
+  SCB->VTOR =  0x08040000U; /*** RELEASE ***/
 #else
-  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
+  SCB->VTOR =  0x08000000U;  /*** DEBUG ***/
 #endif
 }
 

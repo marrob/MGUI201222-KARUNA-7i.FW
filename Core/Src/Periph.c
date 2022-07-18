@@ -21,6 +21,7 @@
 #define MCP320X_CON_SINGLE_END  (1<<3)
 
 static void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t length);
+static void DelayUs(volatile int32_t us);
 /* Private user code ---------------------------------------------------------*/
 /* Commmon--------------------------------------------------------------------*/
 void Spi2TransmittReceive(uint8_t *tx, uint8_t *rx, uint32_t size)
@@ -147,3 +148,12 @@ void PeriphWriteOutputs(uint8_t data)
   HAL_GPIO_WritePin(DIO_WR_GPIO_Port, DIO_WR_Pin, GPIO_PIN_RESET);
 }
 
+
+static void DelayUs(volatile int32_t us)
+{  //practical limit of 25,000us
+  us = us * 72 / 4;
+  while (us)
+  {
+    us--;
+  }
+}

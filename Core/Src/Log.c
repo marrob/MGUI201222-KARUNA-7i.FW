@@ -16,6 +16,7 @@
 static void Spi2Transmitt(uint8_t *data, uint32_t size);
 static void Spi2Receive(uint8_t *data, uint32_t size);
 static uint16_t FlashReadStatusReg(void);
+static void DelayUs(volatile int32_t us);
 
 /* Private user code ---------------------------------------------------------*/
 
@@ -222,6 +223,16 @@ uint8_t LogWriteLine(char *line)
   GuiItfLogIncPage();
 
   return LOG_OK;
+}
+
+
+static void DelayUs(volatile int32_t us)
+{  //practical limit of 25,000us
+  us = us * 72 / 4;
+  while (us)
+  {
+    us--;
+  }
 }
 
 

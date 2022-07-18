@@ -44,11 +44,6 @@
 			<locationURI>$%7BPARENT-1-PROJECT_LOC%7D/Core/Src/system_stm32f7xx.c</locationURI>
 		</link>
 		<link>
-			<name>Drivers/LED/LiveLed.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/LED/LiveLed.c</locationURI>
-		</link>
-		<link>
 			<name>Drivers/MX25/mx25.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/Drivers/MX25/mx25.c</locationURI>
@@ -782,21 +777,6 @@
 			<name>Application/User/gui/textContainer.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/gui/src/containers/textContainer.cpp</locationURI>
-		</link>
-		<link>
-			<name>Drivers/Common/Inc/common.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/common.h</locationURI>
-		</link>
-		<link>
-			<name>Drivers/Common/Inc/vt100.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Inc/vt100.h</locationURI>
-		</link>
-		<link>
-			<name>Drivers/Common/Src/common.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Drivers/Common/Src/common.c</locationURI>
 		</link>
 		<link>
 			<name>Application/User/Core/Inc/Backlight.h</name>
