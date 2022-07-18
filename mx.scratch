@@ -71,10 +71,7 @@
             <Aincludes>
               <include/>
             </Aincludes>
-            <Cincludes>
-              <include>..\Drivers\Components\ft5336</include>
-              <include>..\Drivers\BSP</include>
-            </Cincludes>
+            <Cincludes/>
           </inctoremove>
         </config>
       </configs>
