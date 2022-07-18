@@ -1567,6 +1567,7 @@ void RS485UartTx(char *str)
   RS485DirRx();
 }
 
+
 void RS485Parser(char *response)
 {
   unsigned int addr = 0;
@@ -1755,6 +1756,7 @@ void UsbRxTask(void *argument)
           UsbParser(USB_UART_RxBuffer);
           memset(USB_UART_RxBuffer, 0x00, USB_BUFFER_SIZE);
           HAL_UART_Receive_DMA(&husb, (uint8_t*) USB_UART_RxBuffer, USB_BUFFER_SIZE);
+          break;
         }
       }
       if(startFlag)
@@ -1854,6 +1856,7 @@ void RS485RxTask(void *argument)
           RS485Parser(RS485_UART_RxBuffer);
           memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
           HAL_UART_Receive_DMA(&hRs485, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
+          break;
         }
       }
       if(startFlag)

@@ -278,7 +278,7 @@ void ServiceContainer::GetVersionInfo()
 	Unicode::fromUTF8((const uint8_t*)fw, uni_fw, sizeof(uni_fw));
 	Unicode::fromUTF8((const uint8_t*)uid, uni_uid, sizeof(uni_uid));
 	Unicode::fromUTF8((const uint8_t*)pcb, uni_pcb, sizeof(uni_pcb));
-	Unicode::snprintf(lblDASClockFwVersionBuffer, sizeof(LBLDASCLOCKFWVERSION_SIZE), "%s-%s-%s", uni_fw, uni_uid, uni_pcb);
+	Unicode::snprintf(lblDASClockFwVersionBuffer, LBLDASCLOCKFWVERSION_SIZE, "%s-%s-%s", uni_fw, uni_uid, uni_pcb);
 
 	lblGUIFwVersion.invalidate();
 	lblKarunaFwVersion.invalidate();
