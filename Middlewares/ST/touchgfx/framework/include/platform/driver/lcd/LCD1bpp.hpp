@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -119,9 +119,9 @@ public:
     void enableTextureMapperAll() const;
 
 protected:
-    virtual void drawTextureMapScanLine(const DrawingSurface& /*dest*/, const Gradients& /*gradients*/, const Edge* /*leftEdge*/, const Edge* /*rightEdge*/, const TextureSurface& /*texture*/, const Rect& /*absoluteRect*/, const Rect& /*dirtyAreaAbsolute*/, RenderingVariant /*renderVariant*/, uint8_t /*alpha*/, uint16_t /*subDivisionSize*/)
+    virtual void drawTextureMapScanLine(const DrawingSurface& dest, const Gradients& gradients, const Edge* leftEdge, const Edge* rightEdge, const TextureSurface& texture, const Rect& absoluteRect, const Rect& dirtyAreaAbsolute, RenderingVariant renderVariant, uint8_t alpha, uint16_t subDivisionSize)
     {
-        assert(false && "Texture mapping not supported for 1bpp");
+        assert(0 && "Texture mapping not supported for 1bpp");
     }
 
     /**
@@ -183,7 +183,7 @@ protected:
      * @param      width          The width of area (in pixels).
      * @param      height         The height of area (in pixels).
      */
-    void copyRect(const uint8_t* srcAddress, int16_t srcStride, uint8_t srcPixelOffset, uint8_t* RESTRICT dstAddress, int16_t dstStride, uint8_t dstPixelOffset, int16_t width, int16_t height) const;
+    void copyRect(const uint8_t* srcAddress, uint16_t srcStride, uint8_t srcPixelOffset, uint8_t* RESTRICT dstAddress, uint16_t dstStride, uint8_t dstPixelOffset, uint16_t width, uint16_t height) const;
 
 private:
     class bwRLEdata
@@ -200,7 +200,7 @@ private:
             rleByte = 0;
             firstHalfByte = true;
             color = ~0; // Will be flipped to 0 by first call to getNextLength() below
-            if (src)
+            if (src != 0)
             {
                 // Read two half-bytes ahead
                 thisHalfByte = getNextHalfByte();
@@ -208,7 +208,7 @@ private:
                 getNextLength();
             }
         }
-        void skipNext(int32_t skip)
+        void skipNext(uint32_t skip)
         {
             for (;;)
             {
@@ -229,7 +229,7 @@ private:
         {
             return color;
         }
-        int32_t getLength() const
+        uint32_t getLength() const
         {
             return length;
         }
@@ -260,13 +260,12 @@ private:
         {
             if (firstHalfByte) // Start of new byte, read data from BW_RLE stream
             {
-                assert(data);
                 rleByte = *data++;
             }
-            uint8_t len = rleByte & 0xF;    // Read lower half
+            uint8_t length = rleByte & 0xF; // Read lower half
             rleByte >>= 4;                  // Shift upper half down to make it ready
             firstHalfByte = !firstHalfByte; // Toggle 'start of byte'
-            return len;
+            return length;
         }
         const uint8_t* data;  // Pointer to compressed data (BW_RLE)
         uint8_t thisHalfByte; // The next half byte from the input
@@ -274,7 +273,7 @@ private:
         uint8_t rleByte;      // Byte read from compressed data
         bool firstHalfByte;   // Are we about to process first half byte of rleByte?
         uint8_t color;        // Current color
-        int32_t length;       // Number of pixels with the given color
+        uint32_t length;      // Number of pixels with the given color
     };
 
     friend class PainterBWBitmap;

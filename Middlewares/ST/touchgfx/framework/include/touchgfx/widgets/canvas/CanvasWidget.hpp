@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -45,10 +45,7 @@ public:
      * @note If setPainter() is used to change the painter to a different painter, the area
      *       containing the CanvasWidget is not automatically invalidated.
      */
-    void setPainter(const AbstractPainter& painter)
-    {
-        canvasPainter = &painter;
-    }
+    virtual void setPainter(AbstractPainter& painter);
 
     /**
      * Gets the current painter for the CanvasWidget.
@@ -57,10 +54,7 @@ public:
      *
      * @see setPainter
      */
-    const AbstractPainter* getPainter() const
-    {
-        return canvasPainter;
-    }
+    virtual AbstractPainter& getPainter() const;
 
     /** @copydoc Image::setAlpha */
     virtual void setAlpha(uint8_t newAlpha)
@@ -115,10 +109,7 @@ public:
      *
      * @return The minimal rectangle containing the shape drawn.
      */
-    virtual Rect getMinimalRect() const
-    {
-        return Rect(0, 0, getWidth(), getHeight());
-    }
+    virtual Rect getMinimalRect() const;
 
     /**
      * Gets the largest solid (non-transparent) rectangle. Since canvas widgets typically do
@@ -131,10 +122,17 @@ public:
      * @note Function draw() might fail for some horizontal lines due to memory constraints. These
      *       lines will not be drawn and may cause strange display artifacts.
      */
-    virtual Rect getSolidRect() const
-    {
-        return Rect();
-    }
+    virtual Rect getSolidRect() const;
+
+    /**
+     * Resets the maximum render lines. The maximum render lines is decreates if the
+     * rendering buffer is found to be too small to render a complex outline. This is done
+     * to speed up subsequent draws by not having to draw the outline in vain (as was done
+     * previously) to force the outline to be drawn in smaller blocks. The
+     * resetMaxRenderLines() will try to render the entire outline in one go on the next
+     * call to draw().
+     */
+    void resetMaxRenderLines();
 
     /**
      * Draw canvas widget for the given invalidated area. Similar to draw(), but might be
@@ -153,7 +151,8 @@ protected:
     uint8_t alpha; ///< The Alpha for this CanvasWidget.
 
 private:
-    const AbstractPainter* canvasPainter;
+    AbstractPainter* canvasPainter;
+    mutable int16_t maxRenderLines;
 };
 
 } // namespace touchgfx

@@ -1,7 +1,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.20.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -20,20 +20,23 @@ class TextDatabaseParser_4_17
   def run
     typographies = TypographyParser_4_17.new(@file_name).run
     text_entries = TextParser_4_17.new(@file_name).run
+
     return typographies, text_entries
   end
 end
 
 class TypographyParser_4_17
+  attr_reader :reader
+
   def initialize(file_name)
     header_row_number = 3
     header_column_number = 2
     @reader = ExcelReader.new(file_name, 'Typography', header_row_number, header_column_number)
+    @typographies = []
   end
 
   def run
-    typographies = []
-    @reader.read_rows do |row|
+    reader.read_rows do |row|
       name = row[:'Typography Name']
       font = row[:font]
       size = row[:size]
@@ -57,7 +60,7 @@ class TypographyParser_4_17
       end
 
       if name
-        name.strip!
+        name = name.strip
         unless name.match(/^([0-9a-zA-Z_])*$/)
           fail "ERROR: Illegal characters found in Text ID '#{name}'"
         end
@@ -72,18 +75,21 @@ class TypographyParser_4_17
       ellipsis_character = ellipsis_character.strip if ellipsis_character
 
       if name && font && size && bpp
-        typographies.push Typography.new(name, font, size.to_i, bpp.to_i, fallback_character, ellipsis_character, wildcard_characters, widget_wildcard_characters, wildcard_ranges)
+        @typographies.push Typography.new(name, font, size.to_i, bpp.to_i, fallback_character, ellipsis_character, wildcard_characters, widget_wildcard_characters, wildcard_ranges)
       end
     end
-    typographies
+    @typographies
   end
 end
 
 class TextParser_4_17
+  attr_reader :reader
+
   def initialize(file_name)
     header_row_number = 3
     header_column_number = 2
     @reader = ExcelReader.new(file_name, "Translation", header_row_number, header_column_number)
+    @text_entries = TextEntries.new
   end
 
   def language_capitalization(lang)
@@ -92,7 +98,7 @@ class TextParser_4_17
   end
 
   def run
-    @reader.read_header do |header|
+    reader.read_header do |header|
       @alignments = header.select { |column| column.match(/^.*-ALIGNMENT$/i) }
       @directions = header.select { |column| column.match(/^.*-DIRECTION$/i) }
       @typographies = header.select { |column| column.match(/^.*-TYPOGRAPHY$/i) }
@@ -117,8 +123,7 @@ class TextParser_4_17
       fail "ERROR: Unknown language in column #{language}-DIRECTION" if not @languages.any?{ |lang| lang.upcase == language }
     end
 
-    text_entries = TextEntries.new
-    @reader.read_rows do |row|
+    reader.read_rows do |row|
       text_id = row[:"Text ID"]
       default_typography = row[:"Typography Name"]
       default_alignment = row[:Alignment]
@@ -167,9 +172,9 @@ class TextParser_4_17
           text_entry.add_translation(language, row[language])
         end
 
-        text_entries.add(text_entry)
+        @text_entries.add(text_entry)
       end
     end
-    text_entries
+    @text_entries
   end
 end

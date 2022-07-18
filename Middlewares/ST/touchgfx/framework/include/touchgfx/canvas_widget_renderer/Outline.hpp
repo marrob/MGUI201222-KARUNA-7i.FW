@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -66,7 +66,7 @@ public:
     void lineTo(int x, int y);
 
     /**
-     * Gets number of cells registered in the current drawn path for the Outline.
+     * Gets number cells registered in the current drawn path for the Outline.
      *
      * @return The number of cells.
      */
@@ -81,7 +81,7 @@ public:
      *
      * @return A pointer to the sorted list of Cell objects in the Outline.
      */
-    const Cell* closeOutlineAndSortCells();
+    const Cell* getCells();
 
     /**
      * Sets maximum render y coordinate. This is used to avoid registering any Cell that has
@@ -89,9 +89,8 @@ public:
      *
      * @param  y The max y coordinate to render for the Outline.
      */
-    void setMaxRender(int x, int y)
+    void setMaxRenderY(int y)
     {
-        maxRenderX = x;
         maxRenderY = y;
     }
 
@@ -101,9 +100,9 @@ public:
      *
      * @return false if the buffer for Outline Cell objects was too small.
      */
-    FORCE_INLINE_FUNCTION bool wasOutlineTooComplex()
+    bool wasOutlineTooComplex()
     {
-        return numCells > maxCells;
+        return outlineTooComplex;
     }
 
 private:
@@ -125,6 +124,9 @@ private:
 
     /** Adds current cell to the Outline. */
     void addCurCell();
+
+    /** Sort cells in the Outline. */
+    void sortCells();
 
     /**
      * Render the scanline in the special case where the line is on the same scanline,
@@ -151,18 +153,6 @@ private:
      */
     void renderLine(int x1, int y1, int x2, int y2);
 
-    FORCE_INLINE_FUNCTION static void swapCells(Cell* a, Cell* b)
-    {
-        const Cell temp = *a;
-        *a = *b;
-        *b = temp;
-    }
-
-    FORCE_INLINE_FUNCTION static bool lessThan(const Cell* a, const Cell* b)
-    {
-        return a->y < b->y || (a->y == b->y && a->x < b->x);
-    }
-
     /**
      * Quick sort Outline cells.
      *
@@ -175,15 +165,21 @@ private:
     unsigned numCells;
     Cell* cells;
     Cell* curCellPtr;
+    Cell curCell;
     int curX;
     int curY;
     int closeX;
     int closeY;
+    int minX;
+    int minY;
+    int maxX;
+    int maxY;
     unsigned int flags;
-    int maxRenderX;
     int maxRenderY;
+    bool outlineTooComplex;
 #ifdef SIMULATOR
-    unsigned maxNumCells;
+    unsigned numCellsMissing;
+    unsigned numCellsUsed;
 #endif
 };
 

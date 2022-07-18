@@ -1,7 +1,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.20.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -401,10 +401,10 @@ class UpgradeTo_4_18
       # Add <Text> with required attributes inside <Texts>
       text_node = texts_node.add_child(Nokogiri::XML::Node.new('Text', xml_doc))
       text_node['Id'] = entry.text_id
-      text_node['TypographyId'] = entry.default_typography
-      text_node['Alignment'] = entry.default_alignment.capitalize
-      text_node['Direction'] = entry.default_direction
-      @text_entries.entries.first.languages.each do |lang|
+      text_node['TypographyId'] = entry.typography
+      text_node['Alignment'] = entry.alignment.capitalize
+      text_node['Direction'] = entry.direction
+      @text_entries.languages.each do |lang|
         # Add <Translation> with required attribute
         translation_node = text_node.add_child(Nokogiri::XML::Node.new('Translation', xml_doc))
         translation_node['Language'] = lang

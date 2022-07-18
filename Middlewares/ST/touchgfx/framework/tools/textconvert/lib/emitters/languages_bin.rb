@@ -1,7 +1,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.20.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -11,16 +11,16 @@
 require 'json'
 
 class LanguagesBin
-  def initialize(text_entries, typographies, languages, output_directory)
+  def initialize(text_entries, typographies, output_directory)
     @text_entries = text_entries
     @typographies = typographies
-    @languages = languages
     @output_directory = output_directory
   end
   def run
     #remove_old_binary_files
-    @languages.each do |language|
-      LanguageXxBin.new(@text_entries, @typographies, @output_directory, @languages, language).run
+
+    @text_entries.languages.each do |language|
+      LanguageXxBin.new(@text_entries, @typographies, @output_directory, language).run
     end
   end
 
@@ -44,8 +44,7 @@ class LanguageXxBin < Template
   ALIGNMENT = { "LEFT" => 0, "CENTER" => 1, "RIGHT" => 2 }
   TEXT_DIRECTION = { "LTR" => 0, "RTL" => 1 }
 
-  def initialize(text_entries, typographies, output_directory, languages, language)
-    @languages = languages
+  def initialize(text_entries, typographies, output_directory, language)
     @language = language
     @typographies = typographies
     @text_entries = text_entries
@@ -93,10 +92,10 @@ class LanguageXxBin < Template
 
   def typed_texts(language)
     text_entries.collect do |entry|
-      typography_name = entry.typographies[language] || entry.default_typography
+      typography_name = entry.typographies[language] || entry.typography
       typography = typographies.find { |t| t.name == typography_name }
-      alignment = entry.alignments[language] || entry.default_alignment
-      direction = entry.directions[language] || entry.default_direction
+      alignment = entry.alignments[language] || entry.alignment
+      direction = entry.directions[language] || entry.direction
       TypedTextPresenter.new(alignment, direction, typography);
     end
   end
@@ -107,13 +106,9 @@ class LanguageXxBin < Template
   end
 
   def fonts
-    typographies.map{ |t| Typography.new("", t.font_file, t.font_size, t.bpp) }.uniq.collect do |t|
-      get_getFont_name(t)
+    typographies.map{ |t| Typography.new("", t.font_file, t.font_size, t.bpp) }.uniq.collect do |f|
+      "getFont_#{f.cpp_name}_#{f.font_size}_#{f.bpp}bpp"
     end
-  end
-
-  def get_font_index(typography)
-    fontmap[get_getFont_name(typography)]
   end
 
   def fontmap
@@ -157,7 +152,7 @@ class LanguageXxBin < Template
     #build cache dictionary
     @cache["typographies"] = typographies.collect{|t| [t.name, t.font_file, t.font_size, t.bpp] }
     @cache["language"] = @language
-    @cache["language_index"] = @languages.index(@language)
+    @cache["language_index"] = @text_entries.languages.index(@language)
     list = [] #list of index,textid
     entries.each_with_index do |entry, index|
       list[index] = [entry.unicodes, entry.text_id]
@@ -236,7 +231,7 @@ class LanguageXxBin < Template
           typed_text_arr << 0 << alignment_to_value("LEFT") << text_direction_to_value("LTR")
         else
           typed_texts(language).map do |typed_text|
-            fontIdx = get_font_index(typed_text.typography)
+            fontIdx = fontmap["getFont_#{typed_text.typography.cpp_name}_#{typed_text.typography.font_size}_#{typed_text.typography.bpp}bpp"]
             alignment = alignment_to_value(typed_text.alignment.upcase)
             direction = text_direction_to_value(typed_text.direction.upcase)
             #puts "Font Index     --> #{fontIdx}"
@@ -268,7 +263,7 @@ class LanguageXxBin < Template
 
   def handle_no_entries(entries, text)
     if entries.empty?
-      empty_entry = TextEntry.new(text, "typography", "left", "ltr")
+      empty_entry = TextEntry.new(text, "typography")
       empty_entry.add_translation(language, "")
       [empty_entry]
     else

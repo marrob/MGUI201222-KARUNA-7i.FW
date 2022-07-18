@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -294,7 +294,9 @@ private:
     DrawTextureMapScanLineBase* textureMapper_BGRA2222_NonOpaque_BilinearInterpolation_GA;
     DrawTextureMapScanLineBase* textureMapper_BGRA2222_Opaque_BilinearInterpolation_GA;
     DrawTextureMapScanLineBase* textureMapper_ARGB8888_NonOpaque_NearestNeighbor_GA;
+    DrawTextureMapScanLineBase* textureMapper_ARGB8888_Opaque_NearestNeighbor_GA;
     DrawTextureMapScanLineBase* textureMapper_ARGB8888_NonOpaque_BilinearInterpolation_GA;
+    DrawTextureMapScanLineBase* textureMapper_ARGB8888_Opaque_BilinearInterpolation_GA;
     DrawTextureMapScanLineBase* textureMapper_A4_NearestNeighbor_GA;
     DrawTextureMapScanLineBase* textureMapper_A4_BilinearInterpolation_GA;
 
@@ -326,6 +328,7 @@ private:
     FORCE_INLINE_FUNCTION static uint32_t convertBGRA2222toRGB888(uint8_t val)
     {
         return (((val & 0x0C) << 14) | ((val & 0x30) << 4) | ((val & 0xC0) >> 6)) * 0x55;
+        ;
     }
 
     FORCE_INLINE_FUNCTION static uint8_t convertRGB888toBGRX2222(uint32_t val)

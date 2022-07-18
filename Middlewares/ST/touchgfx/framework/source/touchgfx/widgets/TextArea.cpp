@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -168,6 +168,7 @@ void TextArea::resizeHeightToCurrentTextWithRotation()
         uint16_t h = getTextHeight();
         switch (rotation)
         {
+        default:
         case TEXT_ROTATE_0:
             setHeight(h);
             break;
@@ -276,7 +277,7 @@ TextArea::BoundingArea TextArea::calculateBoundingArea() const
             widgetRectHeight -= lineHeight;
         } while (wtis.getCurrChar() != 0 && widgetRectHeight > lineHeight);
     }
-    int16_t height = (numOfLines * lineHeight) - linespace; // Linespace from the last line is not covering any text and can be omitted
+    int16_t height = (numOfLines * lineHeight) - linespace; // Linspace from the last line is not covering any text and can be omitted
 
     // In Arabic the minimum text height of the font is not adjusted according
     // to the diacritical marks below a letter. To accommodate this, we extend
@@ -313,6 +314,7 @@ TextArea::BoundingArea TextArea::calculateBoundingArea() const
     // Adjust for rotation
     switch (rotation)
     {
+    default:
     case TEXT_ROTATE_0:
         break;
     case TEXT_ROTATE_90:

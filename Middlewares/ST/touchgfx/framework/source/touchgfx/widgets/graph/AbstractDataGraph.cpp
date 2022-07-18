@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -332,7 +332,7 @@ void DynamicDataGraph::setGraphRangeYAutoScaled(bool showXaxis, int margin)
     int indexMax = getGraphRangeXMax();
     if (indexMin > indexMax)
     {
-        const int tmp = indexMin;
+        const int16_t tmp = indexMin;
         indexMin = indexMax;
         indexMax = tmp;
     }
@@ -342,7 +342,7 @@ void DynamicDataGraph::setGraphRangeYAutoScaled(bool showXaxis, int margin)
     {
         int yMin = showXaxis ? margin : yValues[indexMin];
         int yMax = showXaxis ? -margin : yValues[indexMin];
-        for (int i = indexMin; i < indexMax; i++)
+        for (int16_t i = indexMin; i < indexMax; i++)
         {
             int y = yValues[i];
             if (yMin > y)

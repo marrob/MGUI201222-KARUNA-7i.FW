@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -20,7 +20,6 @@
 
 #include <touchgfx/Color.hpp>
 #include <touchgfx/hal/Types.hpp>
-#include <touchgfx/widgets/canvas/AbstractPainterColor.hpp>
 #include <touchgfx/widgets/canvas/AbstractPainterRGB888.hpp>
 
 namespace touchgfx
@@ -31,7 +30,7 @@ namespace touchgfx
  *
  * @see AbstractPainter
  */
-class PainterRGB888 : public AbstractPainterRGB888, public AbstractPainterColor
+class PainterRGB888 : public AbstractPainterRGB888
 {
 public:
     /**
@@ -40,28 +39,38 @@ public:
      * @param  color (Optional) the color, default is black.
      */
     PainterRGB888(colortype color = 0)
-        : AbstractPainterRGB888(), AbstractPainterColor(color)
+        : AbstractPainterRGB888(), painterRed(0), painterGreen(0), painterBlue(0)
     {
+        setColor(color);
     }
 
-    virtual void setColor(colortype color)
+    /**
+     * Sets color to use when drawing the CanvasWidget.
+     *
+     * @param  color The color.
+     */
+    void setColor(colortype color)
     {
-        AbstractPainterColor::setColor(color);
         painterRed = Color::getRed(color);
         painterGreen = Color::getGreen(color);
         painterBlue = Color::getBlue(color);
     }
 
-    virtual void paint(uint8_t* destination, int16_t offset, int16_t widgetX, int16_t widgetY, int16_t count, uint8_t alpha) const;
-
-    virtual void tearDown() const;
-
-    virtual HAL::RenderingMethod getRenderingMethod() const
+    /**
+     * Gets the current color.
+     *
+     * @return The color.
+     */
+    colortype getColor() const
     {
-        return HAL::getInstance()->getDMAType() == DMA_TYPE_CHROMART ? HAL::HARDWARE : HAL::SOFTWARE;
+        return Color::getColorFrom24BitRGB(painterRed, painterGreen, painterBlue);
     }
 
+    virtual void render(uint8_t* ptr, int x, int xAdjust, int y, unsigned count, const uint8_t* covers);
+
 protected:
+    virtual bool renderNext(uint8_t& red, uint8_t& green, uint8_t& blue, uint8_t& alpha);
+
     uint8_t painterRed;   ///< The red part of the color
     uint8_t painterGreen; ///< The green part of the color
     uint8_t painterBlue;  ///< The blue part of the color

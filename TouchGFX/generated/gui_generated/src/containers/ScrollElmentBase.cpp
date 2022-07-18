@@ -32,11 +32,6 @@ ScrollElmentBase::ScrollElmentBase()
     add(line4);
 }
 
-ScrollElmentBase::~ScrollElmentBase()
-{
-
-}
-
 void ScrollElmentBase::initialize()
 {
 

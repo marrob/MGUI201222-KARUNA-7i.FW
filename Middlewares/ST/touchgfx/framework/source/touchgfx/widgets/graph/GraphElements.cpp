@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -262,7 +262,7 @@ void GraphElementArea::invalidateGraphPointAt(int16_t index)
     screenYminQ5 = MIN(screenYminQ5, screenYbaseQ5);
     screenYmaxQ5 = MAX(screenYmaxQ5, screenYbaseQ5);
     Rect dirty(rectFromQ5Coordinates(screenXminQ5, screenYminQ5, screenXmaxQ5, screenYmaxQ5));
-    dirty &= Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
+    dirty = dirty & Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
     invalidateRect(dirty);
 }
 
@@ -313,7 +313,7 @@ void GraphElementLine::invalidateGraphPointAt(int16_t index)
         Rect other(rectAround(indexToScreenXQ5(graph, index + 1), indexToScreenYQ5(graph, index + 1), lineWidthQ5));
         dirty.expandToFit(other);
     }
-    dirty &= Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
+    dirty = dirty & Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
     invalidateRect(dirty);
 }
 
@@ -450,7 +450,7 @@ void GraphElementHistogram::invalidateGraphPointAt(int16_t index)
     const CWRUtil::Q5 barOffsetQ5 = CWRUtil::toQ5(barOffset);
     const int baseline = convertToGraphScaleY(graph, yBaseline, dataScale);
     Rect dirty(rectFromQ5Coordinates(screenXQ5 + barOffsetQ5 - barWidthHalfQ5, indexToScreenYQ5(graph, index), screenXQ5 + barOffsetQ5 + barWidthHalfQ5, valueToScreenYQ5(graph, baseline)));
-    dirty &= Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
+    dirty = dirty & Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
     invalidateRect(dirty);
 }
 
@@ -592,7 +592,7 @@ void GraphElementDots::invalidateGraphPointAt(int16_t index)
         return;
     }
     Rect dirty(rectAround(indexToScreenXQ5(graph, index), indexToScreenYQ5(graph, index), CWRUtil::toQ5(dotWidth)));
-    dirty &= Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
+    dirty = dirty & Rect(0, graph->getGraphAreaPaddingTop(), graph->getGraphAreaWidthIncludingPadding(), graph->getGraphAreaHeight());
     invalidateRect(dirty);
 }
 

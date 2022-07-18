@@ -619,10 +619,10 @@
               "Green": 118,
               "Blue": 73
             },
-            "CenterX": 25.0,
-            "CenterY": 25.0,
-            "Radius": 25.0,
-            "EndAngle": 360.0,
+            "CenterX": 25,
+            "CenterY": 25,
+            "Radius": 25,
+            "EndAngle": 360,
             "CapPrecision": "Butt"
           },
           {
@@ -637,10 +637,10 @@
               "Green": 118,
               "Blue": 73
             },
-            "CenterX": 25.0,
-            "CenterY": 25.0,
-            "Radius": 25.0,
-            "EndAngle": 360.0,
+            "CenterX": 25,
+            "CenterY": 25,
+            "Radius": 25,
+            "EndAngle": 360,
             "CapPrecision": "Butt"
           },
           {
@@ -655,10 +655,10 @@
               "Green": 64,
               "Blue": 64
             },
-            "CenterX": 25.0,
-            "CenterY": 25.0,
-            "Radius": 25.0,
-            "EndAngle": 360.0,
+            "CenterX": 25,
+            "CenterY": 25,
+            "Radius": 25,
+            "EndAngle": 360,
             "CapPrecision": "Butt"
           },
           {
@@ -1208,9 +1208,9 @@
                   "Blue": 64
                 },
                 "Alpha": 128,
-                "EndX": 920.0,
-                "EndY": 1.0,
-                "LineWidth": 1.0,
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 1,
                 "LineEndingStyle": "Butt"
               },
               {
@@ -1240,9 +1240,9 @@
                   "Green": 64,
                   "Blue": 64
                 },
-                "EndX": 920.0,
-                "EndY": 1.0,
-                "LineWidth": 2.0,
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
                 "LineEndingStyle": "Butt"
               },
               {
@@ -1257,9 +1257,9 @@
                   "Green": 64,
                   "Blue": 64
                 },
-                "EndX": 920.0,
-                "EndY": 1.0,
-                "LineWidth": 2.0,
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
                 "LineEndingStyle": "Butt"
               },
               {
@@ -1866,9 +1866,9 @@
               "Green": 64,
               "Blue": 64
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           }
         ],
@@ -3584,9 +3584,9 @@
                       "Green": 64,
                       "Blue": 64
                     },
-                    "EndX": 920.0,
-                    "EndY": 1.0,
-                    "LineWidth": 2.0,
+                    "EndX": 920,
+                    "EndY": 1,
+                    "LineWidth": 2,
                     "LineEndingStyle": "Butt"
                   },
                   {
@@ -3601,9 +3601,9 @@
                       "Green": 64,
                       "Blue": 64
                     },
-                    "EndX": 920.0,
-                    "EndY": 1.0,
-                    "LineWidth": 2.0,
+                    "EndX": 920,
+                    "EndY": 1,
+                    "LineWidth": 2,
                     "LineEndingStyle": "Butt"
                   },
                   {
@@ -3618,9 +3618,9 @@
                       "Green": 64,
                       "Blue": 64
                     },
-                    "EndX": 920.0,
-                    "EndY": 1.0,
-                    "LineWidth": 2.0,
+                    "EndX": 920,
+                    "EndY": 1,
+                    "LineWidth": 2,
                     "LineEndingStyle": "Butt"
                   }
                 ]
@@ -3637,9 +3637,9 @@
                   "Green": 64,
                   "Blue": 64
                 },
-                "EndX": 920.0,
-                "EndY": 1.0,
-                "LineWidth": 2.0,
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
                 "LineEndingStyle": "Butt"
               },
               {
@@ -3707,9 +3707,9 @@
                   "Green": 64,
                   "Blue": 64
                 },
-                "EndX": 920.0,
-                "EndY": 1.0,
-                "LineWidth": 2.0,
+                "EndX": 920,
+                "EndY": 1,
+                "LineWidth": 2,
                 "LineEndingStyle": "Butt"
               }
             ]
@@ -4247,9 +4247,9 @@
               "Blue": 73
             },
             "Alpha": 134,
-            "EndX": 960.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 960,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -4384,8 +4384,8 @@
                   "Blue": 73
                 },
                 "Alpha": 80,
-                "EndX": 960.0,
-                "LineWidth": 2.0,
+                "EndX": 960,
+                "LineWidth": 2,
                 "LineEndingStyle": "Butt"
               },
               {
@@ -4863,10 +4863,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -4897,10 +4897,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -4931,10 +4931,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -4965,10 +4965,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -4999,10 +4999,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5033,10 +5033,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5067,10 +5067,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5101,10 +5101,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5135,10 +5135,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5169,10 +5169,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5203,10 +5203,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5237,10 +5237,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5271,10 +5271,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5305,10 +5305,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5339,10 +5339,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               },
               {
@@ -5373,10 +5373,10 @@
                   "Green": 118,
                   "Blue": 73
                 },
-                "CenterX": 20.0,
-                "CenterY": 20.0,
-                "Radius": 17.0,
-                "EndAngle": 360.0,
+                "CenterX": 20,
+                "CenterY": 20,
+                "Radius": 17,
+                "EndAngle": 360,
                 "CapPrecision": "Butt"
               }
             ]
@@ -5474,11 +5474,11 @@
               "Blue": 255
             },
             "Alpha": 177,
-            "StartX": 1.0,
-            "StartY": 5.0,
-            "EndX": 1.0,
-            "EndY": 400.0,
-            "LineWidth": 1.0,
+            "StartX": 1,
+            "StartY": 5,
+            "EndX": 1,
+            "EndY": 400,
+            "LineWidth": 1,
             "LineEndingStyle": "Round"
           },
           {
@@ -5494,11 +5494,11 @@
               "Blue": 255
             },
             "Alpha": 177,
-            "StartX": 1.0,
-            "StartY": 5.0,
-            "EndX": 1.0,
-            "EndY": 400.0,
-            "LineWidth": 1.0,
+            "StartX": 1,
+            "StartY": 5,
+            "EndX": 1,
+            "EndY": 400,
+            "LineWidth": 1,
             "LineEndingStyle": "Round"
           },
           {
@@ -5665,11 +5665,11 @@
               "Green": 100,
               "Blue": 100
             },
-            "StartX": 2.0,
-            "StartY": 2.0,
-            "EndX": 98.0,
-            "EndY": 2.0,
-            "LineWidth": 2.0,
+            "StartX": 2,
+            "StartY": 2,
+            "EndX": 98,
+            "EndY": 2,
+            "LineWidth": 2,
             "LineEndingStyle": "Round"
           },
           {
@@ -5703,11 +5703,11 @@
               "Green": 100,
               "Blue": 100
             },
-            "StartX": 2.0,
-            "StartY": 4.0,
-            "EndX": 98.0,
-            "EndY": 4.0,
-            "LineWidth": 2.0,
+            "StartX": 2,
+            "StartY": 4,
+            "EndX": 98,
+            "EndY": 4,
+            "LineWidth": 2,
             "LineEndingStyle": "Round"
           }
         ],
@@ -5760,9 +5760,9 @@
               "Green": 32,
               "Blue": 32
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           }
         ],
@@ -6130,9 +6130,9 @@
               "Green": 32,
               "Blue": 32
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6147,9 +6147,9 @@
               "Green": 32,
               "Blue": 32
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6164,9 +6164,9 @@
               "Green": 64,
               "Blue": 64
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6231,9 +6231,9 @@
               "Green": 64,
               "Blue": 64
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6422,9 +6422,9 @@
               "Green": 64,
               "Blue": 64
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6583,9 +6583,9 @@
               "Green": 64,
               "Blue": 64
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6600,9 +6600,9 @@
               "Green": 64,
               "Blue": 64
             },
-            "EndX": 920.0,
-            "EndY": 1.0,
-            "LineWidth": 2.0,
+            "EndX": 920,
+            "EndY": 1,
+            "LineWidth": 2,
             "LineEndingStyle": "Butt"
           },
           {
@@ -6796,10 +6796,10 @@
               "Green": 118,
               "Blue": 73
             },
-            "CenterX": 20.0,
-            "CenterY": 20.0,
-            "Radius": 20.0,
-            "EndAngle": 360.0,
+            "CenterX": 20,
+            "CenterY": 20,
+            "Radius": 20,
+            "EndAngle": 360,
             "CapPrecision": "Butt"
           }
         ],
@@ -7048,6 +7048,6 @@
     "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
     "OptionalComponents": []
   },
-  "Version": "4.20.0",
+  "Version": "4.19.1",
   "CreatedBy": "4.15.0"
 }

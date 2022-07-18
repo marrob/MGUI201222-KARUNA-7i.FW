@@ -1,7 +1,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.20.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -13,6 +13,7 @@ class TextEntries
 
   def initialize
     @entries = []
+    @is_rtl = false
     @unicode_is_rtl = false
   end
 
@@ -40,6 +41,14 @@ class TextEntries
     [ar,default]
   end
 
+  def languages
+    if @entries.empty?
+      []
+    else
+      @entries.first.languages
+    end
+  end
+
   def languages_with_specific_settings
     @entries.collect { |entry| entry.typographies.keys + entry.alignments.keys + entry.directions.keys }.flatten.uniq
   end
@@ -49,7 +58,7 @@ class TextEntries
   end
 
   def typographies
-    @entries.map(&:default_typography).uniq
+    @entries.map { |entry| entry.typography }.uniq
   end
 
   def entries
@@ -83,14 +92,12 @@ end
 
 class TextEntry
   attr_reader :text_id
+  attr_reader :typography
   attr_reader :typographies
   attr_reader :alignments
   attr_reader :directions
-  attr_reader :default_typography
-  attr_reader :default_alignment
-  attr_reader :default_direction
 
-  def initialize(text_id, default_typography, default_alignment, default_direction)
+  def initialize(text_id, typography, alignment, direction)
     @text_id = text_id
     @typographies = {}
     @alignments = {}
@@ -98,13 +105,14 @@ class TextEntry
     @translations = {}
 
     # default typography
-    @default_typography = default_typography
+    @typography = typography
 
     # default alignment
-    @default_alignment = get_alignment_as_string(default_alignment)
+    @alignment = alignment
 
     # default direction
-    @default_direction = get_direction_as_string(default_direction)
+    @direction = get_direction_as_string(direction)
+    @right_to_left = false
   end
 
   def add_typography(language, typography)
@@ -137,7 +145,7 @@ class TextEntry
   def translations_with_typography(typography)
     languages_with_typography = languages.select do |language|
       if @typographies[language].nil?
-        @default_typography == typography
+        @typography == typography
       else
         @typographies[language] == typography
       end
@@ -158,42 +166,72 @@ class TextEntry
     cppify(text_id)
   end
 
+  def alignment
+    get_alignment_as_string(@alignment)
+  end
+
+  def direction
+    get_direction_as_string(@direction)
+  end
+
   # includes the default typography
   def get_all_typographies
-    @typographies.values.compact.insert(0, @default_typography)
+    @typographies.values.compact.insert(0, @typography)
   end
 
   # includes the default alignment
   def get_all_alignments_as_string
-    @alignments.values.compact.collect{ |a| get_alignment_as_string(a) }.insert(0, @default_alignment)
+    @alignments.values.compact.collect{ |a| get_alignment_as_string(a) }.insert(0, alignment)
   end
 
   # includes the default direction
   def get_all_directions_as_string
-    @directions.values.compact.collect{ |a| get_direction_as_string(a) }.insert(0, @default_direction)
+    @directions.values.compact.collect{ |a| get_direction_as_string(a) }.insert(0, direction)
   end
 
   def is_rtl
-    get_all_directions_as_string.any? { |dir| dir == 'RTL' }
+    @is_rtl
   end
 
   private
 
   def get_alignment_as_string(a)
-    a.to_s.empty? ? 'LEFT' : a.to_s.upcase
+    case a.to_s.downcase
+    when 'right'
+      'RIGHT'
+    when 'center'
+      'CENTER'
+    when 'left', ''
+      'LEFT'
+    else
+      a.to_s
+    end
   end
 
   def get_direction_as_string(d)
-    d.to_s.empty? ? 'LTR' : d.to_s.upcase
+    case d.to_s.downcase
+    when 'ltr', ''
+      'LTR'
+    when 'rtl'
+      @is_rtl = true
+      'RTL'
+    else
+      d.to_s
+    end
   end
 
   def cppify(text)
-    t_type = "T_" + text.upcase
+    t_type = "T_" + text
 
     # strip the keys for characters, that can not be used in C++
     t_type = t_type.to_ascii
     t_type.gsub!(" ", "_")
-    t_type.gsub!(/[^0-9a-zA-Z_]/, '')
+    t_type.gsub!(")", "")
+    t_type.gsub!("(", "")
+    t_type.gsub!("-", "")
+    t_type.gsub!("\"", "")
+    t_type.gsub!("/", "")
+    t_type.gsub!(".", "")
     t_type
   end
 end

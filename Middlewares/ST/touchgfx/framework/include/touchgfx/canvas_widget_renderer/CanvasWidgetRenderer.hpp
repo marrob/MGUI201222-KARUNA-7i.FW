@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -43,12 +43,18 @@ public:
      */
     static void setupBuffer(uint8_t* buffer, unsigned bufferSize);
 
+    /// @cond
     /**
-     * Removes references to a buffer previously setup using setupBuffer().
+     * Sets scanline width. Setting the scanline width will initialize the buffers for
+     * scanline and outline. If the width set is too large to hold the scanline buffers in
+     * the allocated memory buffer, false will be returned and all buffer pointers will be
+     * cleared.
      *
-     * @see setupBuffer
+     * @param  width The width of the scanline on screen.
+     *
+     * @return true if it succeeds, false if it fails.
      */
-    static void resetBuffer();
+    static bool setScanlineWidth(unsigned width);
 
     /**
      * Query if CanvasWidgetRenderer has been initialized with a buffer.
@@ -56,6 +62,35 @@ public:
      * @return True if a buffer has been setup.
      */
     static bool hasBuffer();
+
+    /**
+     * The width of a scanline. This is the same as the width of the invalidated area. Used
+     * to optimize the memory layout of the buffer.
+     *
+     * @return Scanline width (HAL::FRAME_BUFFER_WIDTH).
+     */
+    static unsigned getScanlineWidth();
+
+    /**
+     * Gets pointer to memory used for covers in Scanline.
+     *
+     * @return Pointer to memory used internally by Scanline.
+     */
+    static void* getScanlineCovers();
+
+    /**
+     * Gets pointer to memory used for indices in Scanline.
+     *
+     * @return Pointer to memory used internally by Scanline.
+     */
+    static void* getScanlineStartIndices();
+
+    /**
+     * Gets pointer to memory used for counts in Scanline.
+     *
+     * @return Pointer to memory used internally by Scanline.
+     */
+    static void* getScanlineCounts();
 
     /**
      * Gets pointer to memory used for Cell objects in Outline.
@@ -73,6 +108,7 @@ public:
     /// @endcond
 
 #ifdef SIMULATOR
+
     /**
      * Memory reporting.
      *
@@ -151,9 +187,16 @@ public:
 #endif
 
 private:
-    static Cell* memoryBuffer;
+    static uint8_t* memoryBuffer;
     static unsigned int memoryBufferSize;
+    static unsigned int scanlineWidth;
+    static void* scanlineCovers;
+    static void* scanlineStartIndices;
+    static void* scanlineCounts;
+    static Cell* outlineBuffer;
+    static unsigned int outlineBufferSize;
 #ifdef SIMULATOR
+    static unsigned int scanlineSize;
     static unsigned int maxCellsUsed;
     static unsigned int maxCellsMissing;
     static bool writeReport;

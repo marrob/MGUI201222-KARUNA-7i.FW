@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -21,7 +21,6 @@
 #include <touchgfx/Bitmap.hpp>
 #include <touchgfx/hal/Types.hpp>
 #include <touchgfx/widgets/canvas/AbstractPainterARGB2222.hpp>
-#include <touchgfx/widgets/canvas/AbstractPainterBitmap.hpp>
 
 namespace touchgfx
 {
@@ -33,32 +32,49 @@ namespace touchgfx
  *
  * @see AbstractPainter
  */
-class PainterARGB2222Bitmap : public AbstractPainterARGB2222, public AbstractPainterBitmap
+class PainterARGB2222Bitmap : public AbstractPainterARGB2222
 {
 public:
     /**
-     * Constructor.
+     * Initializes a new instance of the PainterARGB2222Bitmap class.
      *
-     * @param  bmp (Optional) The bitmap to use in the painter.
+     * @param  bmp   (Optional) the bitmap, default is #BITMAP_INVALID.
      */
     PainterARGB2222Bitmap(const Bitmap& bmp = Bitmap(BITMAP_INVALID))
-        : AbstractPainterARGB2222(), AbstractPainterBitmap(bmp)
+        : AbstractPainterARGB2222(),
+          bitmapARGB2222Pointer(0),
+          bitmap(), bitmapRectToFrameBuffer(),
+          xOffset(0), yOffset(0), isTiled(false)
     {
+        setBitmap(bmp);
     }
 
-    virtual void setBitmap(const Bitmap& bmp);
+    /**
+     * Sets a bitmap to be used when drawing the CanvasWidget.
+     *
+     * @param  bmp The bitmap.
+     */
+    void setBitmap(const Bitmap& bmp);
 
-    virtual bool setup(const Rect& widgetRect) const
-    {
-        if (!AbstractPainterARGB2222::setup(widgetRect))
-        {
-            return false;
-        }
-        updateBitmapOffsets(widgetWidth);
-        return bitmap.getId() != BITMAP_INVALID;
-    }
+    /** @copydoc PainterRGB565Bitmap::setTiled() */
+    virtual void setTiled(bool tiled);
 
-    virtual void paint(uint8_t* destination, int16_t offset, int16_t widgetX, int16_t widgetY, int16_t count, uint8_t alpha) const;
+    /** @copydoc PainterRGB565Bitmap::setOffset() */
+    virtual void setOffset(int16_t x, int16_t y);
+
+    virtual void render(uint8_t* ptr, int x, int xAdjust, int y, unsigned count, const uint8_t* covers);
+
+protected:
+    virtual bool renderInit();
+
+    const uint8_t* bitmapARGB2222Pointer; ///< Pointer to the bitmap (ARGB2222)
+
+    Bitmap bitmap;                ///< The bitmap to be used when painting
+    Rect bitmapRectToFrameBuffer; ///< Bitmap rectangle translated to framebuffer coordinates
+
+    int16_t xOffset; ///< The x offset of the bitmap
+    int16_t yOffset; ///< The y offset of the bitmap
+    bool isTiled;    ///< True if bitmap should be tiled, false if not
 };
 
 } // namespace touchgfx

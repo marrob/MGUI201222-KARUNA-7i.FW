@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -110,7 +110,6 @@ public:
      */
     virtual void setScaleX(int scale, bool updateData = false)
     {
-        (void)updateData; // Unused variable
         assert(scale != 0);
         xScale = scale;
     }
@@ -145,7 +144,6 @@ public:
      */
     virtual void setScaleY(int scale, bool updateData = false)
     {
-        (void)updateData; // Unused variable
         assert(scale != 0);
         yScale = scale;
     }
@@ -1036,12 +1034,12 @@ public:
      */
     FORCE_INLINE_FUNCTION static int float2scaled(float f, int scale)
     {
-        const float fs = f * (float)scale;
+        const float fs = f * scale;
         if (fs >= 0)
         {
-            return (int)(fs + 0.5f);
+            return int(fs + 0.5f);
         }
-        return ((int)fs - 1) + (int)(1.5f + (fs - (float)(int)fs));
+        return (int(fs) - 1) + int(1.5f + (fs - int(fs)));
     }
 
     /**

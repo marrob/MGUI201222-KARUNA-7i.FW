@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -20,6 +20,7 @@
 
 #include <touchgfx/Bitmap.hpp>
 #include <touchgfx/hal/Types.hpp>
+#include <touchgfx/lcd/LCD.hpp>
 #include <touchgfx/widgets/canvas/AbstractPainter.hpp>
 
 namespace touchgfx
@@ -34,10 +35,36 @@ class AbstractPainterBW : public AbstractPainter
 {
 public:
     AbstractPainterBW()
-        : AbstractPainter()
+        : AbstractPainter(), currentX(0), currentY(0)
     {
         assert(compatibleFramebuffer(Bitmap::BW) && "The chosen painter only works with BW displays");
     }
+
+    virtual void render(uint8_t* ptr, int x, int xAdjust, int y, unsigned count, const uint8_t* covers);
+
+protected:
+    /**
+     * @copydoc AbstractPainterABGR2222::renderInit()
+     */
+    virtual bool renderInit()
+    {
+        return true;
+    }
+
+    /**
+     * Get the color of the next pixel in the scan line to blend into the framebuffer.
+     *
+     * @param [out] color The color (0 or 1).
+     *
+     * @return true if the pixel should be painted, false otherwise.
+     */
+    virtual bool renderNext(uint8_t& color)
+    {
+        return false;
+    }
+
+    int currentX; ///< Current x coordinate relative to the widget
+    int currentY; ///< Current y coordinate relative to the widget
 };
 
 } // namespace touchgfx

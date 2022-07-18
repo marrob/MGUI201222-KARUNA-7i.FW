@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -41,8 +41,8 @@ namespace touchgfx
  *            Circle circle;
  *            circle.setCircle(1.1f, 1.1f, 0.9); // Will use (35/32, 35/32, 28/32) = (1.09375f, 1.09375f, 0.875f)
  *            int x, y, r;
- *            circle.getCenter(&x, &y); // Will return (1, 1)
- *            circle.getRadius(&r); // Will return 0
+ *            circle.getCenter(&amp;x, &amp;y); // Will return (1, 1)
+ *            circle.getRadius(&amp;r); // Will return 0
  *       @endcode.
  */
 class Circle : public CanvasWidget
@@ -310,8 +310,11 @@ public:
         {
             return;
         }
+
         Rect minimalRect = getMinimalRectForUpdatedStartAngle(startAngleQ5);
+
         circleArcAngleStart = startAngleQ5;
+
         invalidateRect(minimalRect);
     }
 
@@ -334,8 +337,11 @@ public:
         {
             return;
         }
+
         Rect minimalRect = getMinimalRectForUpdatedEndAngle(endAngleQ5);
+
         circleArcAngleEnd = endAngleQ5;
+
         invalidateRect(minimalRect);
     }
 
@@ -439,10 +445,7 @@ public:
 
     virtual bool drawCanvasWidget(const Rect& invalidatedArea) const;
 
-    virtual Rect getMinimalRect() const
-    {
-        return getMinimalRect(circleArcAngleStart, circleArcAngleEnd);
-    }
+    virtual Rect getMinimalRect() const;
 
     /**
      * Gets minimal rectangle containing a given circle arc using the set line width.
@@ -452,10 +455,7 @@ public:
      *
      * @return The minimal rectangle.
      */
-    Rect getMinimalRect(int16_t arcStart, int16_t arcEnd) const
-    {
-        return getMinimalRect(CWRUtil::toQ5<int>(arcStart), CWRUtil::toQ5<int>(arcEnd));
-    }
+    Rect getMinimalRect(int16_t arcStart, int16_t arcEnd) const;
 
     /**
      * Gets minimal rectangle containing a given circle arc using the set line width.
@@ -491,61 +491,11 @@ private:
     uint8_t circleArcIncrement;
     uint8_t circleCapArcIncrement;
 
-    FORCE_INLINE_FUNCTION void moveToAngleRadius2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const
-    {
-        canvas.moveTo(circleCenterX + ((r2 * CWRUtil::sine(angle)) / 2), circleCenterY - ((r2 * CWRUtil::cosine(angle)) / 2));
-    }
-
-    FORCE_INLINE_FUNCTION void lineToAngleRadius2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const
-    {
-        lineToXYAngleRadius2(canvas, circleCenterX, circleCenterY, angle, r2);
-    }
-
-    FORCE_INLINE_FUNCTION void lineToXYAngleRadius2(Canvas& canvas, const CWRUtil::Q5& x, const CWRUtil::Q5& y, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const
-    {
-        canvas.lineTo(x + ((r2 * CWRUtil::sine(angle)) / 2), y - ((r2 * CWRUtil::cosine(angle)) / 2));
-    }
-
-    FORCE_INLINE_FUNCTION void updateMinMaxAngleLine(const CWRUtil::Q5& angle, const CWRUtil::Q5& halfLineWidth, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const
-    {
-        const CWRUtil::Q5 xNew = circleCenterX + (circleRadius * CWRUtil::sine(angle));
-        updateMinMaxX(xNew - halfLineWidth, xMin, xMax);
-        updateMinMaxX(xNew + halfLineWidth, xMin, xMax);
-        const CWRUtil::Q5 yNew = circleCenterY - (circleRadius * CWRUtil::cosine(angle));
-        updateMinMaxY(yNew - halfLineWidth, yMin, yMax);
-        updateMinMaxY(yNew + halfLineWidth, yMin, yMax);
-    }
-
-    FORCE_INLINE_FUNCTION void updateMinMaxAngleSolid(const CWRUtil::Q5& angle, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const
-    {
-        updateMinMaxX(circleCenterX + (circleRadius * CWRUtil::sine(angle)), xMin, xMax);
-        updateMinMaxY(circleCenterY - (circleRadius * CWRUtil::cosine(angle)), yMin, yMax);
-    }
-
-    FORCE_INLINE_FUNCTION void updateMinMaxX(const CWRUtil::Q5& xNew, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax) const
-    {
-        if (xNew < xMin)
-        {
-            xMin = xNew;
-        }
-        if (xNew > xMax)
-        {
-            xMax = xNew;
-        }
-    }
-
-    FORCE_INLINE_FUNCTION void updateMinMaxY(const CWRUtil::Q5& yNew, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const
-    {
-        if (yNew < yMin)
-        {
-            yMin = yNew;
-        }
-        if (yNew > yMax)
-        {
-            yMax = yNew;
-        }
-    }
-
+    void moveToAR2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const;
+    void lineToAR2(Canvas& canvas, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const;
+    void lineToXYAR2(Canvas& canvas, const CWRUtil::Q5& x, const CWRUtil::Q5& y, const CWRUtil::Q5& angle, const CWRUtil::Q5& r2) const;
+    void updateMinMaxAR(const CWRUtil::Q5& a, const CWRUtil::Q5& r2, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const;
+    void updateMinMaxXY(const CWRUtil::Q5& xNew, const CWRUtil::Q5& yNew, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const;
     void calculateMinimalRect(CWRUtil::Q5 arcStart, CWRUtil::Q5 arcEnd, CWRUtil::Q5& xMin, CWRUtil::Q5& xMax, CWRUtil::Q5& yMin, CWRUtil::Q5& yMax) const;
     Rect getMinimalRectForUpdatedStartAngle(const CWRUtil::Q5& startAngleQ5) const;
     Rect getMinimalRectForUpdatedEndAngle(const CWRUtil::Q5& endAngleQ5) const;

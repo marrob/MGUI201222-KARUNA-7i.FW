@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -50,16 +50,6 @@ public:
     DragEvent(DragEventType type, int16_t oldX, int16_t oldY, int16_t newX, int16_t newY)
         : dragEventType(type), dragOldX(oldX), dragOldY(oldY), dragNewX(newX), dragNewY(newY)
     {
-    }
-
-    /**
-     * Copy constructor.
-     *
-     * @param  dragEvent The drag event.
-     */
-    DragEvent(const DragEvent& dragEvent)
-    {
-        *this = dragEvent;
     }
 
     /**
@@ -142,23 +132,6 @@ public:
     virtual Event::EventType getEventType() const
     {
         return Event::EVENT_DRAG;
-    }
-
-    /**
-     * Assignment operator.
-     *
-     * @param  dragEvent The drag event.
-     *
-     * @return A shallow copy of this object.
-     */
-    const DragEvent& operator=(const DragEvent& dragEvent)
-    {
-        dragEventType = dragEvent.dragEventType;
-        dragOldX = dragEvent.dragOldX;
-        dragOldY = dragEvent.dragOldY;
-        dragNewX = dragEvent.dragNewX;
-        dragNewY = dragEvent.dragNewY;
-        return *this;
     }
 
 private:

@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -36,41 +36,27 @@ class AbstractPainterRGBA2222 : public AbstractPainter
 {
 public:
     AbstractPainterRGBA2222()
-        : AbstractPainter()
+        : AbstractPainter(), currentX(0), currentY(0)
     {
         assert(compatibleFramebuffer(Bitmap::RGBA2222) && "The chosen painter only works with RGBA2222 displays");
     }
 
+    virtual void render(uint8_t* ptr, int x, int xAdjust, int y, unsigned count, const uint8_t* covers);
+
     /**
-     * Mix colors from a new pixel and a buffer pixel with the given alpha applied to the new pixel,
-     * and the inverse alpha applied to the buffer pixel.
-     *
-     * @param  newpix The new pixel value.
-     * @param  bufpix The buffer pixel value.
-     * @param  alpha  The alpha to apply to the new pixel.
-     *
-     * @return The result of blending the two colors into a new color.
+     * @copydoc AbstractPainterRGB565::mixColors(uint16_t,uint16_t,uint8_t)
      */
-    FORCE_INLINE_FUNCTION uint8_t alphaBlend(uint8_t newpix, uint8_t bufpix, uint8_t alpha) const
+    FORCE_INLINE_FUNCTION uint8_t mixColors(uint8_t newpix, uint8_t bufpix, uint8_t alpha)
     {
-        return alphaBlend(LCD8bpp_RGBA2222::getRedFromNativeColor(newpix),
-                          LCD8bpp_RGBA2222::getGreenFromNativeColor(newpix),
-                          LCD8bpp_RGBA2222::getBlueFromNativeColor(newpix), bufpix, alpha);
+        return mixColors(LCD8bpp_RGBA2222::getRedFromNativeColor(newpix),
+                         LCD8bpp_RGBA2222::getGreenFromNativeColor(newpix),
+                         LCD8bpp_RGBA2222::getBlueFromNativeColor(newpix), bufpix, alpha);
     }
 
     /**
-     * Mix colors from a new pixel and a buffer pixel with the given alpha applied to the new pixel,
-     * and the inverse alpha applied to the buffer pixel.
-     *
-     * @param  R      The red color.
-     * @param  G      The green color.
-     * @param  B      The blue color.
-     * @param  bufpix The buffer pixel value.
-     * @param  alpha  The alpha of the R,G,B.
-     *
-     * @return The result of blending the two colors into a new color.
+     * @copydoc AbstractPainterABGR2222::mixColors(uint8_t,uint8_t,uint8_t,uint8_t,uint8_t)
      */
-    FORCE_INLINE_FUNCTION uint8_t alphaBlend(uint8_t R, uint8_t G, uint8_t B, uint8_t bufpix, uint8_t alpha) const
+    FORCE_INLINE_FUNCTION uint8_t mixColors(uint8_t R, uint8_t G, uint8_t B, uint8_t bufpix, uint8_t alpha)
     {
         const uint8_t ialpha = 0xFF - alpha;
         const uint8_t p_red = LCD8bpp_RGBA2222::getRedFromNativeColor(bufpix);
@@ -81,6 +67,31 @@ public:
         const uint8_t blue = LCD::div255(B * alpha + p_blue * ialpha);
         return LCD8bpp_RGBA2222::getNativeColorFromRGB(red, green, blue);
     }
+
+protected:
+    /**
+     * @copydoc AbstractPainterABGR2222::renderInit()
+     */
+    virtual bool renderInit()
+    {
+        return true;
+    }
+
+    /**
+     * @copydoc AbstractPainterABGR2222::renderNext(uint8_t&,uint8_t&,uint8_t&,uint8_t&)
+     */
+    virtual bool renderNext(uint8_t& red, uint8_t& green, uint8_t& blue, uint8_t& alpha)
+    {
+        return false;
+    }
+
+    /**
+     * @copydoc AbstractPainterABGR2222::renderPixel(uint8_t*,uint8_t,uint8_t,uint8_t)
+     */
+    virtual void renderPixel(uint8_t* p, uint8_t red, uint8_t green, uint8_t blue);
+
+    int currentX; ///< Current x coordinate relative to the widget
+    int currentY; ///< Current y coordinate relative to the widget
 };
 
 } // namespace touchgfx

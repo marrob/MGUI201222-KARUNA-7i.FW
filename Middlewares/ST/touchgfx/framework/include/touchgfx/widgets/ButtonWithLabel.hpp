@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -58,7 +58,7 @@ public:
      *
      * @return The text used for the label.
      */
-    const TypedText& getLabelText() const
+    TypedText getLabelText() const
     {
         return typedText;
     }
@@ -100,16 +100,16 @@ public:
      * Sets the rotation of the text on the label. The text can be rotated in steps of 90
      * degrees.
      *
-     * @param  textRotation The rotation of the text. Default is TEXT_ROTATE_0.
+     * @param  rotation The rotation of the text. Default is TEXT_ROTATE_0.
      *
      * @see TextArea::setRotation
      *
      * @note that this will not rotate the bitmap of the label, only the text.
      * @note The user code must call invalidate() in order to update the button on the display.
      */
-    void setLabelRotation(TextRotation textRotation)
+    void setLabelRotation(TextRotation rotation)
     {
-        rotation = textRotation;
+        this->rotation = rotation;
     }
 
     /**

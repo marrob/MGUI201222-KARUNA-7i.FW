@@ -14,7 +14,7 @@ class DIContainerBase : public touchgfx::Container
 {
 public:
     DIContainerBase();
-    virtual ~DIContainerBase();
+    virtual ~DIContainerBase() {}
     virtual void initialize();
 
 protected:

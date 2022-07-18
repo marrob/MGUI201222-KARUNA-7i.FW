@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -19,9 +19,6 @@
 #include <touchgfx/Utils.hpp>
 #include <touchgfx/Version.hpp>
 #include <touchgfx/hal/FrameBufferAllocator.hpp>
-#include <touchgfx/hal/Paint.hpp>
-#include <touchgfx/hal/PaintRGB565Impl.hpp>
-#include <touchgfx/hal/PaintRGB888Impl.hpp>
 #include <touchgfx/transforms/DisplayTransformation.hpp>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
@@ -683,11 +680,6 @@ void HALSDL2::taskEntry()
                 else if (event.key.keysym.sym == SDLK_F5)
                 {
                     Application::getInstance()->changeToStartScreen();
-                    // If stopped in single stepping, perform one step
-                    if (singleSteppingEnabled && singleSteppingSteps == 0)
-                    {
-                        singleSteppingSteps++;
-                    }
                 }
                 else if (event.key.keysym.sym == SDLK_F9)
                 {
@@ -838,7 +830,7 @@ uint8_t* HALSDL2::scaleTo24bpp(uint16_t* src, Bitmap::BitmapFormat format)
     {
         if (tft_framebuffer24_allocated)
         {
-            delete[] tft_framebuffer24;
+            delete tft_framebuffer24;
             tft_framebuffer24_allocated = false;
         }
         tft_framebuffer24 = reinterpret_cast<uint8_t*>(src);
@@ -1431,11 +1423,6 @@ void HALSDL2::singleStep(uint16_t steps /*= 1*/)
     {
         singleSteppingSteps += steps;
     }
-}
-
-void HALSDL2::stopApplication()
-{
-    isAlive = false;
 }
 
 #ifdef __linux__

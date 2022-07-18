@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -65,11 +65,11 @@ public:
     /**
      * Sets the color of the text. If no color is set, the default color (black) is used.
      *
-     * @param  newColor The color to use.
+     * @param  color The color to use.
      */
-    FORCE_INLINE_FUNCTION void setColor(colortype newColor)
+    FORCE_INLINE_FUNCTION void setColor(colortype color)
     {
-        color = newColor;
+        this->color = color;
     }
 
     /**
@@ -243,7 +243,7 @@ public:
      *
      * @return The currently used TypedText.
      */
-    const TypedText& getTypedText() const
+    TypedText getTypedText() const
     {
         return typedText;
     }

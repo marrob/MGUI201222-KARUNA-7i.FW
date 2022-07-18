@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -87,7 +87,7 @@ void ZoomAnimationImage::handleTickEvent()
         if (animationCounter >= zoomAnimationDelay)
         {
             // Adjust the used animationCounter for the startup delay
-            uint16_t actualAnimationCounter = animationCounter - zoomAnimationDelay;
+            uint32_t actualAnimationCounter = animationCounter - zoomAnimationDelay;
 
             int16_t deltaWidth = zoomAnimationWidthEquation(actualAnimationCounter, 0, zoomAnimationEndWidth - zoomAnimationStartWidth, animationDuration);
             int16_t deltaHeight = zoomAnimationHeightEquation(actualAnimationCounter, 0, zoomAnimationEndHeight - zoomAnimationStartHeight, animationDuration);
@@ -109,7 +109,7 @@ void ZoomAnimationImage::handleTickEvent()
             }
             moveTo(zoomAnimationStartX + deltaX, zoomAnimationStartY + deltaY);
 
-            if (animationCounter >= zoomAnimationDelay + animationDuration)
+            if (animationCounter >= (uint32_t)(zoomAnimationDelay + animationDuration))
             {
                 cancelZoomAnimation();
 
@@ -272,6 +272,8 @@ void ZoomAnimationImage::updateZoomAnimationDeltaXY()
         zoomAnimationDeltaX = 0;
         break;
     case FIXED_RIGHT_AND_BOTTOM:
+        break;
+    default:
         break;
     }
 }

@@ -26,11 +26,6 @@ DIContainerBase::DIContainerBase()
     add(circLed);
 }
 
-DIContainerBase::~DIContainerBase()
-{
-
-}
-
 void DIContainerBase::initialize()
 {
 

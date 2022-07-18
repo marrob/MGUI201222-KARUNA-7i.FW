@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -41,26 +41,27 @@ public:
      *
      * @param  width       The width.
      * @param  height      The height.
-     * @param  colorMiddle The color of the middle of the box.
-     * @param  colorBorder The border color.
-     * @param  borderWidth Size (width) of the border.
-     * @param  boxAlpha    (Optional) The alpha of the box and the border.
+     * @param  color       The color.
+     * @param  borderColor The border color.
+     * @param  borderSize  Size of the border.
+     * @param  alpha       (Optional) The alpha.
      */
-    BoxWithBorder(uint16_t width, uint16_t height, colortype colorMiddle, colortype colorBorder, uint16_t borderWidth, uint8_t boxAlpha = 255)
-        : Box(width, height, colorMiddle, boxAlpha), borderColor(colorBorder), borderSize(borderWidth)
+    BoxWithBorder(uint16_t width, uint16_t height, colortype color, colortype borderColor, uint16_t borderSize, uint8_t alpha = 255)
+        : Box(width, height, color, alpha), borderColor(borderColor), borderSize(borderSize)
     {
+        rect.width = width;
+        rect.height = height;
     }
 
     /**
      * Sets the color of the border drawn along the edge of the BoxWithBorder.
      *
-     * @param  colorBorder The color of the border.
-     *
-     * @see setColor, getBorderColor, Color::getColorFromRGB
+     * @param  color The color of the border.
+     * @see setColor, getBorderColor, Color::getColorFrom24BitRGB
      */
-    void setBorderColor(colortype colorBorder)
+    void setBorderColor(colortype color)
     {
-        borderColor = colorBorder;
+        borderColor = color;
     }
 
     /**

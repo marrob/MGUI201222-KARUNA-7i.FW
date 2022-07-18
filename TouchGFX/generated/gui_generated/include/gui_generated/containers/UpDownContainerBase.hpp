@@ -15,7 +15,7 @@ class UpDownContainerBase : public touchgfx::Container
 {
 public:
     UpDownContainerBase();
-    virtual ~UpDownContainerBase();
+    virtual ~UpDownContainerBase() {}
     virtual void initialize();
 
     /*

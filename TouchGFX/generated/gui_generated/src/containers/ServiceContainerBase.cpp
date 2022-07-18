@@ -375,11 +375,6 @@ ServiceContainerBase::ServiceContainerBase() :
     add(lblTempOffsetRanges);
 }
 
-ServiceContainerBase::~ServiceContainerBase()
-{
-
-}
-
 void ServiceContainerBase::initialize()
 {
     OffsetUpDownContainer.initialize();

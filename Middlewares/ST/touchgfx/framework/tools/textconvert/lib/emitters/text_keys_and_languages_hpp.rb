@@ -1,7 +1,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.20.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -11,15 +11,15 @@
 require 'json'
 
 class TextKeysAndLanguages < Template
-  def initialize(text_entries, typographies, languages, output_directory)
-    super(text_entries, typographies, languages, output_directory)
+  def initialize(text_entries, typographies, output_directory)
+    super
     @cache = {}
   end
-  def get_languages
-    @languages.map(&:upcase)
+  def countries
+    text_entries.languages.map { |language| language.upcase }.join(",\n    ")
   end
-  def get_texts
-    @text_entries.entries.map(&:cpp_text_id)
+  def texts
+    text_entries.entries.map(&:cpp_text_id)
   end
   def input_path
     File.join(root_dir,'Templates','TextKeysAndLanguages.hpp.temp')
@@ -34,8 +34,8 @@ class TextKeysAndLanguages < Template
     File.join(@output_directory, output_path)
   end
   def run
-    @cache["languages"] = languages
-    @cache["textids"] = get_texts
+    @cache["languages"] = text_entries.languages
+    @cache["textids"] = texts;
 
     new_cache_file = false
     if not File::exists?(cache_file)

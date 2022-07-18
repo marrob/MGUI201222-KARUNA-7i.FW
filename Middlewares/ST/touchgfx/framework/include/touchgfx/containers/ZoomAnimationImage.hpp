@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -278,7 +278,7 @@ protected:
     };
 
     States currentState;                        ///< The current animation state
-    uint16_t animationCounter;                  ///< The progress counter for the animation
+    uint32_t animationCounter;                  ///< The progress counter for the animation
     uint16_t zoomAnimationDelay;                ///< A delay that is applied before animation start. Expressed in ticks.
     Bitmap smallBmp;                            ///< The bitmap representing the small image
     Bitmap largeBmp;                            ///< The bitmap representing the large image

@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -162,8 +162,8 @@ void VideoWidget::readVideoInformation()
     // Set frame rate to movie speed (assuming 60 ui frames in a second)
     VideoInformation videoInformation;
     VideoController::getInstance().getVideoInformation(handle, &videoInformation);
-    videoWidth = (int16_t)videoInformation.frame_width;
-    videoHeight = (int16_t)videoInformation.frame_height;
+    videoWidth = videoInformation.frame_width;
+    videoHeight = videoInformation.frame_height;
     uint32_t videoFramesIn1000ms = 1000 / videoInformation.ms_between_frames;
     setFrameRate(60, videoFramesIn1000ms);
 }

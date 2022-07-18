@@ -6,7 +6,7 @@
     <WorkspacePath>D:\@@@!ProjectS\MFWL130221\STM32CubeIDE\MGUI201222-KARUNA-7i.FW\</WorkspacePath>
     <underRoot>false</underRoot>
     <TrustZone>0</TrustZone>
-    <HAL_Driver>C:\Users\Margit Robert\STM32Cube\Repository\STM32Cube_FW_F7_V1.17.0</HAL_Driver>
+    <HAL_Driver>C:\Users\Margit Robert\STM32Cube\Repository\STM32Cube_FW_F7_V1.16.2</HAL_Driver>
     <CMSIS>Drivers/CMSIS</CMSIS>
     <Toolchain>STM32CubeIDE</Toolchain>
     <IocFile>MGUI201222-KARUNA-7i.FW.ioc</IocFile>
@@ -27,7 +27,7 @@
             <memory access="xrw" name="RAM" size="320" start="0x20000000"/>
             <memory access="rx" name="FLASH" size="1024" start="0x8000000"/>
           </memories>
-          <startup>C:\Users\Margit Robert\STM32Cube\Repository\STM32Cube_FW_F7_V1.17.0\Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\gcc\startup_stm32f746xx.s</startup>
+          <startup>C:\Users\Margit Robert\STM32Cube\Repository\STM32Cube_FW_F7_V1.16.2\Drivers\CMSIS\Device\ST\STM32F7xx\Source\Templates\gcc\startup_stm32f746xx.s</startup>
           <LinkSettings>
             <LinkAdditionalLibs/>
           </LinkSettings>
@@ -57,6 +57,8 @@
             <include>Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1</include>
             <include>Drivers\CMSIS\Device\ST\STM32F7xx\Include</include>
             <include>Drivers\CMSIS\Include</include>
+            <include>..\Drivers\Components\ft5336</include>
+            <include>..\Drivers\BSP</include>
           </Cincludes>
           <definestoremove>
             <Adefines/>
@@ -110,6 +112,39 @@
             </file>
             <file>
               <name>Middlewares\Third_Party\FreeRTOS\Source\portable\GCC\ARM_CM7\r0p1\port.c</name>
+            </file>
+          </group>
+        </group>
+        <group>
+          <name>Application</name>
+          <group>
+            <name>User</name>
+            <group>
+              <name>TouchGFX</name>
+              <group>
+                <name>target</name>
+                <file>
+                  <name>TouchGFX/target/CortexMMCUInstrumentation.cpp</name>
+                </file>
+              </group>
+            </group>
+          </group>
+        </group>
+        <group>
+          <name>Drivers</name>
+          <group>
+            <name>Components</name>
+            <file>
+              <name>../Drivers/Components/ft5336/ft5336.c</name>
+            </file>
+          </group>
+        </group>
+        <group>
+          <name>Drivers</name>
+          <group>
+            <name>BSP</name>
+            <file>
+              <name>../Drivers/BSP/stm32746g_discovery_qspi.c</name>
             </file>
           </group>
         </group>

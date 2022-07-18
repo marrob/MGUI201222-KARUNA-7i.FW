@@ -2,7 +2,7 @@
 * Copyright (c) 2018(-2022) STMicroelectronics.
 * All rights reserved.
 *
-* This file is part of the TouchGFX 4.20.0 distribution.
+* This file is part of the TouchGFX 4.19.1 distribution.
 *
 * This software is licensed under terms that can be found in the LICENSE file in
 * the root directory of this software component.
@@ -42,7 +42,7 @@ public:
     VideoWidget();
 
     /** Destructor. Unregisters the Widget from the Controller. */
-    virtual ~VideoWidget();
+    ~VideoWidget();
 
     /** Play the video. */
     void play() const;
@@ -169,7 +169,7 @@ public:
      * @param width  Width of the videoBuffer in pixels
      * @param height Height of the videoBuffer in pixels
      */
-    void setVideoBufferFormat(Bitmap::BitmapFormat bufferFormat, int16_t width, int16_t height)
+    void setVideoBufferFormat(Bitmap::BitmapFormat bufferFormat, uint16_t width, uint16_t height)
     {
         format = bufferFormat;
         bufferWidth = width;
@@ -194,10 +194,10 @@ private:
     GenericCallback<const VideoWidget&>* movieEndedAction; ///< Pointer to the callback to be executed when the video is done.
     uint8_t* buffer;                                       ///< The buffer where the pixels are copied from
     Bitmap::BitmapFormat format;                           ///< The pixel format for the data.
-    int16_t bufferWidth;                                   ///< Width (stride) of buffer in pixels (when used)
-    int16_t bufferHeight;                                  ///< Height of buffer in pixels (when used)
-    int16_t videoWidth;                                    ///< Width of video in pixels
-    int16_t videoHeight;                                   ///< Height of video in pixels
+    uint16_t bufferWidth;                                  ///< Width (stride) of buffer in pixels (when used)
+    uint16_t bufferHeight;                                 ///< Height of buffer in pixels (when used)
+    uint16_t videoWidth;                                   ///< Width of video in pixels
+    uint16_t videoHeight;                                  ///< Height of video in pixels
 };
 
 } // namespace touchgfx

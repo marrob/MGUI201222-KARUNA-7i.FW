@@ -17,7 +17,7 @@ class ServiceContainerBase : public touchgfx::Container
 {
 public:
     ServiceContainerBase();
-    virtual ~ServiceContainerBase();
+    virtual ~ServiceContainerBase() {}
     virtual void initialize();
 
     /*

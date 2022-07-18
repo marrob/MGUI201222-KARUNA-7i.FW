@@ -2,7 +2,7 @@
 # Copyright (c) 2018(-2022) STMicroelectronics.
 # All rights reserved.
 #
-# This file is part of the TouchGFX 4.20.0 distribution.
+# This file is part of the TouchGFX 4.19.1 distribution.
 #
 # This software is licensed under terms that can be found in the LICENSE file in
 # the root directory of this software component.
@@ -38,7 +38,7 @@ BANNER
   file_name = ARGV.shift # texts.xml or texts.xlsx
   version = ARGV.shift # Version to upgrade to, if not the latest TouchGFX version
 
-  version ||= TOUCHGFX_VERSION
+  version = TOUCHGFX_VERSION if version.nil?
   fail "ERROR: Version #{version} is greater than latest TouchGFX version #{TOUCHGFX_VERSION}" if Gem::Version.new(version) > Gem::Version.new(TOUCHGFX_VERSION)
 
   begin
@@ -49,7 +49,6 @@ BANNER
 
   rescue Exception => e
     STDERR.puts e
-    STDERR.puts e.backtrace if ENV['DEBUG']
     abort "An error occurred during text database upgrading!"
   end
 end
