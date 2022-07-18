@@ -81,8 +81,6 @@ typedef struct _RS485TxItem
 #define SDRAM_BUFFER_SIZE                        ((uint32_t)0x1000)
 
 
-#define WITHOUT_RTOS
-
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -164,11 +162,13 @@ const osMessageQueueAttr_t USBUartRxQueue_attributes = {
   .name = "USBUartRxQueue"
 };
 /* USER CODE BEGIN PV */
+#define husb      huart1
+#define hRs485    huart7
 
 Device_t Device;
 __IO unsigned long RTOSRunTimeStatTick;
 
-static char USB_UART_RxBuffer[RS485_BUFFER_SIZE];
+static char USB_UART_RxBuffer[USB_BUFFER_SIZE];
 static char RS485_UART_RxBuffer[RS485_BUFFER_SIZE];
 
 
@@ -322,7 +322,6 @@ int main(void)
   /*** EEPROM ***/
   EepromInit(&hi2c1);
   GuiItfLoad();
-
 
   /*** Versions ***/
   sprintf(Device.Gui.FW, "%s",DEVICE_FW);
@@ -651,7 +650,7 @@ static void MX_LTDC_Init(void)
   LTDC_LayerCfgTypeDef pLayerCfg = {0};
 
   /* USER CODE BEGIN LTDC_Init 1 */
-
+#ifdef KARUNA_7i
   /* USER CODE END LTDC_Init 1 */
   hltdc.Instance = LTDC;
   hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
@@ -693,6 +692,49 @@ static void MX_LTDC_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN LTDC_Init 2 */
+#endif
+
+#ifdef KARUNA_43i
+  hltdc.Instance = LTDC;
+  hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
+  hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
+  hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+  hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  hltdc.Init.HorizontalSync = 19;
+  hltdc.Init.VerticalSync = 2;
+  hltdc.Init.AccumulatedHBP = 159;
+  hltdc.Init.AccumulatedVBP = 22;
+  hltdc.Init.AccumulatedActiveW = 959;
+  hltdc.Init.AccumulatedActiveH = 502;
+  hltdc.Init.TotalWidth = 1119;
+  hltdc.Init.TotalHeigh = 514;
+  hltdc.Init.Backcolor.Blue = 0;
+  hltdc.Init.Backcolor.Green = 0;
+  hltdc.Init.Backcolor.Red = 0;
+  if (HAL_LTDC_Init(&hltdc) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  pLayerCfg.WindowX0 = 0;
+  pLayerCfg.WindowX1 = 800;
+  pLayerCfg.WindowY0 = 0;
+  pLayerCfg.WindowY1 = 480;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB565;
+  pLayerCfg.Alpha = 0xFF;
+  pLayerCfg.Alpha0 = 0;
+  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_CA;
+  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_CA;
+  pLayerCfg.FBStartAdress = 0xD0000000;
+  pLayerCfg.ImageWidth = 800;
+  pLayerCfg.ImageHeight = 480;
+  pLayerCfg.Backcolor.Blue = 0;
+  pLayerCfg.Backcolor.Green = 0;
+  pLayerCfg.Backcolor.Red = 0;
+  if (HAL_LTDC_ConfigLayer(&hltdc, &pLayerCfg, 0) != HAL_OK)
+  {
+    Error_Handler();
+  }
+#endif
 
   /* USER CODE END LTDC_Init 2 */
 
@@ -927,7 +969,7 @@ static void MX_UART7_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN UART7_Init 2 */
-  HAL_UART_Receive_DMA (&huart7, (uint8_t*)RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
+  HAL_UART_Receive_DMA (&hRs485, (uint8_t*)RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
   /* USER CODE END UART7_Init 2 */
 
 }
@@ -962,7 +1004,7 @@ static void MX_USART1_UART_Init(void)
     Error_Handler();
   }
   /* USER CODE BEGIN USART1_Init 2 */
-  HAL_UART_Receive_DMA (&huart1, (uint8_t*)USB_UART_RxBuffer, RS485_BUFFER_SIZE);
+  HAL_UART_Receive_DMA (&husb, (uint8_t*)USB_UART_RxBuffer, RS485_BUFFER_SIZE);
   /* USER CODE END USART1_Init 2 */
 
 }
@@ -1239,19 +1281,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-/* printf -------------------------------------------------------------------*/
-
-int _write(int file, char *ptr, int len)
-{
-  HAL_UART_Transmit(&huart1, (uint8_t*)ptr, len, 100);
-  return len;
-}
-
-
-void ConsoleWrite(char *str)
-{
-  //HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), 100);
-}
 
 /* LEDs ---------------------------------------------------------------------*/
 void LiveLedOn(void)
@@ -1305,137 +1334,90 @@ uint8_t GetDisply(void)
 /* Usb------------------------------------------------------------------------*/
 void UsbUartTx(char *str)
 {
-  static char temp[80];
-  sprintf(temp, "%s\n",str);
-  HAL_UART_Transmit(&huart1, (uint8_t*)temp, strlen(temp), 100);
+  strcat(str,"\n");
+  HAL_UART_Transmit(&husb, (uint8_t*)str, strlen(str), 100);
 }
 
 void UsbParser(char *request)
 {
-  char response[RS485_BUFFER_SIZE];
+  char response[USB_BUFFER_SIZE];
   char cmd[20];
   char arg1[10];
-  char arg2[10];
-  uint8_t params = 0;
+
   if(strlen(USB_UART_RxBuffer) !=0)
   {
-    params = sscanf(request, "%s %s %s", cmd, arg1, arg2);
-    if(params == 1)
-    {/*** parameterless commands ***/
-      if(!strcmp(cmd, "*OPC?"))
-      {
-        strcpy(response, "*OPC");
-      }
-      else if(!strcmp(cmd, "*RDY?"))
-      {
-        strcpy(response, "*RDY");
-      }
-      else if(!strcmp(cmd, "*WHOIS?"))
-      {
-        strcpy(response, DEVICE_NAME);
-      }
-      else if(!strcmp(cmd, "*VER?"))
-      {
-        strcpy(response, DEVICE_FW);
-      }
-      else if(!strcmp(cmd, "*UID?"))
-      {
-        sprintf(response, "%4lX%4lX%4lX",HAL_GetUIDw0(), HAL_GetUIDw1(), HAL_GetUIDw2());
-      }
-      else if(!strcmp(cmd,"UPTIME?"))
-      {
-        sprintf(response, "%lld", Device.Gui.UpTimeSec);
-      }
-      else if(!strcmp(cmd, "DIS:LIG?"))
-      {
-        sprintf(response, "%d", Device.Backlight.LightPercent);
-      }
-//        else if(!strcmp(cmd, "LED:LIG?"))
-//        {
-//          sprintf(response, "%d", GetPowerLedLight());
-//        }
-      else if(!strcmp(cmd, "DIS?"))
-      {
-        sprintf(response, "%d",GetDisply()?1:0);
-      }
-      else if(!strcmp(cmd, "DIS:ON"))
-      {
-        SetDisplayOn();
-        strcpy(response, "RDY");
-      }
-      else if(!strcmp(cmd, "DIS:OFF"))
-      {
-        SetDisplayOff();
-        strcpy(response, "RDY");
-      }
-//        else if(!strcmp(cmd, "PSP:ON"))
-//        {
-//          SetPowerSupply(1);
-//          strcpy(response, "RDY");
-//        }
-//        else if(!strcmp(cmd, "PSP:OFF"))
-//        {
-//          SetPowerSupply(0);
-//          strcpy(response, "RDY");
-//        }
-//        else if(!strcmp(cmd, "PSP?"))
-//        {
-//          sprintf(response, "%d",GetPowerSupply()?1:0);
-//        }
-      else if(!strcmp(cmd, "DIG:INP:U16?"))
-      {
-        sprintf(response, "%04X",PeriphReadInputs());
-      }
-      else if(!strcmp(cmd, "DIG:OUT:U8?"))
-      {
-        //sprintf(response, "%02X",PeriGetOutputs());
-      }
-//        else if(!strcmp(cmd, "TEM:ARR?"))
-//        {
-//          sprintf(response, "%0.3f; %0.3f; %0.3f; %0.3f",
-//              Device.Temperature[0],
-//              Device.Temperature[1],
-//              Device.Temperature[2],
-//              Device.Temperature[3]);
-//        }
-      else
-      {
-        strcpy(response, "!UNKNOWN");
-      }
-    }
+    memset(cmd,0x00, sizeof(cmd));
+    memset(arg1,0x00, sizeof(arg1));
 
-    if(params == 2)
-    {/*** commands with parameters ***/
-      if(!strcmp(cmd, "DIS:LIG"))
-      {
-        BacklightSet(strtol(arg1, NULL, 0));
-        strcpy(response, "RDY");
-      }
-//        else if(!strcmp(cmd, "LED:LIG"))
-//        {
-//          PowerLedSetMaxLight(strtol(arg1, NULL, 0));
-//          strcpy(response, "RDY");
-//        }
-//        else if(!strcmp(cmd, "LED:PER"))
-//        {
-//          PowerLedSetUserPeriod(strtol(arg1, NULL, 0));
-//          strcpy(response, "RDY");
-//        }
-//        else if(!strcmp(cmd, "LED:DIM"))
-//        {
-//          PowerLedSetDimming(strtol(arg1, NULL, 0));
-//          strcpy(response, "RDY");
-//        }
-      else if(!strcmp(cmd, "DIG:OUT:SET:U8"))
-      {
-        uint8_t value = strtol(arg1, NULL, 16);
-        PeriphWriteOutputs(value);
-        strcpy(response, "RDY");
-      }
-      else
-      {
-        strcpy(response, "!UNKNOWN");
-      }
+    sscanf(request, "%s", cmd);
+
+    if(!strcmp(cmd, "*OPC?"))
+    {
+      strcpy(response, "*OPC");
+    }
+    else if(!strcmp(cmd, "OK?"))
+    {
+      strcpy(response, "OK");
+    }
+    else if(!strcmp(cmd, "*WHOIS?"))
+    {
+      strcpy(response, DEVICE_NAME);
+    }
+    else if(!strcmp(cmd, "*VER?"))
+    {
+      strcpy(response, DEVICE_FW);
+    }
+    else if(!strcmp(cmd, "*UID?"))
+    {
+      sprintf(response, "%4lX%4lX%4lX",HAL_GetUIDw0(), HAL_GetUIDw1(), HAL_GetUIDw2());
+    }
+    else if(!strcmp(cmd,"UPTIME?"))
+    {
+      sprintf(response, "%lld", Device.Gui.UpTimeSec);
+    }
+    else if(!strcmp(cmd, "DIS:LIG?"))
+    {
+      sprintf(response, "%d", Device.Backlight.LightPercent);
+    }
+    else if(!strcmp(cmd, "DIS?"))
+    {
+      sprintf(response, "%d",GetDisply()?1:0);
+    }
+    else if(!strcmp(cmd, "DIS:ON"))
+    {
+      SetDisplayOn();
+      strcpy(response, "OK");
+    }
+    else if(!strcmp(cmd, "DIS:OFF"))
+    {
+      SetDisplayOff();
+      strcpy(response, "OK");
+    }
+    else if(!strcmp(cmd, "DIG:INP:U16?"))
+    {
+      sprintf(response, "%04X",PeriphReadInputs());
+    }
+    else if(!strcmp(cmd, "DIG:OUT:U8?"))
+    {
+      strcpy(response, "!UNKNOWN");
+    }
+    else if(!strcmp(cmd, "DIG:OUT:SET:U8"))
+    {
+      sscanf(request, "%s %s", cmd, arg1);
+      uint8_t value = strtol(arg1, NULL, 16);
+
+      PeriphWriteOutputs(value);
+      strcpy(response, "OK");
+    }
+    else if(!strcmp(cmd,"RST"))
+    {
+      strcpy(response, "OK");
+      UsbUartTx(response);
+      NVIC_SystemReset();
+    }
+    else
+    {
+      strcpy(response, "!UNKNOWN");
     }
     UsbUartTx(response);
   }
@@ -1578,11 +1560,10 @@ void RS485DirRx(void)
 
 void RS485UartTx(char *str)
 {
-  static char temp[RS485_BUFFER_SIZE];
   RS485DirTx();
   HAL_Delay(RS485_TX_HOLD_MS);
-  sprintf(temp, "%s\n",str);
-  HAL_UART_Transmit(&huart7, (uint8_t*)temp, strlen(temp), 100);
+  strcat(str,"\n");
+  HAL_UART_Transmit(&hRs485, (uint8_t*)str, strlen(str), 100);
   RS485DirRx();
 }
 
@@ -1592,124 +1573,126 @@ void RS485Parser(char *response)
   char cmd[RS485_CMD_LENGTH];
   char arg1[RS485_ARG1_LENGTH];
   char arg2[RS485_ARG2_LENGTH];
-  uint8_t params = 0;
-
-  memset(cmd,0x00, RS485_CMD_LENGTH);
-  memset(arg1,0x00, RS485_ARG1_LENGTH);
-  memset(arg2,0x00, RS485_ARG2_LENGTH);
 
   if(strlen(response) !=0)
   {
-    Device.Diag.RS485ResponseCnt++;
-    params = sscanf(response, "#%x %s %s %s", &addr, cmd, arg1, arg2);
+    memset(cmd,0x00, RS485_CMD_LENGTH);
+    memset(arg1,0x00, RS485_ARG1_LENGTH);
+    memset(arg2,0x00, RS485_ARG2_LENGTH);
 
+    Device.Diag.RS485ResponseCnt++;
+    sscanf(response, "#%x %s %s", &addr, cmd, arg1);
     if(addr == KRN_HOST_RX_ADDR )
     {
-      if(params == 2)
+      if(!strcmp(cmd, "OK"))
       {
-        if(!strcmp(cmd, "OK"))
-          Device.Karuna.OkCnt++;
-        else
-          Device.Karuna.UnknownCnt++;
+        Device.Karuna.OkCnt++;
       }
-      if(params == 3)
+      else if(!strcmp(cmd, "FW"))
       {
-        if(!strcmp(cmd, "FW"))
-        {
-           uint8_t i = strlen(arg1);
-           if(i<DEVICE_FW_SIZE && i!=0)
-             strcpy(Device.Karuna.FW, arg1);
-           else
-             strcpy(Device.Karuna.FW, "?");
-        }
-        else if(!strcmp(cmd, "UID"))
-        {
-          uint8_t i = strlen(arg1);
-          if(i<DEVICE_UID_SIZE && i!=0)
-            strcpy(Device.Karuna.UID, arg1);
-          else
-            strcpy(Device.Karuna.UID, "?");
-        }
-        else if(!strcmp(cmd, "PCB"))
-        {
-          uint8_t i = strlen(arg1);
-          if(i<DEVICE_PCB_SIZE && i!=0)
-            strcpy(Device.Karuna.PCB, arg1);
-          else
-            strcpy(Device.Karuna.PCB, "?");
-        }
-        else if(!strcmp(cmd,"UPTIME"))
-           Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "DI"))
-          Device.Karuna.DI = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "DO"))
-          Device.Karuna.DO = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "UE"))
-          Device.Karuna.UartErrorCnt = strtol(arg1, NULL, 16);
-        else
-          Device.Karuna.UnknownCnt++;
+         uint8_t i = strlen(arg1);
+         if(i<DEVICE_FW_SIZE && i!=0)
+           strcpy(Device.Karuna.FW, arg1);
+         else
+           strcpy(Device.Karuna.FW, "?");
       }
-    }
-    if(addr == DAS_HOST_RX_ADDR)
-    {
-      if(params == 2)
+      else if(!strcmp(cmd, "UID"))
       {
-        if(!strcmp(cmd, "OK"))
-          Device.DasClock.OkCnt++;
+        uint8_t i = strlen(arg1);
+        if(i<DEVICE_UID_SIZE && i!=0)
+          strcpy(Device.Karuna.UID, arg1);
         else
-          Device.DasClock.UnknownCnt++;
+          strcpy(Device.Karuna.UID, "?");
       }
-      else if(params == 3)
+      else if(!strcmp(cmd, "PCB"))
       {
-        if(!strcmp(cmd, "FW"))
-        {
-          uint8_t i = strlen(arg1);
-          if(i<DEVICE_FW_SIZE && i!=0)
-            strcpy(Device.DasClock.FW, arg1);
-          else
-            strcpy(Device.DasClock.UID, "?");
-        }
-        else if(!strcmp(cmd, "UID"))
-        {
-          uint8_t i = strlen(arg1);
-          if(i<DEVICE_UID_SIZE && i!=0)
-            strcpy(Device.DasClock.UID, arg1);
-          else
-            strcpy(Device.DasClock.UID, "?");
-        }
-        else if(!strcmp(cmd, "PCB"))
-        {
-          uint8_t i = strlen(arg1);
-          if(i<DEVICE_PCB_SIZE && i!=0)
-            strcpy(Device.DasClock.PCB, arg1);
-          else
-            strcpy(Device.DasClock.PCB, "?");
-        }
-        else if(!strcmp(cmd,"UPTIME"))
-           Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "DI"))
-          Device.DasClock.DI = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "DO"))
-          Device.DasClock.DO = strtol(arg1, NULL, 16);
-        else if(!strcmp(cmd, "UE"))
-          Device.DasClock.UartErrorCnt = strtol(arg1, NULL, 16);
+        uint8_t i = strlen(arg1);
+        if(i<DEVICE_PCB_SIZE && i!=0)
+          strcpy(Device.Karuna.PCB, arg1);
         else
-          Device.DasClock.UnknownCnt++;
+          strcpy(Device.Karuna.PCB, "?");
       }
-      else if(params == 4)
+      else if(!strcmp(cmd,"UPTIME"))
       {
-        if(!strcmp(cmd, "AI"))
-        {
-           uint8_t ch = strtol(arg1, NULL, 10);
-           double value = atof(arg2);
-           if(ch < DAS_AI_CHANNELS)
-             Device.DasClock.AI[ch] = value;
-        }
-        else
-          Device.DasClock.UnknownCnt++;
+        Device.Karuna.UpTimeSec = strtol(arg1, NULL, 16);
+      }
+      else if(!strcmp(cmd, "DI"))
+      {
+        Device.Karuna.DI = strtol(arg1, NULL, 16);
+      }
+      else if(!strcmp(cmd, "DO"))
+      {
+        Device.Karuna.DO = strtol(arg1, NULL, 16);
+      }
+      else if(!strcmp(cmd, "UE"))
+      {
+        Device.Karuna.UartErrorCnt = strtol(arg1, NULL, 16);
       }
       else
+      {
+        Device.Karuna.UnknownCnt++;
+      }
+    }
+
+    if(addr == DAS_HOST_RX_ADDR)
+    {
+      if(!strcmp(cmd, "OK"))
+      {
+        Device.DasClock.OkCnt++;
+      }
+
+      if(!strcmp(cmd, "FW"))
+      {
+        uint8_t i = strlen(arg1);
+        if(i<DEVICE_FW_SIZE && i!=0)
+          strcpy(Device.DasClock.FW, arg1);
+        else
+          strcpy(Device.DasClock.UID, "?");
+      }
+      else if(!strcmp(cmd, "UID"))
+      {
+        uint8_t i = strlen(arg1);
+        if(i<DEVICE_UID_SIZE && i!=0)
+          strcpy(Device.DasClock.UID, arg1);
+        else
+          strcpy(Device.DasClock.UID, "?");
+      }
+      else if(!strcmp(cmd, "PCB"))
+      {
+        uint8_t i = strlen(arg1);
+        if(i<DEVICE_PCB_SIZE && i!=0)
+          strcpy(Device.DasClock.PCB, arg1);
+        else
+          strcpy(Device.DasClock.PCB, "?");
+      }
+      else if(!strcmp(cmd,"UPTIME"))
+      {
+         Device.DasClock.UpTimeSec = strtol(arg1, NULL, 16);
+      }
+      else if(!strcmp(cmd, "DI"))
+      {
+        Device.DasClock.DI = strtol(arg1, NULL, 16);
+      }
+      else if(!strcmp(cmd, "DO"))
+      {
+        Device.DasClock.DO = strtol(arg1, NULL, 16);
+      }
+      else if(!strcmp(cmd, "UE"))
+      {
+        Device.DasClock.UartErrorCnt = strtol(arg1, NULL, 16);
+      }
+      if(!strcmp(cmd, "AI"))
+      {
+        sscanf(response, "#%x %s %s %s", &addr, cmd, arg1, arg2);
+        uint8_t ch = strtol(arg1, NULL, 10);
+        double value = atof(arg2);
+        if(ch < DAS_AI_CHANNELS)
+         Device.DasClock.AI[ch] = value;
+      }
+      else
+      {
         Device.DasClock.UnknownCnt++;
+      }
     }
   }
 }
@@ -1762,32 +1745,32 @@ void UsbRxTask(void *argument)
         timestamp = HAL_GetTick();
         startFlag = 1;
       }
-      for(uint8_t i=0; i < RS485_BUFFER_SIZE; i++)
+      for(uint8_t i=0; i < USB_BUFFER_SIZE; i++)
       {
         if(USB_UART_RxBuffer[i]=='\n')
         {
           USB_UART_RxBuffer[i] = 0;
           startFlag = 0;
-          HAL_UART_DMAStop(&huart1);
+          HAL_UART_DMAStop(&husb);
           UsbParser(USB_UART_RxBuffer);
-          memset(USB_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, RS485_BUFFER_SIZE);
+          memset(USB_UART_RxBuffer, 0x00, USB_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&husb, (uint8_t*) USB_UART_RxBuffer, USB_BUFFER_SIZE);
         }
       }
       if(startFlag)
       {
         if(HAL_GetTick() - timestamp > 500)
         {
-          if(__HAL_UART_GET_FLAG(&huart1, UART_FLAG_ORE))
-            __HAL_UART_CLEAR_FLAG(&huart1,UART_CLEAR_OREF);
-          if(__HAL_UART_GET_FLAG(&huart1, USART_ISR_NE))
-            __HAL_UART_CLEAR_FLAG(&huart1,USART_ISR_NE);
-          if(__HAL_UART_GET_FLAG(&huart1, USART_ISR_FE))
-            __HAL_UART_CLEAR_FLAG(&huart1,USART_ISR_FE);
+          if(__HAL_UART_GET_FLAG(&husb, UART_FLAG_ORE))
+            __HAL_UART_CLEAR_FLAG(&husb,UART_CLEAR_OREF);
+          if(__HAL_UART_GET_FLAG(&husb, USART_ISR_NE))
+            __HAL_UART_CLEAR_FLAG(&husb,USART_ISR_NE);
+          if(__HAL_UART_GET_FLAG(&husb, USART_ISR_FE))
+            __HAL_UART_CLEAR_FLAG(&husb,USART_ISR_FE);
           startFlag = 0;
-          HAL_UART_DMAStop(&huart1);
-          memset(USB_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart1, (uint8_t*) USB_UART_RxBuffer, RS485_BUFFER_SIZE);
+          HAL_UART_DMAStop(&husb);
+          memset(USB_UART_RxBuffer, 0x00, USB_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&husb, (uint8_t*) USB_UART_RxBuffer, USB_BUFFER_SIZE);
           Device.Diag.UsbUartErrorCnt ++;
         }
       }
@@ -1867,26 +1850,26 @@ void RS485RxTask(void *argument)
         {
           RS485_UART_RxBuffer[i] = 0;
           startFlag = 0;
-          HAL_UART_DMAStop(&huart7);
+          HAL_UART_DMAStop(&hRs485);
           RS485Parser(RS485_UART_RxBuffer);
           memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&hRs485, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
         }
       }
       if(startFlag)
       {
         if(HAL_GetTick() - timestamp > 500)
         {
-          if(__HAL_UART_GET_FLAG(&huart7, UART_FLAG_ORE))
-            __HAL_UART_CLEAR_FLAG(&huart7,UART_CLEAR_OREF);
-          if(__HAL_UART_GET_FLAG(&huart7, USART_ISR_NE))
-            __HAL_UART_CLEAR_FLAG(&huart7,USART_ISR_NE);
-          if(__HAL_UART_GET_FLAG(&huart7, USART_ISR_FE))
-            __HAL_UART_CLEAR_FLAG(&huart7,USART_ISR_FE);
+          if(__HAL_UART_GET_FLAG(&hRs485, UART_FLAG_ORE))
+            __HAL_UART_CLEAR_FLAG(&hRs485,UART_CLEAR_OREF);
+          if(__HAL_UART_GET_FLAG(&hRs485, USART_ISR_NE))
+            __HAL_UART_CLEAR_FLAG(&hRs485,USART_ISR_NE);
+          if(__HAL_UART_GET_FLAG(&hRs485, USART_ISR_FE))
+            __HAL_UART_CLEAR_FLAG(&hRs485,USART_ISR_FE);
           startFlag = 0;
-          HAL_UART_DMAStop(&huart7);
+          HAL_UART_DMAStop(&hRs485);
           memset(RS485_UART_RxBuffer, 0x00, RS485_BUFFER_SIZE);
-          HAL_UART_Receive_DMA(&huart7, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
+          HAL_UART_Receive_DMA(&hRs485, (uint8_t*) RS485_UART_RxBuffer, RS485_BUFFER_SIZE);
           Device.Diag.RS485UartErrorCnt ++;
         }
       }
