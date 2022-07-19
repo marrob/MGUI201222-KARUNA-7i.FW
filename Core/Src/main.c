@@ -183,7 +183,7 @@ RS485TxItem_t RS485TxCollection[] =
   {"#%02X PCB?",    KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4600 },
   {"#%02X UE?",     KRN_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 4800 },
 
-
+#ifdef KARUNA_7i
   /*** DasClock ***/
   {"#%02X UPTIME?", DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 200,},
   {"#%02X FW?",     DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL, 5000 },
@@ -199,6 +199,7 @@ RS485TxItem_t RS485TxCollection[] =
   {"#%02X AI? 4",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2500 },
   {"#%02X AI? 5",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2600 },
   {"#%02X AI? 6",   DAS_HOST_TX_ADDR, TX_ITEM_NO_ARG, NULL ,2700 },
+#endif
 };
 
 
@@ -603,7 +604,7 @@ static void MX_I2C2_Init(void)
 
   /* USER CODE END I2C2_Init 1 */
   hi2c2.Instance = I2C2;
-  hi2c2.Init.Timing = 0x20404768;
+  hi2c2.Init.Timing = 0x2040BEFF;
   hi2c2.Init.OwnAddress1 = 0;
   hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
   hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
