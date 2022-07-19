@@ -317,7 +317,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockSupplyVoltageTitle_1_1.setLinespacing(0);
     lblDASClockSupplyVoltageTitle_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AFXB));
 
-    lblTempOffsetRanges.setPosition(309, 955, 715, 36);
+    lblTempOffsetRanges.setPosition(309, 961, 715, 36);
     lblTempOffsetRanges.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblTempOffsetRanges.setLinespacing(0);
     Unicode::snprintf(lblTempOffsetRangesBuffer, LBLTEMPOFFSETRANGES_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_QHRN).getText());

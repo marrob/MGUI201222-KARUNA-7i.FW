@@ -6692,7 +6692,7 @@
             "Type": "TextArea",
             "Name": "lblTempOffsetRanges",
             "X": 309,
-            "Y": 955,
+            "Y": 961,
             "Width": 715,
             "Height": 36,
             "TextId": "__SingleUse_BMC7",
