@@ -160,7 +160,7 @@ MainViewBase::MainViewBase() :
     btnSettings.setBorderSize(1);
     btnSettings.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnSettings.setBitmaps(Bitmap(BITMAP_SETTINGS_ID), Bitmap(BITMAP_SETTINGS_ID));
-    btnSettings.setBitmapXY(15, 5);
+    btnSettings.setBitmapXY(20, 10);
     btnSettings.setText(TypedText(T___SINGLEUSE_VB1R));
     btnSettings.setTextPosition(-20, 20, 500, 90);
     btnSettings.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
@@ -171,7 +171,7 @@ MainViewBase::MainViewBase() :
     btnDisplay.setBorderSize(1);
     btnDisplay.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnDisplay.setBitmaps(Bitmap(BITMAP_DISPLAY_ID), Bitmap(BITMAP_DISPLAY_ID));
-    btnDisplay.setBitmapXY(20, 5);
+    btnDisplay.setBitmapXY(20, 10);
     btnDisplay.setText(TypedText(T___SINGLEUSE_SPLI));
     btnDisplay.setTextPosition(-20, 20, 500, 90);
     btnDisplay.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));

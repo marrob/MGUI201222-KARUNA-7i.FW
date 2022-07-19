@@ -41,12 +41,7 @@ LogScreenViewBase::LogScreenViewBase() :
     btnBack.setPosition(5, 505, 500, 90);
     btnBack.setAction(flexButtonCallback);
 
-    lblTitle.setPosition(0, 10, 1024, 80);
-    lblTitle.setColor(touchgfx::Color::getColorFromRGB(128, 128, 128));
-    lblTitle.setLinespacing(0);
-    lblTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QJTD));
-
-    boxWithBorder1.setPosition(5, 100, 1014, 400);
+    boxWithBorder1.setPosition(5, 6, 1014, 494);
     boxWithBorder1.setColor(touchgfx::Color::getColorFromRGB(25, 25, 25));
     boxWithBorder1.setBorderColor(touchgfx::Color::getColorFromRGB(100, 100, 100));
     boxWithBorder1.setBorderSize(1);
@@ -104,38 +99,38 @@ LogScreenViewBase::LogScreenViewBase() :
     lblERROR.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Y806));
     container1.add(lblERROR);
 
-    scrollableCont.setPosition(5, 101, 1014, 398);
+    scrollableCont.setPosition(5, 7, 1014, 490);
     scrollableCont.enableHorizontalScroll(false);
     scrollableCont.setScrollbarsColor(touchgfx::Color::getColorFromRGB(255, 255, 255));
 
     scrollElment_0.setXY(2, 2);
     scrollableCont.add(scrollElment_0);
 
-    scrollElment_1.setXY(1, 103);
+    scrollElment_1.setXY(2, 62);
     scrollableCont.add(scrollElment_1);
 
-    scrollElment_2.setXY(2, 204);
+    scrollElment_2.setXY(2, 122);
     scrollableCont.add(scrollElment_2);
 
-    scrollElment_3.setXY(2, 305);
+    scrollElment_3.setXY(2, 182);
     scrollableCont.add(scrollElment_3);
 
-    scrollElment_4.setXY(2, 406);
+    scrollElment_4.setXY(2, 242);
     scrollableCont.add(scrollElment_4);
 
-    scrollElment_5.setXY(2, 507);
+    scrollElment_5.setXY(2, 302);
     scrollableCont.add(scrollElment_5);
 
-    scrollElment_6.setXY(2, 608);
+    scrollElment_6.setXY(2, 360);
     scrollableCont.add(scrollElment_6);
 
-    scrollElment_7.setXY(2, 709);
+    scrollElment_7.setXY(2, 420);
     scrollableCont.add(scrollElment_7);
 
-    scrollElment_8.setXY(2, 810);
+    scrollElment_8.setXY(2, 480);
     scrollableCont.add(scrollElment_8);
 
-    scrollElment_9.setXY(2, 911);
+    scrollElment_9.setXY(2, 540);
     scrollableCont.add(scrollElment_9);
     scrollableCont.setScrollbarsPermanentlyVisible();
     scrollableCont.setScrollbarsVisible(false);
@@ -144,7 +139,6 @@ LogScreenViewBase::LogScreenViewBase() :
     add(box1);
     add(btnPrevPage);
     add(btnBack);
-    add(lblTitle);
     add(boxWithBorder1);
     add(btnNextPage);
     add(lblDate);

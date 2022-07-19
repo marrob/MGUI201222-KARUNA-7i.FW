@@ -28,8 +28,8 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     btnShowService.setText(TypedText(T___SINGLEUSE_YTJC));
     btnShowService.setTextPosition(-20, 20, 500, 90);
     btnShowService.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnShowService.setBitmaps(Bitmap(BITMAP_DARK_ICONS_INFO_48_ID), Bitmap(BITMAP_DARK_ICONS_INFO_48_ID));
-    btnShowService.setBitmapXY(30, 20);
+    btnShowService.setBitmaps(Bitmap(BITMAP_DARK_ICONS_INFO_ID), Bitmap(BITMAP_DARK_ICONS_INFO_ID));
+    btnShowService.setBitmapXY(20, 5);
     btnShowService.setPosition(519, 505, 500, 90);
     btnShowService.setAction(flexButtonCallback);
 
@@ -127,15 +127,6 @@ SettingsScreenViewBase::SettingsScreenViewBase() :
     line2.setLineWidth(2);
     line2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
     scrollableContainerSettings.add(line2);
-
-    line3.setPosition(55, 465, 920, 15);
-    line3Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
-    line3.setPainter(line3Painter);
-    line3.setStart(0, 0);
-    line3.setEnd(920, 1);
-    line3.setLineWidth(2);
-    line3.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
-    scrollableContainerSettings.add(line3);
 
     lblClockTitle.setPosition(10, 244, 294, 44);
     lblClockTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));

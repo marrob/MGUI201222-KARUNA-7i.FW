@@ -70,8 +70,6 @@ protected:
     touchgfx::TextArea lblGUITitle;
     touchgfx::Line line2;
     touchgfx::PainterRGB565 line2Painter;
-    touchgfx::Line line3;
-    touchgfx::PainterRGB565 line3Painter;
     touchgfx::TextArea lblClockTitle;
     touchgfx::RadioButtonGroup<2> radioButtonGroup1;
 

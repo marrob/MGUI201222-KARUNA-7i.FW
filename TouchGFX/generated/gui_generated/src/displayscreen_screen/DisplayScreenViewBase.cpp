@@ -20,7 +20,7 @@ DisplayScreenViewBase::DisplayScreenViewBase() :
     __background.setPosition(0, 0, 1024, 600);
     __background.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
-    box1.setPosition(0, -9, 1024, 600);
+    box1.setPosition(0, 0, 1024, 600);
     box1.setColor(touchgfx::Color::getColorFromRGB(0, 0, 0));
 
     boxWithBorder1.setPosition(5, 100, 1014, 400);

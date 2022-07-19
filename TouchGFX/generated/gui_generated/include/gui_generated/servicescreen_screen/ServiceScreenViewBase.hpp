@@ -45,7 +45,7 @@ protected:
     touchgfx::Box __background;
     touchgfx::Box box1;
     touchgfx::TextButtonStyle< touchgfx::ImageButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnBack;
-    touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  btnLog;
+    touchgfx::ImageButtonStyle< touchgfx::TextButtonStyle< touchgfx::BoxWithBorderButtonStyle< touchgfx::ClickButtonTrigger >  >  >  btnLog;
     touchgfx::BoxWithBorder boxWithBorder1;
     touchgfx::TextArea lblServiceTitle;
     touchgfx::ScrollableContainer scrollContService;

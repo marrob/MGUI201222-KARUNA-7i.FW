@@ -8,18 +8,18 @@
 ScrollElmentBase::ScrollElmentBase()
 {
     setWidth(1010);
-    setHeight(101);
-    bacdround.setPosition(0, 0, 1014, 101);
+    setHeight(60);
+    bacdround.setPosition(0, 0, 1014, 60);
     bacdround.setColor(touchgfx::Color::getColorFromRGB(16, 16, 16));
 
-    lblElement.setPosition(4, 0, 1010, 101);
+    lblElement.setPosition(4, 0, 1010, 60);
     lblElement.setColor(touchgfx::Color::getColorFromRGB(170, 170, 170));
     lblElement.setLinespacing(0);
     Unicode::snprintf(lblElementBuffer, LBLELEMENT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_9NVL).getText());
     lblElement.setWildcard(lblElementBuffer);
     lblElement.setTypedText(touchgfx::TypedText(T___SINGLEUSE_GCT7));
 
-    line4.setPosition(33, 95, 920, 18);
+    line4.setPosition(33, 56, 920, 18);
     line4Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
     line4.setPainter(line4Painter);
     line4.setStart(0, 0);

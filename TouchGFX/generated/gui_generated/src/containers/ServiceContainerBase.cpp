@@ -10,134 +10,134 @@ ServiceContainerBase::ServiceContainerBase() :
     OffsetUpDownContainerValueChangedTriggerCallback(this, &ServiceContainerBase::OffsetUpDownContainerValueChangedTriggerCallbackHandler)
 {
     setWidth(1024);
-    setHeight(1278);
-    lblKarunaUptimeTitle.setPosition(32, 255, 295, 44);
+    setHeight(1207);
+    lblKarunaUptimeTitle.setXY(32, 274);
     lblKarunaUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaUptimeTitle.setLinespacing(0);
     lblKarunaUptimeTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_QYPN));
 
-    lblKarunaUptime.setPosition(367, 255, 184, 44);
+    lblKarunaUptime.setPosition(476, 270, 300, 44);
     lblKarunaUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaUptime.setLinespacing(0);
     Unicode::snprintf(lblKarunaUptimeBuffer, LBLKARUNAUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_IA01).getText());
     lblKarunaUptime.setWildcard(lblKarunaUptimeBuffer);
     lblKarunaUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_27WL));
 
-    lblDASClockUptimeTitle.setPosition(32, 405, 326, 44);
+    lblDASClockUptimeTitle.setXY(32, 469);
     lblDASClockUptimeTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockUptimeTitle.setLinespacing(0);
     lblDASClockUptimeTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_K6AT));
 
-    lblClockUptime.setPosition(367, 405, 184, 44);
+    lblClockUptime.setPosition(476, 465, 300, 44);
     lblClockUptime.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockUptime.setLinespacing(0);
     Unicode::snprintf(lblClockUptimeBuffer, LBLCLOCKUPTIME_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_XAJB).getText());
     lblClockUptime.setWildcard(lblClockUptimeBuffer);
     lblClockUptime.setTypedText(touchgfx::TypedText(T___SINGLEUSE_5L4A));
 
-    lblDASClockTempTitle_0.setPosition(32, 458, 399, 44);
+    lblDASClockTempTitle_0.setXY(32, 578);
     lblDASClockTempTitle_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_0.setLinespacing(0);
     lblDASClockTempTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AR9N));
 
-    lblClocktemp_0.setPosition(476, 458, 184, 44);
+    lblClocktemp_0.setPosition(476, 578, 184, 44);
     lblClocktemp_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_0.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_0Buffer, LBLCLOCKTEMP_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1E1R).getText());
     lblClocktemp_0.setWildcard(lblClocktemp_0Buffer);
     lblClocktemp_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Q4R5));
 
-    lblDASClockTempTitle_1.setPosition(32, 502, 399, 44);
+    lblDASClockTempTitle_1.setXY(32, 622);
     lblDASClockTempTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_1.setLinespacing(0);
     lblDASClockTempTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_A8ML));
 
-    lblClocktemp_1.setPosition(476, 502, 184, 44);
+    lblClocktemp_1.setPosition(476, 622, 184, 44);
     lblClocktemp_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_1.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_1Buffer, LBLCLOCKTEMP_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_9ZXU).getText());
     lblClocktemp_1.setWildcard(lblClocktemp_1Buffer);
     lblClocktemp_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_JVYW));
 
-    lblClocktemp_2.setPosition(476, 546, 184, 44);
+    lblClocktemp_2.setPosition(476, 666, 184, 44);
     lblClocktemp_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClocktemp_2.setLinespacing(0);
     Unicode::snprintf(lblClocktemp_2Buffer, LBLCLOCKTEMP_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_1FFP).getText());
     lblClocktemp_2.setWildcard(lblClocktemp_2Buffer);
     lblClocktemp_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_GT75));
 
-    lblDASClockCurrentTitle_0.setPosition(28, 603, 399, 44);
+    lblDASClockCurrentTitle_0.setXY(32, 722);
     lblDASClockCurrentTitle_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockCurrentTitle_0.setLinespacing(0);
     lblDASClockCurrentTitle_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PNNL));
 
-    lblClockCurrent_0.setPosition(472, 603, 184, 44);
+    lblClockCurrent_0.setPosition(472, 723, 184, 44);
     lblClockCurrent_0.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_0.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_0Buffer, LBLCLOCKCURRENT_0_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_S5AG).getText());
     lblClockCurrent_0.setWildcard(lblClockCurrent_0Buffer);
     lblClockCurrent_0.setTypedText(touchgfx::TypedText(T___SINGLEUSE_8J5N));
 
-    lblDASClockCurrentTitle_1.setPosition(28, 647, 399, 44);
+    lblDASClockCurrentTitle_1.setXY(32, 767);
     lblDASClockCurrentTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockCurrentTitle_1.setLinespacing(0);
     lblDASClockCurrentTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_FST6));
 
-    lblClockCurrent_1.setPosition(472, 647, 184, 44);
+    lblClockCurrent_1.setPosition(472, 767, 184, 44);
     lblClockCurrent_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_1.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_1Buffer, LBLCLOCKCURRENT_1_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_LWCL).getText());
     lblClockCurrent_1.setWildcard(lblClockCurrent_1Buffer);
     lblClockCurrent_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_8T1B));
 
-    lblDASClockCurrentTitle_2.setPosition(28, 691, 399, 44);
+    lblDASClockCurrentTitle_2.setXY(32, 811);
     lblDASClockCurrentTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockCurrentTitle_2.setLinespacing(0);
     lblDASClockCurrentTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3OH6));
 
-    lblDASClockTempTitle_2.setPosition(32, 546, 399, 44);
+    lblDASClockTempTitle_2.setPosition(32, 666, 399, 44);
     lblDASClockTempTitle_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTempTitle_2.setLinespacing(0);
     lblDASClockTempTitle_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_6WEV));
 
-    lblClockCurrent_2.setPosition(472, 691, 184, 44);
+    lblClockCurrent_2.setPosition(472, 811, 184, 44);
     lblClockCurrent_2.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblClockCurrent_2.setLinespacing(0);
     Unicode::snprintf(lblClockCurrent_2Buffer, LBLCLOCKCURRENT_2_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_VBNA).getText());
     lblClockCurrent_2.setWildcard(lblClockCurrent_2Buffer);
     lblClockCurrent_2.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9LCW));
 
-    lblKarunaTitle.setPosition(15, 161, 294, 44);
+    lblKarunaTitle.setPosition(15, 189, 294, 44);
     lblKarunaTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaTitle.setLinespacing(0);
     lblKarunaTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_0LDD));
 
-    lblDASClockTitle.setPosition(15, 311, 294, 44);
+    lblDASClockTitle.setPosition(15, 384, 294, 44);
     lblDASClockTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockTitle.setLinespacing(0);
     lblDASClockTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_YROX));
 
-    lblDASClockSupplyVoltageTitle.setPosition(28, 734, 399, 44);
+    lblDASClockSupplyVoltageTitle.setXY(32, 854);
     lblDASClockSupplyVoltageTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltageTitle.setLinespacing(0);
     lblDASClockSupplyVoltageTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AB6H));
 
-    lblDASClockSupplyVoltage.setPosition(472, 734, 184, 44);
+    lblDASClockSupplyVoltage.setPosition(472, 854, 184, 44);
     lblDASClockSupplyVoltage.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltage.setLinespacing(0);
     Unicode::snprintf(lblDASClockSupplyVoltageBuffer, LBLDASCLOCKSUPPLYVOLTAGE_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_LCRT).getText());
     lblDASClockSupplyVoltage.setWildcard(lblDASClockSupplyVoltageBuffer);
     lblDASClockSupplyVoltage.setTypedText(touchgfx::TypedText(T___SINGLEUSE_OEE2));
 
-    line4.setPosition(45, 451, 920, 15);
-    line4Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
+    line4.setPosition(45, 568, 920, 15);
+    line4Painter.setColor(touchgfx::Color::getColorFromRGB(48, 48, 48));
     line4.setPainter(line4Painter);
     line4.setStart(0, 0);
     line4.setEnd(920, 1);
     line4.setLineWidth(2);
     line4.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    line2.setPosition(45, 736, 920, 15);
+    line2.setPosition(45, 856, 920, 15);
     line2Painter.setColor(touchgfx::Color::getColorFromRGB(32, 32, 32));
     line2.setPainter(line2Painter);
     line2.setStart(0, 0);
@@ -145,7 +145,7 @@ ServiceContainerBase::ServiceContainerBase() :
     line2.setLineWidth(2);
     line2.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    line1.setPosition(45, 305, 920, 15);
+    line1.setPosition(45, 371, 920, 15);
     line1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1.setPainter(line1Painter);
     line1.setStart(0, 0);
@@ -158,7 +158,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblGUITitle.setLinespacing(0);
     lblGUITitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_C8R6));
 
-    lblGUIFwVerTitle.setPosition(32, 57, 295, 44);
+    lblGUIFwVerTitle.setXY(32, 57);
     lblGUIFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblGUIFwVerTitle.setLinespacing(0);
     lblGUIFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_1OG4));
@@ -171,7 +171,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblGUIFwVersion.setWildcard(lblGUIFwVersionBuffer);
     lblGUIFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Q6L7));
 
-    line0.setPosition(45, 157, 920, 15);
+    line0.setPosition(45, 181, 920, 15);
     line0Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line0.setPainter(line0Painter);
     line0.setStart(0, 0);
@@ -179,17 +179,17 @@ ServiceContainerBase::ServiceContainerBase() :
     line0.setLineWidth(2);
     line0.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    lblKarunaFwVerTitle.setPosition(32, 209, 306, 44);
+    lblKarunaFwVerTitle.setXY(32, 237);
     lblKarunaFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaFwVerTitle.setLinespacing(0);
     lblKarunaFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_G1LA));
 
-    lblDASFwVerTitle.setPosition(32, 359, 345, 44);
+    lblDASFwVerTitle.setXY(32, 432);
     lblDASFwVerTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASFwVerTitle.setLinespacing(0);
     lblDASFwVerTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_T8WL));
 
-    lblKarunaFwVersion.setPosition(387, 215, 596, 33);
+    lblKarunaFwVersion.setPosition(387, 243, 596, 33);
     lblKarunaFwVersion.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaFwVersion.setLinespacing(0);
     lblKarunaFwVersion.setAlpha(100);
@@ -197,7 +197,7 @@ ServiceContainerBase::ServiceContainerBase() :
     lblKarunaFwVersion.setWildcard(lblKarunaFwVersionBuffer);
     lblKarunaFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AT65));
 
-    lblDASClockFwVersion.setPosition(387, 365, 596, 33);
+    lblDASClockFwVersion.setPosition(387, 438, 596, 33);
     lblDASClockFwVersion.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockFwVersion.setLinespacing(0);
     lblDASClockFwVersion.setAlpha(100);
@@ -205,25 +205,25 @@ ServiceContainerBase::ServiceContainerBase() :
     lblDASClockFwVersion.setWildcard(lblDASClockFwVersionBuffer);
     lblDASClockFwVersion.setTypedText(touchgfx::TypedText(T___SINGLEUSE_Z6G5));
 
-    btnFactoryReset.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnFactoryReset.setBoxWithBorderPosition(0, 0, 300, 90);
     btnFactoryReset.setBorderSize(1);
     btnFactoryReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnFactoryReset.setText(TypedText(T___SINGLEUSE_GKKS));
-    btnFactoryReset.setTextPosition(-17, 20, 974, 90);
+    btnFactoryReset.setTextPosition(0, 20, 300, 90);
     btnFactoryReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnFactoryReset.setPosition(28, 1124, 974, 90);
+    btnFactoryReset.setPosition(683, 1041, 300, 90);
     btnFactoryReset.setAction(flexButtonCallback);
 
-    btnSoftReset.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnSoftReset.setBoxWithBorderPosition(0, 0, 300, 90);
     btnSoftReset.setBorderSize(1);
     btnSoftReset.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnSoftReset.setText(TypedText(T___SINGLEUSE_T381));
-    btnSoftReset.setTextPosition(-20, 20, 974, 90);
+    btnSoftReset.setTextPosition(0, 20, 300, 90);
     btnSoftReset.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnSoftReset.setPosition(28, 1020, 974, 90);
+    btnSoftReset.setPosition(355, 1041, 300, 90);
     btnSoftReset.setAction(flexButtonCallback);
 
-    line2_1.setPosition(45, 1231, 920, 15);
+    line2_1.setPosition(45, 1161, 920, 15);
     line2_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line2_1.setPainter(line2_1Painter);
     line2_1.setStart(0, 0);
@@ -231,55 +231,55 @@ ServiceContainerBase::ServiceContainerBase() :
     line2_1.setLineWidth(2);
     line2_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    lblBootUpCountTitle.setXY(32, 105);
+    lblBootUpCountTitle.setXY(32, 94);
     lblBootUpCountTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblBootUpCountTitle.setLinespacing(0);
     lblBootUpCountTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3GMJ));
 
-    lblBootupCnt.setPosition(377, 105, 174, 44);
+    lblBootupCnt.setPosition(476, 96, 174, 44);
     lblBootupCnt.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblBootupCnt.setLinespacing(0);
     Unicode::snprintf(lblBootupCntBuffer, LBLBOOTUPCNT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_Z9BW).getText());
     lblBootupCnt.setWildcard(lblBootupCntBuffer);
     lblBootupCnt.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KTHD));
 
-    lblDasClocUartErrorTitle.setXY(551, 409);
+    lblDasClocUartErrorTitle.setXY(32, 506);
     lblDasClocUartErrorTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDasClocUartErrorTitle.setLinespacing(0);
     lblDasClocUartErrorTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_PGTS));
 
-    DasClockErrorCnt.setPosition(909, 408, 93, 44);
+    DasClockErrorCnt.setPosition(476, 506, 300, 43);
     DasClockErrorCnt.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     DasClockErrorCnt.setLinespacing(0);
     Unicode::snprintf(DasClockErrorCntBuffer, DASCLOCKERRORCNT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_ILXF).getText());
     DasClockErrorCnt.setWildcard(DasClockErrorCntBuffer);
     DasClockErrorCnt.setTypedText(touchgfx::TypedText(T___SINGLEUSE_CVH5));
 
-    lblBusUartErrorCntTitle.setXY(551, 105);
+    lblBusUartErrorCntTitle.setXY(32, 131);
     lblBusUartErrorCntTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblBusUartErrorCntTitle.setLinespacing(0);
     lblBusUartErrorCntTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_W2OM));
 
-    lblBusUartErrorCnt.setPosition(909, 105, 93, 44);
+    lblBusUartErrorCnt.setPosition(476, 131, 149, 43);
     lblBusUartErrorCnt.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblBusUartErrorCnt.setLinespacing(0);
     Unicode::snprintf(lblBusUartErrorCntBuffer, LBLBUSUARTERRORCNT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_WMAQ).getText());
     lblBusUartErrorCnt.setWildcard(lblBusUartErrorCntBuffer);
     lblBusUartErrorCnt.setTypedText(touchgfx::TypedText(T___SINGLEUSE_3TGM));
 
-    lblKarunaUptimeCntTitle.setXY(551, 259);
+    lblKarunaUptimeCntTitle.setXY(32, 314);
     lblKarunaUptimeCntTitle.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaUptimeCntTitle.setLinespacing(0);
     lblKarunaUptimeCntTitle.setTypedText(touchgfx::TypedText(T___SINGLEUSE_KPYH));
 
-    lblKarunaUartErrorCnt.setPosition(909, 259, 93, 44);
+    lblKarunaUartErrorCnt.setPosition(476, 311, 300, 43);
     lblKarunaUartErrorCnt.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblKarunaUartErrorCnt.setLinespacing(0);
     Unicode::snprintf(lblKarunaUartErrorCntBuffer, LBLKARUNAUARTERRORCNT_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_6BR6).getText());
     lblKarunaUartErrorCnt.setWildcard(lblKarunaUartErrorCntBuffer);
     lblKarunaUartErrorCnt.setTypedText(touchgfx::TypedText(T___SINGLEUSE_9QB9));
 
-    line1_1.setPosition(45, 898, 920, 15);
+    line1_1.setPosition(45, 1018, 920, 15);
     line1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1_1.setPainter(line1_1Painter);
     line1_1.setStart(0, 0);
@@ -287,7 +287,7 @@ ServiceContainerBase::ServiceContainerBase() :
     line1_1.setLineWidth(2);
     line1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    line1_1_1.setPosition(45, 1255, 920, 15);
+    line1_1_1.setPosition(45, 1185, 920, 15);
     line1_1_1Painter.setColor(touchgfx::Color::getColorFromRGB(64, 64, 64));
     line1_1_1.setPainter(line1_1_1Painter);
     line1_1_1.setStart(0, 0);
@@ -295,29 +295,29 @@ ServiceContainerBase::ServiceContainerBase() :
     line1_1_1.setLineWidth(2);
     line1_1_1.setLineEndingStyle(touchgfx::Line::BUTT_CAP_ENDING);
 
-    btnDebug.setBoxWithBorderPosition(0, 0, 974, 90);
+    btnDebug.setBoxWithBorderPosition(0, 0, 300, 90);
     btnDebug.setBorderSize(1);
     btnDebug.setBoxWithBorderColors(touchgfx::Color::getColorFromRGB(0, 0, 0), touchgfx::Color::getColorFromRGB(32, 32, 32), touchgfx::Color::getColorFromRGB(100, 100, 100), touchgfx::Color::getColorFromRGB(100, 100, 100));
     btnDebug.setText(TypedText(T___SINGLEUSE_PVRW));
-    btnDebug.setTextPosition(-20, 20, 974, 90);
+    btnDebug.setTextPosition(0, 20, 300, 90);
     btnDebug.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
-    btnDebug.setPosition(28, 915, 974, 90);
+    btnDebug.setPosition(28, 1041, 300, 90);
     btnDebug.setAction(flexButtonCallback);
 
-    lblDASClockSupplyVoltageTitle_1.setPosition(28, 787, 399, 44);
+    lblDASClockSupplyVoltageTitle_1.setXY(32, 907);
     lblDASClockSupplyVoltageTitle_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltageTitle_1.setLinespacing(0);
     lblDASClockSupplyVoltageTitle_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_DSCM));
 
-    OffsetUpDownContainer.setXY(472, 784);
+    OffsetUpDownContainer.setXY(472, 904);
     OffsetUpDownContainer.setValueChangedTriggerCallback(OffsetUpDownContainerValueChangedTriggerCallback);
 
-    lblDASClockSupplyVoltageTitle_1_1.setPosition(28, 834, 399, 44);
+    lblDASClockSupplyVoltageTitle_1_1.setXY(32, 954);
     lblDASClockSupplyVoltageTitle_1_1.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblDASClockSupplyVoltageTitle_1_1.setLinespacing(0);
     lblDASClockSupplyVoltageTitle_1_1.setTypedText(touchgfx::TypedText(T___SINGLEUSE_AFXB));
 
-    lblTempOffsetRanges.setPosition(358, 838, 651, 36);
+    lblTempOffsetRanges.setPosition(309, 955, 715, 36);
     lblTempOffsetRanges.setColor(touchgfx::Color::getColorFromRGB(200, 200, 200));
     lblTempOffsetRanges.setLinespacing(0);
     Unicode::snprintf(lblTempOffsetRangesBuffer, LBLTEMPOFFSETRANGES_SIZE, "%s", touchgfx::TypedText(T___SINGLEUSE_QHRN).getText());

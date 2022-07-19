@@ -3,8 +3,8 @@
 /*********************************************************************************/
 #include <gui_generated/clockscreen_screen/ClockScreenViewBase.hpp>
 #include <touchgfx/Color.hpp>
-#include <texts/TextKeysAndLanguages.hpp>
 #include <BitmapDatabase.hpp>
+#include <texts/TextKeysAndLanguages.hpp>
 #include <touchgfx/canvas_widget_renderer/CanvasWidgetRenderer.hpp>
 
 
@@ -27,6 +27,8 @@ ClockScreenViewBase::ClockScreenViewBase() :
     btnSetupClock.setText(TypedText(T___SINGLEUSE_AYJC));
     btnSetupClock.setTextPosition(-20, 20, 500, 90);
     btnSetupClock.setTextColors(touchgfx::Color::getColorFromRGB(150, 118, 73), touchgfx::Color::getColorFromRGB(64, 64, 64));
+    btnSetupClock.setBitmaps(Bitmap(BITMAP_CLOCK_ID), Bitmap(BITMAP_CLOCK_ID));
+    btnSetupClock.setBitmapXY(20, 10);
     btnSetupClock.setPosition(519, 505, 500, 90);
     btnSetupClock.setAction(flexButtonCallback);
 

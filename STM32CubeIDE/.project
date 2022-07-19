@@ -789,11 +789,6 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/BitmapDatabase.cpp</locationURI>
 		</link>
 		<link>
-			<name>Application/User/generated/image_Dark_Icons_Info_48.cpp</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Icons_Info_48.cpp</locationURI>
-		</link>
-		<link>
 			<name>Application/User/generated/image_Dark_Togglebars_Toggle_large_button_Off.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/__designer/image_Dark_Togglebars_Toggle_large_button_Off.cpp</locationURI>
@@ -849,9 +844,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_CLOCKINT_80x80_i.cpp</locationURI>
 		</link>
 		<link>
+			<name>Application/User/generated/image_Clock.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Clock.cpp</locationURI>
+		</link>
+		<link>
 			<name>Application/User/generated/image_DISPLAY.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_DISPLAY.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Dark_Icons_Info.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Dark_Icons_Info.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_GoBack.cpp</name>
@@ -867,6 +872,11 @@
 			<name>Application/User/generated/image_HDMI_80x80_s.cpp</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_HDMI_80x80_s.cpp</locationURI>
+		</link>
+		<link>
+			<name>Application/User/generated/image_Log.cpp</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/TouchGFX/generated/images/src/image_Log.cpp</locationURI>
 		</link>
 		<link>
 			<name>Application/User/generated/image_OFFCORE_72x72.cpp</name>
