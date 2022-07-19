@@ -67,7 +67,7 @@ extern "C" {
 #ifdef KARUNA_43i
 #define DEVICE_NAME           "MGUI201222-KARUNA-4.3i"
 #endif
-#define DEVICE_FW             "220718_2008"
+#define DEVICE_FW             "220719_0934"
 #define DEVICE_PCB            "VA01"
 #define DEVICE_MNF            "KONVOLUCIO"
 #define DEVICE_MNF_SIZE       sizeof(DEVICE_MNF)

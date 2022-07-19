@@ -17,5 +17,5 @@ TouchGFX/build/*
 
 /IMAGES
 TouchGFX/simulator/msvs/.vs/*
-stm32cubeide.project.prefs
+/STM32CubeIDE/.settings/stm32cubeide.project.prefs
 language.settings.xml
